@@ -1,0 +1,9 @@
+syntax: glob
+
+.DS_Store
+.settings
+.project
+.buildpath
+*.pyc
+*.swp
+*~
