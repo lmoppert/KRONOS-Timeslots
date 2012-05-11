@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Station(models.Model):
     name = models.CharField(max_length=200)
@@ -27,31 +28,31 @@ class Line(models.Model):
     def __unicode__(self):
         return "%s" % (self.dock)
 
-class Slot(models.Model):
-    line = models.ForeignKey(Line)
-    company = models.ForeignKey(UserProfile)
-    
-    index = model.IntegerField()
-    job_number = model.CharField(max_length=20, blank=True)
-    blocked = model.BooleanField()
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     station = models.ManyToManyField(Station)
     
-    company = model.CharField(max_length=200)
-    street = model.CharField(max_length=200, blank=True)
-    ZIP = model.CharField(max_length=20, blank=True)
-    town = model.CharField(max_length=200, blank=True)
-    country = model.CharField(max_length=200, blank=True)
-    phone = model.CharField(max_length=200, blank=True)
-    role = model.IntegerField()
-    readonly = model.BooleanField()
+    company = models.CharField(max_length=200)
+    street = models.CharField(max_length=200, blank=True)
+    ZIP = models.CharField(max_length=20, blank=True)
+    town = models.CharField(max_length=200, blank=True)
+    country = models.CharField(max_length=200, blank=True)
+    phone = models.CharField(max_length=200, blank=True)
+    role = models.IntegerField()
+    readonly = models.BooleanField()
     def __unicode__(self):
         return "%s" % (self.company)
+
+class Slot(models.Model):
+    line = models.ForeignKey(Line)
+    company = models.ForeignKey(UserProfile)
+    
+    index = models.IntegerField()
+    job_number = models.CharField(max_length=20, blank=True)
+    blocked = models.BooleanField()
 
 class Logging(models.Model):
     user = models.ForeignKey(User)
     
-    task = model.CharField(max_length=200)
+    task = models.CharField(max_length=200)
     timestamp = models.TimeField()
