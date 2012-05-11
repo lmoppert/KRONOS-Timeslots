@@ -1,41 +1,57 @@
 from django.db import models
 
-class Ladestelle(models.Model):
+class Station(models.Model):
     name = models.CharField(max_length=200)
-    kurzbeschreibung = models.CharField(max_length=200, blank=True)
-    detailbeschreibung = models.TextField(blank=True)
-    buchungsschluss = models.TimeField()
+    shortdescription = models.CharField(max_length=200, blank=True)
+    longdescription = models.TextField(blank=True)
+    booking_deadline = models.TimeField()
+    rnvp = models.TimeField()
     def __unicode__(self):
         return self.name
-    class Meta:
-        verbose_name_plural = "Ladestellen"
 
-class Rampe(models.Model):
-    ladestelle = models.ForeignKey(Ladestelle)
+class Dock(models.Model):
+    station = models.ForeignKey(Station)
+    
     name = models.CharField(max_length=200)
-    beschreibung = models.CharField(max_length=200, blank=True)
-    anzahl_parallele_abarbeitungen = models.IntegerField()
+    description = models.CharField(max_length=200, blank=True)
+    linecount = models.IntegerField()
     def __unicode__(self):
         return self.name
-    class Meta:
-        verbose_name_plural = "Rampen"
+
+class Line(models.Model):
+    dock = models.ForeignKey(Dock)
+    
+    start = models.TimeField()
+    end = models.TimeField()
+    duration = models.IntegerField()
+    def __unicode__(self):
+        return "%s" % (self.dock)
 
 class Slot(models.Model):
-    rampe = models.ForeignKey(Rampe)
-    start = models.TimeField()
-    ende = models.TimeField()
-    dauer = models.IntegerField()
-    gueltig_ab = models.DateField()
-    def __unicode__(self):
-        return "%s (bis %s)" % (self.rampe, self.gueltig_ab.isoformat())
+    line = models.ForeignKey(Line)
+    company = models.ForeignKey(UserProfile)
+    
+    index = model.IntegerField()
+    job_number = model.CharField(max_length=20, blank=True)
+    blocked = model.BooleanField()
 
-class Pause(models.Model):
-    rampe = models.ForeignKey(Rampe)
-    gueltig_ab = models.DateField()
-    gueltig_bis = models.DateField()
-    start = models.TimeField()
-    ende = models.TimeField()
-    class Meta:
-        verbose_name_plural = "Pausen"
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    station = models.ManyToManyField(Station)
+    
+    company = model.CharField(max_length=200)
+    street = model.CharField(max_length=200, blank=True)
+    ZIP = model.CharField(max_length=20, blank=True)
+    town = model.CharField(max_length=200, blank=True)
+    country = model.CharField(max_length=200, blank=True)
+    phone = model.CharField(max_length=200, blank=True)
+    role = model.IntegerField()
+    readonly = model.BooleanField()
     def __unicode__(self):
-        return "%s (bis %s)" % (self.rampe, self.gueltig_bis.isoformat())
+        return "%s" % (self.company)
+
+class Logging(models.Model):
+    user = models.ForeignKey(User)
+    
+    task = model.CharField(max_length=200)
+    timestamp = models.TimeField()

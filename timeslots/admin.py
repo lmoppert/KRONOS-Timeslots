@@ -1,24 +1,20 @@
-from timeslots.models import Ladestelle, Rampe, Slot, Pause
+from timeslots.models import Station, Dock, Line, Slot, UserProfile
 from django.contrib import admin
-
-class PausenAdmin(admin.ModelAdmin):
-    pass
 
 class SlotInline(admin.TabularInline):
     model = Slot
     extra = 1
     
-class RampenAdmin(admin.ModelAdmin):
+class DockAdmin(admin.ModelAdmin):
     inlines = [SlotInline]
 
-class RampeInline(admin.TabularInline):
+class DockInline(admin.TabularInline):
     model = Rampe
     extra = 1
     show_edit_link = True
     
-class LadestellenAdmin(admin.ModelAdmin):
-    inlines = [RampeInline]
+class StationAdmin(admin.ModelAdmin):
+    inlines = [DockInline]
 
-admin.site.register(Ladestelle, LadestellenAdmin)
-admin.site.register(Rampe, RampenAdmin)
-admin.site.register(Pause, PausenAdmin)
+admin.site.register(Station, StationAdmin)
+admin.site.register(Dock, DockAdmin)
