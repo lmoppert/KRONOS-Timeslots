@@ -1,3 +1,4 @@
+from datetime import timedelta, datetime, date
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -7,6 +8,7 @@ class Station(models.Model):
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
     rnvp = models.TimeField()
+    
     def __unicode__(self):
         return self.name
 
@@ -16,21 +18,29 @@ class Dock(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True)
     linecount = models.IntegerField()
+
     def __unicode__(self):
-        return self.name
+        return  '%s - %s' % (self.station.name, self.name)
 
 class Line(models.Model):
     dock = models.ForeignKey(Dock)
     
     start = models.TimeField()
-    end = models.TimeField()
-    duration = models.IntegerField()
+    slotcount = models.IntegerField()
+    slotduration = models.IntegerField()
+    
+    def _get_end(self):
+        delta = self.slotcount * self.slotduration
+        endtime = datetime.combine(date.today(), self.start) + timedelta(minutes=delta)
+        return endtime.time()
+    end = property(_get_end)
+
     def __unicode__(self):
-        return "%s" % (self.dock)
+        return "%s (%s - %s)" % (unicode(self.dock), self.start.strftime("%H:%M"), self.end.strftime("%H:%M"))
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    station = models.ManyToManyField(Station)
+    stations = models.ManyToManyField(Station)
     
     company = models.CharField(max_length=200)
     street = models.CharField(max_length=200, blank=True)
@@ -38,10 +48,10 @@ class UserProfile(models.Model):
     town = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=200, blank=True)
-    role = models.IntegerField()
     readonly = models.BooleanField()
+
     def __unicode__(self):
-        return "%s" % (self.company)
+        return "%s" % (self.user.username)
 
 class Slot(models.Model):
     line = models.ForeignKey(Line)
