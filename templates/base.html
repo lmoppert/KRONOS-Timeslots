@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html land="de">
+<head>
+    <meta charset="utf-8">
+    <title>KRONOS Titan GmbH - Ladezeitensteuerung</title>
+    <meta name="description" content="KRONOS Timeslots">
+    <meta name="author" content="Lutz Moppert">
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/img/favicon.ico">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="/">KRONOS TITAN GmbH - Ladezeitensteuerung</a>
+            <ul class="nav">
+                <li><a href="/timeslots/">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    {% block content %}Empty page{% endblock %}
+
+    <p><hr></p>
+
+    <footer class="row">
+        <div class="span6">
+        </div>
+        <div class="span6" style="text-align:right">
+            <p>
+                &copy; <a href="http://kronos.de">KRONOS TITAM GmbH</a> 2012
+                |
+                powered by <a href="http://www.djangoproject.com/">Django</a>
+            </p>
+        </div>
+    </footer>
+
+</div> <!-- container -->
+
+</body>
+</html>

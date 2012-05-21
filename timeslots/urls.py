@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^$', 
         ListView.as_view(
             queryset=Station.objects,
-            context_object_name='Station')),
+            context_object_name='Station',
+            template_name='index.html')),
     url(r'^(?P<pk>\d+)/$', DetailView.as_view(model=Station)),
 )
