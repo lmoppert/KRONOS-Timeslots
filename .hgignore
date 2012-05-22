@@ -5,6 +5,6 @@ syntax: glob
 .project
 .buildpath
 *.pyc
-*.swp
+*.sw?
 *~
 logs/*.log
