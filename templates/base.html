@@ -11,6 +11,7 @@
     <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
     <script type="text/javascript">
         $(function(){
             // Datepicker
@@ -37,9 +38,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/timeslots/">Ladezeitensteuerung</a>
+            <span class="pull-right">
+                <a class="brand" href="/timeslots/">Ladezeitensteuerung</a>
+            </span>
             <ul class="nav">
                 <li><a href="/timeslots/">Home</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Loading Dock <b class="caret"></b> </a>
+                    <ul class="dropdown-menu">
+                    {% for station in station_list %}
+                        <li><a href="/timeslots/{{ station.id }}/">{{ station.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -50,23 +60,21 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span3">
-                {% block sidebar %}
-                    <script>
-                        $(function() {
-                            $( "#datepicker" ).datepicker();
-                        });
-                    </script>
-                    <div id="datepicker"></div>
-                    <div id="kronoslogo">
-                        <a href="http://kronos.de/">
-                            <img src="{{ STATIC_URL }}img/logo.png" alt="KRONOS TITAN GmbH">
-                        </a>
-                    </div>
-                {% endblock %}
+            {% block sidebar %}
+                <script>
+                    $(function() { $( "#datepicker" ).datepicker($.datepicker.regional['de']); });
+                </script>
+                <form action="#" method="get">
+                    <div id="datepicker" style="overflow: hidden"></div>
+                </form>
+                <div id="kronoslogo">
+                    <a href="http://kronos.de/">
+                        <img src="{{ STATIC_URL }}img/logo.png" alt="KRONOS TITAN GmbH">
+                    </a>
+                </div>
+            {% endblock %}
             </div>
-            <div class="span9">
-                {% block content %}Empty page{% endblock %}
-            </div>
+            <div class="span9"> {% block content %}Empty page{% endblock %} </div>
         </div>
     </div>
 
