@@ -12,12 +12,11 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
     <script type="text/javascript">
         $(function(){
             // Datepicker
-            $('#datepicker').datepicker({
-                inline: true
-            });
+            $('#datepicker').datepicker( $.datepicker.regional['de'] );
 
             //hover states on the static widgets
             $('#dialog_link, ul#icons li').hover(
@@ -38,19 +37,29 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <span class="pull-right">
-                <a class="brand" href="/timeslots/">Ladezeitensteuerung</a>
-            </span>
+            <span class="span3"><a class="brand" href="/timeslots/">Ladezeitensteuerung</a></span>
             <ul class="nav">
-                <li><a href="/timeslots/">Home</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Loading Dock <b class="caret"></b> </a>
+                <li class="dropdown" id="profile">
+                    <a href="#profile" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }} Username<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                    {% for station in station_list %}
-                        <li><a href="/timeslots/{{ station.id }}/">{{ station.name }}</a></li>
-                    {% endfor %}
+                        <li><a href="#">Profil</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
                     </ul>
                 </li>
             </ul>
+            <span class="pull-right">
+                <form class="navbar-form" action="." method="get">
+                    <select id="selectedStation" class="span3">
+                        <option value="">== Please choose station ==</option>
+                        {% for station in station_list %}
+                            <option value="{{ station.id }}" {% ifequal selectedStation station.id %}selected{% endifequal %}>
+                            {{ station.name }} &ndash; {{ station.shortdescription }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </span>
         </div>
     </div>
 </div>
@@ -61,9 +70,6 @@
         <div class="row-fluid">
             <div class="span3">
             {% block sidebar %}
-                <script>
-                    $(function() { $( "#datepicker" ).datepicker($.datepicker.regional['de']); });
-                </script>
                 <form action="#" method="get">
                     <div id="datepicker" style="overflow: hidden"></div>
                 </form>
