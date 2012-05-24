@@ -40,9 +40,9 @@
             <span class="span3"><a class="brand" href="/timeslots/">Ladezeitensteuerung</a></span>
             <ul class="nav">
                 <li class="dropdown" id="profile">
-                    <a href="#profile" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }} Username<b class="caret"></b></a>
+                <a href="#profile" class="dropdown-toggle" data-toggle="dropdown"><b>{{ user.first_name }} {{ user.last_name }}</b> ({{ user.groups.all.0.name }}) <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profil</a></li>
+                        <li><a href="user/{{ user.id }}">Profil</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
@@ -79,7 +79,9 @@
                     </a>
                 </div>
             </div>
-            <div class="span9"> {% block content %}Empty page{% endblock %} </div>
+            <div class="span9"> 
+                {% block content %}Empty page{% endblock %} 
+            </div>
         </div>
     </div>
 
