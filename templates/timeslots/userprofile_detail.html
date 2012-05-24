@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+
+<div class="well">
+    <h1>{{ userprofile.user.get_full_name }}</h1>
+    <p>{{ userprofile.company }}</p>
+    <p>
+        {{ userprofile.street }}<br />
+        {{ userprofile.ZIP }} {{ userprofile.town }}<br />
+        {{ userprofile.country }}
+    </p>
+
+</div>
+
+{% endblock %}
