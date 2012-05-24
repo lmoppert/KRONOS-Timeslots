@@ -4,11 +4,13 @@
 
 <table class="table table-bordered">
     <tr>
+        <th colspan="2">Angaben in Stunden vor Slotanfang</th>
+    <tr>
         <td>Buchbar bis</td>
-        <td>{{ station.deadline }}</td>
+        <td>{{ station.deadline|time:"H" }}</td>
     </tr><tr>
         <td>Veränderbar bis</td>
-        <td>{{ station.rnvp }}</td>
+        <td>{{ station.rnvp|time:"H" }}</td>
     </tr>
 </table>
 

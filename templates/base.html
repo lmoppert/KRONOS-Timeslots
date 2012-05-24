@@ -50,8 +50,7 @@
             </ul>
             <span class="pull-right">
                 <form class="navbar-form" action="." method="get">
-                    <select id="selectedStation" class="span3">
-                        <option value="">== Please choose station ==</option>
+                    <select id="selectedStation" class="span4">
                         {% for station in station_list %}
                             <option value="{{ station.id }}" {% ifequal selectedStation station.id %}selected{% endifequal %}>
                             {{ station.name }} &ndash; {{ station.shortdescription }}
