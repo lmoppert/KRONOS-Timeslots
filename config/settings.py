@@ -156,3 +156,6 @@ LOGGING = {
         },
     }
 }
+
+# Login URL
+LOGIN_URL = "/admin/"
