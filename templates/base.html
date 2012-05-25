@@ -20,9 +20,9 @@
                 onSelect: function(dateText, inst) { 
                     window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/" 
                 },
-                beforeShowDay: $.datepicker.noWeekends
+                beforeShowDay: $.datepicker.noWeekends,
+                dateFormat: 'yy-mm-dd'
             });
-            $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', '{{ date }}');
 
             //hover states on the static widgets
