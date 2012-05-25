@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="well">
+    <h1>{{ station.name }}</h1>
+    <p>{{ station.shortdescription }}</p>
+    <p>{{ station.longdescription }}</p>
+    <h3>{{ date }}</h3>
+</div>
+
+{% endblock %}

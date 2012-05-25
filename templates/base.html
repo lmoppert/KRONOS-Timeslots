@@ -17,8 +17,7 @@
         $(function(){
             // Datepicker
             $('#datepicker').datepicker({
-                $.datepicker.regional['de'];
-                onSelect: this.form.send();
+                $.datepicker.regional['de']
             });
 
             //hover states on the static widgets
@@ -53,12 +52,12 @@
             </ul>
             {% if user.userprofile.stations.all %}
             <span class="pull-right">
-                <form id="station_picker" class="navbar-form" action="." method="post">
-                    <select id="selectedStation" class="span4" onChange="this.form.submit()">
-                        {% for station in user.userprofile.stations.all %}
-                            <option value="{{ station.id }}" {% ifequal selectedStation station.id %}selected{% endifequal %}>
-                            {{ station.name }} &ndash; {{ station.shortdescription }}
-                        </option>
+                <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
+                    <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
+                        {% for curr_station in user.userprofile.stations.all %}
+                            <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}>
+                            {{ curr_station.name }} &ndash; {{ curr_station.shortdescription }}
+                            </option>
                         {% endfor %}
                     </select>
                 </form>
@@ -74,14 +73,12 @@
         <div class="row-fluid">
             <div class="span3">
                 {% block sidebar %}
-                <form id="date_picker" action="." method="post">
-                    <div id="datepicker" style="overflow: none"></div>
+                <form id="date_picker" action="." method="post">{% csrf_token %}
+                    <div id="datepicker" style="overflow: hidden"></div>
                 </form>
                 {% endblock %}
                 <div id="kronoslogo">
-                    <a href="http://kronos.de/">
-                        <img src="{{ STATIC_URL }}img/logo.png" alt="KRONOS TITAN GmbH">
-                    </a>
+                    <a href="http://kronos.de/"><img src="{{ STATIC_URL }}img/logo.png" alt="KRONOS TITAN GmbH"></a>
                 </div>
             </div>
             <div class="span9"> 
@@ -96,8 +93,6 @@
         <p>
             <span class="pull-right">
                 &copy; <a href="http://kronos.de">KRONOS TITAM GmbH</a> 2012
-                |
-                powered by <a href="http://www.djangoproject.com/">Django</a>
             </span>
         </p>
     </footer>
