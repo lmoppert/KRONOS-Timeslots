@@ -12,5 +12,5 @@ def logout_page(request):
 
 @login_required
 def index(request):
-    station_list = get_list_or_404(Station)
-    return render_to_response('index.html', {'station_list': station_list}, context_instance=RequestContext(request))
+    return render_to_response('index.html', context_instance=RequestContext(request))
+

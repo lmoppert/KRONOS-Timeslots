@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
+{% block sidebar %}
+{% endblock %}
+
 
 {% block content %}
 
     <div class="well">
-        <h1>Django, meet Bootstrap!</h1>
-        <p>The django-bootstrap-toolkit application allows for an easy integration of Django and Bootstrap.</p>
-        <p><a class="btn btn-primary" href="https://github.com/dyve/django-bootstrap-toolkit/">Check it out on GitHub &raquo;</a></p>
+        <h1>KRONOS TITAN GmbH</h1>
+        <h3>Ladezeitensteuerung</h3>
+        <p>Hier können Sie Ladezeiten buchen und verwalten. Wählen Sie bitt zunächst eine Ladestelle im Auswahlmenü rechts oben aus.</p>
+        <p><a class="btn btn-primary" href="http://kronos.de/">See website for more info about KRONOS &raquo;</a></p>
     </div>
-
-    {{ station_list|join:", " }}
 
 {% endblock %}

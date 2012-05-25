@@ -16,7 +16,10 @@
     <script type="text/javascript">
         $(function(){
             // Datepicker
-            $('#datepicker').datepicker( $.datepicker.regional['de'] );
+            $('#datepicker').datepicker({
+                $.datepicker.regional['de'];
+                onSelect: this.form.send();
+            });
 
             //hover states on the static widgets
             $('#dialog_link, ul#icons li').hover(
@@ -48,10 +51,11 @@
                     </ul>
                 </li>
             </ul>
+            {% if user.userprofile.stations.all %}
             <span class="pull-right">
-                <form class="navbar-form" action="." method="get">
-                    <select id="selectedStation" class="span4">
-                        {% for station in station_list %}
+                <form id="station_picker" class="navbar-form" action="." method="post">
+                    <select id="selectedStation" class="span4" onChange="this.form.submit()">
+                        {% for station in user.userprofile.stations.all %}
                             <option value="{{ station.id }}" {% ifequal selectedStation station.id %}selected{% endifequal %}>
                             {{ station.name }} &ndash; {{ station.shortdescription }}
                         </option>
@@ -59,6 +63,7 @@
                     </select>
                 </form>
             </span>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -68,11 +73,11 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span3">
-            {% block sidebar %}
-                <form action="#" method="get">
-                    <div id="datepicker" style="overflow: hidden"></div>
+                {% block sidebar %}
+                <form id="date_picker" action="." method="post">
+                    <div id="datepicker" style="overflow: none"></div>
                 </form>
-            {% endblock %}
+                {% endblock %}
                 <div id="kronoslogo">
                     <a href="http://kronos.de/">
                         <img src="{{ STATIC_URL }}img/logo.png" alt="KRONOS TITAN GmbH">
@@ -81,6 +86,7 @@
             </div>
             <div class="span9"> 
                 {% block content %}Empty page{% endblock %} 
+
             </div>
         </div>
     </div>
