@@ -16,9 +16,13 @@
     <script type="text/javascript">
         $(function(){
             // Datepicker
-            $('#datepicker').datepicker({
-                $.datepicker.regional['de']
+            $('#datepicker').datepicker({ 
+                onSelect: function(dateText, inst) { 
+                    window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/" 
+                } 
             });
+            $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
+            $('#datepicker').datepicker('setDate', '{{ date }}');
 
             //hover states on the static widgets
             $('#dialog_link, ul#icons li').hover(
