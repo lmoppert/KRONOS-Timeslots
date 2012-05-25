@@ -19,7 +19,8 @@
             $('#datepicker').datepicker({ 
                 onSelect: function(dateText, inst) { 
                     window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/" 
-                } 
+                },
+                beforeShowDay: $.datepicker.noWeekends
             });
             $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
             $('#datepicker').datepicker('setDate', '{{ date }}');
