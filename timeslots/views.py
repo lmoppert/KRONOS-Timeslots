@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from timeslots.models import Station, Dock, Line
+from timeslots.models import Station, Dock, Block
 from django.contrib.auth import logout
 
 def logout_page(request):

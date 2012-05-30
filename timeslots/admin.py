@@ -1,8 +1,8 @@
-from timeslots.models import Station, Dock, Line, Slot, UserProfile
+from timeslots.models import Station, Dock, Block, Slot, UserProfile
 from django.contrib import admin
 
 class DockAdmin(admin.ModelAdmin):
-    list_display = ('station', 'name', 'description', 'linecount')
+    list_display = ('station', 'name', 'description')
 
 class DockInline(admin.TabularInline):
     model = Dock
@@ -16,7 +16,7 @@ class StationAdmin(admin.ModelAdmin):
     ]
     inlines = [DockInline]
 
-class LineAdmin(admin.ModelAdmin):
+class BlockAdmin(admin.ModelAdmin):
     list_display = ('dock', 'start', 'end')
 
 class UserAdmin(admin.ModelAdmin):
@@ -24,5 +24,5 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(Station, StationAdmin)
 admin.site.register(Dock, DockAdmin)
-admin.site.register(Line, LineAdmin)
+admin.site.register(Block, BlockAdmin)
 admin.site.register(UserProfile, UserAdmin)

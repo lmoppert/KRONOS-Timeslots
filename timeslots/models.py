@@ -58,7 +58,7 @@ class UserProfile(models.Model):
         return "%s" % (self.user.username)
 
 class Slot(models.Model):
-    line = models.ForeignKey(Line)
+    block = models.ForeignKey(Block)
     company = models.ForeignKey(UserProfile)
     
     date = models.DateField()
