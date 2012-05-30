@@ -7,17 +7,21 @@
 
 {% for dock in station.dock_set.all %}
     <div class="span3">
-        <table class="table table-bordered table-condensed">
-            <caption><h3>{{ dock.name }}</h3></caption>
-            <tbody>
-                <tr>
-                    <th>8:00</th>
-                    {% for i in dock.linecount|get_range %}
-                        <td>{{ i }}</td>
+        <h3 style="text-align: center;">{{ dock.name }}</h3>
+        {% for curr_block in dock.block_set.all %}
+            <table class="table table-bordered table-condensed">
+                <tbody>
+                    {% for index in curr_block.slotcount|get_range %}
+                        <tr>
+                            <th>8:00</th>
+                            {% for line in curr_block.linecount|get_range %}
+                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}</a></td>
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        {% endfor %}
     </div>
 {% endfor %}
 
