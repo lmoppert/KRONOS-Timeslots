@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+
+<table class="table table-bordered">
+    <tr>
+        <th colspan="2">Angaben in Stunden vor Slotanfang</th>
+    <tr>
+        <td>Buchbar bis</td>
+        <td>{{ station.deadline|time:"H" }}</td>
+    </tr><tr>
+        <td>Veränderbar bis</td>
+        <td>{{ station.rnvp|time:"H" }}</td>
+    </tr>
+</table>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="well">
+    <h1>{{ station.name }}</h1>
+    <p>{{ station.shortdescription }}</p>
+    <p>{{ station.longdescription }}</p>
+</div>
+
+{% endblock %}
