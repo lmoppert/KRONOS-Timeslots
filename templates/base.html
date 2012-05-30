@@ -13,6 +13,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
     <script type="text/javascript">
         $(function(){
             // Datepicker
@@ -45,29 +46,29 @@
     <div class="navbar-inner">
         <div class="container">
             <span class="span3"><a class="brand" href="/timeslots/">Ladezeitensteuerung</a></span>
-            <ul class="nav">
-                <li class="dropdown" id="profile">
-                <a href="#profile" class="dropdown-toggle" data-toggle="dropdown"><b>{{ user.first_name }} {{ user.last_name }}</b> ({{ user.groups.all.0.name }}) <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/timeslots/user/{{ user.id }}">Profil</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/timeslots/logout">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            {% if user.userprofile.stations.all %}
-            <span class="pull-right">
-                <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
-                    <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
-                        {% for curr_station in user.userprofile.stations.all %}
-                            <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}>
-                            {{ curr_station.name }} &ndash; {{ curr_station.shortdescription }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </span>
+            {% if station %}
+                <span class="pull-left">
+                    <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
+                        <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
+                            {% for curr_station in user.userprofile.stations.all %}
+                                <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}> {{ curr_station.longname }} </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </span>
             {% endif %}
+            <span class="pull-right">
+                <ul class="nav">
+                    <li class="dropdown" id="profile">
+                    <a href="#profile" class="dropdown-toggle" data-toggle="dropdown"><b>{{ user.first_name }} {{ user.last_name }}</b> ({{ user.groups.all.0.name }}) <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/timeslots/user/{{ user.id }}">Profil</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/timeslots/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </span>
         </div>
     </div>
 </div>
