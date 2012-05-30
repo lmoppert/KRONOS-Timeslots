@@ -1,27 +1,24 @@
 {% extends "base.html" %}
-
-{% block sidebar %}
-
-<table class="table table-bordered">
-    <tr>
-        <th colspan="2">Angaben in Stunden vor Slotanfang</th>
-    <tr>
-        <td>Buchbar bis</td>
-        <td>{{ station.deadline|time:"H" }}</td>
-    </tr><tr>
-        <td>Veränderbar bis</td>
-        <td>{{ station.rnvp|time:"H" }}</td>
-    </tr>
-</table>
-
-{% endblock %}
+{% load get_range %}
 
 {% block content %}
 
-<div class="well">
-    <h1>{{ station.name }}</h1>
-    <p>{{ station.shortdescription }}</p>
-    <p>{{ station.longdescription }}</p>
-</div>
+<!-- div class="well"><h2>{{ station.longname }}</h2></div -->
+
+{% for dock in station.dock_set.all %}
+    <div class="span3">
+        <table class="table table-bordered table-condensed">
+            <caption><h3>{{ dock.name }}</h3></caption>
+            <tbody>
+                <tr>
+                    <th>8:00</th>
+                    {% for i in dock.linecount|get_range %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
 
 {% endblock %}
