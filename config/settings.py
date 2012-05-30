@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'timeslots',
     'bootstrap_toolkit',
     'crispy_forms',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
