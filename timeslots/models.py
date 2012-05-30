@@ -21,15 +21,15 @@ class Dock(models.Model):
     
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True)
-    linecount = models.IntegerField()
 
     def __unicode__(self):
         return  '%s - %s' % (self.station.name, self.name)
 
-class Line(models.Model):
+class Block(models.Model):
     dock = models.ForeignKey(Dock)
     
     start = models.TimeField()
+    linecount = models.IntegerField()
     slotcount = models.IntegerField()
     slotduration = models.IntegerField()
     
