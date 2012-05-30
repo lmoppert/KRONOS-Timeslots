@@ -19,10 +19,7 @@ def station_redirect(request):
         station = request.POST['selectedStation']
         return HttpResponseRedirect('/timeslots/station/%s/' % station)
 
-def station_dayview(request, pk, date):
-    station = get_object_or_404(Station, pk=pk)
-    return render_to_response('timeslots/station_dayview.html', { 'station': station, 'date': date}, context_instance=RequestContext(request))
-
 def station(request, pk, date):
     station = get_object_or_404(Station, pk=pk)
-    return render_to_response('timeslots/station_dayview.html', { 'station': station, 'date': date}, context_instance=RequestContext(request))
+    return render_to_response('timeslots/station_detail.html', 
+                { 'station': station, 'date': date}, context_instance=RequestContext(request))
