@@ -1,112 +1,124 @@
 [
-    {
-        "pk": 1,
-        "model": "timeslots.station",
-        "fields": {
-            "booking_deadline": "15:00:00",
-            "shortdescription": "KRONOS Leverkusen",
-            "name": "Titanstra\u00dfe",
-            "rnvp": "01:00:00",
-            "longdescription": "Titanstra\u00dfe 55,\r\n51373 Leverkusen"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "timeslots.station",
-        "fields": {
-            "booking_deadline": "15:00:00",
-            "shortdescription": "Ferrofloc / Kronofloc",
-            "name": "Werk Leverkusen",
-            "rnvp": "01:00:00",
-            "longdescription": ""
-        }
-    },
-    {
-        "pk": 1,
-        "model": "timeslots.dock",
-        "fields": {
-            "linecount": 2,
-            "station": 1,
-            "name": "Truck",
-            "description": "Palettenbeladung"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "timeslots.dock",
-        "fields": {
-            "linecount": 2,
-            "station": 1,
-            "name": "Container",
-            "description": "Container Beladung"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "timeslots.dock",
-        "fields": {
-            "linecount": 1,
-            "station": 2,
-            "name": "F 26 West",
-            "description": "Ferrofloc / Kronofloc"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "timeslots.block",
-        "fields": {
-            "slotcount": 7,
-            "dock": 1,
-            "slotduration": 45,
-            "start": "07:00:00"
-        }
-    },
-    {
-        "pk": 8,
-        "model": "timeslots.block",
-        "fields": {
-            "slotcount": 4,
-            "dock": 1,
-            "slotduration": 45,
-            "start": "13:00:00"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "timeslots.block",
-        "fields": {
-            "slotcount": 4,
-            "dock": 2,
-            "slotduration": 60,
-            "start": "08:00:00"
-        }
-    },
-    {
-        "pk": 10,
-        "model": "timeslots.block",
-        "fields": {
-            "slotcount": 3,
-            "dock": 2,
-            "slotduration": 60,
-            "start": "13:00:00"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "timeslots.userprofile",
-        "fields": {
-            "town": "Leverkusen",
-            "ZIP": "51373",
-            "stations": [
-                1,
-                2
-            ],
-            "country": "Deutschland",
-            "company": "KRONOS TITAN GmbH",
-            "phone": "+49 214 356 2893",
-            "readonly": false,
-            "street": "Peschstra\u00dfe 5",
-            "user": 1
-        }
+  {
+    "pk": 1,
+    "model": "timeslots.station",
+    "fields": {
+      "booking_deadline": "15:00:00",
+      "shortdescription": "KRONOS Leverkusen",
+      "name": "Titanstra\u00dfe",
+      "rnvp": "01:00:00",
+      "longdescription": "Titanstra\u00dfe 55,\r\n51373 Leverkusen"
     }
+  },
+  {
+    "pk": 2,
+    "model": "timeslots.station",
+    "fields": {
+      "booking_deadline": "15:00:00",
+      "shortdescription": "Ferrofloc / Kronofloc",
+      "name": "Werk Leverkusen",
+      "rnvp": "01:00:00",
+      "longdescription": ""
+    }
+  },
+  {
+    "pk": 1,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 1,
+      "name": "Truck",
+      "description": "Palettenbeladung"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 1,
+      "name": "Container",
+      "description": "Container Beladung"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 2,
+      "name": "F 26 West",
+      "description": "Ferrofloc / Kronofloc"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 7,
+      "dock": 1,
+      "linecount": 2,
+      "slotduration": 45,
+      "start": "07:00:00"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 4,
+      "dock": 1,
+      "linecount": 2,
+      "slotduration": 45,
+      "start": "13:00:00"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 4,
+      "dock": 2,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 3,
+      "dock": 2,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "13:00:00"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 10,
+      "dock": 3,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "timeslots.userprofile",
+    "fields": {
+      "town": "Leverkusen",
+      "ZIP": "51373",
+      "stations": [
+        1,
+        2
+      ],
+      "country": "Deutschland",
+      "company": "KRONOS TITAN GmbH",
+      "phone": "+49 214 356 2893",
+      "readonly": false,
+      "street": "Peschstra\u00dfe 5",
+      "user": 1
+    }
+  }
 ]

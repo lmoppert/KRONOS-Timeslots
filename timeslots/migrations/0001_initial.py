@@ -25,19 +25,19 @@ class Migration(SchemaMigration):
             ('station', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['timeslots.Station'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
-            ('linecount', self.gf('django.db.models.fields.IntegerField')()),
         ))
         db.send_create_signal('timeslots', ['Dock'])
 
-        # Adding model 'Line'
-        db.create_table('timeslots_line', (
+        # Adding model 'Block'
+        db.create_table('timeslots_block', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('dock', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['timeslots.Dock'])),
             ('start', self.gf('django.db.models.fields.TimeField')()),
+            ('linecount', self.gf('django.db.models.fields.IntegerField')()),
             ('slotcount', self.gf('django.db.models.fields.IntegerField')()),
             ('slotduration', self.gf('django.db.models.fields.IntegerField')()),
         ))
-        db.send_create_signal('timeslots', ['Line'])
+        db.send_create_signal('timeslots', ['Block'])
 
         # Adding model 'UserProfile'
         db.create_table('timeslots_userprofile', (
@@ -64,7 +64,7 @@ class Migration(SchemaMigration):
         # Adding model 'Slot'
         db.create_table('timeslots_slot', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('line', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['timeslots.Line'])),
+            ('block', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['timeslots.Block'])),
             ('company', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['timeslots.UserProfile'])),
             ('date', self.gf('django.db.models.fields.DateField')()),
             ('index', self.gf('django.db.models.fields.IntegerField')()),
@@ -90,8 +90,8 @@ class Migration(SchemaMigration):
         # Deleting model 'Dock'
         db.delete_table('timeslots_dock')
 
-        # Deleting model 'Line'
-        db.delete_table('timeslots_line')
+        # Deleting model 'Block'
+        db.delete_table('timeslots_block')
 
         # Deleting model 'UserProfile'
         db.delete_table('timeslots_userprofile')
@@ -143,21 +143,21 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        'timeslots.block': {
+            'Meta': {'object_name': 'Block'},
+            'dock': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.Dock']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'linecount': ('django.db.models.fields.IntegerField', [], {}),
+            'slotcount': ('django.db.models.fields.IntegerField', [], {}),
+            'slotduration': ('django.db.models.fields.IntegerField', [], {}),
+            'start': ('django.db.models.fields.TimeField', [], {})
+        },
         'timeslots.dock': {
             'Meta': {'object_name': 'Dock'},
             'description': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'linecount': ('django.db.models.fields.IntegerField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'station': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.Station']"})
-        },
-        'timeslots.line': {
-            'Meta': {'object_name': 'Line'},
-            'dock': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.Dock']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slotcount': ('django.db.models.fields.IntegerField', [], {}),
-            'slotduration': ('django.db.models.fields.IntegerField', [], {}),
-            'start': ('django.db.models.fields.TimeField', [], {})
         },
         'timeslots.logging': {
             'Meta': {'object_name': 'Logging'},
@@ -168,13 +168,13 @@ class Migration(SchemaMigration):
         },
         'timeslots.slot': {
             'Meta': {'object_name': 'Slot'},
+            'block': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.Block']"}),
             'blocked': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'company': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.UserProfile']"}),
             'date': ('django.db.models.fields.DateField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'index': ('django.db.models.fields.IntegerField', [], {}),
-            'job_number': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
-            'line': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['timeslots.Line']"})
+            'job_number': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
         },
         'timeslots.station': {
             'Meta': {'object_name': 'Station'},
