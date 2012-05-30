@@ -8,6 +8,10 @@ class Station(models.Model):
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
     rnvp = models.TimeField()
+
+    def _get_longname(self):
+        return self.name + " - " + self.shortdescription
+    longname = property(_get_longname)
     
     def __unicode__(self):
         return self.name
@@ -57,6 +61,7 @@ class Slot(models.Model):
     line = models.ForeignKey(Line)
     company = models.ForeignKey(UserProfile)
     
+    date = models.DateField()
     index = models.IntegerField()
     job_number = models.CharField(max_length=20, blank=True)
     blocked = models.BooleanField()
