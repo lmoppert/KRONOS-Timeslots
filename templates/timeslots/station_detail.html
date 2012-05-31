@@ -15,7 +15,7 @@
                         <tr>
                             <th>{{ start_time|time:"H:i" }}</th>
                             {% for line in curr_block.linecount|get_range %}
-                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter|stringformat:"02d" }}.{{ line }}</a></td>
+                                <td><a href="/timeslots/date/{{ date }}/slot/{{ curr_block.id }}.{{ forloop.parentloop.counter }}.{{ line }}/">Empty Slot</a></td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
