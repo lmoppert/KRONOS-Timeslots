@@ -13,9 +13,9 @@
                 <tbody>
                     {% for index in curr_block.slotcount|get_range %}
                         <tr>
-                            <th>8:00</th>
+                            <th>{{ curr_block.start|time:"H:i" }}</th>
                             {% for line in curr_block.linecount|get_range %}
-                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}</a></td>
+                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ index }}</a></td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
