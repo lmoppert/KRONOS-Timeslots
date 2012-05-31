@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from timeslots.models import Station, Dock, Block
-from django.contrib.auth import logout
 
 def logout_page(request):
     logout_then_login(request)
@@ -31,6 +30,14 @@ def slot(request, date, block_id, index, line):
     except IndexError:
         end = block.end
     timeslot = block.start_times[int(index)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
-    return render_to_response('timeslots/slot_detail.html', 
-            { 'date': date, 'curr_block': block, 'index':index, 'line':line, 'timeslot':timeslot, 'station':block.dock.station}, 
-            context_instance=RequestContext(request))
+    if request.method == 'POST':
+        pass
+
+    return render_to_response('timeslots/slot_detail.html', { 
+            'date': date, 
+            'curr_block': block, 
+            'index':index, 
+            'line':line, 
+            'timeslot':timeslot, 
+            'station':block.dock.station,
+            }, context_instance=RequestContext(request))

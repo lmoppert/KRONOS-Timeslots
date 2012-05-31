@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -127,7 +128,12 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'crispy_forms',
     'south',
+    'debug_toolbar',
 )
+
+# Settings for the debug toolbar
+ALWAYS_SHOW_DEBUG_TOOLBAR = True,
+DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
