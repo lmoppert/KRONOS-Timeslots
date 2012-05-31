@@ -1,8 +1,16 @@
 from timeslots.models import Station, Dock, Block, Slot, UserProfile
 from django.contrib import admin
 
+class BlockAdmin(admin.ModelAdmin):
+    list_display = ('dock', 'start', 'end')
+
+class BlockInline(admin.TabularInline):
+    model = Block
+    extra = 1
+    
 class DockAdmin(admin.ModelAdmin):
     list_display = ('station', 'name', 'description')
+    inlines = [BlockInline]
 
 class DockInline(admin.TabularInline):
     model = Dock
@@ -15,9 +23,6 @@ class StationAdmin(admin.ModelAdmin):
         ('Booking deadlines', {'fields': ['booking_deadline', 'rnvp']})
     ]
     inlines = [DockInline]
-
-class BlockAdmin(admin.ModelAdmin):
-    list_display = ('dock', 'start', 'end')
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('user', 'company')

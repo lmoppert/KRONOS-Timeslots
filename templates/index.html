@@ -9,12 +9,13 @@
     <div class="well">
         <h1>KRONOS TITAN GmbH</h1>
         <h3>Ladezeitensteuerung</h3>
-
+        <p>&nbsp;</p>
         <p>Hier können Sie Ladezeiten buchen und verwalten. Wählen Sie bitt zunächst eine Ladestelle aus der Liste aus. 
         Falls keine Ladestellen angezeigt werden, wenden Sie sich bitte an Ihren Ansprechpartner bei der KRONOS TITAN GmbH.</p>
 
+        <p>&nbsp;</p>
         <h4>Verfügbare Ladestellen</h4>
-        <ul class="unstyled">
+        <p><ul class="unstyled">
             {% for curr_station in user.userprofile.stations.all %}
                 <li>
                     <a href="/timeslots/station/{{ curr_station.id }}" id="station{{ curr_station.id }}" rel="tooltip" 
@@ -24,7 +25,7 @@
                     <script>$(function () { $("#station{{ curr_station.id }}").tooltip(); });</script>
                 {% endif %}
             {% endfor %}
-        </ul>
+        </ul></p>
         <p>&nbsp;</p>
         <p><a class="btn btn-primary" href="http://kronos.de/">See website for more info about KRONOS &raquo;</a></p>
     </div>
