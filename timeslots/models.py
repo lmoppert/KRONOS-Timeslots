@@ -39,6 +39,15 @@ class Block(models.Model):
         return endtime.time()
     end = property(_get_end)
 
+    def _get_start_times(self):
+        start_times = []
+        for i in range(self.slotcount):
+            delta = i * self.slotduration
+            starttime = datetime.combine(date.today(), self.start) + timedelta(minutes=delta)
+            start_times.append(starttime.time())
+        return start_times
+    start_times = property(_get_start_times)
+
     def __unicode__(self):
         return "%s (%s - %s)" % (unicode(self.dock), self.start.strftime("%H:%M"), self.end.strftime("%H:%M"))
 

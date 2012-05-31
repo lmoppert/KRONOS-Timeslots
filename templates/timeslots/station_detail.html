@@ -11,11 +11,11 @@
         {% for curr_block in dock.block_set.all %}
             <table class="table table-bordered table-condensed">
                 <tbody>
-                    {% for index in curr_block.slotcount|get_range %}
+                    {% for start_time in curr_block.start_times %}
                         <tr>
-                            <th>{{ curr_block.start|time:"H:i" }}</th>
+                            <th>{{ start_time|time:"H:i" }}</th>
                             {% for line in curr_block.linecount|get_range %}
-                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ index }}</a></td>
+                                <td><a href="#">Slot {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter|stringformat:"02d" }}.{{ line }}</a></td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
