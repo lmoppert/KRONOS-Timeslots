@@ -72,8 +72,12 @@ class Slot(models.Model):
     
     date = models.DateField()
     index = models.IntegerField()
-    job_number = models.CharField(max_length=20, blank=True)
     blocked = models.BooleanField()
+
+class Job(models.Model):
+    slot = models.ForeignKey(Slot)
+    number = models.CharField(max_length=20, blank=True)
+    description = models.CharField(max_length=200, blank=True)
 
 class Logging(models.Model):
     user = models.ForeignKey(User)
