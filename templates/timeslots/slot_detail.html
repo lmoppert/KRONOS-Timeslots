@@ -1,15 +1,47 @@
 {% extends "base.html" %}
-{% load get_range %}
+{% load filters %}
 
 {% block content %}
 
-<h3>{{ date }} &ndash; {{ timeslot }}</h3>
+<div class="well">
+    <h2>Reservierung für {{ date|nice_date }}</h2> 
+    <table class="data-details">
+        <tr>
+            <td><b>Uhrzeit: </b></th>
+            <td>{{ timeslot }}</td>
+            <td class="nextcol"><b>Firma: </b></th>
+            <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
+        </tr>
+        <tr>
+            <td><b>Station: </b></th>
+            <td>{{ station }}</td>
+            <td class="nextcol"><b>Anwender: </b></th>
+            <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
+        </tr>
+        <tr>
+            <td><b>Rampe: </b></th>
+            <td>{{ curr_block.dock.name }}</td>
+        </tr>
+    </table>
+</div>
+
 <form action="." method="post" class="well form-horizontal">{% csrf_token %}
-    <label for="jobnumber">Job-Nummer</label>
-    <input type="text" class="span4" id="jobnumber">
-    
-    <label for="jobdescription">Job-Description</label>
-    <input type="textarea" class="span4" id="jobdescription">
+    <div class="control-group">
+        <label class="control-label" for="jobnumber">Auftrags-Nummer</label>
+        <div class="controls">
+            <input type="text" id="jobnumber">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="jobdescription">Beschreibung</label>
+        <div class="controls">
+            <textarea class="textarea" id="jobdescription" rows="4"></textarea>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Slot Reservieren</button>
+        <button class="btn">Abbrechen</button>
+    </div>
 </form>
 
 {% endblock %}

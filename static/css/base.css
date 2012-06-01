@@ -23,3 +23,9 @@ body {
 .navbar-inner .brand {
     color: #8eadd6;
 }
+table.data-details {
+    margin-top: 10px;
+}
+table.data-details td.nextcol {
+    padding-left: 40px;
+}
