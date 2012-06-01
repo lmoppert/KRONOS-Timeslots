@@ -54,6 +54,7 @@
                                 <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}> {{ curr_station.longname }} </option>
                             {% endfor %}
                         </select>
+                        <input type="hidden" name="currentDate" id="currentDate" value="{{ date }}">
                     </form>
                 </span>
             {% endif %}

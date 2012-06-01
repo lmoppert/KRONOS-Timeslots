@@ -16,7 +16,8 @@ def index(request):
 def station_redirect(request):
     if request.method == 'POST':
         station = request.POST['selectedStation']
-        return HttpResponseRedirect('/timeslots/station/%s/' % station)
+        date = request.POST['currentDate']
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
 
 def station(request, pk, date):
     station = get_object_or_404(Station, pk=pk)
