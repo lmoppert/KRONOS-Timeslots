@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from timeslots.models import Station, Dock, Block
+from timeslots.forms import *
 
 def logout_page(request):
     logout_then_login(request)
@@ -13,17 +14,20 @@ def logout_page(request):
 def index(request):
     return render_to_response('index.html', context_instance=RequestContext(request))
 
+@login_required
 def station_redirect(request):
     if request.method == 'POST':
         station = request.POST['selectedStation']
         date = request.POST['currentDate']
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
 
+@login_required
 def station(request, pk, date):
     station = get_object_or_404(Station, pk=pk)
     return render_to_response('timeslots/station_detail.html', 
             { 'station': station, 'date': date}, context_instance=RequestContext(request))
 
+@login_required
 def slot(request, date, block_id, index, line):
     block = get_object_or_404(Block, pk=block_id)
     try:
@@ -33,7 +37,6 @@ def slot(request, date, block_id, index, line):
     timeslot = block.start_times[int(index)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
     if request.method == 'POST':
         pass
-
     return render_to_response('timeslots/slot_detail.html', { 
             'date': date, 
             'curr_block': block, 
