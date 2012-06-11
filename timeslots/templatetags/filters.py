@@ -33,6 +33,6 @@ def nice_date( curr_date ):
       DD.MM.YYYY
     """
     locale.setlocale(locale.LC_TIME, "de_DE.utf8")
-    nice_date = date(int(curr_date[:4]), int(curr_date[6:7]), int(curr_date[9:10]))
+    nice_date = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
     return nice_date.strftime("%A, %d. %B %Y")
     
