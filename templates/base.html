@@ -22,7 +22,8 @@
                     window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/" 
                 },
                 beforeShowDay: $.datepicker.noWeekends,
-                dateFormat: 'yy-mm-dd'
+                dateFormat: 'yy-mm-dd',
+                showButtonPanel: true
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
 
