@@ -1,7 +1,4 @@
-from django import forms
-from timeslots.models import Slot
+from django.forms.models import inlineformset_factory
+from timeslots.models import Slot, Job
 
-class SlotForm(forms.ModelForm):
-    class Meta:
-        model = Slot
-        exclude = ('is_blocked')
+JobFormSet = inlineformset_factory(Slot, Job)
