@@ -72,6 +72,7 @@ class Slot(models.Model):
     
     date = models.DateField()
     index = models.IntegerField()
+    line = models.IntegerField()
     blocked = models.BooleanField()
 
 class Job(models.Model):
