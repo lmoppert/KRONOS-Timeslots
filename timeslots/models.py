@@ -64,7 +64,7 @@ class UserProfile(models.Model):
     readonly = models.BooleanField()
 
     def __unicode__(self):
-        return "%s" % (self.user.username)
+        return "%s" % (self.company)
 
 class Slot(models.Model):
     block = models.ForeignKey(Block)
@@ -73,7 +73,11 @@ class Slot(models.Model):
     date = models.DateField()
     index = models.IntegerField()
     line = models.IntegerField()
-    blocked = models.BooleanField()
+    blocked = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.index, self.line)
+
 
 class Job(models.Model):
     slot = models.ForeignKey(Slot)
