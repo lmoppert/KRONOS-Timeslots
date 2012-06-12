@@ -1,3 +1,4 @@
+from django.utils.encoding import force_unicode
 from django.template import Library
 from datetime import date
 import locale
@@ -36,3 +37,21 @@ def nice_date( curr_date ):
     nice_date = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
     return nice_date.strftime("%A, %d. %B %Y")
     
+@register.filter
+def in_group(user, groups):
+    """
+      Returns a boolean if the user is in the given group, or comma-separated
+      list of groups.
+
+      Usage::
+          {% if user|in_group:"Friends" %}
+          ...
+          {% endif %}
+
+      or::
+          {% if user|in_group:"Friends,Enemies" %}
+          ...
+          {% endif %}
+    """
+    group_list = force_unicode(groups).split(',')
+    return bool(user.groups.filter(name__in=group_list).values('name'))

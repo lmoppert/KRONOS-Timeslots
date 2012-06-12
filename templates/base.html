@@ -1,3 +1,4 @@
+{% load filters %}
 <!DOCTYPE html>
 <html land="de">
 <head>
@@ -65,6 +66,9 @@
                         <a href="#profile" class="dropdown-toggle" data-toggle="dropdown"><b>{% firstof user.get_full_name user.username %}</b> ({{ user.groups.all.0.name }}) <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/timeslots/user/{{ user.id }}">Profil</a></li>
+                            {% if user|in_group:"Administrator" %}
+                                <li><a href="/admin/">Administration</a></li>
+                            {% endif %}
                             <li class="divider"></li>
                             <li><a href="/timeslots/logout">Logout</a></li>
                         </ul>

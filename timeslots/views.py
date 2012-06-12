@@ -30,21 +30,14 @@ def station(request, pk, date):
 
 @login_required
 def slot(request, date, block_id, index, line):
-    # Get corresponding block and its parameters
     block = get_object_or_404(Block, pk=block_id)
     try:
         end = block.start_times[int(index)]
     except IndexError:
         end = block.end
     timeslot = block.start_times[int(index)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
-
-    # Get current slot or create a new one
-    try:
-        slot = Slot.objects.filter(date=date).filter(index=index).get(line=line)
-    except Slot.DoesNotExist:
-        slot = Slot(date=date, index=index, line=line)
-        slot.block = block
-        slot.company = request.user.userprofile
+    slot, created = Slot.objects.get_or_create(date=date, index=index, line=line, block=block, 
+                    defaults={'company': request.user.userprofile})
 
     # Process request
     if request.method == 'POST':

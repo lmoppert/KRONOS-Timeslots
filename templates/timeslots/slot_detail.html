@@ -26,18 +26,24 @@
 </div>
 
 <form action="." method="post" class="well form-horizontal">{% csrf_token %}
-    <div class="control-group">
-        <label class="control-label" for="jobnumber">Auftrags-Nummer</label>
-        <div class="controls">
-            <input type="text" id="jobnumber">
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="jobdescription">Beschreibung</label>
-        <div class="controls">
-            <textarea class="textarea" id="jobdescription" rows="4"></textarea>
-        </div>
-    </div>
+    {{ form.management_form }}
+    <table class="form-table">
+        <thead>
+            <tr>
+                <th>Auftrags-Nummer</th>
+                <th>Beschreibung</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in form %}
+                <tr>
+                    <td>{{ f.number }}</td>
+                    <td>{{ f.description }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Slot Reservieren</button>
         <button class="btn">Abbrechen</button>
