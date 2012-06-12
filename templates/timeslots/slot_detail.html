@@ -23,31 +23,31 @@
             <td>{{ curr_block.dock.name }}</td>
         </tr>
     </table>
-</div>
 
-<form action="." method="post" class="well form-horizontal">{% csrf_token %}
-    {{ form.management_form }}
-    <table class="form-table">
-        <thead>
-            <tr>
-                <th>Auftrags-Nummer</th>
-                <th>Beschreibung</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for f in form %}
+    <form action="." method="post" class="form-horizontal">{% csrf_token %}
+        {{ form.management_form }}
+        <table class="form-table">
+            <thead>
                 <tr>
-                    <td>{{ f.number }}</td>
-                    <td>{{ f.description }}</td>
+                    <th>Auftrags-Nummer</th>
+                    <th>Beschreibung</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for f in form %}
+                    <tr>
+                        <td>{{ f.number }}</td>
+                        <td>{{ f.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Slot Reservieren</button>
-        <button class="btn">Abbrechen</button>
-    </div>
-</form>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Slot Reservieren</button>
+            <button class="btn">Abbrechen</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
