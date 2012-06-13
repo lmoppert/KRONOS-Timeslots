@@ -9,9 +9,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'project.views.home', name='home'),
     url(r'^timeslots/', include('timeslots.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+    # Build in admin site
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

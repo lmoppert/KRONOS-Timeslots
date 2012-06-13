@@ -3,11 +3,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Station(models.Model):
+    """
+    The Station represents one address, where trucks can be loaded. Every station 
+    consist of one or several docks (:model:`timeslots.Dock`) each of which can have 
+    multiple lines (:model:`timeslots.line`).
+
+    """
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
-    rnvp = models.TimeField()
+    rnvp = models.TimeField(help_text="RVNP = Rien ne vas plus -- time when a slot can not be edited any more")
 
     def _get_longname(self):
         return self.name + " - " + self.shortdescription
