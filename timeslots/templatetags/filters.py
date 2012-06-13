@@ -27,7 +27,7 @@ def get_range( value ):
   return [v + 1 for v in range(value)]
 
 @register.filter
-def nice_date( curr_date ):
+def nice_date(curr_date, arg="long"):
     """
       The date is converted from YYYY-MM-DD to the german standard:
 
@@ -35,7 +35,10 @@ def nice_date( curr_date ):
     """
     locale.setlocale(locale.LC_TIME, "de_DE.utf8")
     nice_date = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
-    return nice_date.strftime("%A, %d. %B %Y")
+    if arg == "long":
+        return nice_date.strftime("%A, %d. %B %Y")
+    else:
+        return nice_date.strftime("%a, %d.%m.")
     
 @register.filter
 def in_group(user, groups):

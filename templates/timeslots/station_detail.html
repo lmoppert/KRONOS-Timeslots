@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- div class="well"><h2>{{ station.longname }}</h2></div -->
+<div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
 
 {% for dock in station.dock_set.all %}
     <div class="span3">
