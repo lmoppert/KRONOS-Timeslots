@@ -4,10 +4,15 @@ from django.contrib.auth.models import User
 
 class Station(models.Model):
     """
-    The Station represents one address, where trucks can be loaded. Every station 
-    consist of one or several docks (:model:`timeslots.Dock`) each of which can have 
-    multiple lines (:model:`timeslots.line`).
+    The Station represents one address, where trucks can be loaded. 
 
+    **Related Objects**
+    
+    ``dock``
+    Every station consist of one or several :model:`timeslots.Dock`.
+
+    ``line``
+    Each Dock can have multiple :model:`timeslots.line`.
     """
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
@@ -23,6 +28,15 @@ class Station(models.Model):
         return self.name
 
 class Dock(models.Model):
+    """
+    The Dock belongs to one :model:`timeslots.Station`
+
+    **Related Objects**
+
+    ``block``
+    Timeslots of a dock are organized through a :model:`timeslots.Block`
+
+    """
     station = models.ForeignKey(Station)
     
     name = models.CharField(max_length=200)

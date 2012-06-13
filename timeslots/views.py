@@ -23,13 +23,31 @@ def station_redirect(request):
 
 @login_required
 def station(request, pk, date):
+    """
+    Displays the :model:`timeslots.Block` of a :model:`timeslots.Station` for a specific date
+    """
+    # prepare context items
     station = get_object_or_404(Station, pk=pk)
+    slots = Slot.objects.filter(date=date) 
+
+    # process request
     return render_to_response('timeslots/station_detail.html', 
-            { 'station': station, 'date': date}, 
+            { 'station': station, 'slots': slots, 'date': date}, 
             context_instance=RequestContext(request))
 
 @login_required
 def slot(request, date, block_id, index, line):
+    """
+    Displays details for a :model:`timeslots.Slot`
+
+    **Context**
+
+    ``RequestContext``
+
+    ``block``
+        An instance of :model:`timeslots.Block`
+    """
+    # prepare context items
     block = get_object_or_404(Block, pk=block_id)
     try:
         end = block.start_times[int(index)]
@@ -39,7 +57,7 @@ def slot(request, date, block_id, index, line):
     slot, created = Slot.objects.get_or_create(date=date, index=index, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
-    # Process request
+    # process request
     if request.method == 'POST':
         formset = JobFormSet(request.POST, instance=slot)
         if formset.is_valid():
