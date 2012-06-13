@@ -3,30 +3,35 @@
 
 {% block content %}
 
-<div class="well">
-    <h2>Reservierung für {{ date|nice_date }}</h2> 
-    <table class="data-details">
+<div class="page-header"><h1>Reservierung für {{ date|nice_date }}</h1></div> 
+<div class="section">
+    <table class="table table-bordered data-details">
         <tr>
-            <td><b>Uhrzeit: </b></th>
+            <td><b>Uhrzeit</b></th>
             <td>{{ timeslot }}</td>
-            <td class="nextcol"><b>Firma: </b></th>
+            <td class="nextcol"><b>Firma</b></th>
             <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
         </tr>
         <tr>
-            <td><b>Station: </b></th>
+            <td><b>Station</b></th>
             <td>{{ station }}</td>
-            <td class="nextcol"><b>Anwender: </b></th>
+            <td class="nextcol"><b>Anwender</b></th>
             <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
         </tr>
         <tr>
-            <td><b>Rampe: </b></th>
+            <td><b>Rampe</b></th>
             <td>{{ curr_block.dock.name }}</td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
+</div>
 
+<div class="section">
+    <h2>Zugehörige Aufträge</h2>
     <form action="." method="post" class="form-horizontal">{% csrf_token %}
         {{ form.management_form }}
-        <table class="form-table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Auftrags-Nummer</th>
