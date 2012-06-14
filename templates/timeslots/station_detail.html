@@ -5,19 +5,22 @@
 
 <div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
 
-{% for dock in station.dock_set.all %}
-<div class="span3">
-    <h3 style="text-align: center;">{{ dock.name }}</h3>
-    {% for curr_block in dock.block_set.all %}
-    <table class="table table-bordered table-condensed">
+<div class="section">
+{% for dock, blocks in docks %} 
+<div class="span4">
+    <h3 style="text-align: center">{{ dock }}</h3>
+    {% for blockid, timeslots in blocks %}
+    <table class="table table-bordered table condesed">
         <tbody>
-            {% for start_time in curr_block.start_times %}
+            {% for start, timeslot in timeslots %}
             <tr>
-                <th>{{ start_time|time:"H:i" }}</th>
-                {% for line in curr_block.linecount|get_range %}
-                <td><a href="/timeslots/date/{{ date }}/slot/{{ curr_block.id }}.{{ forloop.parentloop.counter }}.{{ line }}/">
-                        Empty Slot
-                </a></td>
+                <th style="width: 3em">{{ start }}</th>
+                {% for slot in timeslot %}
+                <td>
+                    <a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">
+                        {{ slot }}
+                    </a>
+                </td>
                 {% endfor %}
             </tr>
             {% endfor %}
@@ -26,9 +29,6 @@
     {% endfor %}
 </div>
 {% endfor %}
-
-<div class="section">
-<h3>Slots</h3>
-{{ slots }}
+</div>
 
 {% endblock %}

@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_list_or_404, get_object_or_404, render_to_response
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
@@ -24,15 +25,33 @@ def station_redirect(request):
 @login_required
 def station(request, pk, date):
     """
-    Displays the :model:`timeslots.Block` of a :model:`timeslots.Station` for a specific date
+    Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
+    for a specific date
     """
     # prepare context items
     station = get_object_or_404(Station, pk=pk)
-    slots = Slot.objects.filter(date=date) 
+    docks = []
+    for dock in station.dock_set.all(): 
+        blocks = []
+        for block in dock.block_set.all(): 
+            timeslots = []
+            for timeslot in range(block.slotcount): 
+                lines = []
+                for line in range(block.linecount): 
+                    #slot = "%s - %s.%s.%s" % (date, i, timeslot+1, line+1)
+                    try:
+                        slot = block.slot_set.filter(date=date).get(date=date, index=timeslot+1, line=line+1, block=block.id).company.company 
+                    except ObjectDoesNotExist:
+                        slot = "Freier Slot"
+                    lines.append(slot)
+                time = block.start_times[int(timeslot)].strftime("%H:%M")
+                timeslots.append((time, lines))
+            blocks.append((str(block.id), timeslots))
+        docks.append((dock.name, blocks))
 
     # process request
     return render_to_response('timeslots/station_detail.html', 
-            { 'station': station, 'slots': slots, 'date': date}, 
+            { 'station': station, 'date': date, 'docks': docks}, 
             context_instance=RequestContext(request))
 
 @login_required
@@ -63,7 +82,7 @@ def slot(request, date, block_id, index, line):
         if formset.is_valid():
             slot.save()
             formset.save()
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station, date))
+            return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
