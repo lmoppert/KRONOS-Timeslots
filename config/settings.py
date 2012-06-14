@@ -163,4 +163,6 @@ LOGGING = {
 }
 
 # Login URL
-LOGIN_URL = "/admin/"
+LOGIN_URL = "/timeslots/login"
+LOGOUT_URL = "/timeslots/logout"
+LOGIN_REDIRECT_URL = "/"
