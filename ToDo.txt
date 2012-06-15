@@ -1,0 +1,11 @@
+timeslots/models.py:    # ToDo: rename index to timeslot
+timeslots/models.py:    # ToDo: rename blocked to is_blocked
+timeslots/views.py:    # ToDo: add an oportunety to filter specific docks
+timeslots/views.py:    # ToDo: AJAXify the job table
+timeslots/views.py:# ToDo: generate a view for the jobs of a date
+timeslots/views.py:# ToDo: generate a view for the jobs of a company
+timeslots/views.py:# ToDo: implement i18n for all views
+timeslots/views.py:# ToDo: restrict tasks with roles and permissions
+timeslots/views.py:# ToDo: restrict reservation by deadline
+timeslots/views.py:# ToDo: restrict slot changes by rnvp
+timeslots/views.py:# ToDo: add a logging feature
