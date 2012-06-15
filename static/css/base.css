@@ -32,3 +32,6 @@ table.data-details td.nextcol {
 div.section {
     margin-top: 20px;
 }
+table.blocktable td a {
+    display: block;
+}

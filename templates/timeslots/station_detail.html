@@ -7,10 +7,10 @@
 
 <div class="section">
 {% for dock, blocks in docks %} 
-<div class="span4">
+<div class="{{ span }}">
     <h3 style="text-align: center">{{ dock }}</h3>
     {% for blockid, timeslots in blocks %}
-    <table class="table table-bordered table condesed">
+    <table class="table table-bordered table condesed blocktable">
         <tbody>
             {% for start, timeslot in timeslots %}
             <tr>

@@ -4,15 +4,12 @@ from django.contrib.auth.models import User
 
 class Station(models.Model):
     """
-    The Station represents one address, where trucks can be loaded. 
+      The Station represents one address, where trucks can be loaded. 
 
-    **Related Objects**
-    
-    ``dock``
-    Every station consist of one or several :model:`timeslots.Dock`.
-
-    ``line``
-    Each Dock can have multiple :model:`timeslots.line`.
+      **Related Objects**
+      
+      ``dock``
+      Every station consist of one or several :model:`timeslots.Dock`.
     """
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
@@ -29,13 +26,13 @@ class Station(models.Model):
 
 class Dock(models.Model):
     """
-    The Dock belongs to one :model:`timeslots.Station`
+      The Dock belongs to one :model:`timeslots.Station` and represents a dock, that is
+      meant for a specific sort of loading like container or truck.
 
-    **Related Objects**
+      **Related Objects**
 
-    ``block``
-    Timeslots of a dock are organized through a :model:`timeslots.Block`
-
+      ``block``
+      Timeslots of a dock are organized through a :model:`timeslots.Block`
     """
     station = models.ForeignKey(Station)
     
@@ -91,8 +88,10 @@ class Slot(models.Model):
     company = models.ForeignKey(UserProfile)
     
     date = models.DateField()
+    # ToDo: rename index to timeslot
     index = models.IntegerField()
     line = models.IntegerField()
+    # ToDo: rename blocked to is_blocked
     blocked = models.BooleanField(default=False)
 
     def __unicode__(self):

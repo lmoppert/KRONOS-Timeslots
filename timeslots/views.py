@@ -38,7 +38,6 @@ def station(request, pk, date):
             for timeslot in range(block.slotcount): 
                 lines = []
                 for line in range(block.linecount): 
-                    #slot = "%s - %s.%s.%s" % (date, i, timeslot+1, line+1)
                     try:
                         slot = block.slot_set.filter(date=date).get(date=date, index=timeslot+1, line=line+1, block=block.id).company.company 
                     except ObjectDoesNotExist:
@@ -48,10 +47,20 @@ def station(request, pk, date):
                 timeslots.append((time, lines))
             blocks.append((str(block.id), timeslots))
         docks.append((dock.name, blocks))
+    dock_count = station.dock_set.count()
+    if dock_count < 3:
+        span = "span6" 
+    elif dock_count == 3:
+        span = "span4" 
+    else:
+        span = "span3" 
+
+    # ToDo: add an oportunety to filter specific docks
+    # ToDo: make table-width depend on number of docks shown
 
     # process request
     return render_to_response('timeslots/station_detail.html', 
-            { 'station': station, 'date': date, 'docks': docks}, 
+            { 'station': station, 'date': date, 'docks': docks, 'span': span}, 
             context_instance=RequestContext(request))
 
 @login_required
@@ -84,7 +93,16 @@ def slot(request, date, block_id, index, line):
             formset.save()
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
+    # ToDo: AJAXify the job table
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
             {'date': date, 'curr_block': block, 'timeslot': timeslot, 'station': block.dock.station, 'slot': slot, 'form': formset}, 
             context_instance=RequestContext(request))
+
+# ToDo: generate a view for the jobs of a date
+# ToDo: generate a view for the jobs of a company
+# ToDo: implement i18n for all views
+# ToDo: restrict tasks with roles and permissions
+# ToDo: restrict reservation by deadline
+# ToDo: restrict slot changes by rnvp
+# ToDo: add a logging feature
