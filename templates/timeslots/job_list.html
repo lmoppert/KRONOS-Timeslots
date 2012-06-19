@@ -8,12 +8,14 @@
 </div>
 
 <table class="table table-bordered">
-    {% for job in jobs %}
-    <tr>
-        <td>{{ job.slot.company }}</td>
-        <td>{{ job.number }}<td>
-        <td>{{ job.description }}<td>
-    </tr>
+    {% for jobs in slots %}
+        {% for job in jobs %}
+            <tr>
+                <td rowspan="{{ jobs.count }}">{{ job.slot.times }}</td>
+                <td>{{ job.number }}<td>
+                <td>{{ job.description }}<td>
+            </tr>
+        {% endfor %}
     {% endfor %}
 </table>
 

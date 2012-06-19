@@ -71,14 +71,16 @@ def jobs(request, station_id, date):
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     slots = get_list_or_404(Slot, date=date) 
-    jobs = []
+    slotlist = []
     for slot in slots:
-        for job in slot.job_set:
+        jobs = []
+        for job in slot.job_set.all():
             jobs.append(job)
+        slotlist.append(jobs)
 
     # process request
     return render_to_response('timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'jobs': jobs}, 
+            { 'station': station, 'date': date, 'slots': slotlist}, 
             context_instance=RequestContext(request))
 
 
@@ -100,7 +102,7 @@ def slot(request, date, block_id, timeslot, line):
         end = block.start_times[int(timeslot)]
     except IndexError:
         end = block.end
-    timeslot = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
+    times = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
     slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
@@ -115,7 +117,7 @@ def slot(request, date, block_id, timeslot, line):
     # ToDo: AJAXify the job table
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
-            {'date': date, 'curr_block': block, 'timeslot': timeslot, 'station': block.dock.station, 'slot': slot, 'form': formset}, 
+            {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset}, 
             context_instance=RequestContext(request))
 
 # ToDo: implement i18n for all views
