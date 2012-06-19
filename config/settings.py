@@ -1,5 +1,7 @@
 # Django settings for project project.
+import os
 
+DIR = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -63,7 +65,8 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'http://lev-srv-565/static/'
+#STATIC_URL = 'http://lev-srv-565/static/'
+STATIC_URL = 'http://localhost/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -110,7 +113,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/lmoppert/project/templates',
+    os.path.join(DIR, '..', 'templates')
 )
 
 INSTALLED_APPS = (
