@@ -88,11 +88,9 @@ class Slot(models.Model):
     company = models.ForeignKey(UserProfile)
     
     date = models.DateField()
-    # ToDo: rename index to timeslot
-    index = models.IntegerField()
+    timeslot = models.IntegerField()
     line = models.IntegerField()
-    # ToDo: rename blocked to is_blocked
-    blocked = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.index, self.line)
