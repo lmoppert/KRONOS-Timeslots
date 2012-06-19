@@ -92,8 +92,20 @@ class Slot(models.Model):
     line = models.IntegerField()
     is_blocked = models.BooleanField(default=False)
 
+    def _get_times(self):
+        start = self.block.start_times[int(self.timeslot)-1].strftime("%H:%M")
+        try:
+            end = self.block.start_times[int(timeslot)]
+        except IndexError:
+            end = self.block.end
+        return  "%s - %s" % (start, end.strftime("%H:%M"))
+    times = property(_get_times)
+
     def __unicode__(self):
         return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.index, self.line)
+
+    class Meta:
+        ordering = ['date', 'timeslot', 'line']
 
 
 class Job(models.Model):
