@@ -1,6 +1,3 @@
-timeslots/models.py:    
-	# ToDo: rename index to timeslot
-	# ToDo: rename blocked to is_blocked
 timeslots/views.py:    
 	# ToDo: add an oportunety to filter specific docks
 	# ToDo: AJAXify the job table

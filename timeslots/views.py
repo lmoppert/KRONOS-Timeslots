@@ -23,13 +23,13 @@ def station_redirect(request):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
 
 @login_required
-def station(request, pk, date):
+def station(request, station_id, date):
     """
-    Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
-    for a specific date
+      Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
+      for a specific date
     """
     # prepare context items
-    station = get_object_or_404(Station, pk=pk)
+    station = get_object_or_404(Station, pk=station_id)
     docks = []
     for dock in station.dock_set.all(): 
         blocks = []
@@ -39,7 +39,7 @@ def station(request, pk, date):
                 lines = []
                 for line in range(block.linecount): 
                     try:
-                        slot = block.slot_set.filter(date=date).get(date=date, index=timeslot+1, line=line+1, block=block.id).company.company 
+                        slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id).company.company 
                     except ObjectDoesNotExist:
                         slot = "Freier Slot"
                     lines.append(slot)
@@ -56,33 +56,52 @@ def station(request, pk, date):
         span = "span3" 
 
     # ToDo: add an oportunety to filter specific docks
-    # ToDo: make table-width depend on number of docks shown
 
     # process request
     return render_to_response('timeslots/station_detail.html', 
             { 'station': station, 'date': date, 'docks': docks, 'span': span}, 
             context_instance=RequestContext(request))
 
+# ToDo: generate a view for the jobs of a date for one station
 @login_required
-def slot(request, date, block_id, index, line):
+def jobs(request, station_id, date):
     """
-    Displays details for a :model:`timeslots.Slot`
+      Displays all jobs for the current company for a given date
+    """
+    # prepare context items
+    station = get_object_or_404(Station, pk=station_id)
+    slots = get_list_or_404(Slot, date=date) 
+    jobs = []
+    for slot in slots:
+        for job in slot.job_set:
+            jobs.append(job)
 
-    **Context**
+    # process request
+    return render_to_response('timeslots/job_list.html', 
+            { 'station': station, 'date': date, 'jobs': jobs}, 
+            context_instance=RequestContext(request))
 
-    ``RequestContext``
 
-    ``block``
-        An instance of :model:`timeslots.Block`
+@login_required
+def slot(request, date, block_id, timeslot, line):
+    """
+      Displays details for a :model:`timeslots.Slot`
+
+      **Context**
+
+      ``RequestContext``
+
+      ``block``
+          An instance of :model:`timeslots.Block`
     """
     # prepare context items
     block = get_object_or_404(Block, pk=block_id)
     try:
-        end = block.start_times[int(index)]
+        end = block.start_times[int(timeslot)]
     except IndexError:
         end = block.end
-    timeslot = block.start_times[int(index)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
-    slot, created = Slot.objects.get_or_create(date=date, index=index, line=line, block=block, 
+    timeslot = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
+    slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
     # process request
@@ -99,10 +118,9 @@ def slot(request, date, block_id, index, line):
             {'date': date, 'curr_block': block, 'timeslot': timeslot, 'station': block.dock.station, 'slot': slot, 'form': formset}, 
             context_instance=RequestContext(request))
 
-# ToDo: generate a view for the jobs of a date
-# ToDo: generate a view for the jobs of a company
 # ToDo: implement i18n for all views
+# ToDo: add a logging feature
 # ToDo: restrict tasks with roles and permissions
 # ToDo: restrict reservation by deadline
 # ToDo: restrict slot changes by rnvp
-# ToDo: add a logging feature
+# ToDo: generate a view for the jobs of a company
