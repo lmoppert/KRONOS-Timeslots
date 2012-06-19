@@ -133,6 +133,7 @@ INSTALLED_APPS = (
 )
 
 # Settings for the debug toolbar
+INTERNAL_IPS = ['127.0.0.1']
 ALWAYS_SHOW_DEBUG_TOOLBAR = True,
 DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
 
