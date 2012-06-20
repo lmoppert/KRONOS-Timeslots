@@ -5,7 +5,7 @@
 
 <div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
 
-<div class="section clearfix">
+<div class="section">
     {% for dock, slots in slotlist.iteritems %}
     <h2>{{ dock }}</h2>
     <table class="table table-bordered table-striped">

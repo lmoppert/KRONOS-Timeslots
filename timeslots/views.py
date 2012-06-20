@@ -73,7 +73,7 @@ def jobs(request, station_id, date):
     slotlist = {}
     for dock in station.dock_set.all():
         slotlist[dock.name] = []
-    slots = get_list_or_404(Slot, date=date) 
+    slots = list(Slot.objects.filter(date=date)) 
     for slot in slots:
         slotlist[slot.block.dock.name].append(slot)
 
