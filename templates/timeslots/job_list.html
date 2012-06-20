@@ -5,12 +5,14 @@
 
 <div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
 
-<div class="section">
+<div class="section clearfix">
+    {% for dock, slots in slotlist.iteritems %}
+    <h2>{{ dock }}</h2>
     <table class="table table-bordered table-striped">
         {% for slot in slots %}
         <tr>
             <th style="width: 6em">{{ slot.times }}</th>
-            <td>{{ slot.company }}</td>
+            <td style="width: 15em">{{ slot.company }}</td>
             <td>
                 {% for job in slot.job_set.all %}
                 <p>
@@ -22,6 +24,10 @@
         </tr>
         {% endfor %}
     </table>
+    {% endfor %}
 </div>
 
+<div class="section">
+    <p><a class="btn btn-info" href="/timeslots/station/{{ station.id }}/date/{{ date }}">Slot-Übersicht anzeigen</a></p>
+</div>
 {% endblock %}

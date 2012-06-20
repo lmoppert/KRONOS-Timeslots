@@ -19,7 +19,7 @@
             // Datepicker
             $('#datepicker').datepicker({ 
                 onSelect: function(dateText, inst) { 
-                    window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/" 
+                    window.location = "/timeslots/{% firstof target "station" %}/{{ station.id }}/date/" + dateText + "/" 
                 },
                 beforeShowDay: $.datepicker.noWeekends,
                 dateFormat: 'yy-mm-dd'

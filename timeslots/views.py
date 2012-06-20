@@ -70,11 +70,16 @@ def jobs(request, station_id, date):
     """
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
+    slotlist = {}
+    for dock in station.dock_set.all():
+        slotlist[dock.name] = []
     slots = get_list_or_404(Slot, date=date) 
+    for slot in slots:
+        slotlist[slot.block.dock.name].append(slot)
 
     # process request
     return render_to_response('timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slots': slots}, 
+            { 'station': station, 'date': date, 'slotlist': slotlist, 'target': "jobs"}, 
             context_instance=RequestContext(request))
 
 
