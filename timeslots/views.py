@@ -71,16 +71,10 @@ def jobs(request, station_id, date):
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     slots = get_list_or_404(Slot, date=date) 
-    slotlist = []
-    for slot in slots:
-        jobs = []
-        for job in slot.job_set.all():
-            jobs.append(job)
-        slotlist.append(jobs)
 
     # process request
     return render_to_response('timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slots': slotlist}, 
+            { 'station': station, 'date': date, 'slots': slots}, 
             context_instance=RequestContext(request))
 
 
