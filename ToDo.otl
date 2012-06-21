@@ -1,5 +1,4 @@
 timeslots/views.py:    
-	# ToDo: add an oportunety to filter specific docks
 	# ToDo: AJAXify the job table?!?
 	# ToDo: implement i18n for all views
 	# ToDo: restrict tasks with roles and permissions
