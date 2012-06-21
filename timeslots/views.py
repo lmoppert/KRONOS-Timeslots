@@ -37,7 +37,6 @@ def station(request, station_id, date):
     else:
         docklist = station.dock_set.all()
     docks = []
-    # ToDo: add an oportunety to filter specific docks
     for dock in docklist:
         blocks = []
         for block in dock.block_set.all(): 
@@ -67,7 +66,6 @@ def station(request, station_id, date):
             { 'station': station, 'date': date, 'docks': docks, 'span': span}, 
             context_instance=RequestContext(request))
 
-# ToDo: generate a view for the jobs of a date for one station
 @login_required
 def jobs(request, station_id, date):
     """
@@ -117,12 +115,18 @@ def slot(request, date, block_id, timeslot, line):
                     defaults={'company': request.user.userprofile})
 
     # process request
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.has_key('makeReservation'):
         formset = JobFormSet(request.POST, instance=slot)
         if formset.is_valid():
             slot.save()
             formset.save()
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+    elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
+        slot.delete()
+        for job in slot.job_set.all():
+            job.delete()
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+
 
     # ToDo: AJAXify the job table
     formset = JobFormSet(instance=slot)
