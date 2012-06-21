@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% load filters %}
 
 {% block content %}
@@ -12,15 +12,14 @@
     <table class="table table-bordered table-striped">
         {% for slot in slots %}
         <tr>
-            <th style="width: 6em">{{ slot.times }}</th>
+            <th style="width: 6.5em">{{ slot.times }}</th>
             <td style="width: 15em">{{ slot.company }}</td>
             <td>
                 {% for job in slot.job_set.all %}
-                <p>
-                    <span class="label">{{ job.number }}</span>
-                    {{ job.description }}
-                </p>
+                <strong style="color: #3A87ad">{{ job.number }}</strong>
+                {{ job.description }}<br />
                 {% endfor %}
+
             </td>
         </tr>
         {% endfor %}
