@@ -75,8 +75,14 @@ def jobs(request, station_id, date):
     """
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
+    if request.method == 'POST':
+        docklist = []
+        for dock_id in request.POST['selectedDocks']:
+            docklist.append(station.dock_set.get(pk=dock_id))
+    else:
+        docklist = station.dock_set.all()
     slotlist = {}
-    for dock in station.dock_set.all():
+    for dock in docklist:
         slotlist[dock.name] = []
     slots = list(Slot.objects.filter(date=date)) 
     for slot in slots:
