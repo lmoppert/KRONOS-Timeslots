@@ -131,9 +131,10 @@ def slot(request, date, block_id, timeslot, line):
     # ToDo: AJAXify the job table
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
-            {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset}, 
+            {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}, 
             context_instance=RequestContext(request))
 
+# ToDo: fix error in dock selection (selection all is not possible
 # ToDo: implement i18n for all views
 # ToDo: add a logging feature
 # ToDo: restrict tasks with roles and permissions

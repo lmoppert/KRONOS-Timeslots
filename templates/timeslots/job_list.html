@@ -16,7 +16,7 @@
             <td style="width: 15em">{{ slot.company }}</td>
             <td>
                 {% for job in slot.job_set.all %}
-                <strong style="color: #3A87ad">{{ job.number }}</strong>
+                <strong style="color: #3A87ad">{{ job.number }}</strong> 
                 {{ job.description }}<br />
                 {% endfor %}
 
