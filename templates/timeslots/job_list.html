@@ -8,6 +8,7 @@
 <div class="section">
     {% for dock, slots in slotlist.iteritems %}
     <h2>{{ dock }}</h2>
+    {% if slots %}
     <table class="table table-bordered table-striped">
         {% for slot in slots %}
         <tr>
@@ -24,6 +25,11 @@
         </tr>
         {% endfor %}
     </table>
+    {% else %}
+    <div class="alert alert-info">
+        <strong>Keine Aufträge Vorhanden</strong>
+    </div>
+    {% endif %}
     {% endfor %}
 </div>
 

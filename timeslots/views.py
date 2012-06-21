@@ -30,8 +30,15 @@ def station(request, station_id, date):
     """
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
+    if request.method == 'POST':
+        docklist = []
+        for dock_id in request.POST['selectedDocks']:
+            docklist.append(station.dock_set.get(pk=dock_id))
+    else:
+        docklist = station.dock_set.all()
     docks = []
-    for dock in station.dock_set.all(): 
+    # ToDo: add an oportunety to filter specific docks
+    for dock in docklist:
         blocks = []
         for block in dock.block_set.all(): 
             timeslots = []
@@ -54,8 +61,6 @@ def station(request, station_id, date):
         span = "span4" 
     else:
         span = "span3" 
-
-    # ToDo: add an oportunety to filter specific docks
 
     # process request
     return render_to_response('timeslots/station_detail.html', 

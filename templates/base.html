@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html land="de">
 <head>
     <meta charset="utf-8">
     <title>KRONOS Titan GmbH - Ladezeitensteuerung</title>
@@ -69,7 +67,7 @@
         <div class="row-fluid">
             <div class="span3">
                 {% block sidebar %}
-                <form id="date_picker" action="." method="post">{% csrf_token %}
+                <form id="sidebar" action="." method="post">{% csrf_token %}
                     <div id="datepicker" style="overflow: hidden"></div>
                 </form>
                 {% endblock %}
