@@ -1,10 +1,9 @@
 timeslots/views.py:    
 	# ToDo: add an oportunety to filter specific docks
-	# ToDo: AJAXify the job table
-	# ToDo: generate a view for the jobs of a date
-	# ToDo: generate a view for the jobs of a company
+	# ToDo: AJAXify the job table?!?
 	# ToDo: implement i18n for all views
 	# ToDo: restrict tasks with roles and permissions
 	# ToDo: restrict reservation by deadline
 	# ToDo: restrict slot changes by rnvp
 	# ToDo: add a logging feature
+	# ToDo: generate a view for the jobs of a company
