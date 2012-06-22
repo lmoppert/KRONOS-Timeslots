@@ -128,7 +128,7 @@ def slot(request, date, block_id, timeslot, line):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
 
-    # ToDo: AJAXify the job table
+    # ToDo: AJAXify the job table (add and remove jobs from the list)
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
             {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}, 

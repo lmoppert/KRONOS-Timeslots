@@ -25,9 +25,13 @@ body {
 }
 table.data-details {
     margin-top: 10px;
+    width: 100%
 }
-table.data-details td.nextcol {
-    padding-left: 40px;
+table td.small-column {
+    width: 6.5em;
+}
+table td.med-column {
+    width: 15em;
 }
 div.section {
     margin-top: 20px;

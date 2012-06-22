@@ -12,8 +12,8 @@
     <table class="table table-bordered table-striped">
         {% for slot in slots %}
         <tr>
-            <th style="width: 6.5em">{{ slot.times }}</th>
-            <td style="width: 15em">{{ slot.company }}</td>
+            <th style="small-column">{{ slot.times }}</th>
+            <td style="med-column">{{ slot.company }}</td>
             <td>
                 {% for job in slot.job_set.all %}
                 <strong style="color: #3A87ad">{{ job.number }}</strong> 

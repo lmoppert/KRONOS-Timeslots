@@ -7,19 +7,19 @@
 <div class="section">
     <table class="table table-bordered data-details">
         <tr>
-            <td><b>Uhrzeit</b></th>
+            <td class="small-column"><strong>Uhrzeit</strong></th>
             <td>{{ times }}</td>
-            <td class="nextcol"><b>Firma</b></th>
+            <td class="small-column"><strong>Firma</strong></th>
             <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
         </tr>
         <tr>
-            <td><b>Station</b></th>
+            <td><strong>Station</strong></th>
             <td>{{ station }}</td>
-            <td class="nextcol"><b>Anwender</b></th>
+            <td><strong>Anwender</strong></th>
             <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
         </tr>
         <tr>
-            <td><b>Rampe</b></th>
+            <td><strong>Rampe</strong></th>
             <td>{{ curr_block.dock.name }}</td>
             <td></td>
             <td></td>
