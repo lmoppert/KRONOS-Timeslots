@@ -1,8 +1,0 @@
-timeslots/views.py:# ToDo: fix error in dock selection (selection all is not possible)
-timeslots/views.py:# ToDo: AJAXify the job table
-timeslots/views.py:# ToDo: implement i18n for all views
-timeslots/views.py:# ToDo: add a logging feature
-timeslots/views.py:# ToDo: restrict tasks with roles and permissions
-timeslots/views.py:# ToDo: restrict reservation by deadline
-timeslots/views.py:# ToDo: restrict slot changes by rnvp
-timeslots/views.py:# ToDo: generate a view for the jobs of a company
