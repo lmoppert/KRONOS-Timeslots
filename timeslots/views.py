@@ -79,17 +79,18 @@ def jobs(request, station_id, date):
     else:
         docklist = station.dock_set.all()
     slotlist = {}
+    docks = []
     for dock in docklist:
         slotlist[dock.name] = []
+        docks.append((dock.name, dock.id))
     slots = list(Slot.objects.filter(date=date)) 
     for slot in slots:
         slotlist[slot.block.dock.name].append(slot)
 
     # process request
     return render_to_response('timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slotlist': slotlist, 'target': "jobs"}, 
+            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}, 
             context_instance=RequestContext(request))
-
 
 @login_required
 def slot(request, date, block_id, timeslot, line):
