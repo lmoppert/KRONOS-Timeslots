@@ -1,5 +1,180 @@
 [
   {
+    "pk": 11,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "block",
+      "name": "block",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "contenttype",
+      "name": "content type",
+      "app_label": "contenttypes"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "dock",
+      "name": "dock",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "group",
+      "name": "group",
+      "app_label": "auth"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "job",
+      "name": "job",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "logentry",
+      "name": "log entry",
+      "app_label": "admin"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "logging",
+      "name": "logging",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "migrationhistory",
+      "name": "migration history",
+      "app_label": "south"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "permission",
+      "name": "permission",
+      "app_label": "auth"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "session",
+      "name": "session",
+      "app_label": "sessions"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "site",
+      "name": "site",
+      "app_label": "sites"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "slot",
+      "name": "slot",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "station",
+      "name": "station",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "user",
+      "name": "user",
+      "app_label": "auth"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "userprofile",
+      "name": "user profile",
+      "app_label": "timeslots"
+    }
+  },
+  {
+    "pk": "06f6cbfee476ba8720376f833144fbba",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-07-05T15:03:48Z",
+      "session_data": "MjZiYTE2YjUzMGNlYTRhMGI3ZGEyYzZjOGFkZTQ1MWUxNzEzNTE3ZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n"
+    }
+  },
+  {
+    "pk": "411f2fa4c6c3a0e45bf94753ad52883d",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-07-03T08:26:32Z",
+      "session_data": "MjZiYTE2YjUzMGNlYTRhMGI3ZGEyYzZjOGFkZTQ1MWUxNzEzNTE3ZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n"
+    }
+  },
+  {
+    "pk": "9071f221134adffed6cb5b4caf055a24",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-07-05T14:54:09Z",
+      "session_data": "MjZiYTE2YjUzMGNlYTRhMGI3ZGEyYzZjOGFkZTQ1MWUxNzEzNTE3ZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n"
+    }
+  },
+  {
+    "pk": "9dba3d273c186e367959ba598df71210",
+    "model": "sessions.session",
+    "fields": {
+      "expire_date": "2012-07-05T14:57:22Z",
+      "session_data": "MjZiYTE2YjUzMGNlYTRhMGI3ZGEyYzZjOGFkZTQ1MWUxNzEzNTE3ZDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "sites.site",
+    "fields": {
+      "domain": "example.com",
+      "name": "example.com"
+    }
+  },
+  {
     "pk": 1,
     "model": "timeslots.station",
     "fields": {
@@ -19,6 +194,39 @@
       "name": "Werk Leverkusen",
       "rnvp": "01:00:00",
       "longdescription": ""
+    }
+  },
+  {
+    "pk": 3,
+    "model": "timeslots.station",
+    "fields": {
+      "booking_deadline": "15:30:00",
+      "shortdescription": "Werk Nordenham",
+      "name": "KRONOS Nordenham",
+      "rnvp": "01:00:00",
+      "longdescription": ""
+    }
+  },
+  {
+    "pk": 4,
+    "model": "timeslots.station",
+    "fields": {
+      "booking_deadline": "15:00:00",
+      "shortdescription": "Langerbrugge",
+      "name": "Ghent",
+      "rnvp": "01:00:00",
+      "longdescription": ""
+    }
+  },
+  {
+    "pk": 5,
+    "model": "timeslots.station",
+    "fields": {
+      "booking_deadline": "15:00:00",
+      "shortdescription": "Albers - Nordenham",
+      "name": "Albers",
+      "rnvp": "01:00:00",
+      "longdescription": "Zus\u00e4tzliche Siloverladungen nur nach Absprache m\u00f6glich."
     }
   },
   {
@@ -49,6 +257,96 @@
     }
   },
   {
+    "pk": 4,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 3,
+      "name": "Truck",
+      "description": "Paletten Verladung"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 3,
+      "name": "Container",
+      "description": ""
+    }
+  },
+  {
+    "pk": 6,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 3,
+      "name": "Silo",
+      "description": ""
+    }
+  },
+  {
+    "pk": 7,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 4,
+      "name": "Truck",
+      "description": "non Container"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 4,
+      "name": "Truck/Cont",
+      "description": "Truck or Container"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 4,
+      "name": "Silo ACE",
+      "description": ""
+    }
+  },
+  {
+    "pk": 10,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 4,
+      "name": "Silo BD",
+      "description": ""
+    }
+  },
+  {
+    "pk": 11,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 5,
+      "name": "Truck",
+      "description": ""
+    }
+  },
+  {
+    "pk": 12,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 5,
+      "name": "Container",
+      "description": ""
+    }
+  },
+  {
+    "pk": 13,
+    "model": "timeslots.dock",
+    "fields": {
+      "station": 5,
+      "name": "Silo",
+      "description": ""
+    }
+  },
+  {
     "pk": 7,
     "model": "timeslots.block",
     "fields": {
@@ -63,7 +361,7 @@
     "pk": 8,
     "model": "timeslots.block",
     "fields": {
-      "slotcount": 4,
+      "slotcount": 3,
       "dock": 1,
       "linecount": 2,
       "slotduration": 45,
@@ -74,11 +372,11 @@
     "pk": 9,
     "model": "timeslots.block",
     "fields": {
-      "slotcount": 4,
+      "slotcount": 7,
       "dock": 2,
       "linecount": 1,
-      "slotduration": 60,
-      "start": "08:00:00"
+      "slotduration": 45,
+      "start": "07:00:00"
     }
   },
   {
@@ -88,7 +386,7 @@
       "slotcount": 3,
       "dock": 2,
       "linecount": 1,
-      "slotduration": 60,
+      "slotduration": 45,
       "start": "13:00:00"
     }
   },
@@ -96,11 +394,1061 @@
     "pk": 11,
     "model": "timeslots.block",
     "fields": {
-      "slotcount": 10,
+      "slotcount": 24,
       "dock": 3,
       "linecount": 1,
       "slotduration": 60,
+      "start": "00:00:00"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 11,
+      "dock": 4,
+      "linecount": 2,
+      "slotduration": 45,
+      "start": "07:00:00"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 13,
+      "dock": 5,
+      "linecount": 1,
+      "slotduration": 40,
+      "start": "07:00:00"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 5,
+      "dock": 6,
+      "linecount": 1,
+      "slotduration": 105,
+      "start": "07:00:00"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 10,
+      "dock": 7,
+      "linecount": 2,
+      "slotduration": 45,
+      "start": "07:30:00"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 10,
+      "dock": 8,
+      "linecount": 2,
+      "slotduration": 45,
+      "start": "07:30:00"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 7,
+      "dock": 9,
+      "linecount": 1,
+      "slotduration": 60,
       "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 7,
+      "dock": 10,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 8,
+      "dock": 11,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 8,
+      "dock": 12,
+      "linecount": 1,
+      "slotduration": 60,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "timeslots.block",
+    "fields": {
+      "slotcount": 3,
+      "dock": 13,
+      "linecount": 1,
+      "slotduration": 180,
+      "start": "08:00:00"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "south.migrationhistory",
+    "fields": {
+      "applied": "2012-06-19T08:23:31Z",
+      "app_name": "timeslots",
+      "migration": "0001_initial"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "south.migrationhistory",
+    "fields": {
+      "applied": "2012-06-19T08:23:32Z",
+      "app_name": "timeslots",
+      "migration": "0002_auto__add_job__del_field_slot_job_number"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "south.migrationhistory",
+    "fields": {
+      "applied": "2012-06-19T08:23:32Z",
+      "app_name": "timeslots",
+      "migration": "0003_auto__add_field_slot_line"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "south.migrationhistory",
+    "fields": {
+      "applied": "2012-06-19T13:28:32Z",
+      "app_name": "timeslots",
+      "migration": "0004_rename_index_to_timeslot"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "south.migrationhistory",
+    "fields": {
+      "applied": "2012-06-19T13:30:41Z",
+      "app_name": "timeslots",
+      "migration": "0005_rename_blocked_to_is_blocked"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_logentry",
+      "name": "Can add log entry",
+      "content_type": 7
+    }
+  },
+  {
+    "pk": 20,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_logentry",
+      "name": "Can change log entry",
+      "content_type": 7
+    }
+  },
+  {
+    "pk": 21,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_logentry",
+      "name": "Can delete log entry",
+      "content_type": 7
+    }
+  },
+  {
+    "pk": 4,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_group",
+      "name": "Can add group",
+      "content_type": 2
+    }
+  },
+  {
+    "pk": 5,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_group",
+      "name": "Can change group",
+      "content_type": 2
+    }
+  },
+  {
+    "pk": 6,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_group",
+      "name": "Can delete group",
+      "content_type": 2
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_permission",
+      "name": "Can add permission",
+      "content_type": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_permission",
+      "name": "Can change permission",
+      "content_type": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_permission",
+      "name": "Can delete permission",
+      "content_type": 1
+    }
+  },
+  {
+    "pk": 7,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_user",
+      "name": "Can add user",
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 8,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_user",
+      "name": "Can change user",
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 9,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_user",
+      "name": "Can delete user",
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 10,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_contenttype",
+      "name": "Can add content type",
+      "content_type": 4
+    }
+  },
+  {
+    "pk": 11,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_contenttype",
+      "name": "Can change content type",
+      "content_type": 4
+    }
+  },
+  {
+    "pk": 12,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_contenttype",
+      "name": "Can delete content type",
+      "content_type": 4
+    }
+  },
+  {
+    "pk": 13,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_session",
+      "name": "Can add session",
+      "content_type": 5
+    }
+  },
+  {
+    "pk": 14,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_session",
+      "name": "Can change session",
+      "content_type": 5
+    }
+  },
+  {
+    "pk": 15,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_session",
+      "name": "Can delete session",
+      "content_type": 5
+    }
+  },
+  {
+    "pk": 16,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_site",
+      "name": "Can add site",
+      "content_type": 6
+    }
+  },
+  {
+    "pk": 17,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_site",
+      "name": "Can change site",
+      "content_type": 6
+    }
+  },
+  {
+    "pk": 18,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_site",
+      "name": "Can delete site",
+      "content_type": 6
+    }
+  },
+  {
+    "pk": 22,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_migrationhistory",
+      "name": "Can add migration history",
+      "content_type": 8
+    }
+  },
+  {
+    "pk": 23,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_migrationhistory",
+      "name": "Can change migration history",
+      "content_type": 8
+    }
+  },
+  {
+    "pk": 24,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_migrationhistory",
+      "name": "Can delete migration history",
+      "content_type": 8
+    }
+  },
+  {
+    "pk": 31,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_block",
+      "name": "Can add block",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 32,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_block",
+      "name": "Can change block",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 33,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_block",
+      "name": "Can delete block",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 28,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_dock",
+      "name": "Can add dock",
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 29,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_dock",
+      "name": "Can change dock",
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 30,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_dock",
+      "name": "Can delete dock",
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 40,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_job",
+      "name": "Can add job",
+      "content_type": 14
+    }
+  },
+  {
+    "pk": 41,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_job",
+      "name": "Can change job",
+      "content_type": 14
+    }
+  },
+  {
+    "pk": 42,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_job",
+      "name": "Can delete job",
+      "content_type": 14
+    }
+  },
+  {
+    "pk": 43,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_logging",
+      "name": "Can add logging",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 44,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_logging",
+      "name": "Can change logging",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 45,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_logging",
+      "name": "Can delete logging",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 37,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_slot",
+      "name": "Can add slot",
+      "content_type": 13
+    }
+  },
+  {
+    "pk": 38,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_slot",
+      "name": "Can change slot",
+      "content_type": 13
+    }
+  },
+  {
+    "pk": 39,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_slot",
+      "name": "Can delete slot",
+      "content_type": 13
+    }
+  },
+  {
+    "pk": 25,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_station",
+      "name": "Can add station",
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 26,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_station",
+      "name": "Can change station",
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 27,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_station",
+      "name": "Can delete station",
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 34,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_userprofile",
+      "name": "Can add user profile",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 35,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_userprofile",
+      "name": "Can change user profile",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 36,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_userprofile",
+      "name": "Can delete user profile",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.group",
+    "fields": {
+      "name": "Administrator",
+      "permissions": [
+        19,
+        20,
+        21,
+        4,
+        5,
+        6,
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        31,
+        32,
+        33,
+        28,
+        29,
+        30,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        37,
+        38,
+        39,
+        25,
+        26,
+        27,
+        34,
+        35,
+        36
+      ]
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "lm",
+      "first_name": "Lutz",
+      "last_name": "Moppert",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-06-21T15:03:48Z",
+      "groups": [
+        1
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$6Op9sl7lRzKl$yMNfuB/jAHIeCEO0S8qiSwz5BEF/UxkxLulz1HYkjc4=",
+      "email": "lutz.moppert@kronosww.com",
+      "date_joined": "2012-06-19T08:23:20Z"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:34:25Z",
+      "object_repr": "Titanstra\u00dfe - Container",
+      "object_id": "2",
+      "change_message": "start von block \"Titanstra\u00dfe - Container (07:00 - 12:15)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 31,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:15:12Z",
+      "object_repr": "Ghent - Truck/Cont",
+      "object_id": "8",
+      "change_message": "slotcount von block \"Ghent - Truck/Cont (07:30 - 15:00)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 30,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:14:16Z",
+      "object_repr": "Werk Leverkusen - F 26 West",
+      "object_id": "3",
+      "change_message": "slotcount von block \"Werk Leverkusen - F 26 West (00:00 - 00:00)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 29,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:13:29Z",
+      "object_repr": "KRONOS TITAN GmbH",
+      "object_id": "1",
+      "change_message": "stations ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 28,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:12:34Z",
+      "object_repr": "Albers - Silo",
+      "object_id": "13",
+      "change_message": "block \"Albers - Silo (08:00 - 17:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 27,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:11:50Z",
+      "object_repr": "Albers - Container",
+      "object_id": "12",
+      "change_message": "block \"Albers - Container (08:00 - 16:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 26,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:11:36Z",
+      "object_repr": "Albers - Truck",
+      "object_id": "11",
+      "change_message": "block \"Albers - Truck (08:00 - 16:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 25,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:10:49Z",
+      "object_repr": "Ghent - Silo BD",
+      "object_id": "10",
+      "change_message": "block \"Ghent - Silo BD (08:00 - 15:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 24,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:10:21Z",
+      "object_repr": "Ghent - Silo ACE",
+      "object_id": "9",
+      "change_message": "block \"Ghent - Silo ACE (08:00 - 15:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 23,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:09:52Z",
+      "object_repr": "Ghent - Truck/Cont",
+      "object_id": "8",
+      "change_message": "block \"Ghent - Truck/Cont (07:30 - 22:30)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 22,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:09:13Z",
+      "object_repr": "Ghent - Truck",
+      "object_id": "7",
+      "change_message": "block \"Ghent - Truck (07:30 - 15:00)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 21,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:08:12Z",
+      "object_repr": "KRONOS Nordenham - Silo",
+      "object_id": "6",
+      "change_message": "block \"KRONOS Nordenham - Silo (07:00 - 15:45)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 20,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:07:38Z",
+      "object_repr": "KRONOS Nordenham - Container",
+      "object_id": "5",
+      "change_message": "block \"KRONOS Nordenham - Container (07:00 - 15:40)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 19,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:06:46Z",
+      "object_repr": "KRONOS Nordenham - Truck",
+      "object_id": "4",
+      "change_message": "block \"KRONOS Nordenham - Truck (07:00 - 15:15)\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 18,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:05:25Z",
+      "object_repr": "Titanstra\u00dfe - Container",
+      "object_id": "2",
+      "change_message": "slotcount und slotduration von block \"Titanstra\u00dfe - Container (08:00 - 13:15)\" ge\u00e4ndert. slotduration von block \"Titanstra\u00dfe - Container (13:00 - 15:15)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 17,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:05:03Z",
+      "object_repr": "Titanstra\u00dfe - Truck",
+      "object_id": "1",
+      "change_message": "slotcount von block \"Titanstra\u00dfe - Truck (13:00 - 15:15)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 16,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:03:37Z",
+      "object_repr": "Werk Leverkusen - F 26 West",
+      "object_id": "3",
+      "change_message": "start und slotcount von block \"Werk Leverkusen - F 26 West (00:00 - 23:00)\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 10
+    }
+  },
+  {
+    "pk": 15,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T20:00:23Z",
+      "object_repr": "KRONOS Nordenham",
+      "object_id": "3",
+      "change_message": "description von dock \"KRONOS Nordenham - Truck\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 14,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T19:59:46Z",
+      "object_repr": "Ghent",
+      "object_id": "4",
+      "change_message": "description von dock \"Ghent - Truck\" ge\u00e4ndert. description von dock \"Ghent - Truck/Cont\" ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 13,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T19:58:15Z",
+      "object_repr": "Albers",
+      "object_id": "5",
+      "change_message": "dock \"Albers - Truck\" hinzugef\u00fcgt. dock \"Albers - Container\" hinzugef\u00fcgt. dock \"Albers - Silo\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 12,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T19:57:37Z",
+      "object_repr": "Ghent",
+      "object_id": "4",
+      "change_message": "dock \"Ghent - Truck\" hinzugef\u00fcgt. dock \"Ghent - Truck/Cont\" hinzugef\u00fcgt. dock \"Ghent - Silo ACE\" hinzugef\u00fcgt. dock \"Ghent - Silo BD\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 11,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T19:56:46Z",
+      "object_repr": "KRONOS Nordenham",
+      "object_id": "3",
+      "change_message": "dock \"KRONOS Nordenham - Truck\" hinzugef\u00fcgt. dock \"KRONOS Nordenham - Container\" hinzugef\u00fcgt. dock \"KRONOS Nordenham - Silo\" hinzugef\u00fcgt.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 10,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-06-21T19:56:06Z",
+      "object_repr": "Albers",
+      "object_id": "5",
+      "change_message": "",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 9,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-21T19:55:28Z",
+      "object_repr": "KRONOS Nordenham",
+      "object_id": "3",
+      "change_message": "name ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 8,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-06-21T19:54:52Z",
+      "object_repr": "Ghent",
+      "object_id": "4",
+      "change_message": "",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 7,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-06-21T19:54:10Z",
+      "object_repr": "Nordenham",
+      "object_id": "3",
+      "change_message": "",
+      "user": 1,
+      "content_type": 9
+    }
+  },
+  {
+    "pk": 6,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-19T08:33:54Z",
+      "object_repr": "lm",
+      "object_id": "1",
+      "change_message": "password, first_name und last_name ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 5,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-19T08:33:28Z",
+      "object_repr": "lm",
+      "object_id": "1",
+      "change_message": "password und groups ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 4,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2012-06-19T08:33:24Z",
+      "object_repr": "Administrator",
+      "object_id": "1",
+      "change_message": "",
+      "user": 1,
+      "content_type": 2
+    }
+  },
+  {
+    "pk": 3,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-19T08:32:32Z",
+      "object_repr": "KRONOS TITAN GmbH",
+      "object_id": "1",
+      "change_message": "Keine Felder ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 2,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-19T08:32:14Z",
+      "object_repr": "lm",
+      "object_id": "1",
+      "change_message": "password, first_name und last_name ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 3
+    }
+  },
+  {
+    "pk": 1,
+    "model": "admin.logentry",
+    "fields": {
+      "action_flag": 2,
+      "action_time": "2012-06-19T08:31:44Z",
+      "object_repr": "lm",
+      "object_id": "1",
+      "change_message": "password, first_name und last_name ge\u00e4ndert.",
+      "user": 1,
+      "content_type": 3
     }
   },
   {
@@ -111,7 +1459,10 @@
       "ZIP": "51373",
       "stations": [
         1,
-        2
+        2,
+        3,
+        4,
+        5
       ],
       "country": "Deutschland",
       "company": "KRONOS TITAN GmbH",

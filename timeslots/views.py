@@ -32,7 +32,7 @@ def station(request, station_id, date):
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
         docklist = []
-        for dock_id in request.POST['selectedDocks']:
+        for dock_id in request.POST.getlist('selectedDocks'):
             docklist.append(station.dock_set.get(pk=dock_id))
     else:
         docklist = station.dock_set.all()
@@ -53,10 +53,9 @@ def station(request, station_id, date):
                 timeslots.append((time, lines))
             blocks.append((str(block.id), timeslots))
         docks.append((dock.name, blocks))
-    dock_count = station.dock_set.count()
-    if dock_count < 3:
+    if len(docklist) < 3:
         span = "span6" 
-    elif dock_count == 3:
+    elif len(docklist) == 3:
         span = "span4" 
     else:
         span = "span3" 
