@@ -374,7 +374,7 @@
     "fields": {
       "slotcount": 7,
       "dock": 2,
-      "linecount": 1,
+      "linecount": 2,
       "slotduration": 45,
       "start": "07:00:00"
     }
@@ -385,7 +385,7 @@
     "fields": {
       "slotcount": 3,
       "dock": 2,
-      "linecount": 1,
+      "linecount": 2,
       "slotduration": 45,
       "start": "13:00:00"
     }
