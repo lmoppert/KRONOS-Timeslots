@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+{% block sidebar %} {% endblock %}
+{% block content %}
+<div class="page-header"><h1>Beispiel für Verlade-Ablauf KECO</h1></div>
+
+<div class="section clearfix span4">
+    <table class="table table-bordered table-condensed blocktable">
+        <tbody>
+            <tr>
+                <th style="width: 3em">7:00</th>
+                <td>
+                    Booked
+                    <div class="progress">
+                        <div class="bar" style="width: 0%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 3em">8:00</th>
+                <td>
+                    Check In
+                    <div class="progress progress-danger">
+                      <div class="bar" style="width: 25%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 3em">9:00</th>
+                <td>
+                    Loading
+                    <div class="progress progress-warning">
+                      <div class="bar" style="width: 50%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 3em">10:00</th>
+                <td>
+                    Check Out
+                    <div class="progress progress-success">
+                      <div class="bar" style="width: 75%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 3em">11:00</th>
+                <td>
+                    Done
+                    <div class="progress">
+                      <div class="bar" style="width: 100%;"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

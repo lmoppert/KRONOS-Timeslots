@@ -6,6 +6,7 @@ from timeslots.models import Station, Dock, Slot, UserProfile
 urlpatterns = patterns('timeslots.views',
     url(r'^$', 'index'),
     url(r'^logout$', 'logout_then_login'),
+    url(r'^keco/$', 'keco'),
     url(r'^station/$', 'station_redirect'),
     url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/$', 'station'),
     url(r'^station/(?P<station_id>\d+)/$', 'station', {'date': datetime.now().strftime("%Y-%m-%d")}),

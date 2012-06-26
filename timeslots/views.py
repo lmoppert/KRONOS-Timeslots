@@ -12,6 +12,10 @@ def logout_page(request):
     logout_then_login(request)
 
 @login_required
+def keco(request):
+    return render_to_response('bars.html', context_instance=RequestContext(request))
+
+@login_required
 def index(request):
     return render_to_response('index.html', context_instance=RequestContext(request))
 
@@ -124,6 +128,7 @@ def slot(request, date, block_id, timeslot, line):
             formset.save()
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
         slot.delete()
         for job in slot.job_set.all():
             job.delete()
