@@ -128,7 +128,6 @@ def slot(request, date, block_id, timeslot, line):
             formset.save()
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
         slot.delete()
         for job in slot.job_set.all():
             job.delete()

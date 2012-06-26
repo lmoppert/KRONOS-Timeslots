@@ -51,13 +51,16 @@
                     <tr>
                         <th>Auftrags-Nummer</th>
                         <th>Beschreibung</th>
+                        <th>Löschen</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for f in form %}
+                        {{ f.id }}
                         <tr>
                             <td>{{ f.number }}</td>
                             <td>{{ f.description }}</td>
+                            <td><a href="." style="display: block;"><i class="icon-remove-circle"></i></a></td>
                         </tr>
                     {% endfor %}
                     <tr>
