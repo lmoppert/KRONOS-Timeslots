@@ -2,11 +2,13 @@ body {
     position: relative;
     padding-top: 80px;
 }
-@media (max-width: 768px) {
+@media (max-width: 979px) {
+  body { padding-top: 0; }
+}
+@media (max-width: 767px) {
   /* Remove any padding from the body */
-  body {
-    padding-top: 0;
-  }
+  body { padding-top: 0; }
+  div#kronoslogo { display: none; }
 }
 
 .footer {

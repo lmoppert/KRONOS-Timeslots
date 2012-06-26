@@ -4,15 +4,15 @@
     <meta name="description" content="KRONOS Timeslots">
     <meta name="author" content="Lutz Moppert">
     <!--[if lt IE 9]>
-        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script type="text/javascript">
         $(function(){
             // Datepicker
@@ -44,13 +44,13 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/timeslots/">Ladezeitensteuerung</a>
+            <span class="span3"><a class="brand" href="/timeslots/">Ladezeitensteuerung</a></span>
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="nav-collapse collapse" style="height: 0px;">
+            <div class="nav-collapse collapse">
                 {% if station %}
                     <span class="pull-left">
                         <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
@@ -70,11 +70,9 @@
 </div>
 
 <div class="container">
-
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span3">
-
                 {% block sidebar %}
                 <form id="sidebar" action="." method="post">{% csrf_token %}
                     <div class="control-group well"> 
@@ -110,10 +108,8 @@
     </div>
 
     <footer class="footer">
-        <p>
-            <span class="pull-right">
-                &copy; <a href="http://kronos.de">KRONOS TITAM GmbH</a> 2012
-            </span>
+        <p class="pull-right">
+            &copy; <a href="http://kronos.de">KRONOS TITAM GmbH</a> 2012
         </p>
     </footer>
 
