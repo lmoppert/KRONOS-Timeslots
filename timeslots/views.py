@@ -51,15 +51,21 @@ def station(request, station_id, date):
                 lines = []
                 for line in range(block.linecount): 
                     try:
-                        slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id).company.company 
+                        slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id)
+                        if slot.is_blocked:
+                            company = "Geblockt"
+                        else:
+                            company = slot.company.company 
                     except ObjectDoesNotExist:
-                        slot = "Freier Slot"
-                    lines.append(slot)
+                        company = "Frei"
+                    lines.append(company)
                 time = block.start_times[int(timeslot)].strftime("%H:%M")
                 timeslots.append((time, lines))
             blocks.append((str(block.id), timeslots))
         docks.append((dock.name, blocks))
-    if dock_count < 3:
+    if dock_count == 1:
+        span = "span12" 
+    elif dock_count == 2:
         span = "span6" 
     elif dock_count == 3:
         span = "span4" 

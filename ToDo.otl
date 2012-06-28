@@ -1,0 +1,28 @@
+Validation Es muss mindestens eine Auftragsnummer angegeben werden
+	Es findet keine Überprüfung der Auftragsnummer statt
+
+Bugs
+	Der Dock-Filter geht beim Datumswechsel verloren.
+
+
+Zusätzliche Funktionen
+	Lademeister:
+		Ganze Tage blocken
+		Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
+	Rollen-System:
+		Anzeigen der Aufträge ausschließlich für die eigene Firma
+
+Zusätzliche Ansichten
+	Auftrags-Übersicht 
+		Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
+		Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
+
+Sonstiges
+	Rechtliche Aufklärung der User über Datenschutz beim ersten Anmelden oder beim Zusenden der Benutzerdaten
+
+Nice To Have
+	Ablösung der bestehenden Excel Lösung
+		Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen (Vorschlag H. Wild)
+	KECO
+		RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
+		Status der Verladung

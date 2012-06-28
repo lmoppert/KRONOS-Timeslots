@@ -89,6 +89,25 @@ table td.small-column {
 table td.med-column {
     width: 15em;
 }
+table td.slot-free a,
+table td.slot-free a:hover,
+table td.slot-free {
+  font-weight: bold;
+  color: #468847;
+  /* background-color: #dff0d8; */
+}
+table td.slot-blocked a,
+table td.slot-blocked a:hover,
+table td.slot-blocked {
+  color: #b94a48;
+  background-color: #f2dede;
+}
+table td.slot-reserved a,
+table td.slot-reserved a:hover,
+table td.slot-reserved {
+  color: #c09853;
+  /* background-color: #fcf8e3; */
+}
 div.section {
     margin-top: 20px;
 }
