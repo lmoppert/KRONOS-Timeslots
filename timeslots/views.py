@@ -139,7 +139,6 @@ def slot(request, date, block_id, timeslot, line):
             job.delete()
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
-
     # ToDo: AJAXify the job table (add and remove jobs from the list)
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 

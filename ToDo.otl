@@ -1,9 +1,10 @@
-Validation Es muss mindestens eine Auftragsnummer angegeben werden
+Validation
+	Es muss mindestens eine Auftragsnummer angegeben werden
+		Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
 	Es findet keine Überprüfung der Auftragsnummer statt
 
 Bugs
 	Der Dock-Filter geht beim Datumswechsel verloren.
-
 
 Zusätzliche Funktionen
 	Lademeister:
@@ -26,3 +27,7 @@ Nice To Have
 	KECO
 		RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
 		Status der Verladung
+	I18N
+		Webseite sollte grundsätzlich englisch sein
+		Übersetzung in deutsch wäre gut
+			=> Sprache im "User Profile" ergänzen!

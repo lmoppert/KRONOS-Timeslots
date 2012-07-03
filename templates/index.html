@@ -7,7 +7,7 @@
 {% block content %}
 <div class="page-header"><h1>KRONOS TITAN GmbH</h1></div>
 <div class="section">
-    <h3>Ladezeitensteuerung</h3>
+    <h3>{% trans "Ladezeitensteuerung" %}</h3>
     <p>
         Hier können Sie Ladezeiten buchen und verwalten. Wählen Sie bitte zunächst eine Ladestelle aus der Liste aus. 
         Falls keine Ladestellen angezeigt werden, wenden Sie sich bitte an Ihren Ansprechpartner bei der KRONOS TITAN GmbH.
@@ -17,6 +17,6 @@
 {% include "timeslots/station_list.html" %}
 
 <div class="section">
-    <p><a class="btn btn-primary" href="http://kronos.de/">See website for more info about KRONOS &raquo;</a></p>
+    <p><a class="btn btn-primary" href="http://kronos.de/">{% trans "Auf der Webseite finden Sie weitere Informationen über KRONOS" %} &raquo;</a></p>
 </div>
 {% endblock %}

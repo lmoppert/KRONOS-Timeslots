@@ -1,6 +1,7 @@
+{% load i18n %}
 <head>
     <meta charset="utf-8">
-    <title>KRONOS Titan GmbH - Ladezeitensteuerung</title>
+    <title>KRONOS Titan GmbH - {% trans "Ladezeitensteuerung" %}</title>
     <meta name="description" content="KRONOS Timeslots">
     <meta name="author" content="Lutz Moppert">
     <!--[if lt IE 9]>
@@ -44,7 +45,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <span class="span3"><a class="brand" href="/timeslots/">Ladezeitensteuerung</a></span>
+            <span class="span3"><a class="brand" href="/timeslots/">{% trans "Ladezeitensteuerung" %}</a></span>
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -76,7 +77,7 @@
                 {% block sidebar %}
                 <form id="sidebar" action="." method="post">{% csrf_token %}
                     <div class="control-group well"> 
-                        <label class="control-label" for="selectedDocks"><strong>Rampen auswählen</strong></label> 
+                        <label class="control-label" for="selectedDocks"><strong>{% trans "Rampen auswählen" %}</strong></label> 
                         <div class="controls">
                             {% for dock in station.dock_set.all %}
                             <label class="checkbox">
@@ -90,7 +91,7 @@
                             </label>
                             {% endfor %}
                         </div>
-                        <button type="submit" class="btn btn-primary">Filter anwenden</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Filter anwenden" %}</button>
                     </div>
                     <div id="datepicker" style="overflow: hidden"></div>
                 </form>
