@@ -109,7 +109,7 @@
                 {% ifequal message.tags 'info' %}<div class="alert alert-info"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
                 {% ifequal message.tags 'success' %}<div class="alert alert-success"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
+                    <br />{{ message }}
                 </div>
                 {% endfor %}
                 {% endif %}
