@@ -20,8 +20,10 @@
                         class="slot-free"
                         {% elif slot == "blocked" %}
                         class="slot-blocked"
-                        {% else %}
+                        {% elif slot == "reserved" %}
                         class="slot-reserved"
+                        {% else %}
+                        class="slot-owned"
                         {% endif %}
                         >
                         {% if slot == "reserved" %}

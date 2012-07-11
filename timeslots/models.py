@@ -81,7 +81,7 @@ class UserProfile(models.Model):
     readonly = models.BooleanField()
 
     def _get_can_see_all(self):
-        if self.user.groups.filter(name='Administrator').count() == 0 or self.user.groups.filter(name='Lademeister').count() == 0:
+        if self.user.groups.filter(name='Administrator').count() == 0 and self.user.groups.filter(name='Lademeister').count() == 0:
             return False
         else:
             return True
