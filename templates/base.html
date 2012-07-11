@@ -11,6 +11,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
@@ -21,7 +22,6 @@
                 onSelect: function(dateText, inst) { 
                     window.location = "/timeslots/{% firstof target "station" %}/{{ station.id }}/date/" + dateText + "/" 
                 },
-                beforeShowDay: $.datepicker.noWeekends,
                 dateFormat: 'yy-mm-dd'
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
@@ -102,8 +102,18 @@
                 </div>
             </div>
             <div class="span9"> 
+                {% if messages %}
+                {% for message in messages %}
+                {% ifequal message.tags 'error' %}<div class="alert alert-error"><strong>{% trans "Fehler: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'warning' %}<div class="alert alert-warning"><strong>{% trans "Warnung: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'info' %}<div class="alert alert-info"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'success' %}<div class="alert alert-success"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 {% block content %}Empty page{% endblock %} 
-
             </div>
         </div>
     </div>

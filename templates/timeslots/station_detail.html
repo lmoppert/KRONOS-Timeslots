@@ -16,7 +16,7 @@
                     <th style="width: 3em">{{ start }}</th>
                     {% for slot in timeslot %}
                     <td
-                        {% if slot == "Frei" %}
+                        {% if slot == "free" %}
                         class="slot-free"
                         {% elif slot == "blocked" %}
                         class="slot-blocked"
@@ -24,7 +24,11 @@
                         class="slot-reserved"
                         {% endif %}
                         >
+                        {% if slot == "reserved" %}
+                        {{ slot }}
+                        {% else %}
                         <a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{{ slot }}</a>
+                        {% endif %}
                     </td>
                     {% endfor %}
                 </tr>
