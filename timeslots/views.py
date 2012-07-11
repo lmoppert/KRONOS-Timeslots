@@ -2,6 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_list_or_404, get_object_or_404, render_to_response
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
@@ -32,6 +33,11 @@ def station(request, station_id, date):
       Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
       for a specific date
     """
+    # check permissions
+    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
+        messages.error(request, 'Auf diese Station haben Sie keinen Zugriff!')
+        return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
+
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
@@ -52,12 +58,9 @@ def station(request, station_id, date):
                 for line in range(block.linecount): 
                     try:
                         slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id)
-                        if slot.is_blocked:
-                            company = "Geblockt"
-                        else:
-                            company = slot.company.company 
+                        company = slot.status(request.user)
                     except ObjectDoesNotExist:
-                        company = "Frei"
+                        company = "free"
                     lines.append(company)
                 time = block.start_times[int(timeslot)].strftime("%H:%M")
                 timeslots.append((time, lines))
@@ -82,6 +85,11 @@ def jobs(request, station_id, date):
     """
       Displays all jobs for the current company for a given date
     """
+    # check permissions
+    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
+        messages.error(request, 'Auf diese Station haben Sie keinen Zugriff!')
+        return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
+
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
@@ -125,6 +133,11 @@ def slot(request, date, block_id, timeslot, line):
     times = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
     slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
+
+    # check permissions
+    if slot.company.user.id != request.user.id:
+        messages.error(request, 'Dieser Slot ist bereits durch jemand anderen reserviert worden!')
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     # process request
     if request.method == 'POST' and request.POST.has_key('makeReservation'):

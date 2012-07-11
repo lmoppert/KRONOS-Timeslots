@@ -80,6 +80,13 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=200, blank=True)
     readonly = models.BooleanField()
 
+    def _get_can_see_all(self):
+        if self.user.groups.filter(name='Administrator').count() == 0 or self.user.groups.filter(name='Lademeister').count() == 0:
+            return False
+        else:
+            return True
+    can_see_all = property(_get_can_see_all)
+
     def __unicode__(self):
         return "%s" % (self.company)
 
@@ -100,6 +107,15 @@ class Slot(models.Model):
             end = self.block.end
         return  "%s - %s" % (start, end.strftime("%H:%M"))
     times = property(_get_times)
+
+    def status(self, user):
+        if user.userprofile.can_see_all or self.company.id == user.id:
+            return self.company.company
+        else:
+            if self.is_blocked:
+                return "blocked"
+            else:
+                return "reserved"
 
     def __unicode__(self):
         return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.timeslot, self.line)
