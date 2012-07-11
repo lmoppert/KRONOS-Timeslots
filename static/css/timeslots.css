@@ -102,10 +102,14 @@ table td.slot-blocked {
   color: #b94a48;
   background-color: #f2dede;
 }
-table td.slot-reserved a,
-table td.slot-reserved a:hover,
 table td.slot-reserved {
   color: #c09853;
+  /* background-color: #fcf8e3; */
+}
+table td.slot-owned a,
+table td.slot-owned a:hover,
+table td.slot-owned {
+  font-weight: bold;
   /* background-color: #fcf8e3; */
 }
 div.section {
