@@ -12,11 +12,13 @@ Zusätzliche Funktionen
 		Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
 	Rollen-System:
 		Anzeigen der Aufträge ausschließlich für die eigene Firma
+	
 
 Zusätzliche Ansichten
 	Auftrags-Übersicht 
 		Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
 		Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
+		Ansicht mit Auftragsnummer als primärer Angabe
 
 Sonstiges
 	Rechtliche Aufklärung der User über Datenschutz beim ersten Anmelden oder beim Zusenden der Benutzerdaten
@@ -27,6 +29,11 @@ Nice To Have
 	KECO
 		RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
 		Status der Verladung
+		Verladung auch Samstags und Sonntags
+		22 Fenster pro Tag Maximum
+		Nur ein Auftrag pro Ladefenster
+		Anmerkungen:
+			Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 	I18N
 		Webseite sollte grundsätzlich englisch sein
 		Übersetzung in deutsch wäre gut
