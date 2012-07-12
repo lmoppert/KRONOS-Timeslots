@@ -160,16 +160,7 @@ def slot(request, date, block_id, timeslot, line):
         messages.success(request, 'Die Reservierung wurde erfolgreich geloescht!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
-    # ToDo: AJAXify the job table (add and remove jobs from the list)
     formset = JobFormSet(instance=slot)
     return render_to_response('timeslots/slot_detail.html', 
             {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}, 
             context_instance=RequestContext(request))
-
-# ToDo: implement i18n for all views
-# ToDo: add a logging feature
-# ToDo: make blocking of slots possible for loadmasters
-# ToDo: restrict tasks with roles and permissions
-# ToDo: restrict reservation by deadline
-# ToDo: restrict slot changes by rnvp
-# ToDo: generate a view for the jobs of a company
