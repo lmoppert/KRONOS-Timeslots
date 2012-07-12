@@ -25,6 +25,10 @@ def station_redirect(request):
     if request.method == 'POST':
         station = request.POST['selectedStation']
         date = request.POST['currentDate']
+        try:
+            del request.session['selectedDocks']
+        except KeyError:
+            pass
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
 
 @login_required
@@ -41,9 +45,10 @@ def station(request, station_id, date):
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
-        # ToDo: write docklist into session variable and do let the following processing depend on that with fallback <all>
+        request.session['selectedDocks'] = request.POST.getlist('selectedDocks')
+    if 'selectedDocks' in request.session:
         docklist = []
-        for dock_id in request.POST.getlist('selectedDocks'):
+        for dock_id in request.session['selectedDocks']:
             docklist.append(station.dock_set.get(pk=dock_id))
         dock_count = len(docklist)
     else:
