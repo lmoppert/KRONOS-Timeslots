@@ -141,7 +141,7 @@ def slot(request, date, block_id, timeslot, line):
                     defaults={'company': request.user.userprofile})
 
     # check permissions
-    if slot.company.user.id != request.user.id:
+    if not request.user.userprofile.can_see_all and slot.company.user.id != request.user.id:
         messages.error(request, 'Dieser Slot ist bereits durch jemand anderen reserviert worden!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
