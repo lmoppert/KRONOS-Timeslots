@@ -1,5 +1,8 @@
 from timeslots.models import Station, Dock, Block, Slot, Job, UserProfile
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+
 
 class JobInline(admin.TabularInline):
     model = Job
@@ -31,12 +34,23 @@ class StationAdmin(admin.ModelAdmin):
     ]
     inlines = [DockInline]
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'company')
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    max_num = 1
+    can_delete = False
 
+class UserAdmin(AuthUserAdmin):
+    def add_view(self, *args, **kwargs):
+        self.inlines = []
+        return super(UserAdmin, self).add_view(*args, **kwargs)
+
+    def change_view(self, *args, **kwargs):
+        self.inlines = [UserProfileInline]
+        return super(UserAdmin, self).change_view(*args, **kwargs)
 
 admin.site.register(Station, StationAdmin)
 admin.site.register(Dock, DockAdmin)
 admin.site.register(Block, BlockAdmin)
 admin.site.register(Slot, SlotAdmin)
-admin.site.register(UserProfile, UserAdmin)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
