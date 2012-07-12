@@ -81,13 +81,8 @@
                         <div class="controls">
                             {% for dock in station.dock_set.all %}
                             <label class="checkbox">
-                                <input type="checkbox" name="selectedDocks" value="{{ dock.id }}"
-                                {% for d, b in docks %}
-                                    {% if d == dock.name %}
-                                    checked="checked"
-                                    {% endif %}
-                                {% endfor %}
-                                >{{ dock.name }}
+                                <input type="checkbox" name="selectedDocks" value="{{ dock.id }}" {% for d, b in docks %}{% if d == dock.name %}checked="checked"{% endif %}{% endfor %}>
+                                {{ dock.name }}
                             </label>
                             {% endfor %}
                         </div>

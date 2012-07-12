@@ -1,40 +1,42 @@
 Validation
 	Es muss mindestens eine Auftragsnummer angegeben werden
-		Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
-	Es findet keine Überprüfung der Auftragsnummer statt
+		[_] Das Formular eines Slots sollte die Existenz der AN validieren
+		[_] Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
+	Es findet keine Überprüfung der Auftragsnummer (z.B. Länge, Zahlen...) statt
 
 Bugs
 	Der Dock-Filter geht beim Datumswechsel verloren.
+		[_] Filter in die Session schreiben
 
 Zusätzliche Funktionen
 	Lademeister:
-		Ganze Tage blocken
-		Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
+		[_] Ganze Tage blocken
+		[_] Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
 	Rollen-System:
-		Anzeigen der Aufträge ausschließlich für die eigene Firma
+		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
 	
 
 Zusätzliche Ansichten
 	Auftrags-Übersicht 
-		Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
-		Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
-		Ansicht mit Auftragsnummer als primärer Angabe
+		[_] Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
+		[_] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
+		[_] Ansicht mit Auftragsnummer als primärer Angabe
 
 Sonstiges
 	Rechtliche Aufklärung der User über Datenschutz beim ersten Anmelden oder beim Zusenden der Benutzerdaten
 
 Nice To Have
 	Ablösung der bestehenden Excel Lösung
-		Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen (Vorschlag H. Wild)
+		[_] Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen (Vorschlag H. Wild)
 	KECO
-		RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
-		Status der Verladung
-		Verladung auch Samstags und Sonntags
-		22 Fenster pro Tag Maximum
-		Nur ein Auftrag pro Ladefenster
+		[_] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
+		[_] Status der Verladung
+		[_] Verladung auch Samstags und Sonntags
+		[_] 22 Fenster pro Tag Maximum
+		[_] Nur ein Auftrag pro Ladefenster
 		Anmerkungen:
 			Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 	I18N
-		Webseite sollte grundsätzlich englisch sein
-		Übersetzung in deutsch wäre gut
+		[_] Webseite sollte grundsätzlich englisch sein
+		[_] Übersetzung in deutsch wäre gut
 			=> Sprache im "User Profile" ergänzen!

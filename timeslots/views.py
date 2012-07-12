@@ -35,12 +35,13 @@ def station(request, station_id, date):
     """
     # check permissions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, 'Auf diese Station haben Sie keinen Zugriff!')
+        messages.error(request, 'Auf diese Ladestelle haben Sie keinen Zugriff!')
         return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
 
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
+        # ToDo: write docklist into session variable and do let the following processing depend on that with fallback <all>
         docklist = []
         for dock_id in request.POST.getlist('selectedDocks'):
             docklist.append(station.dock_set.get(pk=dock_id))
@@ -87,7 +88,7 @@ def jobs(request, station_id, date):
     """
     # check permissions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, 'Auf diese Station haben Sie keinen Zugriff!')
+        messages.error(request, 'Auf diese Ladestelle haben Sie keinen Zugriff!')
         return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
 
     # prepare context items
@@ -145,11 +146,13 @@ def slot(request, date, block_id, timeslot, line):
         if formset.is_valid():
             slot.save()
             formset.save()
+            messages.success(request, 'Die Reservierung wurde erfolgreich gespeichert!')
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
         slot.delete()
         for job in slot.job_set.all():
             job.delete()
+        messages.success(request, 'Die Reservierung wurde erfolgreich geloescht!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     # ToDo: AJAXify the job table (add and remove jobs from the list)
