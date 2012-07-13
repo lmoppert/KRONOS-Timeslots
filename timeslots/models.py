@@ -74,9 +74,11 @@ class Block(models.Model):
         return "%s (%s - %s)" % (unicode(self.dock), self.start.strftime("%H:%M"), self.end.strftime("%H:%M"))
 
 class UserProfile(models.Model):
+    LANGUAGES = ((u'DE', u'Deutsch'),(u'EN', u'English'))
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
     
+    language = models.CharField(max_length=2, choices=LANGUAGES, default='DE')
     company = models.CharField(max_length=200)
     street = models.CharField(max_length=200, blank=True)
     ZIP = models.CharField(max_length=20, blank=True)
