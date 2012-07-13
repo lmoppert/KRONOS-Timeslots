@@ -1,7 +1,15 @@
 Konkrete Implementierungen
-	[X] 100% Grundfunktionen
+	[_] 66% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
+		[_] Verladung Samstags und Sonntags unterbinden ausser bei KECO
+	[_] 66% Zusätzliche Funktionen für KECO
+		[X] Verladung auch Samstags und Sonntags
+		[_] 22 Fenster pro Tag Maximum
+		[_] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
+		[_] Status der Verladung
+		[X] Nur ein Auftrag pro Ladefenster
+			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 	[_] 0% I18N
 		[_] Webseite sollte grundsätzlich englisch sein
 		[_] Das UserProfil um einen Sprachwähler ergänzen
@@ -30,10 +38,6 @@ Konkrete Implementierungen
 		[_] Ansicht mit Auftragsnummer als primärer Angabe
 		[_] Ansicht aller Aufträge für eine Firma
 		[_] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-	[_] 0% Zusätzliche Funktionen für KECO
-		[_] Verladung auch Samstags und Sonntags
-		[_] 22 Fenster pro Tag Maximum
-		[_] Nur ein Auftrag pro Ladefenster
 Bugs
 	[X] 100% Der Dock-Filter geht beim Datumswechsel verloren.
 		[X] Filter in die Session schreiben
@@ -43,8 +47,3 @@ Sonstiges
 Nice To Have
 	Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
 		Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
-	[_] % KECO
-		[_] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
-		[_] Status der Verladung
-		Anmerkungen:
-			Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden

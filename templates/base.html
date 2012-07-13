@@ -74,24 +74,20 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span3">
-                {% block sidebar %}
-                {% if station.dock_set.count > 1 %}
+                {% block sidebar %} 
                 <form id="sidebar" action="." method="post">{% csrf_token %}
-                    <div class="control-group well"> 
-                        <label class="control-label" for="selectedDocks"><strong>{% trans "Rampen auswählen" %}</strong></label> 
+                    {% if station.dock_set.count > 1 %}<div class="control-group well"> 
+                        <label class="control-label" for="selectedDocks"><strong>{% trans "Chosse dock" %}</strong></label> 
                         <div class="controls">
-                            {% for dock in station.dock_set.all %}
-                            <label class="checkbox">
+                            {% for dock in station.dock_set.all %}<label class="checkbox">
                                 <input type="checkbox" name="selectedDocks" value="{{ dock.id }}" {% for d, b in docks %}{% if d == dock.name %}checked="checked"{% endif %}{% endfor %}>
                                 {{ dock.name }}
-                            </label>
-                            {% endfor %}
+                            </label>{% endfor %}
                         </div>
-                        <button type="submit" class="btn btn-primary">{% trans "Filter anwenden" %}</button>
-                    </div>
+                        <button type="submit" class="btn btn-primary">{% trans "Apply filter" %}</button>
+                    </div>{% endif %}
                     <div id="datepicker" style="overflow: hidden"></div>
                 </form>
-                {% endif %}
                 {% endblock %}
 
                 <div id="kronoslogo">
@@ -101,16 +97,16 @@
             <div class="span9"> 
                 {% if messages %}
                 {% for message in messages %}
-                {% ifequal message.tags 'error' %}<div class="alert alert-error"><strong>{% trans "Fehler: " %}</strong>{% endifequal %}
-                {% ifequal message.tags 'warning' %}<div class="alert alert-warning"><strong>{% trans "Warnung: " %}</strong>{% endifequal %}
-                {% ifequal message.tags 'info' %}<div class="alert alert-info"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
-                {% ifequal message.tags 'success' %}<div class="alert alert-success"><strong>{% trans "Hinweis: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'error' %}<div class="alert alert-error"><strong>{% trans "Error: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'warning' %}<div class="alert alert-warning"><strong>{% trans "Warning: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'info' %}<div class="alert alert-info"><strong>{% trans "Info: " %}</strong>{% endifequal %}
+                {% ifequal message.tags 'success' %}<div class="alert alert-success"><strong>{% trans "Success: " %}</strong>{% endifequal %}
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <br />{{ message }}
                 </div>
                 {% endfor %}
                 {% endif %}
-                {% block content %}Empty page{% endblock %} 
+                {% block content %}{% trans "Empty page" %}{% endblock %} 
             </div>
         </div>
     </div>
