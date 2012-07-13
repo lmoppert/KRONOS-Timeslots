@@ -16,6 +16,7 @@ class Station(models.Model):
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
     rnvp = models.TimeField(help_text="RVNP = Rien ne vas plus -- time when a slot can not be edited any more")
+    opened_on_weekend = models.BooleanField()
 
     def _get_longname(self):
         return self.name + " - " + self.shortdescription
