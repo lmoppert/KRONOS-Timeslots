@@ -1,40 +1,45 @@
 {% extends "base.html" %}
-{% load filters %}
+{% load filters i18n %}
 
 {% block extra_head %}
-    {% if not debug %}
-        <script type="text/javascript">
-            function preventUnload( state ) {
-                    unloadMessage = "Wenn Sie die Seite verlassen, wird dieser Slot für Sie reserviert!";
-                    window.onbeforeunload = state ? function() { return unloadMessage; } : null;
-            }
-            preventUnload( true );	
-        </script>
-    {% endif %}
+    <script type="text/javascript">
+        $(function() {
+            $('.charge_detail').formset({
+                prefix: '{{ form.prefix }}',
+                addText: '<button class="btn btn-mini" name="addCharge"><i class="icon-plus"></i> {% trans "add another charge" %}</button>',
+                deleteText: '<i class="icon-remove-circle" style="display: block;"></i>',
+            });
+        })
+        function preventUnload( state ) {
+            unloadMessage = "Wenn Sie die Seite verlassen, wird dieser Slot für Sie reserviert!";
+            window.onbeforeunload = state ? function() { return unloadMessage; } : null;
+        }
+        preventUnload( true );	
+    </script>
 {% endblock %}
 
 {% block sidebar %}{% endblock %}
 
 {% block content %}
-<div class="page-header"><h1>Reservierung für {{ date|nice_date }}</h1></div> 
+<div class="page-header"><h1>{% trans "Reservierung für" %} {{ date|nice_date }}</h1></div> 
 
 <div class="well">
     <div class="section">
         <table class="table table-bordered data-details">
             <tr>
-                <td class="small-column"><strong>Uhrzeit</strong></th>
+                <td class="small-column"><strong>{% trans "Uhrzeit" %}</strong></th>
                 <td>{{ times }}</td>
-                <td class="small-column"><strong>Firma</strong></th>
+                <td class="small-column"><strong>{% trans "Firma" %}</strong></th>
                 <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
             </tr>
             <tr>
-                <td><strong>Station</strong></th>
+                <td><strong>{% trans "Station" %}</strong></th>
                 <td>{{ station }}</td>
-                <td><strong>Anwender</strong></th>
+                <td><strong>{% trans "Anwender" %}</strong></th>
                 <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
             </tr>
             <tr>
-                <td><strong>Rampe</strong></th>
+                <td><strong>{% trans "Rampe" %}</strong></th>
                 <td>{{ curr_block.dock.name }}</td>
                 <td></td>
                 <td></td>
@@ -43,52 +48,37 @@
     </div>
 
     <div class="section">
-        <h2>Zugehörige Aufträge</h2>
+        <h2>{% trans "Zugehörige Aufträge" %}</h2>
         <form action="." method="post" class="form-horizontal">{% csrf_token %}
-            {{ form.management_form }}
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Auftrags-Nummer</th>
-                        <th>Beschreibung</th>
-                        <th>Löschen</th>
+                        <th>{% trans "Auftrags-Nummer" %}</th>
+                        <th>{% trans "Beschreibung" %}</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for f in form %}
                         {{ f.id }}
-                        <tr>
+                        <tr class="charge_detail">
                             <td>{{ f.number }}</td>
                             <td>{{ f.description }}</td>
-                            <td><a href="." style="display: block;"><i class="icon-remove-circle"></i></a></td>
+                            <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
                         </tr>
                     {% endfor %}
-                    <tr>
-                        <td colspan="2">
-                            <button class="btn btn-mini" name="addJobform" onclick="preventUnload(false)">
-                                <i class="icon-plus"></i> Weiteren Auftrag hinzufügen
-                            </button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            {{ form.management_form }}
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
-                    {% if created %}
-                    Slot Reservieren
-                    {% else %}
-                    Reservierung aktualisieren
-                    {% endif %}
+                    {% if created %}{% trans "Slot Reservieren" %}{% else %}{% trans "Reservierung aktualisieren" %}{% endif %}
                 </button>
                 <button type="submit" class="btn btn-warning" name="cancelReservation" onclick="preventUnload(false)">
-                    {% if created %}
-                    Reservierung abbrechen
-                    {% else %}
-                    Reservierung löschen
-                    {% endif %}
+                    {% if created %}{% trans "Reservierung abbrechen" %}{% else %}{% trans "Reservierung löschen" %}{% endif %}
                 </button>
-                <button type="reset" class="btn">Formular zurücksetzen</button>
+                <button type="reset" class="btn">{% trans "Formular zurücksetzen" %}</button>
             </div>
         </form>
     </div>
