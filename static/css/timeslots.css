@@ -2,14 +2,6 @@ body {
     position: relative;
     padding-top: 80px;
 }
-@media (max-width: 979px) {
-  body { padding-top: 0; }
-}
-@media (max-width: 767px) {
-  /* Remove any padding from the body */
-  body { padding-top: 0; }
-  div#kronoslogo { display: none; }
-}
 .footer {
     margin-top: 30px;
     padding: 5px 0;
@@ -20,7 +12,7 @@ body {
     color: #555;
 }
 
-#datepicker {
+div#datepicker {
     font-size: 80%;
 }
 
@@ -117,4 +109,14 @@ div.section {
 }
 table.blocktable td a {
     display: block;
+}
+@media (max-width: 979px) {
+  body { padding-top: 0; }
+  div#datepicker { font-size: 60%; }
+}
+@media (max-width: 767px) {
+  /* Remove any padding from the body */
+  body { padding-top: 0; }
+  div#kronoslogo { display: none; }
+  div#datepicker { font-size: 80%; }
 }
