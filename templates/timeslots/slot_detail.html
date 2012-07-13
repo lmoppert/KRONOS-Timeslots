@@ -6,7 +6,7 @@
         $(function() {
             $('.charge_detail').formset({
                 prefix: '{{ form.prefix }}',
-                addText: '<button class="btn btn-mini" name="addCharge"><i class="icon-plus"></i> {% trans "add another charge" %}</button>',
+                addText: '<button class="btn btn-mini" name="addCharge"><i class="icon-plus-sign"></i> {% trans "add another charge" %}</button>',
                 deleteText: '<i class="icon-remove-circle" style="display: block;"></i>',
             });
         })
@@ -51,17 +51,11 @@
         <h2>{% trans "Zugehörige Aufträge" %}</h2>
         <form action="." method="post" class="form-horizontal">{% csrf_token %}
             <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>{% trans "Auftrags-Nummer" %}</th>
-                        <th>{% trans "Beschreibung" %}</th>
-                        <th></th>
-                    </tr>
-                </thead>
+                <thead><tr><th>{% trans "Auftrags-Nummer" %}</th><th>{% trans "Beschreibung" %}</th><th></th></tr></thead>
                 <tbody>
                     {% for f in form %}
                         {{ f.id }}
-                        <tr class="charge_detail">
+                        <tr {% if not station.id == 2 %}class="charge_detail"{% endif %}>
                             <td>{{ f.number }}</td>
                             <td>{{ f.description }}</td>
                             <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>

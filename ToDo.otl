@@ -1,6 +1,6 @@
 Konkrete Implementierungen
-	[_] 50% Grundfunktionen
-		[_] AJAXify the job table (add and remove jobs from the list)
+	[X] 100% Grundfunktionen
+		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
 	[_] 0% I18N
 		[_] Webseite sollte grundsätzlich englisch sein
