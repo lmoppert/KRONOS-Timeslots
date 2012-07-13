@@ -23,6 +23,7 @@
                 onSelect: function(dateText, inst) { 
                     window.location = "/timeslots/{% firstof target "station" %}/{{ station.id }}/date/" + dateText + "/" 
                 },
+                {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
                 dateFormat: 'yy-mm-dd'
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
