@@ -26,7 +26,6 @@
                 dateFormat: 'yy-mm-dd'
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
-
             //hover states on the static widgets
             $('#dialog_link, ul#icons li').hover(
                 function() { $(this).addClass('ui-state-hover'); },
@@ -76,6 +75,7 @@
         <div class="row-fluid">
             <div class="span3">
                 {% block sidebar %}
+                {% if station.dock_set.count > 1 %}
                 <form id="sidebar" action="." method="post">{% csrf_token %}
                     <div class="control-group well"> 
                         <label class="control-label" for="selectedDocks"><strong>{% trans "Rampen auswählen" %}</strong></label> 
@@ -91,6 +91,7 @@
                     </div>
                     <div id="datepicker" style="overflow: hidden"></div>
                 </form>
+                {% endif %}
                 {% endblock %}
 
                 <div id="kronoslogo">
