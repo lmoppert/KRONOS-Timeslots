@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from timeslots.models import Station, Dock, Block, Slot
 from timeslots.forms import *
+from datetime import datetime, time
 
 def logout_page(request):
     logout_then_login(request)
@@ -140,9 +141,23 @@ def slot(request, date, block_id, timeslot, line):
     slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
-    # check permissions
+    # check conditions
+    if not slot.block.dock.station.opened_on_weekend and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+        if created:
+            slot.delete()
+        messages.error(request, 'This station is closed on weekends!')
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+    if created and slot.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+        slot.delete()
+        messages.error(request, 'The deadline for booking this slot has ended!')
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+    if not created and not request.user.userprofile.can_see_all and slot.past_rnvp(datetime.now()):
+        messages.error(request, 'This slot can not be changed any more!')
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     if not request.user.userprofile.can_see_all and slot.company.user.id != request.user.id:
-        messages.error(request, 'Dieser Slot ist bereits durch jemand anderen reserviert worden!')
+        if created:
+            slot.delete()
+        messages.error(request, 'This slot was already booked b ya different person!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     # process request

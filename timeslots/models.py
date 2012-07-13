@@ -118,6 +118,15 @@ class Slot(models.Model):
             else:
                 return "reserved"
 
+    def past_deadline(self, curr_date, curr_time):
+        deadline = datetime.combine(curr_date - timedelta(days=1), self.block.dock.station.booking_deadline)
+        return curr_time > deadline
+
+    def past_rnvp(self, curr_time):
+        start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])
+        delta = timedelta(hours=self.block.dock.station.rnvp.hour, minutes=self.block.dock.station.rnvp.minute)
+        return start - curr_time < delta
+
     def __unicode__(self):
         return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.timeslot, self.line)
 
