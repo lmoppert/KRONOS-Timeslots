@@ -1,20 +1,20 @@
 Konkrete Implementierungen
-	[_] 83% Grundfunktionen
+	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
 		[X] Verladung Samstags und Sonntags unterbinden ausser bei KECO
 		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
-		[_] Das Reservieren von Slots nach der Deadline verhindern
-	[_] 25% Zusätzliche Funktionen für KECO
+		[X] Das Reservieren von Slots nach der Deadline verhindern
+	[_] 50% Zusätzliche Funktionen für KECO
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 		[_] 22 Fenster pro Tag Maximum
-		[_] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
+		[X] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
 		[_] Status der Verladung
 	[_] 50% Änderungen am Model
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
-		[_] Einen Sprachwähler für User ergänzen
+You are not allowed to access this statio		[_] Einen Sprachwähler für User ergänzen
 	[_] 0% I18N
 		[_] Webseite sollte grundsätzlich englisch sein
 		[_] Alle Texte in den Templates markieren
@@ -41,6 +41,7 @@ Konkrete Implementierungen
 Bugs
 	[X] 100% Der Dock-Filter geht beim Datumswechsel verloren.
 		[X] Filter in die Session schreiben
+	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten

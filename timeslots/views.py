@@ -38,13 +38,15 @@ def station(request, station_id, date):
       Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
       for a specific date
     """
-    # check permissions
+    # check conditions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, 'Auf diese Ladestelle haben Sie keinen Zugriff!')
+        messages.error(request, 'You are not allowed to access this station!')
         return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
+    station = get_object_or_404(Station, pk=station_id)
+    if station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+        messages.warning(request, 'The reservation deadline has been reached, no more reservations will be accepted!')
 
     # prepare context items
-    station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
         request.session['selectedDocks'] = request.POST.getlist('selectedDocks')
     if 'selectedDocks' in request.session:
@@ -147,7 +149,7 @@ def slot(request, date, block_id, timeslot, line):
             slot.delete()
         messages.error(request, 'This station is closed on weekends!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
-    if created and slot.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if created and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         messages.error(request, 'The deadline for booking this slot has ended!')
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))

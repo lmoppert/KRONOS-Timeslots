@@ -18,6 +18,10 @@ class Station(models.Model):
     rnvp = models.TimeField(help_text="RVNP = Rien ne vas plus -- time when a slot can not be edited any more")
     opened_on_weekend = models.BooleanField()
 
+    def past_deadline(self, curr_date, curr_time):
+        deadline = datetime.combine(curr_date - timedelta(days=1), self.booking_deadline)
+        return curr_time > deadline
+
     def _get_longname(self):
         return self.name + " - " + self.shortdescription
     longname = property(_get_longname)
@@ -117,10 +121,6 @@ class Slot(models.Model):
                 return "blocked"
             else:
                 return "reserved"
-
-    def past_deadline(self, curr_date, curr_time):
-        deadline = datetime.combine(curr_date - timedelta(days=1), self.block.dock.station.booking_deadline)
-        return curr_time > deadline
 
     def past_rnvp(self, curr_time):
         start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])
