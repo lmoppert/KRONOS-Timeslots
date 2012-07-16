@@ -3,7 +3,7 @@
     <ul class="unstyled">
         {% for curr_station in user.userprofile.stations.all %}
             <li>
-                <a href="/timeslots/station/{{ curr_station.id }}" id="station{{ curr_station.id }}" rel="tooltip" 
+                <a href="{{ curr_station.get_absolute_url }}" id="station{{ curr_station.id }}" rel="tooltip" 
                    data-placement="right" data-original-title="{{ curr_station.longdescription }}">{{ curr_station.longname }}</a>
             </li>
             {% if curr_station.longdescription %}

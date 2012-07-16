@@ -22,6 +22,10 @@ class Station(models.Model):
         deadline = datetime.combine(curr_date - timedelta(days=1), self.booking_deadline)
         return curr_time > deadline
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('timeslots_station_detail', (), {'station_id': self.id})
+
     def _get_longname(self):
         return self.name + " - " + self.shortdescription
     longname = property(_get_longname)
