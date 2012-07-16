@@ -1,5 +1,5 @@
 Konkrete Implementierungen
-	[X] 100% Grundfunktionen
+	[_] 77% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
@@ -10,7 +10,7 @@ Konkrete Implementierungen
 			: get_absolut_url um einem Model die eigene URL beizubringen
 			: url um statische Links zu referenzieren
 		[_] Das logging konfigurieren
-		[_] render_to_response durch render ersetzen
+		[X] render_to_response durch render ersetzen
 	[_] 50% Zusätzliche Funktionen für KECO
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden

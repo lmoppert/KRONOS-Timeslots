@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_list_or_404, get_object_or_404, render_to_response
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -15,11 +15,11 @@ def logout_page(request):
 
 @login_required
 def keco(request):
-    return render_to_response('bars.html', context_instance=RequestContext(request))
+    return render(request, 'bars.html')
 
 @login_required
 def index(request):
-    return render_to_response('index.html', context_instance=RequestContext(request))
+    return render(request, 'index.html')
 
 @login_required
 def station_redirect(request):
@@ -85,9 +85,8 @@ def station(request, station_id, date):
         span = "span3" 
 
     # process request
-    return render_to_response('timeslots/station_detail.html', 
-            { 'station': station, 'date': date, 'docks': docks, 'span': span}, 
-            context_instance=RequestContext(request))
+    return render(request, 'timeslots/station_detail.html', 
+            { 'station': station, 'date': date, 'docks': docks, 'span': span}) 
 
 @login_required
 def jobs(request, station_id, date):
@@ -117,9 +116,8 @@ def jobs(request, station_id, date):
         slotlist[slot.block.dock.name].append(slot)
 
     # process request
-    return render_to_response('timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}, 
-            context_instance=RequestContext(request))
+    return render(request, 'timeslots/job_list.html', 
+            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}) 
 
 @login_required
 def slot(request, date, block_id, timeslot, line):
@@ -178,6 +176,5 @@ def slot(request, date, block_id, timeslot, line):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     formset = JobFormSet(instance=slot)
-    return render_to_response('timeslots/slot_detail.html', 
-            {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}, 
-            context_instance=RequestContext(request))
+    return render(request, 'timeslots/slot_detail.html', 
+            {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}) 
