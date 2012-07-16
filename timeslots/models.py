@@ -104,6 +104,10 @@ class UserProfile(models.Model):
             return True
     can_see_all = property(_get_can_see_all)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('timeslots_profile_detail', (), {'pk': self.user.id})
+
     def __unicode__(self):
         return "%s" % (self.company)
 
