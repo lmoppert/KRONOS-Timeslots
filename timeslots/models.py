@@ -82,9 +82,7 @@ class UserProfile(models.Model):
     """
     This model is adds additional fields to the buil in `auth.User` model.
 
-    The most important additions are the language (prefered user-interface language) and the company field
-
-    Furthermore it has some authorizational fields: readonly, 
+    The most important additions are the language (prefered user-interface language) and the company field.
     """
     LANGUAGES = ((u'DE', u'Deutsch'),(u'EN', u'English'))
     user = models.OneToOneField(User)
@@ -110,6 +108,11 @@ class UserProfile(models.Model):
         return "%s" % (self.company)
 
 class Slot(models.Model):
+    """
+    This is the representation of a dedicated reservation. The Slot is part of a block and
+    identified by the timeslot number and the line number, which results in a triple as the 
+    index (block_id, timeslot, line)
+    """
     block = models.ForeignKey(Block)
     company = models.ForeignKey(UserProfile)
     
@@ -126,6 +129,11 @@ class Slot(models.Model):
             end = self.block.end
         return  "%s - %s" % (start, end.strftime("%H:%M"))
     times = property(_get_times)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
+            self.timeslot, 'line': self.line, 'date': self.date})
 
     def status(self, user):
         if user.userprofile.can_see_all or self.company.id == user.id:
@@ -149,6 +157,10 @@ class Slot(models.Model):
 
 
 class Job(models.Model):
+    """
+    A job contains informations about a charge that will be loaden within a slot. There can be several jobs per slot
+    but every slot muste contain atleast one valid job.
+    """
     slot = models.ForeignKey(Slot)
     number = models.CharField(max_length=20, blank=True)
     description = models.CharField(max_length=200, blank=True)
