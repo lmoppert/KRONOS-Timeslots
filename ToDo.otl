@@ -1,15 +1,14 @@
 Konkrete Implementierungen
-	[_] 77% Grundfunktionen
+	[_] 88% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
 		[X] Verladung Samstags und Sonntags unterbinden ausser bei KECO
 		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
 		[X] Das Reservieren von Slots nach der Deadline verhindern
-		[_] Bei der verwendung von URLs die Decoratoren und Namen verwenden
+		[X] Bei der verwendung von URLs die Decoratoren und Namen verwenden
 			: get_absolut_url um einem Model die eigene URL beizubringen
 			: url um statische Links zu referenzieren
-		[_] Das logging konfigurieren
 		[X] render_to_response durch render ersetzen
 	[_] 50% Zusätzliche Funktionen für KECO
 		[X] Nur ein Auftrag pro Ladefenster
@@ -17,9 +16,9 @@ Konkrete Implementierungen
 		[_] 22 Fenster pro Tag Maximum
 		[X] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
 		[_] Status der Verladung
-	[_] 50% Änderungen am Model
+	[X] 100% Änderungen am Model
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
-		[_] Einen Sprachwähler für User ergänzen
+		[X] Einen Sprachwähler für User ergänzen
 	[_] 0% I18N
 		[_] Webseite sollte grundsätzlich englisch sein
 		[_] Alle Texte in den Templates markieren
@@ -27,7 +26,7 @@ Konkrete Implementierungen
 		[_] per gettext() eine .po Datei erzeugen
 		[_] .po Dateien übersetzen
 	[_] 0% Logging_
-		[_] Alle Aktionen sollten in ein dediziertes Logfile geschrieben werden
+		[_] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
 		[_] Formatierung der Logs sollte gut lesbar sein
 		[_] Log-Dateien sollten exportierbar sein
 	[_] 0% Beim Reservieren eines Slots muss mindestens eine Auftragsnummer angegeben werden
