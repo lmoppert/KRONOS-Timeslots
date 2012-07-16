@@ -4,12 +4,10 @@ from django.contrib.auth.models import User
 
 class Station(models.Model):
     """
-      The Station represents one address, where trucks can be loaded. 
+    The Station represents one address, where trucks can be loaded. 
 
-      **Related Objects**
-      
-      ``dock``
-      Every station consist of one or several :model:`timeslots.Dock`.
+    Every station consist of one or several `timeslots.Dock` 
+
     """
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
@@ -35,13 +33,11 @@ class Station(models.Model):
 
 class Dock(models.Model):
     """
-      The Dock belongs to one :model:`timeslots.Station` and represents a dock, that is
-      meant for a specific sort of loading like container or truck.
+    The Dock belongs to one `timeslots.Station` and represents a dock, that is
+    meant for a specific sort of loading like container or truck.
 
-      **Related Objects**
+    Timeslots of a dock are organized through a `timeslots.Block`
 
-      ``block``
-      Timeslots of a dock are organized through a :model:`timeslots.Block`
     """
     station = models.ForeignKey(Station)
     
@@ -52,6 +48,11 @@ class Dock(models.Model):
         return  '%s - %s' % (self.station.name, self.name)
 
 class Block(models.Model):
+    """
+    The Block is a collection og timeslots that belongs to a specific `timeslots.Dock`.
+
+    The number of Lines (possible patallel loadings) is also defined here.
+    """
     dock = models.ForeignKey(Dock)
     
     start = models.TimeField()
@@ -78,6 +79,13 @@ class Block(models.Model):
         return "%s (%s - %s)" % (unicode(self.dock), self.start.strftime("%H:%M"), self.end.strftime("%H:%M"))
 
 class UserProfile(models.Model):
+    """
+    This model is adds additional fields to the buil in `auth.User` model.
+
+    The most important additions are the language (prefered user-interface language) and the company field
+
+    Furthermore it has some authorizational fields: readonly, 
+    """
     LANGUAGES = ((u'DE', u'Deutsch'),(u'EN', u'English'))
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
