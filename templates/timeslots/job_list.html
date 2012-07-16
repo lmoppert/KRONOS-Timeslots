@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% load timeslots_filters %}
+{% load timeslots_filters i18n %}
 
 {% block content %}
 
@@ -25,13 +25,13 @@
     </table>
     {% else %}
     <div class="alert alert-info">
-        <strong>Keine Aufträge Vorhanden</strong>
+        <strong>{% trans "Keine Aufträge Vorhanden" %}</strong>
     </div>
     {% endif %}
     {% endfor %}
 </div>
 
 <div class="section">
-    <p><a class="btn btn-info" href="/timeslots/station/{{ station.id }}/date/{{ date }}">Slot-Übersicht anzeigen</a></p>
+    <p><a class="btn btn-info" href="/timeslots/station/{{ station.id }}/date/{{ date }}">{% trans "Slot-Übersicht anzeigen" %}</a></p>
 </div>
 {% endblock %}
