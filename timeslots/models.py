@@ -1,6 +1,9 @@
 from datetime import timedelta, datetime, date
 from django.db import models
+from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.contrib.auth.signals import user_logged_in
+
 
 class Station(models.Model):
     """
@@ -80,7 +83,7 @@ class Block(models.Model):
 
 class UserProfile(models.Model):
     """
-    This model is adds additional fields to the buil in `auth.User` model.
+    This model adds additional fields to the buil in `auth.User` model.
 
     The most important additions are the language (prefered user-interface language) and the company field.
     """
@@ -88,7 +91,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
     
-    language = models.CharField(max_length=2, choices=LANGUAGES, default='DE')
+    language = models.CharField(max_length=2, choices=LANGUAGES, default='de')
     company = models.CharField(max_length=200)
     street = models.CharField(max_length=200, blank=True)
     ZIP = models.CharField(max_length=20, blank=True)
@@ -110,6 +113,11 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return "%s" % (self.company)
+
+@receiver(user_logged_in)
+def setlang(sender, **kwargs):
+    kwargs['request'].session['django_language'] = kwargs['user'].userprofile.language
+
 
 class Slot(models.Model):
     """

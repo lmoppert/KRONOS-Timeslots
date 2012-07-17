@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load timeslots_filters %}
+{% load timeslots_filters i18n %}
 
 {% block content %}
 <div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
@@ -16,7 +16,7 @@
                     <th style="width: 3em">{{ start }}</th>
                     {% for slot in timeslot %}
                     <td {% if slot == "free" %}class="slot-free"{% elif slot == "blocked" %}class="slot-blocked"{% elif slot == "reserved" %}class="slot-reserved"{% else %}class="slot-owned"{% endif %} >
-                        {% if slot == "reserved" %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{{ slot }}</a>{% endif %}
+                        {% if slot == "reserved" %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans slot %}</a>{% endif %}
                     </td>
                     {% endfor %}
                 </tr>
@@ -29,6 +29,7 @@
 </div>
 
 <div class="section">
-    <p><a class="btn btn-info" href="/timeslots/jobs/{{ station.id }}/date/{{ date }}">Liste der Aufträge anzeigen</a></p>
+    <p><a class="btn btn-info" href="/timeslots/jobs/{{ station.id }}/date/{{ date }}">{% trans "Show list of jobs" %}</a></p>
 </div>
+
 {% endblock %}

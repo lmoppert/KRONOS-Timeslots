@@ -3,6 +3,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
@@ -19,7 +20,8 @@ def keco(request):
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    test = request.LANGUAGE_CODE
+    return render(request, 'index.html', {'test': test})
 
 @login_required
 def station_redirect(request):
@@ -40,11 +42,11 @@ def station(request, station_id, date):
     """
     # check conditions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, 'You are not allowed to access this station!')
+        messages.error(request, _('You are not allowed to access this station!'))
         return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
     station = get_object_or_404(Station, pk=station_id)
     if station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
-        messages.warning(request, 'The reservation deadline has been reached, no more reservations will be accepted!')
+        messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
     # prepare context items
     if request.method == 'POST':
@@ -95,7 +97,7 @@ def jobs(request, station_id, date):
     """
     # check permissions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, 'Auf diese Ladestelle haben Sie keinen Zugriff!')
+        messages.error(request, 'You are not allowed to access this station!')
         return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
 
     # prepare context items
@@ -145,19 +147,19 @@ def slot(request, date, block_id, timeslot, line):
     if not slot.block.dock.station.opened_on_weekend and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         if created:
             slot.delete()
-        messages.error(request, 'This station is closed on weekends!')
+        messages.error(request, _('This station is closed on weekends!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     if created and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
-        messages.error(request, 'The deadline for booking this slot has ended!')
+        messages.error(request, _('The deadline for booking this slot has ended!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     if not created and not request.user.userprofile.can_see_all and slot.past_rnvp(datetime.now()):
-        messages.error(request, 'This slot can not be changed any more!')
+        messages.error(request, _('This slot can not be changed any more!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     if not request.user.userprofile.can_see_all and slot.company.user.id != request.user.id:
         if created:
             slot.delete()
-        messages.error(request, 'This slot was already booked b ya different person!')
+        messages.error(request, _('This slot was already booked b ya different person!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     # process request
@@ -166,13 +168,13 @@ def slot(request, date, block_id, timeslot, line):
         if formset.is_valid():
             slot.save()
             formset.save()
-            messages.success(request, 'Die Reservierung wurde erfolgreich gespeichert!')
+            messages.success(request, _('This reservation has been saved successfully!'))
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
         slot.delete()
         for job in slot.job_set.all():
             job.delete()
-        messages.success(request, 'Die Reservierung wurde erfolgreich geloescht!')
+        messages.success(request, _('This reservation has been deleted successfully!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
 
     formset = JobFormSet(instance=slot)

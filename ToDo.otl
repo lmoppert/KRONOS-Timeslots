@@ -1,5 +1,5 @@
-Konkrete Implementierungen
-	[_] 88% Grundfunktionen
+[_] 33% Konkrete Implementierungen
+	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
@@ -19,8 +19,8 @@ Konkrete Implementierungen
 	[X] 100% Änderungen am Model
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
 		[X] Einen Sprachwähler für User ergänzen
-	[_] 0% I18N
-		[_] Webseite sollte grundsätzlich englisch sein
+	[_] 20% I18N
+		[X] Webseite sollte grundsätzlich englisch sein
 		[_] Alle Texte in den Templates markieren
 		[_] Texte in den Views zur Übersetzung markieren
 		[_] per gettext() eine .po Datei erzeugen

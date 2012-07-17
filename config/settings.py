@@ -33,7 +33,18 @@ TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'de'
+LANGUAGE_CODE = 'en'
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('de', ugettext('German')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(DIR, '..', 'locale')
+)
 
 SITE_ID = 1
 
@@ -66,8 +77,6 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 
-#STATIC_URL = 'http://lev-srv-565/static/'
-#STATIC_URL = 'http://baerlauch/static/'
 STATIC_URL = 'http://' + os.uname()[1] + '/static/'
 
 # Additional locations of static files
@@ -137,7 +146,7 @@ INSTALLED_APPS = (
 
 # Settings for the debug toolbar
 INTERNAL_IPS = ['127.0.0.1']
-ALWAYS_SHOW_DEBUG_TOOLBAR = True,
+ALWAYS_SHOW_DEBUG_TOOLBAR = True
 DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
 
 # A sample logging configuration. The only tangible logging
@@ -173,3 +182,4 @@ LOGGING = {
 LOGIN_URL = "/timeslots/login"
 LOGOUT_URL = "/timeslots/logout"
 LOGIN_REDIRECT_URL = "/"
+AUTH_PROFILE_MODULE = 'timeslots.UserProfile'

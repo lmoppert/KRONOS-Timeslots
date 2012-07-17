@@ -10,7 +10,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-de.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-{{ user.userprofile.language }}.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
@@ -78,7 +78,7 @@
                 {% block sidebar %} 
                 <form id="sidebar" action="." method="post">{% csrf_token %}
                     {% if station.dock_set.count > 1 %}<div class="control-group well"> 
-                        <label class="control-label" for="selectedDocks"><strong>{% trans "Chosse dock" %}</strong></label> 
+                        <label class="control-label" for="selectedDocks"><strong>{% trans "Choose dock" %}</strong></label> 
                         <div class="controls">
                             {% for dock in station.dock_set.all %}<label class="checkbox">
                                 <input type="checkbox" name="selectedDocks" value="{{ dock.id }}" {% for d, b in docks %}{% if d == dock.name %}checked="checked"{% endif %}{% endfor %}>

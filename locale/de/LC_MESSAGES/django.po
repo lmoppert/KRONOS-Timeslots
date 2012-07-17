@@ -1,22 +1,29 @@
 # Translation file for the timeslots application
 # Copyright (C) 2012 KRONOS TITAN GmbH
 # This file is distributed under the same license as the timeslots package.
-# Lutz Moppert <lutz.moppert@kronosww.com, 2012.
+# Lutz Moppert <lutz.moppert@kronosww.com>, 2012.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 10:14+0200\n"
+"POT-Creation-Date: 2012-07-17 16:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
+"Language-Team: German\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: config/settings.py:41
+msgid "English"
+msgstr "Englisch"
+
+#: config/settings.py:42
+msgid "German"
+msgstr "Deutsch"
 
 #: templates/404.html:9
 msgid "Object not found"
@@ -47,7 +54,7 @@ msgid "Timeslots"
 msgstr "Ladezeitensteuerung"
 
 #: templates/base.html:81
-msgid "Chosse dock"
+msgid "Choose dock"
 msgstr "Wählen Sie eine Rampe"
 
 #: templates/base.html:88
@@ -96,7 +103,7 @@ msgstr "Weiteren Auftrag hinzufügen"
 
 #: templates/timeslots/slot_detail.html:24
 msgid "Reservation for"
-msgstr ""
+msgstr "Reservierung für den"
 
 #: templates/timeslots/slot_detail.html:30
 #, fuzzy
@@ -150,3 +157,53 @@ msgstr "Reservierung löschen"
 #: templates/timeslots/slot_detail.html:75
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
+
+#: templates/timeslots/station_detail.html:32
+msgid "Show list of jobs"
+msgstr "Auftragsliste anzeigen"
+
+#: templates/timeslots/station_list.html:3
+msgid "Available stations"
+msgstr "Verfügbare Ladestellen"
+
+#: timeslots/views.py:45
+msgid "You are not allowed to access this station!"
+msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
+
+#: timeslots/views.py:49
+msgid ""
+"The reservation deadline has been reached, no more reservations will be "
+"accepted!"
+msgstr ""
+"Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
+"weiteren Reservierungen für diesen Tag angenommen!"
+
+#: timeslots/views.py:150
+msgid "This station is closed on weekends!"
+msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
+
+#: timeslots/views.py:154
+msgid "The deadline for booking this slot has ended!"
+msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
+
+#: timeslots/views.py:157
+msgid "This slot can not be changed any more!"
+msgstr "Diese Reservierung kann nicht mehr geändert werden!"
+
+#: timeslots/views.py:162
+msgid "This slot was already booked b ya different person!"
+msgstr "Diese Ladezeit wurde bereits durch jemand anderen reserviert!"
+
+#: timeslots/views.py:171
+msgid "This reservation has been saved successfully!"
+msgstr "Die Reservierung wurde erfolgreich gespeichert!"
+
+#: timeslots/views.py:177
+msgid "This reservation has been deleted successfully!"
+msgstr "Die Reservierung wurde erfolgreich gelöscht!"
+
+#~ msgid "Deutsch"
+#~ msgstr "Deutsch"
+
+#~ msgid "free"
+#~ msgstr "Frei"
