@@ -21,25 +21,25 @@
 {% block sidebar %}{% endblock %}
 
 {% block content %}
-<div class="page-header"><h1>{% trans "Reservierung für" %} {{ date|nice_date }}</h1></div> 
+<div class="page-header"><h1>{% trans "Reservation for" %} {{ date|nice_date }}</h1></div> 
 
 <div class="well">
     <div class="section">
         <table class="table table-bordered data-details">
             <tr>
-                <td class="small-column"><strong>{% trans "Uhrzeit" %}</strong></th>
+                <td class="small-column"><strong>{% trans "Time" %}</strong></th>
                 <td>{{ times }}</td>
-                <td class="small-column"><strong>{% trans "Firma" %}</strong></th>
+                <td class="small-column"><strong>{% trans "Company" %}</strong></th>
                 <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
             </tr>
             <tr>
                 <td><strong>{% trans "Station" %}</strong></th>
                 <td>{{ station }}</td>
-                <td><strong>{% trans "Anwender" %}</strong></th>
+                <td><strong>{% trans "User" %}</strong></th>
                 <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
             </tr>
             <tr>
-                <td><strong>{% trans "Rampe" %}</strong></th>
+                <td><strong>{% trans "Dock" %}</strong></th>
                 <td>{{ curr_block.dock.name }}</td>
                 <td></td>
                 <td></td>
@@ -48,10 +48,10 @@
     </div>
 
     <div class="section">
-        <h2>{% trans "Zugehörige Aufträge" %}</h2>
+        <h2>{% trans "Corresponding jobs" %}</h2>
         <form action="." method="post" class="form-horizontal">{% csrf_token %}
             <table class="table table-bordered table-striped">
-                <thead><tr><th>{% trans "Auftrags-Nummer" %}</th><th>{% trans "Beschreibung" %}</th><th></th></tr></thead>
+                <thead><tr><th>{% trans "Jobnumber" %}</th><th>{% trans "Description" %}</th><th></th></tr></thead>
                 <tbody>
                     {% for f in form %}
                         {{ f.id }}
@@ -67,12 +67,12 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
-                    {% if created %}{% trans "Slot Reservieren" %}{% else %}{% trans "Reservierung aktualisieren" %}{% endif %}
+                    {% if created %}{% trans "Make reservation" %}{% else %}{% trans "Update reservation" %}{% endif %}
                 </button>
                 <button type="submit" class="btn btn-warning" name="cancelReservation" onclick="preventUnload(false)">
-                    {% if created %}{% trans "Reservierung abbrechen" %}{% else %}{% trans "Reservierung löschen" %}{% endif %}
+                    {% if created %}{% trans "Cancel reservation" %}{% else %}{% trans "Delete reservation" %}{% endif %}
                 </button>
-                <button type="reset" class="btn">{% trans "Formular zurücksetzen" %}</button>
+                <button type="reset" class="btn">{% trans "Reset form" %}</button>
             </div>
         </form>
     </div>

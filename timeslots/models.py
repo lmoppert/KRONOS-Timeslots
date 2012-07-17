@@ -84,7 +84,7 @@ class UserProfile(models.Model):
 
     The most important additions are the language (prefered user-interface language) and the company field.
     """
-    LANGUAGES = ((u'DE', u'Deutsch'),(u'EN', u'English'))
+    LANGUAGES = ((u'de', u'Deutsch'),(u'en', u'English'))
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
     
