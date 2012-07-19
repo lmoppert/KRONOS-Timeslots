@@ -7,7 +7,7 @@
             $('.charge_detail').formset({
                 prefix: '{{ form.prefix }}',
                 addText: '<button class="btn btn-mini" name="addCharge"><i class="icon-plus-sign"></i> {% trans "add another charge" %}</button>',
-                deleteText: '<i class="icon-remove-circle" style="display: block;"></i>',
+                deleteText: '<i class="icon-remove-circle" style="display: block;" title="{% trans "Delete Job" %}"></i>',
             });
         })
         function preventUnload( state ) {

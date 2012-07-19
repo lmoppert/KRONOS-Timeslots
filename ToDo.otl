@@ -25,6 +25,8 @@
 		[_] Texte in den Views zur Übersetzung markieren
 		[_] per gettext() eine .po Datei erzeugen
 		[_] .po Dateien übersetzen
+		[_] Übersetzung der Seite durch Flag im UserProfil
+		[_] Filter übersetzen
 	[_] 0% Logging_
 		[_] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
 		[_] Formatierung der Logs sollte gut lesbar sein
@@ -42,7 +44,7 @@
 		[_] Ansicht mit Auftragsnummer als primärer Angabe
 		[_] Ansicht aller Aufträge für eine Firma
 		[_] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-Bugs
+[X] 100% Bugs
 	[X] 100% Der Dock-Filter geht beim Datumswechsel verloren.
 		[X] Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen

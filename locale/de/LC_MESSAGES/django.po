@@ -101,6 +101,10 @@ msgstr "Slot-Übersicht anzeigen"
 msgid "add another charge"
 msgstr "Weiteren Auftrag hinzufügen"
 
+#: templates/timeslots/slot_detail.html:10
+msgid "Delete Job"
+msgstr "Auftrag löschen"
+
 #: templates/timeslots/slot_detail.html:24
 msgid "Reservation for"
 msgstr "Reservierung für den"
@@ -108,7 +112,7 @@ msgstr "Reservierung für den"
 #: templates/timeslots/slot_detail.html:30
 #, fuzzy
 msgid "Time"
-msgstr "Ladezeitensteuerung"
+msgstr "Zeit"
 
 #: templates/timeslots/slot_detail.html:32
 msgid "Company"
@@ -201,9 +205,3 @@ msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 #: timeslots/views.py:177
 msgid "This reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"
-
-#~ msgid "Deutsch"
-#~ msgstr "Deutsch"
-
-#~ msgid "free"
-#~ msgstr "Frei"
