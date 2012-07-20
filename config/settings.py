@@ -138,7 +138,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'timeslots',
-    'bootstrap_toolkit',
+    #'bootstrap_toolkit',
     'crispy_forms',
     'south',
     'debug_toolbar',

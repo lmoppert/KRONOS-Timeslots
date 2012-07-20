@@ -71,6 +71,16 @@ div#datepicker {
 .navbar-inner .brand {
     color: #8eadd6;
 }
+.form-horizontal .control-label {
+    display: none;
+}
+
+.form-horizontal .controls {
+  margin-left: 0;
+}
+.form-horizontal span.help-inline {
+    display: block;
+}
 table.data-details {
     margin-top: 10px;
     width: 100%

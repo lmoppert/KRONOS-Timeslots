@@ -48,6 +48,7 @@
 	[X] 100% Der Dock-Filter geht beim Datumswechsel verloren.
 		[X] Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
+	[_] Löscht man das letzte Job-Formular und schickt das Formular ab, gibt es keinen "add" Knopf mehr
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten

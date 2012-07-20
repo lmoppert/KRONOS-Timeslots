@@ -174,7 +174,7 @@ class Job(models.Model):
     but every slot muste contain atleast one valid job.
     """
     slot = models.ForeignKey(Slot)
-    number = models.CharField(max_length=20, blank=True)
+    number = models.CharField(max_length=20)
     description = models.CharField(max_length=200, blank=True)
 
 class Logging(models.Model):

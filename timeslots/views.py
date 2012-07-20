@@ -168,15 +168,17 @@ def slot(request, date, block_id, timeslot, line):
         if formset.is_valid():
             slot.save()
             formset.save()
-            messages.success(request, _('This reservation has been saved successfully!'))
+            messages.success(request, _('The reservation has been saved successfully!'))
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
         slot.delete()
         for job in slot.job_set.all():
             job.delete()
-        messages.success(request, _('This reservation has been deleted successfully!'))
+        messages.success(request, _('The reservation has been deleted successfully!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+    else:
+        # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
+        formset = JobFormSet(instance=slot)
 
-    formset = JobFormSet(instance=slot)
     return render(request, 'timeslots/slot_detail.html', 
             {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}) 
