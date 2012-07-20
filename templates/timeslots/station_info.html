@@ -4,12 +4,12 @@
 
 <table class="table table-bordered">
     <tr>
-        <th colspan="2">Angaben in Stunden vor Slotanfang</th>
+        <th colspan="2">{% trans "Values represent hours before the beginning" %}</th>
     <tr>
-        <td>Buchbar bis</td>
+        <td>{% trans "Bookable until" %}</td>
         <td>{{ station.deadline|time:"H" }}</td>
     </tr><tr>
-        <td>Veränderbar bis</td>
+    <td>Ver{% trans "Editable until" %}</td>
         <td>{{ station.rnvp|time:"H" }}</td>
     </tr>
 </table>
