@@ -1,8 +1,10 @@
 from datetime import timedelta, datetime, date
+
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
+from django.utils.translation import ugettext_lazy as _
 
 
 class Station(models.Model):
@@ -16,7 +18,7 @@ class Station(models.Model):
     shortdescription = models.CharField(max_length=200, blank=True)
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
-    rnvp = models.TimeField(help_text="RVNP = Rien ne vas plus -- time when a slot can not be edited any more")
+    rnvp = models.TimeField(help_text=_("RVNP = Rien ne vas plus -- time when a slot can not be edited any more"))
     opened_on_weekend = models.BooleanField()
 
     def past_deadline(self, curr_date, curr_time):

@@ -7,8 +7,10 @@ from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
+
 from timeslots.models import Station, Dock, Block, Slot
 from timeslots.forms import *
+
 from datetime import datetime, time
 
 def logout_page(request):

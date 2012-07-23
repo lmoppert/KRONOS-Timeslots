@@ -43,7 +43,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(DIR, '..', 'locale')
+    os.path.join(DIR, '..', 'locale'),
 )
 
 SITE_ID = 1
