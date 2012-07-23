@@ -1,10 +1,12 @@
-[X] 100% Bugs
-	[X] 100% Der Dock-Filter geht beim Datumswechsel verloren.
-		[X] Filter in die Session schreiben
+Liste der Offenen Punkte im Projekt Ladezeitensteuerung
+[_] 75% Bugs
+	[X] Der Dock-Filter geht beim Datumswechsel verloren.
+		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Job-Formular enthält Stolperfalle
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
 		: gibt es keinen "add" Knopf mehr
+	[_] Das I18N Feature findet die Übersetzungen nicht
 [_] 46% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
