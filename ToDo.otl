@@ -1,13 +1,13 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[_] 75% Bugs
+[X] 100% Bugs
 	[X] Der Dock-Filter geht beim Datumswechsel verloren.
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Job-Formular enthält Stolperfalle
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
 		: gibt es keinen "add" Knopf mehr
-	[_] Das I18N Feature findet die Übersetzungen nicht
-[_] 46% Konkrete Implementierungen
+	[X] Das I18N Feature findet die Übersetzungen nicht
+[_] 50% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
@@ -28,14 +28,14 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Änderungen am Model
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
 		[X] Einen Sprachwähler für User ergänzen
-	[_] 71% I18N
+	[X] 100% I18N
 		[X] Webseite sollte grundsätzlich englisch sein
 		[X] Alle Texte in den Templates markieren
-		[_] Texte in den Views zur Übersetzung markieren
+		[X] Texte in den Views zur Übersetzung markieren
 		[X] per gettext() eine .po Datei erzeugen
 		[X] .po Dateien übersetzen
 		[X] Übersetzung der Seite durch Flag im UserProfil
-		[_] Filter übersetzen
+		[X] Filter übersetzen
 	[_] 50% Beim Reservieren eines Slots muss mindestens eine Auftragsnummer angegeben werden
 		[X] Das Formular eines Slots sollte die Existenz der AN validieren
 		[_] Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
