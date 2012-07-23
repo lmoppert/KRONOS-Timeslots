@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% load timeslots_filters i18n %}
 
-{% block content %}
-<div class="page-header"><h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1></div>
+{% block sidebar %}
+{% include "timeslots/details_subnav.html" with active=1 %}
+{{ block.super }}
+{% endblock %}
 
+{% block content %}
+<h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
 <div class="section clearfix">
     {% for dock, blocks in docks %} 
     <div class="{{ span }}">
@@ -27,9 +31,4 @@
     </div>
     {% endfor %}
 </div>
-
-<div class="section">
-    <p><a class="btn btn-info" href="/timeslots/jobs/{{ station.id }}/date/{{ date }}">{% trans "Show list of jobs" %}</a></p>
-</div>
-
 {% endblock %}

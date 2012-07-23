@@ -4,6 +4,7 @@ from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_noop
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
@@ -61,6 +62,7 @@ def station(request, station_id, date):
     else:
         docklist = station.dock_set.all()
         dock_count = docklist.count()
+
     docks = []
     for dock in docklist:
         blocks = []
@@ -73,7 +75,7 @@ def station(request, station_id, date):
                         slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id)
                         company = slot.status(request.user)
                     except ObjectDoesNotExist:
-                        company = "free"
+                        company = ugettext_noop("free")
                     lines.append(company)
                 time = block.start_times[int(timeslot)].strftime("%H:%M")
                 timeslots.append((time, lines))
@@ -93,9 +95,9 @@ def station(request, station_id, date):
             { 'station': station, 'date': date, 'docks': docks, 'span': span}) 
 
 @login_required
-def jobs(request, station_id, date):
+def jobs(request, station_id, date, as_table):
     """
-      Displays all jobs for the current company for a given date
+    Displays all jobs for a given date
     """
     # check permissions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
@@ -105,23 +107,39 @@ def jobs(request, station_id, date):
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
     if request.method == 'POST':
+        request.session['selectedDocks'] = request.POST.getlist('selectedDocks')
+    if 'selectedDocks' in request.session:
         docklist = []
-        for dock_id in request.POST.getlist('selectedDocks'):
+        for dock_id in request.session['selectedDocks']:
             docklist.append(station.dock_set.get(pk=dock_id))
     else:
         docklist = station.dock_set.all()
+
     slotlist = {}
     docks = []
     for dock in docklist:
         slotlist[dock.name] = []
         docks.append((dock.name, dock.id))
-    slots = list(Slot.objects.filter(date=date)) 
-    for slot in slots:
-        slotlist[slot.block.dock.name].append(slot)
 
-    # process request
-    return render(request, 'timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}) 
+    if request.user.userprofile.can_see_all:
+        slots = list(Slot.objects.filter(date=date)) 
+    else:
+        slots = list(Slot.objects.filter(date=date).filter(company=request.user.userprofile.id)) 
+
+    if as_table:
+        jobs = []
+        for slot in slots:
+            if slot.block.dock.name in slotlist:
+                for job in slot.job_set.all():
+                    jobs.append(job)
+        return render(request, 'timeslots/job_table.html', 
+                { 'station': station, 'date': date, 'jobs': jobs, 'target': "jobs"}) 
+    else:
+        for slot in slots:
+            if slot.block.dock.name in slotlist:
+                slotlist[slot.block.dock.name].append(slot)
+        return render(request, 'timeslots/job_list.html', 
+                { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}) 
 
 @login_required
 def slot(request, date, block_id, timeslot, line):

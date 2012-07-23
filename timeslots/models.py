@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_noop
 
 
 class Station(models.Model):
@@ -154,9 +155,9 @@ class Slot(models.Model):
             return self.company.company
         else:
             if self.is_blocked:
-                return "blocked"
+                return ugettext_noop("blocked")
             else:
-                return "reserved"
+                return ugettext_noop("reserved")
 
     def past_rnvp(self, curr_time):
         start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])

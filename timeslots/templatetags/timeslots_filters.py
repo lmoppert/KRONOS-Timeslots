@@ -37,11 +37,13 @@ def nice_date(curr_date, lang="en"):
     """
     if lang == "de":
         locale.setlocale(locale.LC_TIME, "de_DE.utf8")
+
     nice_date = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
     if lang == "de":
         fmtstr = nice_date.strftime("%A, %d. %B %Y")
     else:
         fmtstr = nice_date.strftime("%A, %d %B %Y")
+
     return nice_date.strftime(fmtstr)
     
 @register.filter

@@ -7,7 +7,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
 		: gibt es keinen "add" Knopf mehr
 	[X] Das I18N Feature findet die Übersetzungen nicht
-[_] 50% Konkrete Implementierungen
+	[_] Dock-Filter bei Tabellenübersicht zeigt nichts an
+[_] 52% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
@@ -40,8 +41,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Das Formular eines Slots sollte die Existenz der AN validieren
 		[_] Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
 			:Es findet keine Überprüfung der Auftragsnummer (z.B. Länge, Zahlen...) statt
-	[_] 0% Zusätzliche Ansichten für die Auftrags-Übersicht 
-		[_] Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
+	[_] 20% Zusätzliche Ansichten für die Auftrags-Übersicht 
+		[X] Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
 		[_] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
 		[_] Ansicht mit Auftragsnummer als primärer Angabe
 		[_] Ansicht aller Aufträge für eine Firma
