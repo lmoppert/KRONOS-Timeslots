@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-23 14:12+0200\n"
+"POT-Creation-Date: 2012-07-24 12:38+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -53,31 +53,31 @@ msgstr "Abgefertigt"
 msgid "Timeslots"
 msgstr "Ladezeitensteuerung"
 
-#: templates/base.html:81
+#: templates/base.html:83
 msgid "Choose dock"
-msgstr "Wählen Sie eine Rampe"
+msgstr "Anzuzeigende Rampen"
 
-#: templates/base.html:88
+#: templates/base.html:90
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: templates/base.html:101 templates/timeslots/slot_detail.html:54
+#: templates/base.html:103 templates/timeslots/slot_detail.html:54
 msgid "Error: "
 msgstr "Fehler:"
 
-#: templates/base.html:102
+#: templates/base.html:104
 msgid "Warning: "
 msgstr "Warnung:"
 
-#: templates/base.html:103
+#: templates/base.html:105
 msgid "Info: "
 msgstr "Information:"
 
-#: templates/base.html:104
+#: templates/base.html:106
 msgid "Success: "
 msgstr "Erfolgreich verarbeitet:"
 
-#: templates/base.html:110
+#: templates/base.html:112
 msgid "Empty page"
 msgstr "Leere Seite"
 
@@ -93,37 +93,34 @@ msgstr "Aktuelle Aufträge"
 msgid "See our homepage for further information"
 msgstr "Auf der Webseite finden Sie weitere Informationen über KRONOS"
 
-#: templates/timeslots/job_list.html:28 templates/timeslots/job_table.html:36
-msgid "No open jobs"
-msgstr "Keine Aufträge Vorhanden"
+#: templates/table.html:52
+msgid "Previous"
+msgstr "Vorige"
 
-#: templates/timeslots/job_list.html:35 templates/timeslots/job_table.html:42
+#: templates/table.html:56
+#, python-format
+msgid "Page %(current)s of %(total)s"
+msgstr "Seite %(current)s von %(total)s"
+
+#: templates/table.html:60
+msgid "Next"
+msgstr "Nächste"
+
+#: templates/timeslots/details_subnav.html:5
 msgid "Show station"
 msgstr "Slot-Übersicht anzeigen"
 
-#: templates/timeslots/job_table.html:13
-#: templates/timeslots/slot_detail.html:30
-msgid "Time"
-msgstr "Zeit"
+#: templates/timeslots/details_subnav.html:6
+msgid "Show list of jobs"
+msgstr "Aufträge als Liste anzeigen"
 
-#: templates/timeslots/job_table.html:14
-msgid "Job number"
-msgstr "Auftrag"
+#: templates/timeslots/details_subnav.html:7
+msgid "Show table of jobs"
+msgstr "Aufträge als Tabelle anzeigen"
 
-#: templates/timeslots/job_table.html:15
-#: templates/timeslots/slot_detail.html:42
-msgid "Dock"
-msgstr "Rampe"
-
-#: templates/timeslots/job_table.html:16
-#: templates/timeslots/slot_detail.html:32
-msgid "Company"
-msgstr "Firma"
-
-#: templates/timeslots/job_table.html:17
-#: templates/timeslots/slot_detail.html:61
-msgid "Description"
-msgstr "Beschreibung des Auftrags"
+#: templates/timeslots/job_list.html:30 templates/timeslots/job_table.html:18
+msgid "No open jobs"
+msgstr "Keine Aufträge Vorhanden"
 
 #: templates/timeslots/slot_detail.html:9
 msgid "add another charge"
@@ -137,6 +134,14 @@ msgstr "Auftrag löschen"
 msgid "Reservation for"
 msgstr "Reservierung für den"
 
+#: templates/timeslots/slot_detail.html:30 timeslots/tables.py:11
+msgid "Time"
+msgstr "Zeit"
+
+#: templates/timeslots/slot_detail.html:32 timeslots/tables.py:22
+msgid "Company"
+msgstr "Firma"
+
 #: templates/timeslots/slot_detail.html:36
 msgid "Station"
 msgstr "Ladestelle"
@@ -145,6 +150,10 @@ msgstr "Ladestelle"
 msgid "User"
 msgstr "Anwender"
 
+#: templates/timeslots/slot_detail.html:42 timeslots/tables.py:17
+msgid "Dock"
+msgstr "Rampe"
+
 #: templates/timeslots/slot_detail.html:51
 msgid "Corresponding jobs"
 msgstr "Zugehörige Aufträge"
@@ -152,6 +161,10 @@ msgstr "Zugehörige Aufträge"
 #: templates/timeslots/slot_detail.html:61
 msgid "Jobnumber"
 msgstr "Auftrags-Nummer"
+
+#: templates/timeslots/slot_detail.html:61 timeslots/tables.py:24
+msgid "Description"
+msgstr "Beschreibung des Auftrags"
 
 #: templates/timeslots/slot_detail.html:77
 msgid "Make reservation"
@@ -172,14 +185,6 @@ msgstr "Reservierung löschen"
 #: templates/timeslots/slot_detail.html:82
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
-
-#: templates/timeslots/station_detail.html:32
-msgid "Show list of jobs"
-msgstr "Aufträge als Liste anzeigen"
-
-#: templates/timeslots/station_detail.html:33
-msgid "Show table of jobs"
-msgstr "Aufträge als Tabelle anzeigen"
 
 #: templates/timeslots/station_info.html:8
 msgid "Values represent hours before the beginning"
@@ -227,11 +232,15 @@ msgstr "Geblockt"
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/views.py:48
+#: timeslots/tables.py:13
+msgid "Job"
+msgstr "Auftrag"
+
+#: timeslots/views.py:50
 msgid "You are not allowed to access this station!"
 msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
 
-#: timeslots/views.py:52
+#: timeslots/views.py:54
 msgid ""
 "The reservation deadline has been reached, no more reservations will be "
 "accepted!"
@@ -239,30 +248,30 @@ msgstr ""
 "Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:77
+#: timeslots/views.py:80
 msgid "free"
 msgstr "Frei"
 
-#: timeslots/views.py:163
+#: timeslots/views.py:174
 msgid "This station is closed on weekends!"
 msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
 
-#: timeslots/views.py:167
+#: timeslots/views.py:178
 msgid "The deadline for booking this slot has ended!"
 msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
 
-#: timeslots/views.py:170
+#: timeslots/views.py:181
 msgid "This slot can not be changed any more!"
 msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 
-#: timeslots/views.py:175
+#: timeslots/views.py:186
 msgid "This slot was already booked b ya different person!"
 msgstr "Diese Ladezeit wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:184
+#: timeslots/views.py:195
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:192
+#: timeslots/views.py:203
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"

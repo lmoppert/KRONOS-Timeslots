@@ -134,10 +134,10 @@ def jobs(request, station_id, date, as_table):
             if slot.block.dock.name in slotlist:
                 for job in slot.job_set.all():
                     jobs.append(job)
-        jobtable = JobTable(jobs)
-        RequestConfig(request).configure(jobtable)
+        table = JobTable(jobs)
+        RequestConfig(request, paginate={"per_page": 25}).configure(table)
         return render(request, 'timeslots/job_table.html', 
-                { 'station': station, 'date': date, 'jobtable': jobtable, 'docks': docks, 'target': "jobtable"}) 
+                { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
     else:
         for slot in slots:
             if slot.block.dock.name in slotlist:

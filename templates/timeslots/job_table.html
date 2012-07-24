@@ -11,8 +11,8 @@
 <h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
 
 <div class="section">
-    {% if jobtable %}
-    {% render_table jobtable %}
+    {% if table %}
+    {% render_table table "table.html" %}
     {% else %}
     <div class="alert alert-info">
         <strong>{% trans "No open jobs" %}</strong>
