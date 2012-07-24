@@ -54,8 +54,9 @@ def station(request, station_id, date):
     # check conditions
     station = get_object_or_404(Station, pk=station_id)
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        log = Logging.objects.create(user=request.user)
-        log.taks = "user %s tried to access station %s but is not allowed to" % (request.user, station)
+        # logging
+        log = Logging.objects.create(user=request.user, host=request.META.get('REMOTE_ADDR'))
+        log.task = "user %s tried to access station %s but is not allowed to" % (request.user, station)
         log.save()
         messages.error(request, _('You are not allowed to access this station!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))

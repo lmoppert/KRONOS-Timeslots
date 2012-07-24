@@ -193,5 +193,5 @@ class Logging(models.Model):
     task = models.CharField(max_length=200)
 
     def save(self, *args, **kwargs):
-        self.time = datetime.now()
+        self.time = datetime.today()
         super(Logging, self).save(*args, **kwargs)

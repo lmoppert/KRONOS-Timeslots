@@ -11,7 +11,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[_] Kein Fehler beim reservieren durch Kunden
 		: obwohl keine AN angegeben wurde, escheint keine Fehlermeldung,
 		: das Formular wird aber auch nicht abgeschickt
-[_] 62% Konkrete Implementierungen
+[_] 66% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
 		[X] Make single form for User and Userprofile
@@ -49,9 +49,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-	[_] 0% Logging_
+	[_] 33% Logging_
 		[_] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
-		[_] Formatierung der Logs sollte gut lesbar sein
+		[X] Formatierung der Logs sollte gut lesbar sein
 		[_] Log-Dateien sollten exportierbar sein
 	[_] 0% Zusätzliche Funktionen für Lademeister:
 		[_] Ganze Tage blocken
