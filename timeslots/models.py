@@ -188,6 +188,10 @@ class Job(models.Model):
 
 class Logging(models.Model):
     user = models.ForeignKey(User)
-    
+    time = models.DateTimeField(editable=False)
+    host = models.CharField(max_length=40, blank=True)
     task = models.CharField(max_length=200)
-    timestamp = models.TimeField()
+
+    def save(self, *args, **kwargs):
+        self.time = datetime.now()
+        super(Logging, self).save(*args, **kwargs)

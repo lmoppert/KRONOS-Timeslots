@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django_tables2 import RequestConfig
 
-from timeslots.models import Station, Dock, Block, Slot
+from timeslots.models import Station, Block, Slot, Logging
 from timeslots.forms import *
 from timeslots.tables import *
 
@@ -52,10 +52,13 @@ def station(request, station_id, date):
       for a specific date
     """
     # check conditions
-    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        messages.error(request, _('You are not allowed to access this station!'))
-        return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
     station = get_object_or_404(Station, pk=station_id)
+    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
+        log = Logging.objects.create(user=request.user)
+        log.taks = "user %s tried to access station %s but is not allowed to" % (request.user, station)
+        log.save()
+        messages.error(request, _('You are not allowed to access this station!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
@@ -109,8 +112,9 @@ def jobs(request, station_id, date, as_table):
     """
     # check permissions
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
+        log_entry('Error', request)
         messages.error(request, 'You are not allowed to access this station!')
-        return HttpResponseRedirect('/timeslots/user/%s' % (request.user.id))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
 
     # prepare context items
     station = get_object_or_404(Station, pk=station_id)
@@ -148,8 +152,9 @@ def jobs(request, station_id, date, as_table):
         for slot in slots:
             if slot.block.dock.name in slotlist:
                 slotlist[slot.block.dock.name].append(slot)
-        return render(request, 'timeslots/job_list.html', 
-                { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "joblist"}) 
+
+    return render(request, 'timeslots/job_list.html', 
+            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "joblist"}) 
 
 @login_required
 def slot(request, date, block_id, timeslot, line):
