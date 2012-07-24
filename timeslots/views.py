@@ -8,9 +8,11 @@ from django.utils.translation import ugettext_noop
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
+from django_tables2 import RequestConfig
 
 from timeslots.models import Station, Dock, Block, Slot
 from timeslots.forms import *
+from timeslots.tables import *
 
 from datetime import datetime, time
 
@@ -132,8 +134,10 @@ def jobs(request, station_id, date, as_table):
             if slot.block.dock.name in slotlist:
                 for job in slot.job_set.all():
                     jobs.append(job)
+        jobtable = JobTable(jobs)
+        RequestConfig(request).configure(jobtable)
         return render(request, 'timeslots/job_table.html', 
-                { 'station': station, 'date': date, 'jobs': jobs, 'docks': docks, 'target': "jobtable"}) 
+                { 'station': station, 'date': date, 'jobtable': jobtable, 'docks': docks, 'target': "jobtable"}) 
     else:
         for slot in slots:
             if slot.block.dock.name in slotlist:

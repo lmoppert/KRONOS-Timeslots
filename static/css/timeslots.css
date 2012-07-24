@@ -11,7 +11,32 @@ body {
     margin-bottom: 0;
     color: #555;
 }
-
+td.jobs {
+    padding-bottom: 2px;
+}
+td.jobs div {
+    padding-bottom: 8px;
+}
+td.jobs div strong {
+    color:  #3A87ad;
+}
+td.number,
+td.slot_times {
+    font-weight: bold;
+}
+td.number {
+    color: #468847;
+}
+th.asc:after {
+    float: right;
+    color: #ddd;
+    content: " ▲";
+}
+th.desc:after {
+    float: right;
+    color: #ddd;
+    content: " ▼";
+}
 div#datepicker {
     font-size: 80%;
 }

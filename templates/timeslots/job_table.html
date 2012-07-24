@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% load timeslots_filters i18n %}
+{% load render_table from django_tables2 %}
 
 {% block sidebar %}
 {% include "timeslots/details_subnav.html" with active=3 %}
@@ -10,29 +11,8 @@
 <h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
 
 <div class="section">
-    {% if jobs %}
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>{% trans "Time" %}</th>
-                <th>{% trans "Job number" %}</th>
-                <th>{% trans "Dock" %}</th>
-                <th>{% trans "Company" %}</th>
-                <th>{% trans "Description" %}</th>
-            </tr>
-        </thead>
-        <tbody> 
-            {% for job in jobs %}
-            <tr>
-                <td><strong>{{ job.slot.times }}<strong></td>
-                <td><strong style="color: #3A87ad">{{ job.number }}</strong></td>
-                <td>{{ job.slot.block.dock.name }}</td>
-                <td>{{ job.slot.company }}</td>
-                <td>{{ job.description }}</td>
-            </tr>
-            {% endfor %}
-        </tbody> 
-    </table>
+    {% if jobtable %}
+    {% render_table jobtable %}
     {% else %}
     <div class="alert alert-info">
         <strong>{% trans "No open jobs" %}</strong>
