@@ -108,7 +108,7 @@ msgstr "Zeit"
 
 #: templates/timeslots/job_table.html:14
 msgid "Job number"
-msgstr "Auftrags-Nummer"
+msgstr "Auftrag"
 
 #: templates/timeslots/job_table.html:15
 #: templates/timeslots/slot_detail.html:42

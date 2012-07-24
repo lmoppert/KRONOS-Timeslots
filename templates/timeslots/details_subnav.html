@@ -3,7 +3,7 @@
 <div class="tabbable tabs-left">
     <ul class="nav nav-tabs">
         <li{% if active == 1 %} class="active"{% endif %}><a href="/timeslots/station/{{ station.id }}/date/{{ date }}">{% trans "Show station" %}</a></li>
-        <li{% if active == 2 %} class="active"{% endif %}><a href="/timeslots/jobtable/{{ station.id }}/date/{{ date }}">{% trans "Show table of jobs" %}</a></li>
-        <li{% if active == 3 %} class="active"{% endif %}><a href="/timeslots/joblist/{{ station.id }}/date/{{ date }}">{% trans "Show list of jobs" %}</a></li>
+        <li{% if active == 2 %} class="active"{% endif %}><a href="/timeslots/joblist/{{ station.id }}/date/{{ date }}">{% trans "Show list of jobs" %}</a></li>
+        <li{% if active == 3 %} class="active"{% endif %}><a href="/timeslots/jobtable/{{ station.id }}/date/{{ date }}">{% trans "Show table of jobs" %}</a></li>
     </ul>
 </div>

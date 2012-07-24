@@ -133,13 +133,13 @@ def jobs(request, station_id, date, as_table):
                 for job in slot.job_set.all():
                     jobs.append(job)
         return render(request, 'timeslots/job_table.html', 
-                { 'station': station, 'date': date, 'jobs': jobs, 'target': "jobs"}) 
+                { 'station': station, 'date': date, 'jobs': jobs, 'docks': docks, 'target': "jobtable"}) 
     else:
         for slot in slots:
             if slot.block.dock.name in slotlist:
                 slotlist[slot.block.dock.name].append(slot)
         return render(request, 'timeslots/job_list.html', 
-                { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "jobs"}) 
+                { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "joblist"}) 
 
 @login_required
 def slot(request, date, block_id, timeslot, line):

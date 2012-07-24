@@ -7,7 +7,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
 		: gibt es keinen "add" Knopf mehr
 	[X] Das I18N Feature findet die Übersetzungen nicht
-	[_] Dock-Filter bei Tabellenübersicht zeigt nichts an
+	[X] Dock-Filter bei Tabellenübersicht zeigt nichts an
 [_] 52% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
