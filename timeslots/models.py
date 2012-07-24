@@ -145,10 +145,16 @@ class Slot(models.Model):
         return  "%s - %s" % (start, end.strftime("%H:%M"))
     times = property(_get_times)
 
+    def _get_date_string(self):
+        return self.date.strftime("%Y-%m-%d")
+    date_string = property(_get_date_string)
+
+
+
     @models.permalink
     def get_absolute_url(self):
         return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
-            self.timeslot, 'line': self.line, 'date': self.date})
+            self.timeslot, 'line': self.line, 'date': self.date_string})
 
     def status(self, user):
         if user.userprofile.can_see_all or self.company.id == user.id:

@@ -20,12 +20,8 @@ td.jobs div {
 td.jobs div strong {
     color:  #3A87ad;
 }
-td.number,
-td.slot_times {
-    font-weight: bold;
-}
 td.number {
-    color: #468847;
+    font-weight: bold;
 }
 th.asc:after {
     float: right;

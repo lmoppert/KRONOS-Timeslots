@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load render_table from django_tables2 %}
 
 {% block sidebar %}
 {% endblock %}
@@ -10,9 +11,10 @@
     <h1>KRONOS TITAN GmbH</h1>
     {% if user.is_staff %}<a href="{{ STATIC_URL }}html/todo.html">{% trans "ToDo List" %}</a>{% endif %}
 </div>
+
 <div class="section">
-    <h3>{% trans "Timeslots" %}</h3>
-    <h4>{% trans "Open jobs" %}</h4>
+    <h3>{% trans "Open jobs" %}</h3>
+    {% render_table table "table.html" %}
 </div>
 
 {% include "timeslots/station_list.html" %}

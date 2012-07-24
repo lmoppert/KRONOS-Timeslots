@@ -25,8 +25,14 @@ def keco(request):
 
 @login_required
 def index(request):
-    test = request.LANGUAGE_CODE
-    return render(request, 'index.html', {'test': test})
+    jobs = []
+    slots =  request.user.userprofile.slot_set.filter(date__gt=datetime.now())
+    for slot in slots:
+        for job in slot.job_set.all():
+            jobs.append(job)
+    table = UserJobTable(jobs)
+    RequestConfig(request, paginate={"per_page": 5}).configure(table)
+    return render(request, 'index.html', {'table': table})
 
 @login_required
 def station_redirect(request):
@@ -134,7 +140,7 @@ def jobs(request, station_id, date, as_table):
             if slot.block.dock.name in slotlist:
                 for job in slot.job_set.all():
                     jobs.append(job)
-        table = JobTable(jobs)
+        table = StationJobTable(jobs)
         RequestConfig(request, paginate={"per_page": 25}).configure(table)
         return render(request, 'timeslots/job_table.html', 
                 { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
@@ -168,12 +174,12 @@ def slot(request, date, block_id, timeslot, line):
                     defaults={'company': request.user.userprofile})
 
     # check conditions
-    if not slot.block.dock.station.opened_on_weekend and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+    if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         if created:
             slot.delete()
         messages.error(request, _('This station is closed on weekends!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
-    if created and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if created and not request.user.userprofile.can_see_all and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         messages.error(request, _('The deadline for booking this slot has ended!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))

@@ -14,7 +14,7 @@ urlpatterns = patterns('timeslots.views',
     url(r'^jobtable/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/$', 'jobs', {'as_table': True}),
     url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),
     url(r'^dock/(?P<pk>\d+)/$', DetailView.as_view(model=Dock)),
-   url(r'^profile/(?P<pk>\d+)/$', DetailView.as_view(model=UserProfile, template_name='timeslots/user_detail.html'), name='timeslots_profile_detail'),
+    url(r'^profile/(?P<pk>\d+)/$', DetailView.as_view(model=UserProfile, template_name='timeslots/user_detail.html'), name='timeslots_profile_detail'),
 )
 urlpatterns += patterns('django.contrib.auth.views',
     url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'}, name='user_login'),
