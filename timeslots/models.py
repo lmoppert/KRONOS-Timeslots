@@ -149,8 +149,6 @@ class Slot(models.Model):
         return self.date.strftime("%Y-%m-%d")
     date_string = property(_get_date_string)
 
-
-
     @models.permalink
     def get_absolute_url(self):
         return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
@@ -171,7 +169,12 @@ class Slot(models.Model):
         return start - curr_time < delta
 
     def __unicode__(self):
-        return "%s - %s|%s|%s" % (unicode(self.date), self.block.id, self.timeslot, self.line)
+        return "%(date)s [%(time)s] %(station)s - %(dock)s" % {
+                'date': unicode(self.date), 
+                'dock': self.block.dock.name, 
+                'station': self.block.dock.station.name, 
+                'time': self.times
+                }
 
     class Meta:
         ordering = ['date', 'timeslot', 'line']

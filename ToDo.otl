@@ -49,13 +49,27 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-	[_] 33% Logging_
-		[_] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
-		[X] Formatierung der Logs sollte gut lesbar sein
-		[_] Log-Dateien sollten exportierbar sein
 	[_] 0% Zusätzliche Funktionen für Lademeister:
 		[_] Ganze Tage blocken
 		[_] Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
+[_] 88% Logging_
+	Implementierungen
+		[X] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
+		[X] Formatierung der Logs sollte gut lesbar sein
+		[_] Log-Dateien sollten exportierbar sein
+	[X] 100% Station
+		[X] "User ... tried to access station ... without authorization" 
+	[X] 100% Joblist
+		[X] "User ... tried to access station ... without authorization" 
+	[_] 87% Slot
+		[_] "User ... tried to access the weekend view of station ..., which is not opened on weekends." 
+		[X] "User ... tried to reserve slot ... after the booking deadline has been reached." 
+		[X] "User ... tried to change slot ... after the rnvp deadline has been reached." 
+		[X] "User ... tried to access slot ... which was reserved by a different user." 
+		[X] "User ... has successfully reserved slot ...." 
+		[X] "User ... has submitted a reservation form for slot ... which contained errors." 
+		[X] "User ... has successfully deleted the reservation for slot ...." 
+		[X] "User ... has opened the reservation form for slot ...." 
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
