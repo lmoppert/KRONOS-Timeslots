@@ -60,6 +60,10 @@ def station(request, station_id, date):
     """
     # check conditions
     station = get_object_or_404(Station, pk=station_id)
+    if not station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+        log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, station))
+        messages.error(request, _('This station is closed on weekends!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, _('You are not authorized to access this station!'))
@@ -117,6 +121,10 @@ def jobs(request, station_id, date, as_table):
     """
     # check permissions
     station = get_object_or_404(Station, pk=station_id)
+    if not station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+        log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, station))
+        messages.error(request, _('This station is closed on weekends!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, 'You are not allowed to access this station!')
@@ -187,9 +195,9 @@ def slot(request, date, block_id, timeslot, line):
     if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         if created:
             slot.delete()
-        log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, slot.block.dock.station))
+        log_task(request, "User %s tried to access slot %s, which is not opened on weekends." % (request.user, slot))
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if created and not request.user.userprofile.can_see_all and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
