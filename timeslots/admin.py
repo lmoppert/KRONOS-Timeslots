@@ -1,8 +1,11 @@
-from timeslots.models import Station, Dock, Block, Slot, Job, UserProfile
+from timeslots.models import Logging, Station, Dock, Block, Slot, Job, UserProfile
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
+
+class LoggingAdmin(admin.ModelAdmin):
+    list_display = ('time', 'user', 'host', 'task')
 
 class JobInline(admin.TabularInline):
     model = Job
@@ -48,6 +51,7 @@ class UserAdmin(AuthUserAdmin):
         self.inlines = [UserProfileInline]
         return super(UserAdmin, self).change_view(*args, **kwargs)
 
+admin.site.register(Logging, LoggingAdmin)
 admin.site.register(Station, StationAdmin)
 admin.site.register(Dock, DockAdmin)
 admin.site.register(Block, BlockAdmin)
