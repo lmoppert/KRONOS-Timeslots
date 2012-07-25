@@ -2,13 +2,10 @@
 {% load timeslots_filters i18n %}
 {% load render_table from django_tables2 %}
 
-{% block sidebar %}
-{% include "timeslots/details_subnav.html" with active=3 %}
-{{ block.super }}
-{% endblock %}
-
 {% block content %}
 <h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
+
+{% include "timeslots/details_subnav.html" with active=3 %}
 
 <div class="section">
     {% render_table table "table.html" %}

@@ -1,13 +1,12 @@
 {% extends "base.html" %} 
 {% load timeslots_filters i18n %}
 
-{% block sidebar %}
-{% include "timeslots/details_subnav.html" with active=2 %}
-{{ block.super }}
-{% endblock %}
-
 {% block content %}
+
 <h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
+
+{% include "timeslots/details_subnav.html" with active=2 %}
+
 <div class="section">
     {% for dock, slots in slotlist.iteritems %}
     <h2>{{ dock }}</h2>

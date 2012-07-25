@@ -76,21 +76,19 @@
         <div class="row-fluid">
             <div class="span3">
                 {% block sidebar %} 
-                <div class="section">
-                    <form id="sidebar" action="." method="post">{% csrf_token %}
-                        <div id="datepicker"></div>
-                        {% if station.dock_set.count > 1 %}<div class="control-group section"> 
-                            <label class="control-label" for="selectedDocks"><strong>{% trans "Choose dock" %}</strong></label> 
-                            <div class="controls">
-                                {% for dock in station.dock_set.all %}<label class="checkbox">
-                                    <input type="checkbox" name="selectedDocks" value="{{ dock.id }}" {% for d, b in docks %}{% if d == dock.name %}checked="checked"{% endif %}{% endfor %}>
-                                    {{ dock.name }}
-                                </label>{% endfor %}
-                            </div>
-                            <button type="submit" class="btn btn-primary">{% trans "Apply filter" %}</button>
-                        </div>{% endif %}
-                    </form>
-                </div>
+                <form id="sidebar" action="." method="post">{% csrf_token %}
+                    {% if station.dock_set.count > 1 %}<div class="control-group section"> 
+                        <label class="control-label" for="selectedDocks"><strong>{% trans "Choose dock" %}</strong></label> 
+                        <div class="controls">
+                            {% for dock in station.dock_set.all %}<label class="checkbox">
+                                <input type="checkbox" name="selectedDocks" value="{{ dock.id }}" {% for d, b in docks %}{% if d == dock.name %}checked="checked"{% endif %}{% endfor %}>
+                                {{ dock.name }}
+                            </label>{% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">{% trans "Apply filter" %}</button>
+                    </div>{% endif %}
+                    <div id="datepicker"></div>
+                </form>
                 {% endblock %}
 
                 <div id="kronoslogo">

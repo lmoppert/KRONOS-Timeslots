@@ -10,7 +10,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] Dock-Filter bei Tabellenübersicht zeigt nichts an
 	[_] Kein Fehler beim reservieren durch Kunden
 		: obwohl keine AN angegeben wurde, escheint keine Fehlermeldung,
-		: das Formular wird aber auch nicht abgeschickt
+		: das Formular wird aber auch nicht abgeschickt und es wird ein
+		: korrekter Log-Eintrag erzeugt
 [_] 66% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)

@@ -101,6 +101,9 @@ div#datepicker {
 .form-horizontal span.help-inline {
     display: block;
 }
+form#sidebar div.control-group {
+    margin: 0 15px 20px 15px;
+}
 table.data-details {
     margin-top: 10px;
     width: 100%
