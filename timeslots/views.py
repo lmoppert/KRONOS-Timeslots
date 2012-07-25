@@ -53,10 +53,10 @@ def station_redirect(request):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
 
 @login_required
-def station(request, station_id, date):
+def station(request, station_id, date, view_mode):
     """
       Displays the blocks ( see :model:`timeslots.Block`) of a :model:`timeslots.Station` 
-      for a specific date
+      or the jobs (table- or listview) for a specific date
     """
     # check conditions
     station = get_object_or_404(Station, pk=station_id)
@@ -68,7 +68,7 @@ def station(request, station_id, date):
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, _('You are not authorized to access this station!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if view_mode == 'station' and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
     # prepare context items
@@ -83,91 +83,66 @@ def station(request, station_id, date):
         docklist = station.dock_set.all()
         dock_count = docklist.count()
 
-    docks = []
-    for dock in docklist:
-        blocks = []
-        for block in dock.block_set.all(): 
-            timeslots = []
-            for timeslot in range(block.slotcount): 
-                lines = []
-                for line in range(block.linecount): 
-                    try:
-                        slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id)
-                        company = slot.status(request.user)
-                    except ObjectDoesNotExist:
-                        company = ugettext_noop("free")
-                    lines.append(company)
-                time = block.start_times[int(timeslot)].strftime("%H:%M")
-                timeslots.append((time, lines))
-            blocks.append((str(block.id), timeslots))
-        docks.append((dock.name, blocks))
-    if dock_count == 1:
-        span = "span12" 
-    elif dock_count == 2:
-        span = "span6" 
-    elif dock_count == 3:
-        span = "span4" 
-    else:
-        span = "span3" 
+    if not view_mode == 'slots':
+        slotlist = {}
+        docks = []
+        for dock in docklist:
+            slotlist[dock.name] = []
+            docks.append((dock.name, dock.id))
 
-    # process request
+        if request.user.userprofile.can_see_all:
+            slots = list(Slot.objects.filter(date=date)) 
+        else:
+            slots = list(Slot.objects.filter(date=date).filter(company=request.user.userprofile.id)) 
+
+        if view_mode == 'jobtable':
+            jobs = []
+            for slot in slots:
+                if slot.block.dock.name in slotlist:
+                    for job in slot.job_set.all():
+                        jobs.append(job)
+            table = StationJobTable(jobs)
+            RequestConfig(request, paginate={"per_page": 25}).configure(table)
+            return render(request, 'timeslots/job_table.html', 
+                    { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
+        else:
+            for slot in slots:
+                if slot.block.dock.name in slotlist:
+                    slotlist[slot.block.dock.name].append(slot)
+
+        return render(request, 'timeslots/job_list.html', 
+                { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "joblist"}) 
+    else:
+        docks = []
+        for dock in docklist:
+            blocks = []
+            for block in dock.block_set.all(): 
+                timeslots = []
+                for timeslot in range(block.slotcount): 
+                    lines = []
+                    for line in range(block.linecount): 
+                        try:
+                            slot = block.slot_set.filter(date=date).get(date=date, timeslot=timeslot+1, line=line+1, block=block.id)
+                            company = slot.status(request.user)
+                        except ObjectDoesNotExist:
+                            company = ugettext_noop("free")
+                        lines.append(company)
+                    time = block.start_times[int(timeslot)].strftime("%H:%M")
+                    timeslots.append((time, lines))
+                blocks.append((str(block.id), timeslots))
+            docks.append((dock.name, blocks))
+        if dock_count == 1:
+            span = "span12" 
+        elif dock_count == 2:
+            span = "span6" 
+        elif dock_count == 3:
+            span = "span4" 
+        else:
+            span = "span3" 
+
     return render(request, 'timeslots/station_detail.html', 
-            { 'station': station, 'date': date, 'docks': docks, 'span': span}) 
+            { 'station': station, 'date': date, 'docks': docks, 'span': span, 'target': "slots"}) 
 
-@login_required
-def jobs(request, station_id, date, as_table):
-    """
-    Displays all jobs for a given date
-    """
-    # check permissions
-    station = get_object_or_404(Station, pk=station_id)
-    if not station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
-        log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, station))
-        messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
-        messages.error(request, 'You are not allowed to access this station!')
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-
-    # prepare context items
-    if request.method == 'POST':
-        request.session['selectedDocks'] = request.POST.getlist('selectedDocks')
-    if 'selectedDocks' in request.session:
-        docklist = []
-        for dock_id in request.session['selectedDocks']:
-            docklist.append(station.dock_set.get(pk=dock_id))
-    else:
-        docklist = station.dock_set.all()
-
-    slotlist = {}
-    docks = []
-    for dock in docklist:
-        slotlist[dock.name] = []
-        docks.append((dock.name, dock.id))
-
-    if request.user.userprofile.can_see_all:
-        slots = list(Slot.objects.filter(date=date)) 
-    else:
-        slots = list(Slot.objects.filter(date=date).filter(company=request.user.userprofile.id)) 
-
-    if as_table:
-        jobs = []
-        for slot in slots:
-            if slot.block.dock.name in slotlist:
-                for job in slot.job_set.all():
-                    jobs.append(job)
-        table = StationJobTable(jobs)
-        RequestConfig(request, paginate={"per_page": 25}).configure(table)
-        return render(request, 'timeslots/job_table.html', 
-                { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
-    else:
-        for slot in slots:
-            if slot.block.dock.name in slotlist:
-                slotlist[slot.block.dock.name].append(slot)
-
-    return render(request, 'timeslots/job_list.html', 
-            { 'station': station, 'date': date, 'slotlist': slotlist, 'docks': docks, 'target': "joblist"}) 
 
 @login_required
 def slot(request, date, block_id, timeslot, line):

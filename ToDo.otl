@@ -72,6 +72,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] "User ... has submitted a reservation form for slot ... which contained errors." 
 		[X] "User ... has successfully deleted the reservation for slot ...." 
 		[X] "User ... has opened the reservation form for slot ...." 
+Refactoring
+	[X] 100% Views
+		[X] jobs und station zu einem einzigen view verschmelzen
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
