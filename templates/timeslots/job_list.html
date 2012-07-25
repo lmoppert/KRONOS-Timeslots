@@ -3,7 +3,9 @@
 
 {% block content %}
 
-<h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
+<div class="page-header">
+    <h1>{{ date|nice_date }} <small>{{ station.longname }}</small></h1>
+</div>
 
 {% include "timeslots/details_subnav.html" with active=2 %}
 
