@@ -217,7 +217,6 @@ def slot(request, date, block_id, timeslot, line):
             return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
         else:
             log_task(request, "User %s has submitted a reservation form for slot %s which contained errors." % (request.user, slot))
-            formset = JobFormSet(instance=slot)
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
         slot.delete()
         for job in slot.job_set.all():

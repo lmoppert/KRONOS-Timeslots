@@ -1,5 +1,5 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[_] 83% Bugs
+[X] 100% Bugs
 	[X] Der Dock-Filter geht beim Datumswechsel verloren.
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
@@ -8,9 +8,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: gibt es keinen "add" Knopf mehr
 	[X] Das I18N Feature findet die Übersetzungen nicht
 	[X] Dock-Filter bei Tabellenübersicht zeigt nichts an
-	[_] Kein Fehler beim reservieren durch Kunden
-		: obwohl keine AN angegeben wurde, escheint keine Fehlermeldung,
-		: das Formular wird aber auch nicht abgeschickt und es wird ein
+	[X] Keine Fehlermeldung beim reservieren ohne AN
+		: das Formular wird nicht abgeschickt und es wird ein
 		: korrekter Log-Eintrag erzeugt
 [_] 66% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
