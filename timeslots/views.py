@@ -50,7 +50,7 @@ def station_redirect(request):
             del request.session['selectedDocks']
         except KeyError:
             pass
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (station, date))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station, date))
 
 @login_required
 def station(request, station_id, date, view_mode):
@@ -177,17 +177,17 @@ def slot(request, date, block_id, timeslot, line):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
         messages.error(request, _('The deadline for booking this slot has ended!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if not created and not request.user.userprofile.can_see_all and slot.past_rnvp(datetime.now()):
         log_task(request, "User %s tried to change slot %s after the rnvp deadline has been reached." % (request.user, slot))
         messages.error(request, _('This slot can not be changed any more!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if not request.user.userprofile.can_see_all and slot.company.user.id != request.user.id:
         if created:
             slot.delete()
         log_task(request, "User %s tried to access slot %s which is reserved for a different user." % (request.user, slot))
         messages.error(request, _('This slot was already booked by a different person!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
 
     # process request
     if request.method == 'POST' and request.POST.has_key('makeReservation'):
@@ -197,7 +197,7 @@ def slot(request, date, block_id, timeslot, line):
             formset.save()
             log_task(request, "User %s has successfully reserved slot %s." % (request.user, slot))
             messages.success(request, _('The reservation has been saved successfully!'))
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
         else:
             log_task(request, "User %s has submitted a reservation form for slot %s which contained errors." % (request.user, slot))
     elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
@@ -206,7 +206,7 @@ def slot(request, date, block_id, timeslot, line):
             job.delete()
         log_task(request, "User %s has successfully deleted the reservation for slot %s." % (request.user, slot))
         messages.success(request, _('The reservation has been deleted successfully!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     else:
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))
