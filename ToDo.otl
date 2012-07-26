@@ -76,7 +76,7 @@ Refactoring
 	[X] 100% Views
 		[X] jobs und station zu einem einzigen view verschmelzen
 	Sonstiges
-		[_] Debug modus durch Umgebungsvariable steuern
+		[X] Debug modus durch Umgebungsvariable steuern
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
