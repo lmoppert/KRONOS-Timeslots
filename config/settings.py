@@ -2,7 +2,17 @@
 import os
 
 DIR = os.path.abspath(os.path.dirname(__file__))
-DEBUG = True
+
+try:
+    DJANGO_SERVER = os.environ['DJANGO_SERVER']
+except KeyError:
+    DJANGO_SERVER = 'Production'
+
+if DJANGO_SERVER == 'Development':
+    DEBUG = True
+else:
+    DEBUG = False
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -123,8 +133,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+if DEBUG:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 ROOT_URLCONF = 'config.urls'
 
@@ -152,13 +163,14 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_tables2',
     'south',
-    'debug_toolbar',
 )
+if DEBUG:
+    INSTALLED_APPS += ('debug_toolbar',)
 
-# Settings for the debug toolbar
-INTERNAL_IPS = ['127.0.0.1']
-ALWAYS_SHOW_DEBUG_TOOLBAR = True
-DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
+    # Settings for the debug toolbar
+    INTERNAL_IPS = ['127.0.0.1']
+    ALWAYS_SHOW_DEBUG_TOOLBAR = True
+    DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
