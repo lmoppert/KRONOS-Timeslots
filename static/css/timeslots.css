@@ -2,6 +2,10 @@ body {
     position: relative;
     padding-top: 80px;
 }
+div#timeout-alert, 
+div#timeout-warning {
+    display: none;
+}
 .footer {
     margin-top: 30px;
     padding: 5px 0;

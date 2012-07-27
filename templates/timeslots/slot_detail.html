@@ -15,6 +15,10 @@
             window.onbeforeunload = state ? function() { return unloadMessage; } : null;
         }
         preventUnload( true );	
+        {% if created %}
+        setTimeout(function() { $('#timeout-warning').slideDown('slow') }, 150000);
+        setTimeout(function() { $('#timeout-warning').slideUp('slow'); $('#timeout-alert').delay(800).slideDown('slow') }, 300000);
+        {% endif %}
     </script>
 {% endblock %}
 
@@ -22,6 +26,14 @@
 
 {% block content %}
 <div class="page-header"><h1>{% trans "Reservation for" %} {{ date|nice_date }}</h1></div> 
+<div id="timeout-warning" class="alert alert-warning">
+    <strong>{% trans "Warning: " %}</strong><br /> 
+    {% trans "Your reservation for this slot will end soon! Please fill in the form and send it." %}
+</div>
+<div id="timeout-alert" class="alert alert-error">
+    <strong>{% trans "Error: " %}</strong><br /> 
+    {% trans "Your reservation for this slot has enden! It is not sure, whether any changes can be saved." %}
+</div>
 
 <div class="well">
     <div class="section">
