@@ -1,11 +1,24 @@
 from datetime import timedelta, datetime, date
 
 from django.db import models
+from django.core.signals import request_started
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext_noop
+from django.utils.timezone import now
+
+
+
+# Signal Receiver
+@receiver(request_started)
+def delete_slot_garbage(sender, **kwargs):
+    # annotate creates a filterable value (properties cannot be accessed in filters)
+    slots = Slot.objects.annotate(num_jobs=models.Count('job')).filter(num_jobs__exact=0)
+    for slot in slots:
+        if now() - slot.created > timedelta(minutes=5):
+            slot.delete()
 
 
 class Station(models.Model):
@@ -135,6 +148,7 @@ class Slot(models.Model):
     timeslot = models.IntegerField()
     line = models.IntegerField()
     is_blocked = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
 
     def _get_times(self):
         start = self.block.start_times[int(self.timeslot)-1].strftime("%H:%M")
@@ -149,11 +163,6 @@ class Slot(models.Model):
         return self.date.strftime("%Y-%m-%d")
     date_string = property(_get_date_string)
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
-            self.timeslot, 'line': self.line, 'date': self.date_string})
-
     def status(self, user):
         if user.userprofile.can_see_all or self.company.id == user.id:
             return self.company.company
@@ -167,6 +176,11 @@ class Slot(models.Model):
         start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])
         delta = timedelta(hours=self.block.dock.station.rnvp.hour, minutes=self.block.dock.station.rnvp.minute)
         return start - curr_time < delta
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
+            self.timeslot, 'line': self.line, 'date': self.date_string})
 
     def __unicode__(self):
         return "%(date)s [%(time)s] %(station)s - %(dock)s" % {
