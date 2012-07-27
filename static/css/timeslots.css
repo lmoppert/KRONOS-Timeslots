@@ -99,6 +99,9 @@ div#datepicker {
     display: none;
 }
 
+form.form-horizontal div.control-group {
+    margin-bottom: 0;
+}
 .form-horizontal .controls {
   margin-left: 0;
 }
