@@ -72,19 +72,18 @@
             <table class="table table-bordered table-striped">
                 <thead><tr><th>{% trans "Jobnumber" %}</th><th>{% trans "Description" %}</th><th></th></tr></thead>
                 <tbody>
-                    {% for f in form %}
-                        {{ f.id }}
-                        <tr {% if not station.id == 2 %}class="charge_detail"{% endif %}>
-                            <td>{{ f.number|as_crispy_field }}</td>
-                            <td>{{ f.description|as_crispy_field }}</td>
-                            <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
-                        </tr>
-                    {% endfor %}
+                {% for f in form %}
+                    <tr {% if not station.id == 2 %}class="charge_detail"{% endif %}>
+                        <td>{{ f.id }}{{ f.number|as_crispy_field }}</td>
+                        <td>{{ f.description|as_crispy_field }}</td>
+                        <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
             {{ form.management_form }}
 
-            <div class="form-actions">
+            <div class="buttons">
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
                     {% if created %}{% trans "Make reservation" %}{% else %}{% trans "Update reservation" %}{% endif %}
                 </button>

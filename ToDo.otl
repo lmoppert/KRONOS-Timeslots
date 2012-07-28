@@ -1,5 +1,5 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[X] 100% Bugs
+[_] 77% Bugs
 	[X] Der Dock-Filter geht beim Datumswechsel verloren.
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
@@ -11,6 +11,12 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] Keine Fehlermeldung beim reservieren ohne AN
 		: das Formular wird nicht abgeschickt und es wird ein
 		: korrekter Log-Eintrag erzeugt
+	[X] Doctype wird nicht angegeben
+	[_] % Detailansich für Slots
+		[_] Die Übersetzung für den Form-Fehler fehlt
+		[_] Mehr Jobs hinzufügen Knopf muss besser positioniert werden
+		[_] Hart Kodierte Station ID muss verschwinden
+	Hakkk
 [_] 78% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAXify the job table (add and remove jobs from the list)
