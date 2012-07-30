@@ -191,6 +191,9 @@ class Job(models.Model):
     number = models.CharField(max_length=20)
     description = models.CharField(max_length=200, blank=True)
 
+    class Meta:
+        verbose_name = _("job")
+
 class Logging(models.Model):
     user = models.ForeignKey(User)
     time = models.DateTimeField(editable=False)

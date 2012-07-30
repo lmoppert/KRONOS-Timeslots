@@ -1,9 +1,9 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[_] 77% Bugs
-	[_] % Detailansich für Slots
-		[_] Die Übersetzung für den Form-Fehler fehlt
-		[_] Mehr Jobs hinzufügen Knopf muss besser positioniert werden
-		[_] Hart kodierte Station ID muss verschwinden
+[X] 100% Bugs
+	[X] 100% Detailansich für Slots
+		[X] Die Übersetzung für den Form-Fehler fehlt
+		[X] Hart kodierte Station ID muss verschwinden
+		[X] Mehr Jobs hinzufügen Knopf muss besser positioniert werden
 	[X] Doctype wird nicht angegeben
 	[X] Job-Formular enthält Stolperfalle
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 

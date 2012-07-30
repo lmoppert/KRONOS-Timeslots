@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-24 15:51+0200\n"
+"POT-Creation-Date: 2012-07-30 13:04+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: config/settings.py:41
+#: config/settings.py:51
 msgid "English"
 msgstr "Englisch"
 
-#: config/settings.py:42
+#: config/settings.py:52
 msgid "German"
 msgstr "Deutsch"
 
@@ -49,35 +49,36 @@ msgstr "Check Out"
 msgid "Done"
 msgstr "Abgefertigt"
 
-#: templates/base.html:4 templates/base.html.py:49
+#: templates/base.html:5 templates/base.html.py:49
 msgid "Timeslots"
 msgstr "Ladezeitensteuerung"
 
-#: templates/base.html:83
+#: templates/base.html:81
 msgid "Choose dock"
 msgstr "Anzuzeigende Rampen"
 
-#: templates/base.html:90
+#: templates/base.html:88
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: templates/base.html:103 templates/timeslots/slot_detail.html:54
+#: templates/base.html:101 templates/timeslots/slot_detail.html:35
+#: templates/timeslots/slot_detail.html:67
 msgid "Error: "
 msgstr "Fehler:"
 
-#: templates/base.html:104
+#: templates/base.html:102 templates/timeslots/slot_detail.html:31
 msgid "Warning: "
 msgstr "Warnung:"
 
-#: templates/base.html:105
+#: templates/base.html:103
 msgid "Info: "
 msgstr "Information:"
 
-#: templates/base.html:106
+#: templates/base.html:104
 msgid "Success: "
 msgstr "Erfolgreich verarbeitet:"
 
-#: templates/base.html:112
+#: templates/base.html:110
 msgid "Empty page"
 msgstr "Leere Seite"
 
@@ -106,84 +107,100 @@ msgstr "Seite %(current)s von %(total)s"
 msgid "Next"
 msgstr "Nächste"
 
-#: templates/timeslots/details_subnav.html:5
+#: templates/timeslots/details_subnav.html:4
 msgid "Show station"
 msgstr "Slot-Übersicht anzeigen"
 
-#: templates/timeslots/details_subnav.html:6
+#: templates/timeslots/details_subnav.html:5
 msgid "Show list of jobs"
 msgstr "Aufträge als Liste anzeigen"
 
-#: templates/timeslots/details_subnav.html:7
+#: templates/timeslots/details_subnav.html:6
 msgid "Show table of jobs"
 msgstr "Aufträge als Tabelle anzeigen"
 
-#: templates/timeslots/job_list.html:30 timeslots/tables.py:39
+#: templates/timeslots/job_list.html:31 timeslots/tables.py:39
 #: timeslots/tables.py:52
 msgid "No open jobs"
 msgstr "Keine Aufträge Vorhanden"
 
-#: templates/timeslots/slot_detail.html:9
+#: templates/timeslots/slot_detail.html:10
 msgid "add another charge"
 msgstr "Weiteren Auftrag hinzufügen"
 
-#: templates/timeslots/slot_detail.html:10
+#: templates/timeslots/slot_detail.html:11
 msgid "Delete Job"
 msgstr "Auftrag löschen"
 
-#: templates/timeslots/slot_detail.html:24
+#: templates/timeslots/slot_detail.html:29
 msgid "Reservation for"
 msgstr "Reservierung für den"
 
-#: templates/timeslots/slot_detail.html:30 timeslots/tables.py:21
+#: templates/timeslots/slot_detail.html:32
+msgid ""
+"Your reservation for this slot will end soon! Please fill in the form and "
+"send it."
+msgstr ""
+"Ihre Reservierung für dieses Zeitfenster endet bald! Bitte füllen Sie das "
+"Formular korrekt aus und schicken Sie es ab."
+
+#: templates/timeslots/slot_detail.html:36
+msgid ""
+"Your reservation for this slot has enden! It is not sure, whether any "
+"changes can be saved."
+msgstr ""
+"Ihre Reservierung für dieses Zeitfenster ist abgelaufen und "
+"kannmöglicherweise nicht mehr korrekt gespeichert werden!"
+
+#: templates/timeslots/slot_detail.html:43 timeslots/tables.py:21
 msgid "Time"
 msgstr "Zeit"
 
-#: templates/timeslots/slot_detail.html:32 timeslots/tables.py:34
+#: templates/timeslots/slot_detail.html:45 timeslots/tables.py:34
 msgid "Company"
 msgstr "Firma"
 
-#: templates/timeslots/slot_detail.html:36
+#: templates/timeslots/slot_detail.html:49
 msgid "Station"
 msgstr "Ladestelle"
 
-#: templates/timeslots/slot_detail.html:38
+#: templates/timeslots/slot_detail.html:51
 msgid "User"
 msgstr "Anwender"
 
-#: templates/timeslots/slot_detail.html:42 timeslots/tables.py:26
+#: templates/timeslots/slot_detail.html:55 timeslots/tables.py:26
 msgid "Dock"
 msgstr "Rampe"
 
-#: templates/timeslots/slot_detail.html:51
+#: templates/timeslots/slot_detail.html:64
 msgid "Corresponding jobs"
 msgstr "Zugehörige Aufträge"
 
-#: templates/timeslots/slot_detail.html:61
+#: templates/timeslots/slot_detail.html:74
 msgid "Jobnumber"
 msgstr "Auftrags-Nummer"
 
-#: templates/timeslots/slot_detail.html:61 timeslots/tables.py:28
+#: templates/timeslots/slot_detail.html:74 timeslots/tables.py:28
 msgid "Description"
 msgstr "Beschreibung des Auftrags"
 
-#: templates/timeslots/slot_detail.html:77
+#: templates/timeslots/slot_detail.html:89
 msgid "Make reservation"
 msgstr "Reservieren"
 
-#: templates/timeslots/slot_detail.html:77
+#: templates/timeslots/slot_detail.html:89
 msgid "Update reservation"
 msgstr "Reservierung aktualisieren"
 
-#: templates/timeslots/slot_detail.html:80
+#: templates/timeslots/slot_detail.html:92
 msgid "Cancel reservation"
 msgstr "Reservierung abbrechen"
 
-#: templates/timeslots/slot_detail.html:80
+#: templates/timeslots/slot_detail.html:92
 msgid "Delete reservation"
 msgstr "Reservierung löschen"
 
-#: templates/timeslots/slot_detail.html:82
+#: templates/timeslots/slot_detail.html:94
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
 
@@ -219,19 +236,28 @@ msgstr "Administration"
 msgid "Logout"
 msgstr "Abmelden"
 
+#: timeslots/forms.py:20
+#, python-format
+msgid "At least one %s is required."
+msgstr "Es muss mindestens ein %s angegeben werden"
+
 #: timeslots/models.py:22
 msgid "RVNP = Rien ne vas plus -- time when a slot can not be edited any more"
 msgstr ""
 "RNVP = Rien ne va plus -- Anzahl der Stunden vor der Verladung, bis zu der "
 "noch Änderungen erlaubt sind."
 
-#: timeslots/models.py:164
+#: timeslots/models.py:159
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:166
+#: timeslots/models.py:161
 msgid "reserved"
 msgstr "Reserviert"
+
+#: timeslots/models.py:195
+msgid "job"
+msgstr "Auftrag"
 
 #: timeslots/tables.py:16
 msgid "Job"
@@ -241,11 +267,15 @@ msgstr "Auftrag"
 msgid "Date"
 msgstr "Datum"
 
-#: timeslots/views.py:56
-msgid "You are not allowed to access this station!"
+#: timeslots/views.py:77 timeslots/views.py:188
+msgid "This station is closed on weekends!"
+msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
+
+#: timeslots/views.py:81
+msgid "You are not authorized to access this station!"
 msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
 
-#: timeslots/views.py:60
+#: timeslots/views.py:84
 msgid ""
 "The reservation deadline has been reached, no more reservations will be "
 "accepted!"
@@ -253,30 +283,26 @@ msgstr ""
 "Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:86
+#: timeslots/views.py:141
 msgid "free"
 msgstr "Frei"
 
-#: timeslots/views.py:180
-msgid "This station is closed on weekends!"
-msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
-
-#: timeslots/views.py:184
+#: timeslots/views.py:193
 msgid "The deadline for booking this slot has ended!"
 msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
 
-#: timeslots/views.py:187
+#: timeslots/views.py:197
 msgid "This slot can not be changed any more!"
 msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 
-#: timeslots/views.py:192
-msgid "This slot was already booked b ya different person!"
-msgstr "Diese Ladezeit wurde bereits durch jemand anderen reserviert!"
+#: timeslots/views.py:203
+msgid "This slot was already booked by a different person!"
+msgstr "Dieses Zeitfenster wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:201
+#: timeslots/views.py:213
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:209
+#: timeslots/views.py:222
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"

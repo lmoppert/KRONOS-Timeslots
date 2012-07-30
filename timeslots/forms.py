@@ -1,4 +1,5 @@
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
+from django.utils.translation import ugettext as _
 from django import forms
 from timeslots.models import Slot, Job
 
@@ -16,7 +17,7 @@ class RequireOneFormSet(BaseInlineFormSet):
                 completed += 1
 
         if completed < 1:
-            raise forms.ValidationError("At least one %s is required." %
-                self.model._meta.object_name.lower())
+            raise forms.ValidationError(_("At least one %s is required.") %
+                self.model._meta.verbose_name)
 
 JobFormSet = inlineformset_factory(Slot, Job, extra=1, formset=RequireOneFormSet)
