@@ -1,24 +1,11 @@
 from datetime import timedelta, datetime, date
 
-from django.db import models
-from django.core.signals import request_started
-from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
+from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext_noop
-from django.utils.timezone import now
-
-
-
-# Signal Receiver
-@receiver(request_started)
-def delete_slot_garbage(sender, **kwargs):
-    # annotate creates a filterable value (properties cannot be accessed in filters)
-    slots = Slot.objects.annotate(num_jobs=models.Count('job')).filter(num_jobs__exact=0)
-    for slot in slots:
-        if now() - slot.created > timedelta(minutes=5):
-            slot.delete()
 
 
 class Station(models.Model):

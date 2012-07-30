@@ -1,12 +1,14 @@
+from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.utils.timezone import now
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django_tables2 import RequestConfig
 
@@ -14,8 +16,9 @@ from timeslots.models import Station, Block, Slot, Logging
 from timeslots.forms import *
 from timeslots.tables import *
 
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 
+# Helper functions
 def log_task(request, message):
     logentry = Logging.objects.create(
             user=request.user, 
@@ -23,6 +26,14 @@ def log_task(request, message):
             task = message)
     logentry.save()
 
+def delete_slot_garbage():
+    # annotate creates a filterable value (properties cannot be accessed in filters)
+    slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
+    for slot in slots:
+        if now() - slot.created > timedelta(minutes=5):
+            slot.delete()
+
+# View processing
 def logout_page(request):
     logout_then_login(request)
 
@@ -33,6 +44,7 @@ def keco(request):
 @login_required
 def index(request):
     jobs = []
+    delete_slot_garbage()
     slots =  request.user.userprofile.slot_set.filter(date__gt=datetime.now())
     for slot in slots:
         for job in slot.job_set.all():
@@ -68,7 +80,7 @@ def station(request, station_id, date, view_mode):
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, _('You are not authorized to access this station!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if view_mode == 'station' and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if view_mode == 'slots' and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
     # prepare context items
@@ -83,6 +95,7 @@ def station(request, station_id, date, view_mode):
         docklist = station.dock_set.all()
         dock_count = docklist.count()
 
+    delete_slot_garbage()
     if not view_mode == 'slots':
         slotlist = {}
         docks = []
@@ -163,6 +176,7 @@ def slot(request, date, block_id, timeslot, line):
     except IndexError:
         end = block.end
     times = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
+    delete_slot_garbage()
     slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
