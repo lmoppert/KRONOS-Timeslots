@@ -253,7 +253,7 @@ msgstr ""
 
 #: timeslots/models.py:94
 msgid "administrator"
-msgstr "Administration"
+msgstr "Administrator"
 
 #: timeslots/models.py:94
 msgid "loadmaster"

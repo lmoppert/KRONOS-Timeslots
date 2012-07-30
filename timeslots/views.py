@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.views import logout_then_login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
@@ -36,6 +36,22 @@ def delete_slot_garbage():
 # View processing
 def logout_page(request):
     logout_then_login(request)
+
+@login_required
+def block_slot(request):
+    if not request.user.userprofile.is_master:
+        log_task(request, "User %s tried to access the block slot view but is not member of a master group" % request.user)
+        messages.error(request, _('You are not authorized to access this page!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+    return render(request, 'bars.html')
+
+@login_required
+def block_day(request):
+    if not request.user.userprofile.is_master:
+        log_task(request, "User %s tried to access the block day view but is not member of a master group" % request.user)
+        messages.error(request, _('You are not authorized to access this page!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+    return render(request, 'bars.html')
 
 @login_required
 def keco(request):
