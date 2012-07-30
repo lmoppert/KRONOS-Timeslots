@@ -20,7 +20,8 @@ class Station(models.Model):
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
     rnvp = models.TimeField(help_text=_("RVNP = Rien ne vas plus -- time when a slot can not be edited any more"))
-    opened_on_weekend = models.BooleanField()
+    opened_on_weekend = models.BooleanField(default=False)
+    multiple_charges = models.BooleanField(default=True)
 
     def past_deadline(self, curr_date, curr_time):
         deadline = datetime.combine(curr_date - timedelta(days=1), self.booking_deadline)
