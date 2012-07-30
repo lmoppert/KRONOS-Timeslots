@@ -72,7 +72,7 @@ def station(request, station_id, date, view_mode):
     """
     # check conditions
     station = get_object_or_404(Station, pk=station_id)
-    if not station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+    if not station.opened_on_weekend and not request.user.userprofile.is_master and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, station))
         messages.error(request, _('This station is closed on weekends!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
@@ -80,7 +80,7 @@ def station(request, station_id, date, view_mode):
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, _('You are not authorized to access this station!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if view_mode == 'slots' and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if view_mode == 'slots' and not request.user.userprofile.is_master and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
     # prepare context items
@@ -103,7 +103,7 @@ def station(request, station_id, date, view_mode):
             slotlist[dock.name] = []
             docks.append((dock.name, dock.id))
 
-        if request.user.userprofile.can_see_all:
+        if request.user.userprofile.is_master:
             slots = list(Slot.objects.filter(date=date)) 
         else:
             slots = list(Slot.objects.filter(date=date).filter(company=request.user.userprofile.id)) 
@@ -181,22 +181,22 @@ def slot(request, date, block_id, timeslot, line):
                     defaults={'company': request.user.userprofile})
 
     # check conditions
-    if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.can_see_all and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
+    if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.is_master and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         if created:
             slot.delete()
         log_task(request, "User %s tried to access slot %s, which is not opened on weekends." % (request.user, slot))
         messages.error(request, _('This station is closed on weekends!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if created and not request.user.userprofile.can_see_all and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
+    if created and not request.user.userprofile.is_master and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
         messages.error(request, _('The deadline for booking this slot has ended!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
-    if not created and not request.user.userprofile.can_see_all and slot.past_rnvp(datetime.now()):
+    if not created and not request.user.userprofile.is_master and slot.past_rnvp(datetime.now()):
         log_task(request, "User %s tried to change slot %s after the rnvp deadline has been reached." % (request.user, slot))
         messages.error(request, _('This slot can not be changed any more!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
-    if not request.user.userprofile.can_see_all and slot.company.user.id != request.user.id:
+    if not request.user.userprofile.is_master and slot.company.user.id != request.user.id:
         if created:
             slot.delete()
         log_task(request, "User %s tried to access slot %s which is reserved for a different user." % (request.user, slot))

@@ -91,6 +91,7 @@ class UserProfile(models.Model):
 
     The most important additions are the language (prefered user-interface language) and the company field.
     """
+    GROUPS = (ugettext_noop("administrator"),ugettext_noop("loadmaster"),ugettext_noop("user"),) 
     LANGUAGES = ((u'de', u'Deutsch'),(u'en', u'English'))
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
@@ -104,12 +105,12 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=200, blank=True)
     readonly = models.BooleanField()
 
-    def _get_can_see_all(self):
-        if self.user.groups.filter(name='Administrator').count() == 0 and self.user.groups.filter(name='Lademeister').count() == 0:
+    def _get_is_master(self):
+        if self.user.groups.filter(name='administrator').count() == 0 and self.user.groups.filter(name='loadmaster').count() == 0:
             return False
         else:
             return True
-    can_see_all = property(_get_can_see_all)
+    is_master = property(_get_is_master)
 
     @models.permalink
     def get_absolute_url(self):
@@ -152,7 +153,7 @@ class Slot(models.Model):
     date_string = property(_get_date_string)
 
     def status(self, user):
-        if user.userprofile.can_see_all or self.company.id == user.id:
+        if user.userprofile.is_master or self.company.id == user.id:
             return self.company.company
         else:
             if self.is_blocked:

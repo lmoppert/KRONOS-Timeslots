@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-30 13:04+0200\n"
+"POT-Creation-Date: 2012-07-30 16:29+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -149,8 +149,8 @@ msgid ""
 "Your reservation for this slot has enden! It is not sure, whether any "
 "changes can be saved."
 msgstr ""
-"Ihre Reservierung für dieses Zeitfenster ist abgelaufen und "
-"kann möglicherweise nicht mehr korrekt gespeichert werden!"
+"Ihre Reservierung für dieses Zeitfenster ist abgelaufen und kann "
+"möglicherweise nicht mehr korrekt gespeichert werden!"
 
 #: templates/timeslots/slot_detail.html:43 timeslots/tables.py:21
 msgid "Time"
@@ -229,10 +229,14 @@ msgid "Profile"
 msgstr "Profil"
 
 #: templates/timeslots/user_menu.html:9
-msgid "Administration"
+msgid "administration"
 msgstr "Administration"
 
 #: templates/timeslots/user_menu.html:12
+msgid "Block timeslots"
+msgstr "Ladefenster blocken"
+
+#: templates/timeslots/user_menu.html:15
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -247,15 +251,27 @@ msgstr ""
 "RNVP = Rien ne va plus -- Anzahl der Stunden vor der Verladung, bis zu der "
 "noch Änderungen erlaubt sind."
 
-#: timeslots/models.py:159
+#: timeslots/models.py:94
+msgid "administrator"
+msgstr "Administration"
+
+#: timeslots/models.py:94
+msgid "loadmaster"
+msgstr "Lademeister"
+
+#: timeslots/models.py:94
+msgid "user"
+msgstr "Anwender"
+
+#: timeslots/models.py:160
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:161
+#: timeslots/models.py:162
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:195
+#: timeslots/models.py:196
 msgid "job"
 msgstr "Auftrag"
 
