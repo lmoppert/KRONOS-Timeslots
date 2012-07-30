@@ -1,4 +1,5 @@
 from django.utils.encoding import force_unicode
+from django.utils.translation import get_language
 from django.template import Library
 from datetime import date
 import locale
@@ -29,23 +30,19 @@ def get_range( value ):
     return [v + 1 for v in range(value)]
 
 @register.filter
-def nice_date(curr_date, lang="en"):
+def make_date(curr_date):
     """
-    The date is converted from YYYY-MM-DD to the german standard:
-
-    DD.MM.YYYY
+    The date is converted from YYYY-MM-DD to a real date representation
     """
-    if lang == "de":
+    if get_language() == "de":
         locale.setlocale(locale.LC_TIME, "de_DE.utf8")
-
-    nice_date = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
-    if lang == "de":
-        fmtstr = nice_date.strftime("%A, %d. %B %Y")
+        fmtstr = "%A, %d. %B %Y"
     else:
-        fmtstr = nice_date.strftime("%A, %d %B %Y")
+        fmtstr = "%A, %d %B %Y"
 
-    return nice_date.strftime(fmtstr)
-    
+    date_obj = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
+    return date_obj.strftime(fmtstr)
+
 @register.filter
 def in_group(user, groups):
     """

@@ -150,7 +150,7 @@ msgid ""
 "changes can be saved."
 msgstr ""
 "Ihre Reservierung für dieses Zeitfenster ist abgelaufen und "
-"kannmöglicherweise nicht mehr korrekt gespeichert werden!"
+"kann möglicherweise nicht mehr korrekt gespeichert werden!"
 
 #: templates/timeslots/slot_detail.html:43 timeslots/tables.py:21
 msgid "Time"
