@@ -2,6 +2,7 @@
 {% load timeslots_filters i18n crispy_forms_tags %}
 
 {% block extra_head %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.min.js"></script>
     <script type="text/javascript">
         $(function() {
             $('.charge_detail').formset({

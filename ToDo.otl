@@ -3,7 +3,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[_] % Detailansich für Slots
 		[_] Die Übersetzung für den Form-Fehler fehlt
 		[_] Mehr Jobs hinzufügen Knopf muss besser positioniert werden
-		[_] Hart Kodierte Station ID muss verschwinden
+		[_] Hart kodierte Station ID muss verschwinden
 	[X] Doctype wird nicht angegeben
 	[X] Job-Formular enthält Stolperfalle
 		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
@@ -16,8 +16,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
-[_] 78% Konkrete Implementierungen
-	[X] 100% Grundfunktionen
+[_] 76% Konkrete Implementierungen
+	[_] 88% Grundfunktionen
 		[_] URLs mit Hilfe von reverse erzeugen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das User und das UserProfile Formular im Admin Backend verschemelzen
