@@ -31,8 +31,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] render_to_response durch render ersetzen
 	[_] 50% Zusätzliche Funktionen für KECO
 		[_] 22 Fenster pro Tag Maximum
-			: Anlegen eines gültigen KECO Slots löst ein Signal aus, dass die
-			: restlichen Slots des Tages blockt
+			: Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
+			: einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
+			: sind
 		[_] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden

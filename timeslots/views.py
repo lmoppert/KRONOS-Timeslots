@@ -146,6 +146,8 @@ def station(request, station_id, date, view_mode):
         for dock in docklist:
             blocks = []
             for block in dock.block_set.all(): 
+                if block.max_slots > 0 and block.get_slots(date) >= block.max_slots:
+                    messages.warning(request, _('The maximal number of Slots have been reserved, no more reservations will be accepted!'))
                 timeslots = []
                 for timeslot in range(block.slotcount): 
                     lines = []

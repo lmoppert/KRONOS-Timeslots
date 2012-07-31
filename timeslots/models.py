@@ -76,7 +76,11 @@ class Block(models.Model):
     linecount = models.IntegerField()
     slotcount = models.IntegerField()
     slotduration = models.IntegerField()
+    max_slots = models.IntegerField(default=0, help_text=_("0 for unlimited"))
     
+    def get_slots(self, date):
+        return self.slot_set.filter(date=date).count()
+
     def _get_end(self):
         delta = self.slotcount * self.slotduration
         endtime = datetime.combine(date.today(), self.start) + timedelta(minutes=delta)
