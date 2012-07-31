@@ -187,7 +187,7 @@ msgstr "Auftrags-Nummer"
 
 #: templates/timeslots/slot_detail.html:74 timeslots/tables.py:28
 msgid "Description"
-msgstr "Beschreibung des Auftrags"
+msgstr "Auftragsbeschreibung"
 
 #: templates/timeslots/slot_detail.html:89
 msgid "Make reservation"
