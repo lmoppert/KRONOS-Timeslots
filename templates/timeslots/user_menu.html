@@ -1,4 +1,4 @@
-{% load timeslots_filters i18n %}
+{% load i18n %}
 <span class="pull-right">
     <ul class="nav">
         <li class="dropdown" id="profile">
@@ -7,10 +7,6 @@
                 <li><a href="{{ user.userprofile.get_absolute_url }}">{% trans "Profile" %}</a></li>
                 {% if user.is_staff %}
                 <li><a href="/admin/">{% trans "administration" %}</a></li>
-                {% endif %}
-                {% if user|in_group:"administrator,loadmaster" %}
-                <li><a href="{% url 'block_day' %}">{% trans "Block day" %}</a></li>
-                <li><a href="{% url 'block_slot' %}">{% trans "Block slot" %}</a></li>
                 {% endif %}
                 <li class="divider"></li>
                 <li><a href="{% url user_logout %}">{% trans "Logout" %}</a></li>

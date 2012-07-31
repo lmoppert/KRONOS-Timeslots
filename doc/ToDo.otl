@@ -31,6 +31,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] render_to_response durch render ersetzen
 	[_] 50% Zusätzliche Funktionen für KECO
 		[_] 22 Fenster pro Tag Maximum
+			: Anlegen eines gültigen KECO Slots löst ein Signal aus, dass die
+			: restlichen Slots des Tages blockt
 		[_] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
@@ -59,8 +61,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
 	[_] 0% Zusätzliche Funktionen für Lademeister:
-		[_] Ganze Tage blocken
 		[_] Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
+			: Wenn keine Zeit angegeben wurde, werden alle Slots geblockt
 [_] 91% Logging_
 	Implementierungen
 		[_] Log-Dateien sollten exportierbar sein

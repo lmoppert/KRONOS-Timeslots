@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-30 16:29+0200\n"
+"POT-Creation-Date: 2012-07-31 10:30+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -233,7 +233,7 @@ msgid "administration"
 msgstr "Administration"
 
 #: templates/timeslots/user_menu.html:12
-msgid "Block timeslots"
+msgid "Block slots"
 msgstr "Ladefenster blocken"
 
 #: templates/timeslots/user_menu.html:15
@@ -283,15 +283,19 @@ msgstr "Auftrag"
 msgid "Date"
 msgstr "Datum"
 
-#: timeslots/views.py:77 timeslots/views.py:188
+#: timeslots/views.py:44
+msgid "You are not authorized to access this page!"
+msgstr "Sie sind nicht berechtigt, diese Seite aufzurufen!"
+
+#: timeslots/views.py:87 timeslots/views.py:198
 msgid "This station is closed on weekends!"
 msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
 
-#: timeslots/views.py:81
+#: timeslots/views.py:91
 msgid "You are not authorized to access this station!"
 msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
 
-#: timeslots/views.py:84
+#: timeslots/views.py:94
 msgid ""
 "The reservation deadline has been reached, no more reservations will be "
 "accepted!"
@@ -299,26 +303,26 @@ msgstr ""
 "Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:141
+#: timeslots/views.py:151
 msgid "free"
 msgstr "Frei"
 
-#: timeslots/views.py:193
+#: timeslots/views.py:203
 msgid "The deadline for booking this slot has ended!"
 msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
 
-#: timeslots/views.py:197
+#: timeslots/views.py:207
 msgid "This slot can not be changed any more!"
 msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 
-#: timeslots/views.py:203
+#: timeslots/views.py:213
 msgid "This slot was already booked by a different person!"
 msgstr "Dieses Zeitfenster wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:213
+#: timeslots/views.py:223
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:222
+#: timeslots/views.py:232
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"

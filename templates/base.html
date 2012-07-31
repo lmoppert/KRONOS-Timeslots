@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n timeslots_filters %}
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -64,6 +64,9 @@
                             <input type="hidden" name="currentDate" id="currentDate" value="{{ date }}">
                         </form>
                     </span>
+                    {% if user|in_group:"administrator,loadmaster" %}
+                    <ul class="nav"><li><a href="{% url timeslots_station_blocking station.id %}">{% trans "Block slots" %}</a></li></div>
+                    {% endif %}
                 {% endif %}
                 {% if user.is_authenticated %}{% include "timeslots/user_menu.html" %}{% endif %}
             </div>

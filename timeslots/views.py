@@ -38,22 +38,6 @@ def logout_page(request):
     logout_then_login(request)
 
 @login_required
-def block_slot(request):
-    if not request.user.userprofile.is_master:
-        log_task(request, "User %s tried to access the block slot view but is not member of a master group" % request.user)
-        messages.error(request, _('You are not authorized to access this page!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    return render(request, 'bars.html')
-
-@login_required
-def block_day(request):
-    if not request.user.userprofile.is_master:
-        log_task(request, "User %s tried to access the block day view but is not member of a master group" % request.user)
-        messages.error(request, _('You are not authorized to access this page!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    return render(request, 'bars.html')
-
-@login_required
 def keco(request):
     return render(request, 'bars.html')
 
@@ -79,6 +63,21 @@ def station_redirect(request):
         except KeyError:
             pass
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station, date))
+
+@login_required
+def station_blocking(request, station_id):
+    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
+        log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
+        messages.error(request, _('You are not authorized to access this station!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+    if not request.user.userprofile.is_master:
+        log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
+        messages.error(request, _('You are not authorized to access this page!'))
+        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+    if request.method == 'POST':
+        pass
+    form = BlockSlotForm()
+    return render(request, 'timeslots/station_blocking.html', { 'station': station, 'form': form}) 
 
 @login_required
 def station(request, station_id, date, view_mode):
