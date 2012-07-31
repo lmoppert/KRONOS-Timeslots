@@ -77,6 +77,7 @@ def station_blocking(request, station_id):
     if request.method == 'POST':
         pass
     form = BlockSlotForm()
+    station = get_object_or_404(Station, pk=station_id)
     return render(request, 'timeslots/station_blocking.html', { 'station': station, 'form': form}) 
 
 @login_required

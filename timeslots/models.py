@@ -38,6 +38,11 @@ class Station(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _("Station")
+        verbose_name_plural = _("Stations")
+
+
 class Dock(models.Model):
     """
     The Dock belongs to one `timeslots.Station` and represents a dock, that is
@@ -53,6 +58,11 @@ class Dock(models.Model):
 
     def __unicode__(self):
         return  '%s - %s' % (self.station.name, self.name)
+
+    class Meta:
+        verbose_name = _("Dock")
+        verbose_name_plural = _("Docks")
+
 
 class Block(models.Model):
     """
@@ -84,6 +94,11 @@ class Block(models.Model):
 
     def __unicode__(self):
         return "%s (%s - %s)" % (unicode(self.dock), self.start.strftime("%H:%M"), self.end.strftime("%H:%M"))
+
+    class Meta:
+        verbose_name = _("Block")
+        verbose_name_plural = _("Blocks")
+
 
 class UserProfile(models.Model):
     """
@@ -181,6 +196,8 @@ class Slot(models.Model):
 
     class Meta:
         ordering = ['date', 'timeslot', 'line']
+        verbose_name = _("Slot")
+        verbose_name_plural = _("Slots")
 
 
 class Job(models.Model):
@@ -193,7 +210,9 @@ class Job(models.Model):
     description = models.CharField(max_length=200, blank=True)
 
     class Meta:
-        verbose_name = _("job")
+        verbose_name = _("Job")
+        verbose_name_plural = _("Jobs")
+
 
 class Logging(models.Model):
     user = models.ForeignKey(User)
@@ -204,3 +223,7 @@ class Logging(models.Model):
     def save(self, *args, **kwargs):
         self.time = datetime.today()
         super(Logging, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = _("Logging")
+        verbose_name_plural = _("Loggings")
