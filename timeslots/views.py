@@ -72,8 +72,7 @@ def blocking(request):
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if request.method == 'POST':
         pass
-    stations = request.user.userprofile.stations.values('id')
-    form = BlockSlotForm()
+    form = BlockSlotForm(stations=request.user.userprofile.stations.values('id'))
     return render(request, 'timeslots/blocking.html', {'form': form}) 
 
 @login_required
