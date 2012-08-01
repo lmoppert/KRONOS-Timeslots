@@ -9,9 +9,13 @@
     <h1>{% trans "Blocking Of Timeslots" %}</h1>
 </div>
 
-<form action="{% url user_login %}" method="post" accept-charset="utf-8">{% csrf_token %}
+<form action="{% url timeslots_blocking %}" method="post" accept-charset="utf-8">{% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" value="Block Slots" />
+    <div class="buttons">
+        <button type="submit" class="btn btn-primary" name="blockSLots">
+            {% trans "Block Selected Slots" %}
+        </button>
+    </div>
 </form>
 
 {% endblock %}

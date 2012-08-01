@@ -9,13 +9,16 @@ class BlockSlotForm(forms.Form):
     block = forms.ModelChoiceField(queryset=Block.objects.none())
     start = forms.DateField(initial=date.today)
     end = forms.DateField(initial=date.today)
-    #slots = forms.MultipleChoiceField(choices = _get_times())
+    slots = forms.MultipleChoiceField(choices=[])
 
     def __init__(self, *args, **kwargs):
         stations = kwargs.pop('stations', None)
+        timeslots = kwargs.pop('timeslots', None)
         super(BlockSlotForm, self).__init__(*args, **kwargs)
         if stations:
             self.fields["block"].queryset = Block.objects.filter(dock__station__in=stations)
+        if timeslots:
+            self.fields["slots"].choices = timeslots
 
 
 class RequireOneFormSet(BaseInlineFormSet):
