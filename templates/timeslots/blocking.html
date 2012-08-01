@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% load i18n crispy_forms_tags %}
 
+{% block sidebar %}{% endblock %}
+
 {% block content %}
 
 <div class="page-header">
-    <h1>{{ station.longname }}</h1>
+    <h1>{% trans "Blocking Of Timeslots" %}</h1>
 </div>
 
 <form action="{% url user_login %}" method="post" accept-charset="utf-8">{% csrf_token %}
     {{ form|crispy }}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <input type="submit" value="Login"/>
+    <input type="submit" value="Block Slots" />
 </form>
 
 {% endblock %}

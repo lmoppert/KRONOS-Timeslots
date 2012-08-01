@@ -1,4 +1,4 @@
-{% load i18n timeslots_filters %}
+{% load i18n %}
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -54,19 +54,16 @@
             </button>
             <div class="nav-collapse collapse">
                 {% if station %}
-                    <span class="pull-left">
-                        <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
-                            <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
-                                {% for curr_station in user.userprofile.stations.all %}
-                                    <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}> {{ curr_station.longname }} </option>
-                                {% endfor %}
-                            </select>
-                            <input type="hidden" name="currentDate" id="currentDate" value="{{ date }}">
-                        </form>
-                    </span>
-                    {% if user|in_group:"administrator,loadmaster" %}
-                    <ul class="nav"><li><a href="{% url timeslots_station_blocking station.id %}">{% trans "Block slots" %}</a></li></div>
-                    {% endif %}
+                <span class="pull-left">
+                    <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
+                        <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
+                            {% for curr_station in user.userprofile.stations.all %}
+                            <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}> {{ curr_station.longname }} </option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="currentDate" id="currentDate" value="{{ date }}">
+                    </form>
+                </span>
                 {% endif %}
                 {% if user.is_authenticated %}{% include "timeslots/user_menu.html" %}{% endif %}
             </div>

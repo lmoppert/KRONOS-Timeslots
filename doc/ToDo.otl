@@ -16,9 +16,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
-[_] 76% Konkrete Implementierungen
-	[_] 88% Grundfunktionen
-		[_] URLs mit Hilfe von reverse erzeugen
+[_] 82% Konkrete Implementierungen
+	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das User und das UserProfile Formular im Admin Backend verschemelzen
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
@@ -29,11 +28,11 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 			: get_absolut_url um einem Model die eigene URL beizubringen
 			: url um statische Links zu referenzieren
 		[X] render_to_response durch render ersetzen
-	[_] 50% Zusätzliche Funktionen für KECO
-		[_] 22 Fenster pro Tag Maximum
+	[_] 75% Zusätzliche Funktionen für KECO
+		[X] 22 Fenster pro Tag Maximum
 			: Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
 			: einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
-			: sind
+			: sind. Das Model muss um die Funktion erweitert werden
 		[_] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
@@ -65,7 +64,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
 			: Wenn keine Zeit angegeben wurde, werden alle Slots geblockt
 [_] 91% Logging_
-	Implementierungen
+	[_] 66% Implementierungen
 		[_] Log-Dateien sollten exportierbar sein
 		[X] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
 		[X] Formatierung der Logs sollte gut lesbar sein
@@ -84,10 +83,11 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] "User ... has submitted a reservation form for slot ... which contained errors." 
 		[X] "User ... has successfully deleted the reservation for slot ...." 
 		[X] "User ... has opened the reservation form for slot ...." 
-Refactoring
+[_] 75% Refactoring
 	[X] 100% Views
 		[X] jobs und station zu einem einzigen view verschmelzen
-	Sonstiges
+	[_] 50% Sonstiges
+		[_] URLs mit Hilfe von reverse erzeugen
 		[X] Debug modus durch Umgebungsvariable steuern
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 

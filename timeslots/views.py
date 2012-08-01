@@ -65,20 +65,16 @@ def station_redirect(request):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station, date))
 
 @login_required
-def station_blocking(request, station_id):
-    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
-        messages.error(request, _('You are not authorized to access this station!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+def blocking(request):
     if not request.user.userprofile.is_master:
         log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
         messages.error(request, _('You are not authorized to access this page!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if request.method == 'POST':
         pass
+    stations = request.user.userprofile.stations.values('id')
     form = BlockSlotForm()
-    station = get_object_or_404(Station, pk=station_id)
-    return render(request, 'timeslots/station_blocking.html', { 'station': station, 'form': form}) 
+    return render(request, 'timeslots/blocking.html', {'form': form}) 
 
 @login_required
 def station(request, station_id, date, view_mode):
@@ -209,6 +205,11 @@ def slot(request, date, block_id, timeslot, line):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
         messages.error(request, _('The deadline for booking this slot has ended!'))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+    if created and block.max_slots > 0 and block.get_slots(date) >= block.max_slots:
+        slot.delete()
+        log_task(request, "User %s tried to reserve slot %s after the maximum number of blocks per day has been reached." % (request.user, slot))
+        messages.error(request, _('The maximal number of Slots have been reserved, no more reservations will be accepted!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if not created and not request.user.userprofile.is_master and slot.past_rnvp(datetime.now()):
         log_task(request, "User %s tried to change slot %s after the rnvp deadline has been reached." % (request.user, slot))

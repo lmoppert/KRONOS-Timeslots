@@ -1,28 +1,21 @@
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django import forms
-from timeslots.models import Slot, Job, Station
+from timeslots.models import *
+from datetime import date
 
 
-class BlockSlotForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(BlockSlotForm, self).__init__(*args, **kwargs)
-        self.station = kwargs.pop('station', None)
-
-    class Meta:
-        model = Slot
-        exclude = ('company',)
-
-    def _get_times(self):
-        slot_times = () 
-        for d in self.station.dock_set.all():
-            for b in d.block_set.all():
-                slot_times.append((b.dock, b.start_times))
-        return slot_times
-
-    #start = forms.DateField()
-    #end = forms.DateField()
+class BlockSlotForm(forms.Form):
+    block = forms.ModelChoiceField(queryset=Block.objects.none())
+    start = forms.DateField(initial=date.today)
+    end = forms.DateField(initial=date.today)
     #slots = forms.MultipleChoiceField(choices = _get_times())
+
+    def __init__(self, *args, **kwargs):
+        stations = kwargs.pop('stations', None)
+        super(BlockSlotForm, self).__init__(*args, **kwargs)
+        if stations:
+            self.fields["block"].queryset = Block.objects.filter(dock__station__in=stations)
 
 
 class RequireOneFormSet(BaseInlineFormSet):
