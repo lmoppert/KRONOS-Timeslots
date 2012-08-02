@@ -1,5 +1,5 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[X] 100% Bugs
+[_] 88% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden
@@ -16,6 +16,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
+	[_] 0% Blocken von Slots
+		[_] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
+		[_] Geblockte Slots sind verlinkt
 [_] 82% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
@@ -61,8 +64,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
 	[_] 0% Zusätzliche Funktionen für Lademeister:
-		[_] Einen Timeslot blocken ab einem Datum oder zwischen zwei Tagen
-			: Wenn keine Zeit angegeben wurde, werden alle Slots geblockt
+		[_] Einen Timeslot zwischen zwei Tagen für einen Block blocken
+			: Um geblockte Slots wieder frei geben zu können, muss eine Option
+			: in der Slot-Detail-Ansicht existieren
 [_] 91% Logging_
 	[_] 66% Implementierungen
 		[_] Log-Dateien sollten exportierbar sein

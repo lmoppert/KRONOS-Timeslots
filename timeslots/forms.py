@@ -1,19 +1,34 @@
-from django.forms.models import inlineformset_factory, BaseInlineFormSet
-from django.utils.translation import ugettext as _
-from django import forms
-from timeslots.models import *
 from datetime import date
+
+from django.forms.models import inlineformset_factory, BaseInlineFormSet
+from django.utils.translation import ugettext_lazy as _
+from django import forms
+from crispy_forms.helper import FormHelper
+from timeslots.models import *
 
 
 class BlockSlotForm(forms.Form):
-    block = forms.ModelChoiceField(queryset=Block.objects.none())
-    start = forms.DateField(initial=date.today)
-    end = forms.DateField(initial=date.today)
-    slots = forms.MultipleChoiceField(choices=[])
+    block = forms.ModelChoiceField(
+                label=_("Choose block to work with"),
+                queryset=Block.objects.none()
+            )
+    start = forms.DateField(
+                label=_("Block slots from the following date"),
+                initial=date.today
+            )
+    end = forms.DateField(
+                label=_("Block slots until the following date"),
+                initial=date.today
+            )
+    slots = forms.MultipleChoiceField(
+                label=_("Choose slots that should be blocked"),
+                choices=[]
+            )
 
     def __init__(self, *args, **kwargs):
         stations = kwargs.pop('stations', None)
         timeslots = kwargs.pop('timeslots', None)
+        self.helper = FormHelper()
         super(BlockSlotForm, self).__init__(*args, **kwargs)
         if stations:
             self.fields["block"].queryset = Block.objects.filter(dock__station__in=stations)

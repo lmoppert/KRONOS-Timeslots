@@ -10,7 +10,7 @@
 </div>
 
 <form action="{% url timeslots_blocking %}" method="post" accept-charset="utf-8">{% csrf_token %}
-    {{ form|crispy }}
+    {% crispy form %}
     <div class="buttons">
         <button type="submit" class="btn btn-primary" name="blockSLots">
             {% trans "Block Selected Slots" %}
@@ -18,4 +18,12 @@
     </div>
 </form>
 
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript">
+        $('select#id_block').change(function() {
+            $(this).closest('form').submit();
+        });
+    </script>
 {% endblock %}

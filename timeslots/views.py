@@ -70,14 +70,15 @@ def blocking(request):
         log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
         messages.error(request, _('You are not authorized to access this page!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    #if request.method == 'POST' and request.POST.has_key('blockSlots'):
-    #    # Form processing goes here
-    #    pass
+    if request.method == 'POST' and request.POST.has_key('blockSlots'):
+        # Form processing goes here
+        pass
     if request.method == 'POST' and request.POST.has_key('block'):
         timeslots = []
         for t in Block.objects.get(id=request.POST.get('block')).start_times:
             timeslots.append(t.strftime("%H:%M"))
         form = BlockSlotForm(request.POST, stations=request.user.userprofile.stations.values('id'), timeslots=list(enumerate(timeslots, start=1)))
+        form.helper.form_show_errors = False
     else:
         form = BlockSlotForm(stations=request.user.userprofile.stations.values('id'))
     return render(request, 'timeslots/blocking.html', {'form': form}) 
