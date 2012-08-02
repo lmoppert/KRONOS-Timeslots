@@ -4,24 +4,26 @@ from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from crispy_forms.helper import FormHelper
+from crispy_forms.bootstrap import *
+from crispy_forms.layout import *
 from timeslots.models import *
 
 
 class BlockSlotForm(forms.Form):
     block = forms.ModelChoiceField(
-                label=_("Choose block to work with"),
+                label=_("Choose block"),
                 queryset=Block.objects.none()
             )
     start = forms.DateField(
-                label=_("Block slots from the following date"),
+                label=_("Block from"),
                 initial=date.today
             )
     end = forms.DateField(
-                label=_("Block slots until the following date"),
+                label=_("Block until"),
                 initial=date.today
             )
     slots = forms.MultipleChoiceField(
-                label=_("Choose slots that should be blocked"),
+                label=_("Slots"),
                 choices=[]
             )
 
@@ -29,6 +31,21 @@ class BlockSlotForm(forms.Form):
         stations = kwargs.pop('stations', None)
         timeslots = kwargs.pop('timeslots', None)
         self.helper = FormHelper()
+        self.helper.layout = Layout (
+                Div(Field('block'), 
+                    css_class="span12"
+                ),
+                Div(AppendedText('start', '<a href="#"><i class="icon-calendar"></i></a>', css_class="date_picker_field"),
+                    AppendedText('end', '<a href="#"><i class="icon-calendar"></i></a>', css_class="date_picker_field"), 
+                    css_class="span3"
+                ), 
+                Div(Field('slots', size="12"), 
+                    css_class="span4"
+                ),
+                Div(Submit('blockSlots', 'Block selected slots', css_class="btn-primary"),
+                    css_class="span12"
+                )
+            )
         super(BlockSlotForm, self).__init__(*args, **kwargs)
         if stations:
             self.fields["block"].queryset = Block.objects.filter(dock__station__in=stations)

@@ -95,6 +95,17 @@ div#datepicker {
 .navbar-inner .brand {
     color: #8eadd6;
 }
+select#id_block {
+    width: 400px;
+}
+select#id_slots {
+    width: 100px;
+}
+input.date_picker_field {
+    margin: 0;
+    width: 100px;
+    float:left;
+}
 .form-horizontal .control-label {
     display: none;
 }
