@@ -88,16 +88,16 @@ def blocking(request):
             if form.is_valid():
                 slots = []
                 for day in daterange(form['start'].value(), form['end'].value()):
-                    for timeslot in form['start'].value():
+                    for timeslot in form['slots'].value():
                         for line in range(block.linecount): 
                             slot, created = Slot.objects.get_or_create(
                                     block=block, 
-                                    date=day.date(), 
-                                    timeslot=timeslot, 
+                                    date=day.strftime("%Y-%m-%d"), 
+                                    timeslot=int(timeslot)+1, 
                                     line=line+1, 
                                 )
                             slot.is_blocked = True
-                            slots.append("Date %s timeslot %s line %s block %s" % (date, timeslot, line, block.start))
+                            slots.append("Date %s timeslot %s line %s block %s" % (date, timeslot+1, line+1, block.start))
                             slot.save()
                 #TODO user Redirect!
                 return render(request, 'timeslots/blocking_done.html', {'slots': slots}) 
