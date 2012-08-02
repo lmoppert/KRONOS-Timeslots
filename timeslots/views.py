@@ -91,10 +91,10 @@ def blocking(request):
                     for timeslot in form['start'].value():
                         for line in range(block.linecount): 
                             slot, created = Slot.objects.get_or_create(
+                                    block=block, 
                                     date=day.date(), 
                                     timeslot=timeslot, 
                                     line=line+1, 
-                                    block=block, 
                                 )
                             slot.is_blocked = True
                             slots.append("Date %s timeslot %s line %s block %s" % (date, timeslot, line, block.start))

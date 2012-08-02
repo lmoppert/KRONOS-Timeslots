@@ -150,7 +150,7 @@ class Slot(models.Model):
     index (block_id, timeslot, line)
     """
     block = models.ForeignKey(Block)
-    company = models.ForeignKey(UserProfile, blank=True)
+    company = models.ForeignKey(UserProfile, null=True, blank=True)
     
     date = models.DateField()
     timeslot = models.IntegerField()
