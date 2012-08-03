@@ -36,7 +36,7 @@ def delete_slot_garbage():
     # annotate creates a filterable value (properties cannot be accessed in filters)
     slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
     for slot in slots:
-        if now() - slot.created > timedelta(minutes=5):
+        if not slot.is_blocked and now() - slot.created > timedelta(minutes=5):
             slot.delete()
 
 # View processing
@@ -74,7 +74,7 @@ def station_redirect(request):
 def blocking(request):
     if not request.user.userprofile.is_master:
         log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
-        messages.error(request, _('You are not authorized to access this page!'))
+        messages.error(request, _("You are not authorized to access this page!"))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
     if request.method == 'POST' and request.POST.has_key('block'):
         show_errors = False
@@ -86,21 +86,19 @@ def blocking(request):
         if request.POST.has_key('blockSlots'):
             show_errors = True
             if form.is_valid():
-                slots = []
                 for day in daterange(form['start'].value(), form['end'].value()):
                     for timeslot in form['slots'].value():
                         for line in range(block.linecount): 
                             slot, created = Slot.objects.get_or_create(
                                     block=block, 
                                     date=day.strftime("%Y-%m-%d"), 
-                                    timeslot=int(timeslot)+1, 
-                                    line=line+1, 
+                                    timeslot=str(int(timeslot)+1),
+                                    line=str(line+1), 
                                 )
                             slot.is_blocked = True
-                            slots.append("Date %s timeslot %s line %s block %s" % (date, timeslot+1, line+1, block.start))
                             slot.save()
-                #TODO user Redirect!
-                return render(request, 'timeslots/blocking_done.html', {'slots': slots}) 
+                messages.success(request, _("successfully blocked the selected slots!"))
+                return HttpResponseRedirect(reverse('timeslots_blocking')) 
         form.helper.form_show_errors = show_errors
     else:
         form = BlockSlotForm(stations=request.user.userprofile.stations.values('id'))

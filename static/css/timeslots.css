@@ -143,8 +143,10 @@ table td.slot-free {
 table td.slot-blocked a,
 table td.slot-blocked a:hover,
 table td.slot-blocked {
+  font-weight: bold;
   color: #b94a48;
-  background-color: #f2dede;
+  text-transform: uppercase;
+  /* background-color: #f2dede; */
 }
 table td.slot-reserved {
   color: #c09853;

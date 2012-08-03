@@ -172,11 +172,11 @@ class Slot(models.Model):
     date_string = property(_get_date_string)
 
     def status(self, user):
-        if user.userprofile.is_master or self.company.id == user.id:
-            return self.company.company
+        if self.is_blocked:
+            return ugettext_noop("blocked")
         else:
-            if self.is_blocked:
-                return ugettext_noop("blocked")
+            if user.userprofile.is_master or self.company.id == user.id:
+                return self.company.company
             else:
                 return ugettext_noop("reserved")
 

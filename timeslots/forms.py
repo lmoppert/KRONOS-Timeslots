@@ -12,19 +12,17 @@ from timeslots.models import *
 class BlockSlotForm(forms.Form):
     block = forms.ModelChoiceField(
                 label=_("Choose block"),
-                queryset=Block.objects.none()
+                queryset=Block.objects.none(),
             )
     start = forms.DateField(
                 label=_("Block from"),
-                initial=date.today
             )
     end = forms.DateField(
                 label=_("Block until"),
-                initial=date.today
             )
     slots = forms.MultipleChoiceField(
                 label=_("Slots"),
-                choices=[]
+                choices=[],
             )
 
     def __init__(self, *args, **kwargs):
