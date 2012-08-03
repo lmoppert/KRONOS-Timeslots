@@ -194,8 +194,12 @@ def station(request, station_id, date, view_mode):
         else:
             span = "span3" 
 
+    if request.user.userprofile.is_master:
+        hidden = ()
+    else:
+        hidden = ("blocked", "reserved")
     return render(request, 'timeslots/station_detail.html', 
-            { 'station': station, 'date': date, 'docks': docks, 'span': span, 'target': "slots"}) 
+            { 'station': station, 'date': date, 'docks': docks, 'span': span, 'target': "slots", 'hidden': hidden}) 
 
 
 @login_required

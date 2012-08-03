@@ -21,7 +21,7 @@
                     <th style="width: 3em">{{ start }}</th>
                     {% for slot in timeslot %}
                     <td {% if slot == "free" %}class="slot-free"{% elif slot == "blocked" %}class="slot-blocked"{% elif slot == "reserved" %}class="slot-reserved"{% else %}class="slot-owned"{% endif %} >
-                        {% if slot == "reserved" %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans slot %}</a>{% endif %}
+                        {% if slot in hidden %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans slot %}</a>{% endif %}
                     </td>
                     {% endfor %}
                 </tr>

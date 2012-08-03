@@ -1,5 +1,5 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[_] 88% Bugs
+[_] 94% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden
@@ -16,10 +16,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
-	[_] 0% Blocken von Slots
+	[_] 50% Blocken von Slots
 		[_] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
-		[_] Geblockte Slots sind verlinkt
-[_] 91% Konkrete Implementierungen
+		[X] Geblockte Slots sind verlinkt
+[_] 78% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das User und das UserProfile Formular im Admin Backend verschemelzen
@@ -63,11 +63,18 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-	[_] 66% Einen Timeslot zwischen zwei Tagen für einen Block blocken
+	[_] 50% Einen Timeslot zwischen zwei Tagen für einen Block blocken
 		[X] Ein Formular erstellen, um einen Block, zwei Datumswerte und die Timeslots zu wählen
+		[_] Ein Button erstellen, um Blocks wieder frei zu geben
 		[X] Das abschicken des Formulars erstellt oder ändert die gewählten Slots
 		[_] In der Detailansicht von Slots die Option is_blocked anzeigen
 			: Um geblockte Slots wieder frei geben zu können
+	[_] 0% User Profil als Formular anzeigen
+		[_] Die Sprache kann geändert werden
+			: Hierbei muss dann auch die Session Variable korrigiert werden
+		[_] Die Adresse kann geändert werden
+		[_] Die Userdaten (Name, Vorname und E-Mail können geändert werden
+		[_] Das Passwort kann geändert werden 
 [_] 91% Logging_
 	[_] 66% Implementierungen
 		[_] Log-Dateien sollten exportierbar sein
