@@ -28,9 +28,9 @@
     $(function(){
         $('#id_start').datepicker({ 
             {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
-            dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
+            dateFormat: 'yy-mm-dd',
             minDate: new Date(),
             numberOfMonths: 3,
             onSelect: function( selectedDate ) {
@@ -39,9 +39,9 @@
         });
         $('#id_end').datepicker({ 
             {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
-            dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
+            dateFormat: 'yy-mm-dd',
             minDate: new Date(),
             numberOfMonths: 3,
             onSelect: function( selectedDate ) {

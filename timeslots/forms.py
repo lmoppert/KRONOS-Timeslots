@@ -30,17 +30,21 @@ class BlockSlotForm(forms.Form):
         timeslots = kwargs.pop('timeslots', None)
         self.helper = FormHelper()
         self.helper.layout = Layout (
-                Div(Field('block'), 
+                Div(
+                    Field('block'), 
                     css_class="span12"
                 ),
-                Div(AppendedText('start', '<a href="#"><i class="icon-calendar"></i></a>', css_class="date_picker_field"),
+                Div(
+                    AppendedText('start', '<a href="#"><i class="icon-calendar"></i></a>', css_class="date_picker_field"),
                     AppendedText('end', '<a href="#"><i class="icon-calendar"></i></a>', css_class="date_picker_field"), 
                     css_class="span3"
                 ), 
-                Div(Field('slots', size="12"), 
+                Div(
+                    Field('slots', size="12"), 
                     css_class="span4"
                 ),
-                Div(Submit('blockSlots', 'Block selected slots', css_class="btn-primary"),
+                Div(
+                    Submit('blockSlots', 'Block selected slots', css_class="btn-primary"),
                     css_class="span12"
                 )
             )
