@@ -14,8 +14,38 @@
 
 {% block extra_script %}
 <script type="text/javascript">
+    // Reload the form with slot values after block selection
     $('select#id_block').change(function() {
         $(this).closest('form').submit();
+    });
+    // Expand the click event to the surrounding div
+    $('div#div_id_start').click(function() {
+         $('#id_start').focus()
+    });
+    $('div#div_id_end').click(function() {
+         $('#id_end').focus()
+    });
+    $(function(){
+        $('#id_start').datepicker({ 
+            {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date(),
+            numberOfMonths: 3,
+            onSelect: function( selectedDate ) {
+                $('#id_end').datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $('#id_end').datepicker({ 
+            {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date(),
+            numberOfMonths: 3,
+            onSelect: function( selectedDate ) {
+                $('#id_start').datepicker( "option", "maxDate", selectedDate );
+            }
+        });
     });
 </script>
 {% endblock %}

@@ -27,8 +27,8 @@ def log_task(request, message):
     logentry.save()
 
 def daterange(start, end):
-    start_date = datetime.strptime(start, "%d.%m.%Y")
-    end_date = datetime.strptime(end, "%d.%m.%Y")
+    start_date = datetime.strptime(start, "%Y-%m-%d")
+    end_date = datetime.strptime(end, "%Y-%m-%d")
     for n in range(int ((end_date - start_date).days + 1)):
         yield start_date + timedelta(n)
 
