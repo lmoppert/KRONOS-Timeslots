@@ -76,15 +76,13 @@ def blocking(request):
         log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
         messages.error(request, _("You are not authorized to access this page!"))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
-    if request.method == 'POST' and request.POST.has_key('block'):
-        show_errors = False
+    if request.method == 'POST' and request.POST.has_key('block') and request.POST.get('block') != "":
         block = get_object_or_404(Block, pk=request.POST.get('block'))
         timeslots = []
         for t in block.start_times:
             timeslots.append(t.strftime("%H:%M"))
         form = BlockSlotForm(request.POST, stations=request.user.userprofile.stations.values('id'), timeslots=list(enumerate(timeslots, start=1)))
         if request.POST.has_key('blockSlots'):
-            show_errors = True
             if form.is_valid():
                 for day in daterange(form['start'].value(), form['end'].value()):
                     for timeslot in form['slots'].value():
@@ -99,7 +97,8 @@ def blocking(request):
                             slot.save()
                 messages.success(request, _("successfully blocked the selected slots!"))
                 return HttpResponseRedirect(reverse('timeslots_blocking')) 
-        form.helper.form_show_errors = show_errors
+        else:
+            form.helper.form_show_errors = False
     else:
         form = BlockSlotForm(stations=request.user.userprofile.stations.values('id'))
     return render(request, 'timeslots/blocking.html', {'form': form}) 
