@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -270,23 +270,30 @@ def slot(request, date, block_id, timeslot, line):
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
 
     # process request
-    if request.method == 'POST' and request.POST.has_key('makeReservation'):
-        formset = JobFormSet(request.POST, instance=slot)
-        if formset.is_valid():
-            slot.save()
-            formset.save()
-            log_task(request, "User %s has successfully reserved slot %s." % (request.user, slot))
-            messages.success(request, _('The reservation has been saved successfully!'))
+    if request.method == 'POST':
+        if request.POST.has_key('makeReservation'):
+            formset = JobFormSet(request.POST, instance=slot)
+            if formset.is_valid():
+                slot.save()
+                formset.save()
+                log_task(request, "User %s has successfully reserved slot %s." % (request.user, slot))
+                messages.success(request, _('The reservation has been saved successfully!'))
+                return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+            else:
+                log_task(request, "User %s has submitted a reservation form for slot %s which contained errors." % (request.user, slot))
+        elif request.POST.has_key('cancelReservation') or request.POST.has_key('deleteSlot'):
+            slot.delete()
+            for job in slot.job_set.all():
+                job.delete()
+            log_task(request, "User %s has successfully deleted the reservation for slot %s." % (request.user, slot))
+            messages.success(request, _('The reservation has been deleted successfully!'))
             return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
-        else:
-            log_task(request, "User %s has submitted a reservation form for slot %s which contained errors." % (request.user, slot))
-    elif request.method == 'POST' and request.POST.has_key('cancelReservation'):
-        slot.delete()
-        for job in slot.job_set.all():
-            job.delete()
-        log_task(request, "User %s has successfully deleted the reservation for slot %s." % (request.user, slot))
-        messages.success(request, _('The reservation has been deleted successfully!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        elif request.POST.has_key('releaseSlot'):
+            slot.is_blocked = False
+            slot.save()
+            log_task(request, "User %s has successfully released the blocking of slot %s." % (request.user, slot))
+            messages.success(request, _('This slot is no longer blocked!'))
+            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     else:
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))

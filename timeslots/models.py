@@ -187,8 +187,12 @@ class Slot(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('timeslots_slot_detail', (), {'block_id': self.block, 'timeslot':
-            self.timeslot, 'line': self.line, 'date': self.date_string})
+        return ('timeslots_slot_detail', (), {
+                'block_id': self.block.id, 
+                'timeslot': str(self.timeslot), 
+                'line': str(self.line), 
+                'date': self.date.strftime("%Y-%m-%d")
+                })
 
     def __unicode__(self):
         return "%(date)s [%(time)s] %(station)s - %(dock)s" % {

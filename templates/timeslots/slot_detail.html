@@ -26,7 +26,12 @@
 {% block sidebar %}{% endblock %}
 
 {% block content %}
-<div class="page-header"><h1>{% trans "Reservation for" %} {{ date|make_date }}</h1></div> 
+<div class="page-header"> 
+    <h1> 
+        {% trans "Reservation for" %} {{ date|make_date }} 
+        {% if slot.is_blocked %}<p><span class="badge badge-important">{% trans "Blocked" %}</span></p>{% endif %}
+    </h1> 
+</div> 
 <div id="timeout-warning" class="alert alert-warning">
     <strong>{% trans "Warning: " %}</strong><br /> 
     {% trans "Your reservation for this slot will end soon! Please fill in the form and send it." %}
@@ -41,7 +46,9 @@
         <table class="table table-bordered data-details">
             <tr>
                 <td class="small-column"><strong>{% trans "Time" %}</strong></th>
-                <td>{{ times }}</td>
+                <td>
+                    {{ times }}
+                </td>
                 <td class="small-column"><strong>{% trans "Company" %}</strong></th>
                 <td>{% firstof slot.company.company user.userprofile.company %}</td>
             </tr>
@@ -85,6 +92,14 @@
             {{ form.management_form }}
 
             <div class="buttons">
+                {% if slot.is_blocked %}
+                <button type="submit" class="btn btn-primary" name="deleteSlot" onclick="preventUnload(false)">
+                    {% trans "Release blocked slot" %}
+                </button>
+                <button type="submit" class="btn" name="releaseSlot" onclick="preventUnload(false)">
+                    {% trans "Release slot and keep data" %}
+                </button>
+                {% else %}
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
                     {% if created %}{% trans "Make reservation" %}{% else %}{% trans "Update reservation" %}{% endif %}
                 </button>
@@ -92,6 +107,7 @@
                     {% if created %}{% trans "Cancel reservation" %}{% else %}{% trans "Delete reservation" %}{% endif %}
                 </button>
                 <button type="reset" class="btn">{% trans "Reset form" %}</button>
+                {% endif %}
             </div>
         </form>
     </div>
