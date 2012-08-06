@@ -81,20 +81,32 @@ def blocking(request):
         timeslots = []
         for t in block.start_times:
             timeslots.append(t.strftime("%H:%M"))
-        form = BlockSlotForm(request.POST, stations=request.user.userprofile.stations.values('id'), timeslots=list(enumerate(timeslots, start=1)))
+        form = BlockSlotForm(request.POST, 
+                stations=request.user.userprofile.stations.values('id'), 
+                timeslots=list(enumerate(timeslots, start=1))
+                )
         if request.POST.has_key('blockSlots'):
             if form.is_valid():
                 for day in daterange(form['start'].value(), form['end'].value()):
+                    date=day.strftime("%Y-%m-%d") 
                     for timeslot in form['slots'].value():
                         for line in range(block.linecount): 
                             slot, created = Slot.objects.get_or_create(
-                                    block=block, 
-                                    date=day.strftime("%Y-%m-%d"), 
-                                    timeslot=str(int(timeslot)+1),
-                                    line=str(line+1), 
-                                )
+                                    block=block,
+                                    date=day.strftime("%Y-%m-%d"),
+                                    timeslot=str(int(timeslot)),
+                                    line=str(line+1),
+                                    defaults={'company': request.user.userprofile}
+                                    )
                             slot.is_blocked = True
                             slot.save()
+                log_task(request, "User %s blocked slots %s from %s to %s for block %s" % (
+                        request.user, 
+                        form['slots'].value(), 
+                        form['start'].value(), 
+                        form['end'].value(), 
+                        block)
+                        )
                 messages.success(request, _("successfully blocked the selected slots!"))
                 return HttpResponseRedirect(reverse('timeslots_blocking')) 
         else:
@@ -232,6 +244,10 @@ def slot(request, date, block_id, timeslot, line):
         log_task(request, "User %s tried to access slot %s, which is not opened on weekends." % (request.user, slot))
         messages.error(request, _('This station is closed on weekends!'))
         return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+    if not request.user.userprofile.is_master and slot.is_blocked:
+        log_task(request, "User %s tried to access slot %s which is blocked." % (request.user, slot))
+        messages.error(request, _('This slot has been blocked!'))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if created and not request.user.userprofile.is_master and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))

@@ -43,13 +43,13 @@
                 <td class="small-column"><strong>{% trans "Time" %}</strong></th>
                 <td>{{ times }}</td>
                 <td class="small-column"><strong>{% trans "Company" %}</strong></th>
-                <td>{% firstof slot.user.userprofile.company user.userprofile.company %}</td>
+                <td>{% firstof slot.company.company user.userprofile.company %}</td>
             </tr>
             <tr>
                 <td><strong>{% trans "Station" %}</strong></th>
                 <td>{{ station }}</td>
                 <td><strong>{% trans "User" %}</strong></th>
-                <td>{% firstof slot.user.get_full_name slot.user.username user.get_full_name user.username %}</td>
+                <td>{% firstof slot.company.user.get_full_name slot.company.user.username user.get_full_name user.username %}</td>
             </tr>
             <tr>
                 <td><strong>{% trans "Dock" %}</strong></th>

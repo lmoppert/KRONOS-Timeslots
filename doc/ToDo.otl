@@ -1,5 +1,5 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[_] 94% Bugs
+[X] 100% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden
@@ -16,8 +16,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
-	[_] 50% Blocken von Slots
-		[_] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
+	[X] 100% Blocken von Slots
+		[X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
 		[X] Geblockte Slots sind verlinkt
 [_] 78% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
