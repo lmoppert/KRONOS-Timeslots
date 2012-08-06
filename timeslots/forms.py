@@ -44,7 +44,8 @@ class BlockSlotForm(forms.Form):
                     css_class="span4"
                 ),
                 Div(
-                    Submit('blockSlots', 'Block selected slots', css_class="btn-primary"),
+                    Submit('blockSlots', 'Block selected slots', css_class="btn-danger"),
+                    Submit('releaseSlots', 'Release selected slots', css_class="btn-success"),
                     css_class="span12"
                 )
             )

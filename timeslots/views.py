@@ -85,30 +85,29 @@ def blocking(request):
                 stations=request.user.userprofile.stations.values('id'), 
                 timeslots=list(enumerate(timeslots, start=1))
                 )
-        if request.POST.has_key('blockSlots'):
-            if form.is_valid():
-                for day in daterange(form['start'].value(), form['end'].value()):
-                    date=day.strftime("%Y-%m-%d") 
-                    for timeslot in form['slots'].value():
-                        for line in range(block.linecount): 
-                            slot, created = Slot.objects.get_or_create(
-                                    block=block,
-                                    date=day.strftime("%Y-%m-%d"),
-                                    timeslot=str(int(timeslot)),
-                                    line=str(line+1),
-                                    defaults={'company': request.user.userprofile}
-                                    )
-                            slot.is_blocked = True
-                            slot.save()
-                log_task(request, "User %s blocked slots %s from %s to %s for block %s" % (
-                        request.user, 
-                        form['slots'].value(), 
-                        form['start'].value(), 
-                        form['end'].value(), 
-                        block)
-                        )
-                messages.success(request, _("successfully blocked the selected slots!"))
-                return HttpResponseRedirect(reverse('timeslots_blocking')) 
+        if form.is_valid():
+            for day in daterange(form['start'].value(), form['end'].value()):
+                date=day.strftime("%Y-%m-%d") 
+                for timeslot in form['slots'].value():
+                    for line in range(block.linecount): 
+                        slot, created = Slot.objects.get_or_create(
+                                block=block,
+                                date=day.strftime("%Y-%m-%d"),
+                                timeslot=str(int(timeslot)),
+                                line=str(line+1),
+                                defaults={'company': request.user.userprofile}
+                                )
+                        slot.is_blocked = request.POST.has_key('blockSlots')
+                        slot.save()
+            if request.POST.has_key('blockSlots'):
+                logmessage = _("User %s blocked slots %s from %s to %s for block %s")
+                usermessage = _("successfully blocked the selected slots!")
+            else:
+                logmessage = _("User %s released slots %s from %s to %s for block %s")
+                usermessage = _("successfully released the selected slots!")
+            log_task(request, logmessage % ( request.user, form['slots'].value(), form['start'].value(), form['end'].value(), block))
+            messages.success(request, usermessage)
+            return HttpResponseRedirect(reverse('timeslots_blocking')) 
         else:
             form.helper.form_show_errors = False
     else:
