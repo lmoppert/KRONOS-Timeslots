@@ -9,7 +9,7 @@
                 <li><a href="/admin/">{% trans "administration" %}</a></li>
                 {% endif %}
                 {% if user|in_group:"administrator,loadmaster" %}
-                <li><a href="{% url timeslots_blocking %}">{% trans "Block slots" %}</a></li>
+                <li><a href="{% url timeslots_blocking %}">{% trans "Manage blocked slots" %}</a></li>
                 {% endif %}
                 <li class="divider"></li>
                 <li><a href="{% url user_logout %}">{% trans "Logout" %}</a></li>

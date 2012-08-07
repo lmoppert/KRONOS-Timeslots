@@ -44,8 +44,8 @@ class BlockSlotForm(forms.Form):
                     css_class="span4"
                 ),
                 Div(
-                    Submit('blockSlots', 'Block selected slots', css_class="btn-danger"),
-                    Submit('releaseSlots', 'Release selected slots', css_class="btn-success"),
+                    Submit('blockSlots', _("Block selected slots"), css_class="btn-danger"),
+                    Submit('releaseSlots', _("Release selected slots"), css_class="btn-success"),
                     css_class="span12"
                 )
             )
@@ -70,8 +70,6 @@ class RequireOneFormSet(BaseInlineFormSet):
                 completed += 1
 
         if completed < 1:
-            raise forms.ValidationError(_("At least one %s is required.") %
-                self.model._meta.verbose_name)
+            raise forms.ValidationError(_("At least one %(model)s is required.") % {'model': self.model._meta.verbose_name})
 
 JobFormSet = inlineformset_factory(Slot, Job, extra=1, formset=RequireOneFormSet)
-

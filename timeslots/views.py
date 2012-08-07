@@ -37,6 +37,7 @@ def delete_slot_garbage():
     slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
     for slot in slots:
         if not slot.is_blocked and now() - slot.created > timedelta(minutes=5):
+            log_task(request, "The garbage collector has deleted slot %s" % slot)
             slot.delete()
 
 # View processing
@@ -100,12 +101,12 @@ def blocking(request):
                         slot.is_blocked = request.POST.has_key('blockSlots')
                         slot.save()
             if request.POST.has_key('blockSlots'):
-                logmessage = _("User %s blocked slots %s from %s to %s for block %s")
+                logmessage = "User %(user)s blocked slots %(slots)s from %(from)s to %(to)s for block %(block)s"
                 usermessage = _("successfully blocked the selected slots!")
             else:
-                logmessage = _("User %s released slots %s from %s to %s for block %s")
+                logmessage = "User %(user)s released slots %(slots)s from %(from)s to %(to)s for block %(block)s"
                 usermessage = _("successfully released the selected slots!")
-            log_task(request, logmessage % ( request.user, form['slots'].value(), form['start'].value(), form['end'].value(), block))
+            log_task(request, logmessage % (request.user, form['slots'].value(), form['start'].value(), form['end'].value(), block))
             messages.success(request, usermessage)
             return HttpResponseRedirect(reverse('timeslots_blocking')) 
         else:
