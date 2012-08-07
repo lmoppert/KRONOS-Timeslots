@@ -95,6 +95,7 @@ div#datepicker {
 
 .navbar-inner .brand {
     color: #8eadd6;
+    vertical-align: bottom;
 }
 select#id_block {
     width: 400px;
