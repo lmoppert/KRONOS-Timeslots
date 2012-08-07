@@ -19,10 +19,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Blocken von Slots
 		[X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
 		[X] Geblockte Slots sind verlinkt
-[_] 81% Konkrete Implementierungen
+[_] 84% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
-		[X] Das User und das UserProfile Formular im Admin Backend verschemelzen
+		[X] Das Formular für User und das UserProfile im Admin Backend verschmelzen
 		[X] Filter nicht anzeigen, wenn es nur ein Dock gibt
 		[X] Verladung Samstags und Sonntags unterbinden ausser bei KECO
 		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
@@ -63,9 +63,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ansicht als vollständige Tabelle, sortierbar, um beispielsweise eine AN zu suchen
 		[X] Ansicht aller Aufträge für eine Firma
 		[X] Die Auftragsübersicht für eine Firma auf der Startseite anzeigen
-	[_] 75% Einen Timeslot zwischen zwei Tagen für einen Block blocken
+	[X] 100% Einen Timeslot zwischen zwei Tagen für einen Block blocken
 		[X] Ein Formular erstellen, um einen Block, zwei Datumswerte und die Timeslots zu wählen
-		[_] Ein Button erstellen, um Blocks wieder frei zu geben
+		[X] Ein Button erstellen, um Blocks wieder frei zu geben
 		[X] Das abschicken des Formulars erstellt oder ändert die gewählten Slots
 		[X] In der Detailansicht von Slots die Option is_blocked anzeigen
 			: Um geblockte Slots wieder frei geben zu können

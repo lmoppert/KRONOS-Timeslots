@@ -16,7 +16,10 @@
     <table class="table table-bordered table-striped">
         {% for slot in slots %}
         <tr>
-            <th style="small-column">{{ slot.times }}</th>
+            <th style="small-column">
+                {{ slot.times }}
+                {% if slot.is_blocked %}<span class="badge badge-important">{% trans "Blocked" %}</span>{% endif %}
+            </th>
             <td style="med-column">{{ slot.company }}</td>
             <td class="jobs">
                 {% for job in slot.job_set.all %}

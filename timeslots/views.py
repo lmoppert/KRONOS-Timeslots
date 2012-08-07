@@ -32,7 +32,7 @@ def daterange(start, end):
     for n in range(int ((end_date - start_date).days + 1)):
         yield start_date + timedelta(n)
 
-def delete_slot_garbage():
+def delete_slot_garbage(request):
     # annotate creates a filterable value (properties cannot be accessed in filters)
     slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
     for slot in slots:
@@ -51,7 +51,7 @@ def keco(request):
 @login_required
 def index(request):
     jobs = []
-    delete_slot_garbage()
+    delete_slot_garbage(request)
     slots =  request.user.userprofile.slot_set.filter(date__gt=datetime.now())
     for slot in slots:
         for job in slot.job_set.all():
@@ -101,10 +101,10 @@ def blocking(request):
                         slot.is_blocked = request.POST.has_key('blockSlots')
                         slot.save()
             if request.POST.has_key('blockSlots'):
-                logmessage = "User %(user)s blocked slots %(slots)s from %(from)s to %(to)s for block %(block)s"
+                logmessage = "User %s blocked slots %s from %s to %s for block %s"
                 usermessage = _("successfully blocked the selected slots!")
             else:
-                logmessage = "User %(user)s released slots %(slots)s from %(from)s to %(to)s for block %(block)s"
+                logmessage = "User %s released slots %s from %s to %s for block %s"
                 usermessage = _("successfully released the selected slots!")
             log_task(request, logmessage % (request.user, form['slots'].value(), form['start'].value(), form['end'].value(), block))
             messages.success(request, usermessage)
@@ -146,7 +146,7 @@ def station(request, station_id, date, view_mode):
         docklist = station.dock_set.all()
         dock_count = docklist.count()
 
-    delete_slot_garbage()
+    delete_slot_garbage(request)
     if not view_mode == 'slots':
         slotlist = {}
         docks = []
@@ -233,7 +233,7 @@ def slot(request, date, block_id, timeslot, line):
     except IndexError:
         end = block.end
     times = block.start_times[int(timeslot)-1].strftime("%H:%M") + " - " + end.strftime("%H:%M")
-    delete_slot_garbage()
+    delete_slot_garbage(request)
     slot, created = Slot.objects.get_or_create(date=date, timeslot=timeslot, line=line, block=block, 
                     defaults={'company': request.user.userprofile})
 
