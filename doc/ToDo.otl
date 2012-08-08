@@ -69,6 +69,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Das abschicken des Formulars erstellt oder ändert die gewählten Slots
 		[X] In der Detailansicht von Slots die Option is_blocked anzeigen
 			: Um geblockte Slots wieder frei geben zu können
+	[_] % Stylesheet für den Druck erstellen
+		[_] Kopfzeile ausblenden
+		[_] Seitenleiste ausblenden
+		[_] Fußzeile ausblenden
 	[_] 0% User Profil als Formular anzeigen
 		[_] Die Sprache kann geändert werden
 			: Hierbei muss dann auch die Session Variable korrigiert werden

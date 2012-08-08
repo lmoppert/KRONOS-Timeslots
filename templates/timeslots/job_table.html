@@ -11,7 +11,9 @@
 {% include "timeslots/details_subnav.html" with active=3 %}
 
 <div class="section">
+    {% autoescape off %}
     {% render_table table "table.html" %}
+    {% endautoescape %}
 </div>
 
 {% endblock %}

@@ -171,7 +171,7 @@ def station(request, station_id, date, view_mode):
         if view_mode == 'jobtable':
             jobs = []
             for slot in slots:
-                if slot.block.dock.name in slotlist:
+                if slot.block.dock.name in slotlist and not slot.is_blocked:
                     for job in slot.job_set.all():
                         jobs.append(job)
             table = StationJobTable(jobs)

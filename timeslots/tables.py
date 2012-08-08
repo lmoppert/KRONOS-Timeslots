@@ -27,6 +27,7 @@ class JobTable(tables.Table):
             )
     description = tables.Column(verbose_name=_('Description'))
 
+
 class StationJobTable(JobTable):
     slot_company = tables.Column(
             accessor='slot.company', 
