@@ -35,6 +35,7 @@
     <link type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link type="text/css" href="{{ STATIC_URL }}css/custom-theme/jquery-ui-1.8.20.custom.css" rel="stylesheet">
     <link type="text/css" href="{{ STATIC_URL }}css/timeslots.css" rel="stylesheet">
+    <link type="text/css" media="print" href="{{ STATIC_URL }}css/print.css" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -73,7 +74,7 @@
 <div class="container">
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span3 sidebar">
                 {% block sidebar %} 
                 <form id="sidebar" action="." method="post">{% csrf_token %}
                     {% if station.dock_set.count > 1 %}<div class="control-group section"> 

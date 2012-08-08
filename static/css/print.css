@@ -1,0 +1,8 @@
+.footer, 
+.sidebar,
+form#sidebar,
+.alert,
+.nav,
+div.navbar {
+    display: none;
+}

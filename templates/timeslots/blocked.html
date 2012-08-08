@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{% trans "Some slots had already been reserved" %}</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr><th>{% trans "Slot" %}</th><th>{% trans "Company" %}</th></tr>
+    </thead>
+    <tbody>
+        {% for slot in slots %}
+        <tr>
+            <td><a href="{{ slot.get_absolute_url }}">{{ slot }}</a></td>
+            <td>{{ slot.company.company }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
