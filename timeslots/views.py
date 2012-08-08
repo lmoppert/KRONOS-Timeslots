@@ -87,6 +87,7 @@ def blocking(request):
                 timeslots=list(enumerate(timeslots, start=1))
                 )
         if form.is_valid():
+            reserved_slots = []
             for day in daterange(form['start'].value(), form['end'].value()):
                 date=day.strftime("%Y-%m-%d") 
                 for timeslot in form['slots'].value():
@@ -98,17 +99,25 @@ def blocking(request):
                                 line=str(line+1),
                                 defaults={'company': request.user.userprofile}
                                 )
+                        if not created and not slot.is_blocked:
+                            reserved_slots.append(slot)
                         slot.is_blocked = request.POST.has_key('blockSlots')
                         slot.save()
             if request.POST.has_key('blockSlots'):
                 logmessage = "User %s blocked slots %s from %s to %s for block %s"
                 usermessage = _("successfully blocked the selected slots!")
+                if len(reserved_slots) > 0:
+                    usermessage = _("The slots listed below had already been reserved before you blocked them. ")
+                    usermessage += _("You can click on the link if you want to relase a slot. ")
+                    usermessage += _("(use <CTRL><click> to open the slot-form in a new window or tab)")
+                    messages.warning(request, usermessage)
+                    return render(request, 'timeslots/blocked.html', {'slots': reserved_slots}) 
             else:
                 logmessage = "User %s released slots %s from %s to %s for block %s"
                 usermessage = _("successfully released the selected slots!")
             log_task(request, logmessage % (request.user, form['slots'].value(), form['start'].value(), form['end'].value(), block))
             messages.success(request, usermessage)
-            return HttpResponseRedirect(reverse('timeslots_blocking')) 
+            return HttpResponseRedirect(reverse('timeslots_blocking'))
         else:
             form.helper.form_show_errors = False
     else:
@@ -171,7 +180,7 @@ def station(request, station_id, date, view_mode):
                     { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
         else:
             for slot in slots:
-                if slot.block.dock.name in slotlist and not slot.is_blocked:
+                if slot.block.dock.name in slotlist and (not slot.is_blocked or slot.job_set.count() >0):
                     slotlist[slot.block.dock.name].append(slot)
 
         return render(request, 'timeslots/job_list.html', 

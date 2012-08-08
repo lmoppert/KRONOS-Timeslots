@@ -21,8 +21,11 @@ td.jobs {
 td.jobs div {
     padding-bottom: 8px;
 }
-td.jobs div strong {
+td.jobs div span.jobnumber {
+    font-weight: bold;
     color:  #3A87ad;
+    float: left;
+    min-width: 6em;
 }
 td.number {
     font-weight: bold;
