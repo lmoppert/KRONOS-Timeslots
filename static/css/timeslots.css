@@ -93,8 +93,11 @@ div#datepicker {
   background-color: #243F8F;
 }
 
-.navbar-inner .brand {
+.navbar-inner a.brand {
     color: #8eadd6;
+}
+.navbar-inner .brand span#AppName {
+    height: 26px;
     vertical-align: bottom;
 }
 select#id_block {

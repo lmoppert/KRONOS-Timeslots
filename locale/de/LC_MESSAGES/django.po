@@ -51,7 +51,7 @@ msgstr "Abgefertigt"
 
 #: templates/base.html:5 templates/base.html.py:45
 msgid "Timeslots"
-msgstr "Ladezeitensteuerung"
+msgstr "Timeslots"
 
 #: templates/base.html:77
 msgid "Choose dock"

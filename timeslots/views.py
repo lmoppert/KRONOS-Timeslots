@@ -171,7 +171,7 @@ def station(request, station_id, date, view_mode):
                     { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
         else:
             for slot in slots:
-                if slot.block.dock.name in slotlist:
+                if slot.block.dock.name in slotlist and not slot.is_blocked:
                     slotlist[slot.block.dock.name].append(slot)
 
         return render(request, 'timeslots/job_list.html', 
