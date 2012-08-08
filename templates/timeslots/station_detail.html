@@ -19,9 +19,10 @@
                 {% for start, timeslot in timeslots %}
                 <tr>
                     <th style="width: 3em">{{ start }}</th>
-                    {% for slot in timeslot %}
-                    <td {% if slot == "free" %}class="slot-free"{% elif slot == "blocked" %}class="slot-blocked"{% elif slot == "reserved" %}class="slot-reserved"{% else %}class="slot-owned"{% endif %} >
+                    {% for slot, progress in timeslot %}
+                    <td class="{% if slot == "free" %}slot-free{% elif slot == "blocked" %}slot-blocked{% elif slot == "reserved" %}slot-reserved{% else %}slot-owned{% endif %}">
                         {% if slot in hidden %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans slot %}</a>{% endif %}
+                        {% if station.has_status and slot != "free" and slot != "blocked" and request.user.userprofile.is_master %}{% slot progress %}{% endif %}
                     </td>
                     {% endfor %}
                 </tr>

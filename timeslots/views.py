@@ -201,7 +201,7 @@ def station(request, station_id, date, view_mode):
                             company = slot.status(request.user)
                         except ObjectDoesNotExist:
                             company = ugettext_noop("free")
-                        lines.append(company)
+                        lines.append((company, slot.progress))
                     time = block.start_times[int(timeslot)].strftime("%H:%M")
                     timeslots.append((time, lines))
                 blocks.append((str(block.id), timeslots))

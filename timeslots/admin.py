@@ -37,7 +37,7 @@ class StationAdmin(admin.ModelAdmin):
     list_display = ('name', 'shortdescription')
     fieldsets = [
         ('Basic information', {'fields': ['name','shortdescription','longdescription']}),
-        ('Booking information', {'fields': ['opened_on_weekend', 'multiple_charges', 'booking_deadline', 'rnvp']})
+        ('Booking information', {'fields': ['opened_on_weekend', 'multiple_charges', 'has_status', 'booking_deadline', 'rnvp']})
     ]
     inlines = [DockInline]
 
