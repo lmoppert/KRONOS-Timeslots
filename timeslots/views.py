@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, F
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -45,8 +45,12 @@ def logout_page(request):
     logout_then_login(request)
 
 @login_required
-def keco(request):
-    return render(request, 'bars.html')
+def slotstatus(request, slot_id, station_id, date):
+    slot = get_object_or_404(Slot, pk=slot_id)
+    if slot.progress < 4:
+        slot.progress = F('progress') + 1
+        slot.save()
+    return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station_id, date))
 
 @login_required
 def index(request):
@@ -201,7 +205,10 @@ def station(request, station_id, date, view_mode):
                             company = slot.status(request.user)
                         except ObjectDoesNotExist:
                             company = ugettext_noop("free")
-                        lines.append((company, slot.progress))
+                        if company in ("free", "reserved", "blocked"):
+                            lines.append((company, None))
+                        else:
+                            lines.append((company, slot))
                     time = block.start_times[int(timeslot)].strftime("%H:%M")
                     timeslots.append((time, lines))
                 blocks.append((str(block.id), timeslots))

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load timeslots_filters i18n %}
+{% load timeslots_filters timeslots_tags i18n %}
 
 {% block content %}
 
@@ -19,10 +19,10 @@
                 {% for start, timeslot in timeslots %}
                 <tr>
                     <th style="width: 3em">{{ start }}</th>
-                    {% for slot, progress in timeslot %}
-                    <td class="{% if slot == "free" %}slot-free{% elif slot == "blocked" %}slot-blocked{% elif slot == "reserved" %}slot-reserved{% else %}slot-owned{% endif %}">
-                        {% if slot in hidden %}{{ slot }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans slot %}</a>{% endif %}
-                        {% if station.has_status and slot != "free" and slot != "blocked" and request.user.userprofile.is_master %}{% slot progress %}{% endif %}
+                    {% for company, slot in timeslot %}
+                    <td class="{% if company == "free" %}slot-free{% elif company == "blocked" %}slot-blocked{% elif company == "reserved" %}slot-reserved{% else %}slot-owned{% endif %}">
+                        {% if station.has_status and company != "free" and company != "blocked" and request.user.userprofile.is_master %}{% show_progress slot station.id date %}{% endif %}
+                        {% if company in hidden %}{{ company }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans company%}</a>{% endif %}
                     </td>
                     {% endfor %}
                 </tr>

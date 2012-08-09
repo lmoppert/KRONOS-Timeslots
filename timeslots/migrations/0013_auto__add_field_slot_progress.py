@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Slot.progress'
         db.add_column('timeslots_slot', 'progress',
-                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      self.gf('django.db.models.fields.PositiveIntegerField')(default=0),
                       keep_default=False)
 
 
@@ -97,7 +97,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_blocked': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'line': ('django.db.models.fields.IntegerField', [], {}),
-            'progress': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'progress': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'timeslot': ('django.db.models.fields.IntegerField', [], {})
         },
         'timeslots.station': {

@@ -156,7 +156,7 @@ class Slot(models.Model):
     date = models.DateField()
     timeslot = models.IntegerField()
     line = models.IntegerField()
-    progress = models.IntegerField(default=0)
+    progress = models.PositiveIntegerField(default=0)
     is_blocked = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
