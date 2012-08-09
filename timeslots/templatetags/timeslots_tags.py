@@ -50,4 +50,4 @@ def show_progress(slot, station_id, date):
         div_class = "progress"
         div_style = "width: 100%"
     return {'div_title': div_title, 'div_class': div_class, 'div_style': div_style, 
-            'slot_id': slot.id, 'station_id': station_id, 'date': date}
+            'progress': progress, 'slot_id': slot.id, 'station_id': station_id, 'date': date}

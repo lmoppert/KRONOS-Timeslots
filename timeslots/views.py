@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django_tables2 import RequestConfig
 
-from timeslots.models import Station, Block, Slot, Logging
+from timeslots.models import Station, Block, Slot, Logging, User
 from timeslots.forms import *
 from timeslots.tables import *
 
@@ -45,12 +45,21 @@ def logout_page(request):
     logout_then_login(request)
 
 @login_required
+def profile(request):
+    return render(request, 'timeslots/user_detail.html')
+
+@login_required
 def slotstatus(request, slot_id, station_id, date):
     slot = get_object_or_404(Slot, pk=slot_id)
-    if slot.progress < 4:
-        slot.progress = F('progress') + 1
-        slot.save()
-    return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station_id, date))
+    if request.user.userprofile.is_master:
+        if slot.progress < 4:
+            slot.progress = F('progress') + 1
+            slot.save()
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station_id, date))
+    else:
+        log_task(request, "User %s tried to change the status of slot %s but is not allowed to." % (request.user, slot))
+        messages.error(request, _('You are not allowed to change the status of a slot!'))
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station_id, date))
 
 @login_required
 def index(request):
@@ -288,7 +297,10 @@ def slot(request, date, block_id, timeslot, line):
     # process request
     if request.method == 'POST':
         if request.POST.has_key('makeReservation'):
-            formset = JobFormSet(request.POST, instance=slot)
+            if block.dock.station.multiple_charges:
+                formset = JobFormSet(request.POST, instance=slot)
+            else:
+                formset = SingleJobForm(request.POST, instance=slot)
             if formset.is_valid():
                 slot.save()
                 formset.save()
@@ -313,7 +325,10 @@ def slot(request, date, block_id, timeslot, line):
     else:
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))
-        formset = JobFormSet(instance=slot)
+        if block.dock.station.multiple_charges:
+            formset = JobFormSet(instance=slot)
+        else:
+            formset = SingleJobForm(instance=slot)
 
     return render(request, 'timeslots/slot_detail.html', 
             {'date': date, 'curr_block': block, 'times': times, 'station': block.dock.station, 'slot': slot, 'form': formset, 'created': created}) 

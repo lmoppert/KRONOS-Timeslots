@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.conf.urls import patterns, include, url
-from django.views.generic import DetailView, ListView
 from timeslots.models import Station, Dock, Slot, UserProfile
 
 urlpatterns = patterns('timeslots.views',
@@ -13,8 +12,7 @@ urlpatterns = patterns('timeslots.views',
     url(r'^station/(?P<station_id>\d+)/$', 'station', {'date': datetime.now().strftime("%Y-%m-%d"), 'view_mode': 'slots'}, name='timeslots_station_detail'),
     url(r'^station/$', 'station_redirect'),
     url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),
-    url(r'^dock/(?P<pk>\d+)/$', DetailView.as_view(model=Dock)),
-    url(r'^profile/(?P<pk>\d+)/$', DetailView.as_view(model=UserProfile, template_name='timeslots/user_detail.html'), name='timeslots_profile_detail'),
+    url(r'^profile/$', 'profile', name='timeslots_profile_detail'),
     url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
 )
 urlpatterns += patterns('django.contrib.auth.views',
