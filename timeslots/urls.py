@@ -1,6 +1,5 @@
 from datetime import datetime
-from django.conf.urls import patterns, include, url
-from timeslots.models import Station, Dock, Slot, UserProfile
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
