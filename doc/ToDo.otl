@@ -19,7 +19,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Blocken von Slots
 		[X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
 		[X] Geblockte Slots sind verlinkt
-[_] 84% Konkrete Implementierungen
+[_] 88% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das Formular für User und das UserProfile im Admin Backend verschmelzen
@@ -31,12 +31,12 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 			: get_absolut_url um einem Model die eigene URL beizubringen
 			: url um statische Links zu referenzieren
 		[X] render_to_response durch render ersetzen
-	[_] 75% Zusätzliche Funktionen für KECO
+	[X] 100% Zusätzliche Funktionen für KECO
 		[X] 22 Fenster pro Tag Maximum
 			: Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
 			: einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
 			: sind. Das Model muss um die Funktion erweitert werden
-		[_] Status der Verladung
+		[X] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 		[X] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
@@ -69,10 +69,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Das abschicken des Formulars erstellt oder ändert die gewählten Slots
 		[X] In der Detailansicht von Slots die Option is_blocked anzeigen
 			: Um geblockte Slots wieder frei geben zu können
-	[_] % Stylesheet für den Druck erstellen
-		[_] Kopfzeile ausblenden
-		[_] Seitenleiste ausblenden
-		[_] Fußzeile ausblenden
+	[X] 100% Stylesheet für den Druck erstellen
+		[X] Kopfzeile ausblenden
+		[X] Seitenleiste ausblenden
+		[X] Fußzeile ausblenden
 	[_] 0% User Profil als Formular anzeigen
 		[_] Die Sprache kann geändert werden
 			: Hierbei muss dann auch die Session Variable korrigiert werden
@@ -103,7 +103,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Views
 		[X] jobs und station zu einem einzigen view verschmelzen
 	[_] 50% Sonstiges
-		[_] URLs mit Hilfe von reverse erzeugen
+		[_] URLs mit Hilfe von reverse und url erzeugen
 		[X] Debug modus durch Umgebungsvariable steuern
 Sonstiges
 	Recht_liche Aufklärung der User über Datenschutz 
