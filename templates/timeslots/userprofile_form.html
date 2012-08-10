@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>
+        {{ user.get_full_name }}
+        <small>{{ user.userprofile.company }}</small>
+    </h1>
+</div>
+<div class="section">
+        {% crispy form %}
+</div>
+
+{% endblock %}

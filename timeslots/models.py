@@ -116,13 +116,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)
     
-    language = models.CharField(max_length=2, choices=LANGUAGES, default='de')
-    company = models.CharField(max_length=200)
-    street = models.CharField(max_length=200, blank=True)
-    ZIP = models.CharField(max_length=20, blank=True)
-    town = models.CharField(max_length=200, blank=True)
-    country = models.CharField(max_length=200, blank=True)
-    phone = models.CharField(max_length=200, blank=True)
+    language = models.CharField(max_length=2, choices=LANGUAGES, default='de', verbose_name=_("Language"))
+    company = models.CharField(max_length=200, verbose_name=_("Company"))
+    street = models.CharField(max_length=200, blank=True, verbose_name=_("Street"))
+    ZIP = models.CharField(max_length=20, blank=True, verbose_name=_("ZIP"))
+    town = models.CharField(max_length=200, blank=True, verbose_name=_("Town"))
+    country = models.CharField(max_length=200, blank=True, verbose_name=_("Country"))
+    phone = models.CharField(max_length=200, blank=True, verbose_name=_("Phone"))
     readonly = models.BooleanField()
 
     def _get_is_master(self):

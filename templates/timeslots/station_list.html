@@ -1,6 +1,7 @@
 {% load i18n %}
+
 <div class="section">
-    <h3>{% trans "Available stations" %}</h3>
+    <h2>{% trans "Available stations" %}</h2>
     <ul class="unstyled">
         {% for curr_station in user.userprofile.stations.all %}
             <li>

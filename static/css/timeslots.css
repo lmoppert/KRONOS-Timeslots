@@ -40,6 +40,17 @@ th.desc:after {
     color: #ddd;
     content: " ▼";
 }
+
+table#profile_details {
+    font-size: 120%;
+}
+table#profile_details tr {
+    vertical-align: top;
+}
+table#profile_details td {
+    padding: 5px 10px 5px 0;
+}
+
 div#ui-datepicker-div, 
 div#datepicker {
     font-size: 81%;
@@ -95,7 +106,9 @@ div#datepicker {
 .navbar .btn-navbar[disabled] {
   background-color: #243F8F;
 }
-
+.navbar-inner div.nav-collapse {
+    padding-top: 5px;
+}
 .navbar-inner a.brand {
     color: #8eadd6;
 }
