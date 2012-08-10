@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.conf.urls import patterns, url
+from timeslots.views import UserProfile
 
 urlpatterns = patterns('timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
@@ -16,4 +17,7 @@ urlpatterns = patterns('timeslots.views',
 )
 urlpatterns += patterns('django.contrib.auth.views',
     url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'}, name='user_login'),
+)
+urlpatterns += patterns('',
+    url(r'^userprofile/$', UserProfile.as_view(), {'template_name': 'timeslots/user_login.html'}, name='user_login'),
 )

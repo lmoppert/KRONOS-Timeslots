@@ -1,22 +1,27 @@
 from django.db.models import Count, F
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
+from django.views.generic.edit import UpdateView
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404, render, redirect
+
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
+
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
 from django.utils.timezone import now
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
-from django_tables2 import RequestConfig
 
-from timeslots.models import Station, Block, Slot, Logging, User
+from django_tables2 import RequestConfig
+from datetime import datetime, time, timedelta
+
+from timeslots.models import Station, Block, Slot, Logging, UserProfile
 from timeslots.forms import *
 from timeslots.tables import *
 
-from datetime import datetime, time, timedelta
 
 # Helper functions
 def log_task(request, message):
@@ -40,7 +45,15 @@ def delete_slot_garbage(request):
             log_task(request, "The garbage collector has deleted slot %s" % slot)
             slot.delete()
 
-# View processing
+# Class-Based Views
+class UserProfile(UpdateView):
+    form_class = UserProfileForm
+
+    def get_object(self, queryset=None):
+        return self.request.user.userprofile
+
+
+# View functions
 def logout_page(request):
     logout_then_login(request)
 

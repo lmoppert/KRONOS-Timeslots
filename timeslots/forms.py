@@ -9,6 +9,20 @@ from crispy_forms.layout import *
 from timeslots.models import *
 
 
+class UserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.form_action = 'update_profile'
+        self.helper.add_input(Submit('updateProfile', 'Update Your Profile'))
+
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = UserProfile
+        fields = ('language', 'company', 'street', 'ZIP', 'town', 'country', 'phone')
+    
+
 class BlockSlotForm(forms.Form):
     block = forms.ModelChoiceField(
                 label=_("Choose block"),

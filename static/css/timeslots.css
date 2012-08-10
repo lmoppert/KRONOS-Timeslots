@@ -114,17 +114,18 @@ input.date_picker_field {
     width: 100px;
     float:left;
 }
-.form-horizontal .control-label {
+
+/* settings for the job form */
+.form-horizontal tr.charge_detail .control-label {
     display: none;
 }
-
-form.form-horizontal div.control-group {
+form.form-horizontal tr.charge_detail div.control-group {
     margin-bottom: 0;
 }
-.form-horizontal .controls {
+.form-horizontal tr.charge_detail .controls {
   margin-left: 0;
 }
-.form-horizontal span.help-inline {
+.form-horizontal tr.charge_detail span.help-inline {
     display: block;
 }
 form#sidebar div.control-group {
