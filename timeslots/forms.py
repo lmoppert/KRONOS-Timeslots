@@ -13,7 +13,7 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.form_action = 'timeslots_user_profile'
+        self.helper.form_action = 'timeslots_userprofile_form'
         self.helper.add_input(Submit('updateProfile', _('Update Your Profile')))
         super(UserProfileForm, self).__init__(*args, **kwargs)
 

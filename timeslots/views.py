@@ -58,8 +58,13 @@ def logout_page(request):
     logout_then_login(request)
 
 @login_required
+def password_change_done(request):
+    messages.success(request, _('Your password has been changed!'))
+    return HttpResponseRedirect('/timeslots/profile/')
+
+@login_required
 def profile(request):
-    return render(request, 'timeslots/user_detail.html')
+    return render(request, 'timeslots/userprofile_detail.html')
 
 @login_required
 def slotstatus(request, slot_id, station_id, date):
