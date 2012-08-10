@@ -4,13 +4,13 @@
         <li class="dropdown" id="profile">
             <a href="#profile" class="dropdown-toggle" data-toggle="dropdown"><b>{% firstof user.get_full_name user.username %}</b> ({% trans user.groups.all.0.name %}) <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                {% if user.is_staff %}
+                {% if user|in_group:"administrator" %}
                 <li><a href="/admin/">{% trans "administration" %}</a></li>
                 {% endif %}
                 {% if user|in_group:"administrator,loadmaster" %}
                 <li><a href="{% url timeslots_blocking %}">{% trans "Manage blocked slots" %}</a></li>
-                {% endif %}
                 <li class="divider"></li>
+                {% endif %}
                 <li><a href="{% url timeslots_userprofile_detail %}">{% trans "Profile" %}</a></li>
                 <li><a href="{% url timeslots_change_password %}">{% trans "Change Password" %}</a></li>
                 <li class="divider"></li>

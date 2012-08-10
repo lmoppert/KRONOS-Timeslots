@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 16:13+0200\n"
+"POT-Creation-Date: 2012-08-10 17:09+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -126,7 +126,7 @@ msgstr "Geblockt"
 msgid "No open jobs"
 msgstr "Keine Aufträge Vorhanden"
 
-#: templates/timeslots/password_change_form.html:14
+#: templates/timeslots/password_change_form.html:18
 #: templates/timeslots/user_menu.html:15
 msgid "Change Password"
 msgstr "Passwort ändern"
@@ -233,6 +233,7 @@ msgid "Available stations"
 msgstr "Verfügbare Ladestellen"
 
 #: templates/timeslots/user_login.html:4
+#: templates/timeslots/user_login.html:13
 msgid "Login"
 msgstr "Anmelden"
 

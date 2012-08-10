@@ -6,9 +6,10 @@
 {% block sidebar %}{% endblock %}
 
 {% block content %}
-    <form action="{% url user_login %}" method="post" accept-charset="utf-8">{% csrf_token %}
-        {{ form|crispy }}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="Login"/>
-    </form>
+<form action="{% url user_login %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+</form>
 {% endblock %}

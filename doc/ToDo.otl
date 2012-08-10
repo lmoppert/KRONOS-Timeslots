@@ -19,7 +19,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Blocken von Slots
 		[X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
 		[X] Geblockte Slots sind verlinkt
-[_] 88% Konkrete Implementierungen
+[X] 100% Konkrete Implementierungen
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das Formular für User und das UserProfile im Admin Backend verschmelzen
@@ -73,12 +73,12 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Kopfzeile ausblenden
 		[X] Seitenleiste ausblenden
 		[X] Fußzeile ausblenden
-	[_] 0% User Profil als Formular anzeigen
-		[_] Die Sprache kann geändert werden
+	[X] 100% User Profil als Formular anzeigen
+		[X] Die Sprache kann geändert werden
 			: Hierbei muss dann auch die Session Variable korrigiert werden
-		[_] Die Adresse kann geändert werden
-		[_] Die Userdaten (Name, Vorname und E-Mail können geändert werden
-		[_] Das Passwort kann geändert werden 
+		[X] Die Adresse kann geändert werden
+		[X] Die Userdaten (Name, Vorname und E-Mail können geändert werden
+		[X] Das Passwort kann geändert werden 
 [_] 91% Logging_
 	[_] 66% Implementierungen
 		[_] Log-Dateien sollten exportierbar sein

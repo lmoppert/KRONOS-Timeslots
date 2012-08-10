@@ -107,7 +107,7 @@ def blocking(request):
     if not request.user.userprofile.is_master:
         log_task(request, "User %s tried to access the blocking view but is not member of a master group" % request.user)
         messages.error(request, _("You are not authorized to access this page!"))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+        return HttpResponseRedirect('/timeslots/profile/')
     if request.method == 'POST' and request.POST.has_key('block') and request.POST.get('block') != "":
         block = get_object_or_404(Block, pk=request.POST.get('block'))
         timeslots = []
@@ -166,11 +166,11 @@ def station(request, station_id, date, view_mode):
     if not station.opened_on_weekend and not request.user.userprofile.is_master and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         log_task(request, "User %s tried to access the weekend view of station %s, which is not opened on weekends." % (request.user, station))
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+        return HttpResponseRedirect('/timeslots/profile/')
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
         log_task(request, "User %s tried to access station %s without authorization" % (request.user, station))
         messages.error(request, _('You are not authorized to access this station!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+        return HttpResponseRedirect('/timeslots/profile/')
     if view_mode == 'slots' and not request.user.userprofile.is_master and station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         messages.warning(request, _('The reservation deadline has been reached, no more reservations will be accepted!'))
 
@@ -286,7 +286,7 @@ def slot(request, date, block_id, timeslot, line):
             slot.delete()
         log_task(request, "User %s tried to access slot %s, which is not opened on weekends." % (request.user, slot))
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/%s' % (request.user.id))
+        return HttpResponseRedirect('/timeslots/profile/')
     if not request.user.userprofile.is_master and slot.is_blocked:
         log_task(request, "User %s tried to access slot %s which is blocked." % (request.user, slot))
         messages.error(request, _('This slot has been blocked!'))

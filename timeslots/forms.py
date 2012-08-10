@@ -14,7 +14,7 @@ class UserProfileForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.form_action = 'timeslots_userprofile_form'
-        self.helper.add_input(Submit('updateProfile', _('Update Your Profile')))
+        self.helper.add_input(Submit('updateProfile', _('Update Your Profile'), css_class="btn btn-primary"))
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
     class Meta:
