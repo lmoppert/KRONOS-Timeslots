@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.conf.urls import patterns, url
-from timeslots.views import UserProfile
+from timeslots.views import UserProfile, LoggingArchive
 
 urlpatterns = patterns('timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
@@ -23,4 +23,5 @@ urlpatterns += patterns('django.contrib.auth.views',
 )
 urlpatterns += patterns('',
     url(r'^userprofile/$', UserProfile.as_view(), name='timeslots_userprofile_form'),
+    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', LoggingArchive.as_view(), name='timeslots_logging_pdf'),
 )

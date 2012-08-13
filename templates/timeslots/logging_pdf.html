@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+    $(function(){
+        // Datepicker
+        $('#datepicker').datepicker({ 
+            onSelect: function(dateText, inst) { 
+                window.location = "/timeslots/logging/" + dateText + "/" 
+            },
+            dateFormat: 'yy-mm-dd'
+        });
+        $('#datepicker').datepicker('setDate', '{{ date }}');
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Logfiles for" %} {{ day }}</h1>
+<div class="section">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Time" %}</th>
+                <th>{% trans "Host" %}</th>
+                <th>{% trans "Task" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logging_list %}<tr>
+                <td>{{ log.user }}</td>
+                <td>{{ log.time }}</td>
+                <td>{{ log.host }}</td>
+                <td>{{ log.task }}</td>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

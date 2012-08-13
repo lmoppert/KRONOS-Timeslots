@@ -1,8 +1,10 @@
 from django.db.models import Count, F
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+
 from django.views.generic.edit import UpdateView
+from django.views.generic.dates import MonthArchiveView, DayArchiveView
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -14,6 +16,10 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
 from django.utils.timezone import now
+from django.utils.decorators import method_decorator
+
+import cStringIO as StringIO
+import ho.pisa as pisa
 
 from django_tables2 import RequestConfig
 from datetime import datetime, time, timedelta
@@ -45,12 +51,46 @@ def delete_slot_garbage(request):
             log_task(request, "The garbage collector has deleted slot %s" % slot)
             slot.delete()
 
-# Class-Based Views
+def cbv_decorator(decorator):
+    def _decorator(cls):
+        cls.dispatch = method_decorator(decorator)(cls.dispatch)
+        return cls
+    return _decorator
+
+# Class-Based-Views
+@cbv_decorator(login_required)
 class UserProfile(UpdateView):
     form_class = UserProfileForm
 
     def get_object(self, queryset=None):
         return self.request.user.userprofile
+
+
+#class PDFView(DetailView):
+#    def __init__(self):
+#        if not self.filename:
+#            self.filename = "File_%s" % now()
+#
+#    def render_to_pdf(self, html):
+#        pdf = StringIO.StringIO()
+#        pisa.CreatePDF(html, pdf, encoding="utf-8")
+#        pdf.seek(0)
+#        return pdf
+#
+#    def render_to_response(self, context, **response_kwargs):
+#        tpl = super(PDFView, self).render_to_response(context, **response_kwargs)
+#        tpl.render()
+#        pdf = self.render_to_pdf(tpl.rendered_content)
+#        response = HttpResponse(pdf, mimetype='application/pdf')
+#        response['Content-Disposition'] = 'attachment; filename=%s.pdf' % self.filename
+#        return response
+
+
+class LoggingArchive(DayArchiveView):
+    model = Logging
+    month_format = "%m"
+    date_field = 'time'
+    template_name = 'timeslots/logging_pdf.html'
 
 
 # View functions

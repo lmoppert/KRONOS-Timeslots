@@ -12,6 +12,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-{{ user.userprofile.language }}.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% block javascript %}
     <script type="text/javascript">
         $(function(){
             // Datepicker
@@ -23,13 +24,9 @@
                 dateFormat: 'yy-mm-dd'
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
-            //hover states on the static widgets
-            $('#dialog_link, ul#icons li').hover(
-                function() { $(this).addClass('ui-state-hover'); },
-                function() { $(this).removeClass('ui-state-hover'); }
-            );
         });
     </script>
+    {% endblock %}
     <link type="text/css" href="{{ STATIC_URL }}/img/favicon.ico" rel="shortcut icon">
     <link type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
