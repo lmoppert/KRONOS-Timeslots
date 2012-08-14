@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.conf.urls import patterns, url
-from timeslots.views import UserProfile, LoggingArchive
+from timeslots.views import UserProfile, DayLoggingArchive, MonthLoggingArchive
 
 urlpatterns = patterns('timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
@@ -10,7 +10,8 @@ urlpatterns = patterns('timeslots.views',
     url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/joblist/$', 'station', {'view_mode': 'joblist'}),
     url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/jobtable/$', 'station', {'view_mode': 'jobtable'}),
     url(r'^station/(?P<station_id>\d+)/$', 'station', {'date': datetime.now().strftime("%Y-%m-%d"), 'view_mode': 'slots'}, name='timeslots_station_detail'),
-    url(r'^station/$', 'station_redirect'),
+    url(r'^station/$', 'station_redirect', name='timeslots_station'),
+    url(r'^logging/$', 'logging_redirect', name='timeslots_logging'),
     url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),
     url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
@@ -23,5 +24,6 @@ urlpatterns += patterns('django.contrib.auth.views',
 )
 urlpatterns += patterns('',
     url(r'^userprofile/$', UserProfile.as_view(), name='timeslots_userprofile_form'),
-    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', LoggingArchive.as_view(), name='timeslots_logging_pdf'),
+    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', DayLoggingArchive.as_view(), name='timeslots_logging_day'),
+    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})/$', MonthLoggingArchive.as_view(), name='timeslots_logging_month'),
 )

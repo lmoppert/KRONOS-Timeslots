@@ -51,6 +51,9 @@ table#profile_details td {
     padding: 5px 10px 5px 0;
 }
 
+table tr.logentry {
+    font-size: 12px;
+}
 div#ui-datepicker-div, 
 div#datepicker {
     font-size: 81%;

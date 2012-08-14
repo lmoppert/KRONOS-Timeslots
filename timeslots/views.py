@@ -1,61 +1,28 @@
-from django.db.models import Count, F
-from django.shortcuts import get_object_or_404, render, redirect
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.db.models import F
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
 
 from django.views.generic.edit import UpdateView
-from django.views.generic.dates import MonthArchiveView, DayArchiveView
+from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthArchiveView
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.views import logout_then_login
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
-from django.utils.timezone import now
-from django.utils.decorators import method_decorator
-
-import cStringIO as StringIO
-import ho.pisa as pisa
 
 from django_tables2 import RequestConfig
-from datetime import datetime, time, timedelta
+from datetime import datetime
 
-from timeslots.models import Station, Block, Slot, Logging, UserProfile
+from timeslots.models import *
 from timeslots.forms import *
 from timeslots.tables import *
+from timeslots.utils import *
 
-
-# Helper functions
-def log_task(request, message):
-    logentry = Logging.objects.create(
-            user=request.user, 
-            host=request.META.get('REMOTE_ADDR'), 
-            task = message)
-    logentry.save()
-
-def daterange(start, end):
-    start_date = datetime.strptime(start, "%Y-%m-%d")
-    end_date = datetime.strptime(end, "%Y-%m-%d")
-    for n in range(int ((end_date - start_date).days + 1)):
-        yield start_date + timedelta(n)
-
-def delete_slot_garbage(request):
-    # annotate creates a filterable value (properties cannot be accessed in filters)
-    slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
-    for slot in slots:
-        if not slot.is_blocked and now() - slot.created > timedelta(minutes=5):
-            log_task(request, "The garbage collector has deleted slot %s" % slot)
-            slot.delete()
-
-def cbv_decorator(decorator):
-    def _decorator(cls):
-        cls.dispatch = method_decorator(decorator)(cls.dispatch)
-        return cls
-    return _decorator
 
 # Class-Based-Views
 @cbv_decorator(login_required)
@@ -66,34 +33,29 @@ class UserProfile(UpdateView):
         return self.request.user.userprofile
 
 
-#class PDFView(DetailView):
-#    def __init__(self):
-#        if not self.filename:
-#            self.filename = "File_%s" % now()
-#
-#    def render_to_pdf(self, html):
-#        pdf = StringIO.StringIO()
-#        pisa.CreatePDF(html, pdf, encoding="utf-8")
-#        pdf.seek(0)
-#        return pdf
-#
-#    def render_to_response(self, context, **response_kwargs):
-#        tpl = super(PDFView, self).render_to_response(context, **response_kwargs)
-#        tpl.render()
-#        pdf = self.render_to_pdf(tpl.rendered_content)
-#        response = HttpResponse(pdf, mimetype='application/pdf')
-#        response['Content-Disposition'] = 'attachment; filename=%s.pdf' % self.filename
-#        return response
-
-
-class LoggingArchive(DayArchiveView):
+class LoggingArchive():
     model = Logging
     month_format = "%m"
     date_field = 'time'
-    template_name = 'timeslots/logging_pdf.html'
+    allow_empty = True
+    template_name = 'timeslots/logging.html'
+
+@cbv_decorator(login_required)
+class DayLoggingArchive(LoggingArchive, DayArchiveView):
+    pass
+
+@cbv_decorator(login_required)
+class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
+    pass
 
 
 # View functions
+@login_required
+def logging_redirect(request):
+    t = datetime.now()
+    kwargs = {'year': t.strftime("%Y"), 'month': t.strftime("%m"), 'day': t.strftime("%d")}
+    return HttpResponseRedirect(reverse('timeslots_logging_day', kwargs=kwargs))
+
 def logout_page(request):
     logout_then_login(request)
 
