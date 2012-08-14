@@ -134,7 +134,7 @@ class UserProfile(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('timeslots_profile_detail', (), {})
+        return ('timeslots_userprofile_detail', (), {})
 
     def __unicode__(self):
         return "%s" % (self.company)
