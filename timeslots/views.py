@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.views import logout_then_login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
 from django.utils.translation import ugettext as _
@@ -40,11 +40,14 @@ class LoggingArchive():
     allow_empty = True
     template_name = 'timeslots/logging.html'
 
-@cbv_decorator(login_required)
+
+@cbv_decorator(user_passes_test(lambda u: u.userprofile.is_master))
 class DayLoggingArchive(LoggingArchive, DayArchiveView):
     pass
 
-@cbv_decorator(login_required)
+
+@cbv_decorator(user_passes_test(lambda u: u.userprofile.is_master))
+class DayLoggingArchive(LoggingArchive, DayArchiveView):
 class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
     pass
 
