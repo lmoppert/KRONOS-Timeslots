@@ -47,7 +47,6 @@ class DayLoggingArchive(LoggingArchive, DayArchiveView):
 
 
 @cbv_decorator(user_passes_test(lambda u: u.userprofile.is_master))
-class DayLoggingArchive(LoggingArchive, DayArchiveView):
 class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
     pass
 
