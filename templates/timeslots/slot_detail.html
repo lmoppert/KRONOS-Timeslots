@@ -12,7 +12,7 @@
             });
         })
         function preventUnload( state ) {
-            unloadMessage = "Wenn Sie die Seite verlassen, wird dieser Slot für Sie reserviert!";
+            unloadMessage = '{% trans "If you leave this page, your changes will be lost and the slot will be reserved for you.\r\rIf there are no jobs associated with this slot, your reservation will be deleted after five minutes." %}';
             window.onbeforeunload = state ? function() { return unloadMessage; } : null;
         }
         preventUnload( true );	
@@ -68,7 +68,7 @@
     </div>
 
     <div class="section">
-        <h2>{% trans "Corresponding jobs" %}</h2>
+        <h2>{% trans "Corresponding jobs" %} <small>({% trans "at least one job is required" %})</small></h2>
         {% if form.non_form_errors %}
         <div class="alert alert-error">
             <strong>{% trans "Error: " %}</strong>
