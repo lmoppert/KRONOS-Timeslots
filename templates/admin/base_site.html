@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Timeslots site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Timeslots administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}
+<div style="padding-left: 10px;"><a href="/">{% trans "Back to the Timeslots application" %}</a></div>
+{% endblock %}
