@@ -496,7 +496,7 @@ msgid ""
 "The maximal number of Slots have been reserved, no more reservations will be "
 "accepted!"
 msgstr ""
-"Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
+"Die maximale Anzahl an Buchungen wurde bereits erreicht, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
 #: timeslots/views.py:238

@@ -300,7 +300,7 @@ def slot(request, date, block_id, timeslot, line):
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
         messages.error(request, _('The deadline for booking this slot has ended!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
-    if created and block.max_slots > 0 and block.get_slots(date) >= block.max_slots:
+    if created and block.max_slots > 0 and block.get_slots(date) > block.max_slots:
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the maximum number of blocks per day has been reached." % (request.user, slot))
         messages.error(request, _('The maximal number of Slots have been reserved, no more reservations will be accepted!'))
