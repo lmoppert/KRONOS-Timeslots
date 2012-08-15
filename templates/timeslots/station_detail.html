@@ -21,7 +21,7 @@
                     <th style="width: 3em">{{ start }}</th>
                     {% for company, slot in timeslot %}
                     <td class="{% if company == "free" %}slot-free{% elif company == "blocked" %}slot-blocked{% elif company == "reserved" %}slot-reserved{% else %}slot-owned{% endif %}">
-                        {% if station.has_status and company != "free" and company != "blocked" and request.user.userprofile.is_master %}{% show_progress slot station.id date %}{% endif %}
+                        {% if station.has_status and company != "free" and company != "blocked" and request.user.userprofile.is_master %}{% show_progress slot %}{% endif %}
                         {% if company in hidden %}{{ company }}{% else %}<a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans company%}</a>{% endif %}
                     </td>
                     {% endfor %}

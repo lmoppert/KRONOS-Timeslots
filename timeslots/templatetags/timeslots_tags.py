@@ -27,7 +27,17 @@ register = template.Library()
 #    return SlotProgress(slot)
 
 @register.inclusion_tag('timeslots/progress.html')
-def show_progress(slot, station_id, date):
+def show_progress(slot):
+    """
+    Displays a colorized progress bar representing the current status of the corresponding SLOT.
+    The bar is linked to a javascript fuction that increases the current status by one step.
+
+    Usage (in template)::
+
+        {% show_progress SLOT %}
+
+    The tag uses the template ``timeslots/progress.html`` to render the progress bar
+    """
     progress = slot.progress
     if progress == 0:
         div_title = _("Slot has been booked")
@@ -49,5 +59,5 @@ def show_progress(slot, station_id, date):
         div_title = _("Slot has been processed")
         div_class = "progress"
         div_style = "width: 100%"
-    return {'div_title': div_title, 'div_class': div_class, 'div_style': div_style, 
-            'progress': progress, 'slot_id': slot.id, 'station_id': station_id, 'date': date}
+    return {'div_title': div_title, 'div_class': div_class, 'div_style': div_style, 'progress': progress, 
+            'slot_id': slot.id, 'station_id': slot.block.dock.station.id, 'date': slot.date}
