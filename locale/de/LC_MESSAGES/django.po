@@ -182,7 +182,7 @@ msgstr ""
 "Wenn Sie diese Seite verlassen, gehen Ihre Änderungen verloren, aber das "
 "Ladefenster bleibt zunächst für Sie reserviert.\\r\\rWenn Sie bei dieser "
 "Reservierungs keine zugehörigen Aufträge angegeben haben, wird das "
-"lLadefenster nach fünf Minuten wieder frei gegeben."
+"Ladefenster nach fünf Minuten wieder frei gegeben."
 
 #: templates/timeslots/slot_detail.html:31
 msgid "Reservation for"
