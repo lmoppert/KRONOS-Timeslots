@@ -1,0 +1,52 @@
+Konfiguration
+	User:
+		Ein User gehört genau einer Gruppe an (administrator, loadmaster oder user)
+		Einem User werden Ladestellen zugeordnet
+		Dem User ist eine Sprache zugeordnet
+		Der User kann seine Stammdaten, die Sprache und sein Passwort selbständig ändern
+	Ladestellen:
+		Die Konfiguration ist ausschließlich durch einen Administrator möglich (das sind derzeit Frau Mattheis, Herr Ellmann und ich)
+		Eine Ladestelle hat eine oder mehrere Rampen
+		Eine Ladestelle hat eine Buchungs-Deadline, also eine Uhrzeit am Vortag der eigentlichen Ladezeit, bis zu der ein Kunde einen Slot reservieren kann.
+		Eine Ladestelle hat eine Änderungs-Deadline, eine Uhrzeit am Tag der Verladung, bis zu der ein Kunde noch die zugehörigen Auftragsdaten ändern kann.
+		Eine Ladestelle kann für die Buchung am Wochenende freigegeben werden (derzeit bei Werk Leverkusen der Fall)
+		Eine Ladestelle kann so konfiguriert werden, dass nur eine Auftragsnummer pro Slot angegeben werden kann (derzeit bei Werk Leverkusen der Fall)
+		Eine Ladestelle kann konfiguriert werden, dass ein Slot einen Status erhält. Dieser kann von einem Lademeister dann jeweils weitergeführt werden.
+	Rampen und Blöcke:
+		Eine Rampe kann einen oder mehrere Blöcke enthalten
+		Ein Block ist eine Sammlung von Timeslots.
+		Für einen Block kann die maximal zu buchende Anzahl an Slots festgelegt werden  (derzeit bei Werk Leverkusen der Fall)
+User (Spediteur)
+	Erlaubte Aktivitäten
+		Anzeigen und Bearbeiten der eigenen Stammdaten
+		Anzeigen der Verfügbaren Ladezeiten einer Ladestelle
+		Reservieren eines Ladefensters innerhalb der Fristen
+		Ändern einer Reservierung innerhalb der Fristen
+		Löschen einer Reservierung
+	Unterbundene Aktivitäten
+		Anzeigen oder Bearbeiten fremder Stammdaten
+		Anzeigen der Verfügbaren Ladezeiten einer Ladestelle, die dem Kunden nicht zugewiesen ist
+		Anzeigen oder Bearbeiten der Reservierung eines anderen Kunden
+		Reservieren eines Ladefensters nach ablauf der Deadline
+		Reservieren eines Ladefensters nach erreichen der maximalen Anzahl erlaubter Reservierungen (nur KECO)
+		Ändern eines Ladefensters nach ablauf der RNVP-Deadline (nur KECO)
+	Weiteres
+		In der Reservierungs-Maske werden Warnungen angezeigt, das die Reservierungsfrist abläuft
+		Reservierungen, die keine Auftragsnummer enthalten, werden nach ca. 5 Minuten gelöscht
+Loadmaster
+	Erlaubte Aktivitäten (zusätzlich zu den oben genannten)
+		Anzeigen und Bearbeiten aller Reservierungen unabhängig von den Fristen	
+		Ladefenster blockieren und freigeben
+	Unterbundene Aktivitäten
+		Zugriff auf Stationen, für die er nicht zuständig ist
+Administrator
+	Administration
+		Bearbeiten aller Aspekte der Anwendung:
+			User
+			Gruppen
+			Ladestellen
+			Rampen
+			Ladefenster-Blöcke
+			Ladefenster
+			Aufträge
+			Protokolle
