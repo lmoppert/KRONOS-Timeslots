@@ -1,5 +1,46 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-[X] 100% Bugs
+	Zeitplan
+		Neues System: Ab 22.10.2012 online, Einträge möglich ab dem 12.11.2012
+		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
+	Recht_liche Aufklärung der User über Datenschutz 
+		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
+[_] 6% Meeting vom 13.09.2012
+	[_] 0% Domänen
+		[_] kronos-timeslots.com
+		[_] kronos-timeslots.eu
+	[_] 0% Neue User anlegen
+		[_] Christian Schmidt, KECO, Spediteur
+		[_] Elsa Rodrigues-Kloss, TiO2, Spediteur
+		[_] Rita Longerich, PWT, Spediteur
+		[_] Ralf Schäfer, Chemion, Autohof (nur Werk Leverkusen)
+		[_] Andreas Wild, KRONOS, Lademeister
+	[_] 0% Weitere Anforderungen
+		[_] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
+		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
+		: International oder die beiden Logos
+		[_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben wederden können.
+		[_] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
+		[_] RVNP bei allen außer KECO ist die Deadline
+		[_] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
+		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
+		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
+		: eventuell mit einem Hinweis darauf, was der Grund ist.
+		[_] KECO: Reservierung soll eine Option KLV enthalten
+		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
+		: der Übersicht entsprechend hervorgehoben werden.
+	[_] 0% Nice to have
+		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
+		: So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
+		: stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
+		: eine Ladestelle gilt.
+		: Beispiel Titanstr.:
+		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
+		: gleichzeitg statt finden.
+	[_] 33% Bugs
+		[_] I18n Reservierungsformular: Vom in Englisch
+		[_] I18n Reservierungsformular: Datum in der Überschrift
+		[X] Stationen mit single_charges enthalten dennoch die JS Buttons
+[_] 90% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden
@@ -28,19 +69,19 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
 		[X] Das Reservieren von Slots nach der Deadline verhindern
 		[X] Bei der verwendung von URLs die Decoratoren und Namen verwenden
-			: get_absolut_url um einem Model die eigene URL beizubringen
+			: get_absolut_url um einer Instanz die eigene URL beizubringen
 			: url um statische Links zu referenzieren
 		[X] render_to_response durch render ersetzen
 	[X] 100% Zusätzliche Funktionen für KECO
 		[X] 22 Fenster pro Tag Maximum
 			: Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
 			: einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
-			: sind. Das Model muss um die Funktion erweitert werden
+			: sind. Das Modell muss um die Funktion erweitert werden
 		[X] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
 			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 		[X] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
-	[X] 100% Änderungen am Model
+	[X] 100% Änderungen am Modell
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
 		[X] Einen Sprachwähler für User ergänzen
 	[X] 100% I18N
@@ -99,15 +140,12 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] "User ... has submitted a reservation form for slot ... which contained errors." 
 		[X] "User ... has successfully deleted the reservation for slot ...." 
 		[X] "User ... has opened the reservation form for slot ...." 
-[_] 75% Refactoring
+[X] 100% Refactoring
 	[X] 100% Views
 		[X] jobs und station zu einem einzigen view verschmelzen
-	[_] 50% Sonstiges
-		[_] URLs mit Hilfe von reverse und url erzeugen
+	[X] 100% Sonstiges
+		[X] URLs mit Hilfe von reverse und url erzeugen
 		[X] Debug modus durch Umgebungsvariable steuern
-Sonstiges
-	Recht_liche Aufklärung der User über Datenschutz 
-		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
 Nice To Have
 	Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
 		Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
