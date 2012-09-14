@@ -45,11 +45,6 @@
                     <img src="{{ STATIC_URL }}/img/kronoslogo.png" alt="KRONOS">
                     <span id="AppName">{% trans "Timeslots" %}</span>
             </a></span>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             {% if station %}
             <span class="pull-left">
                 <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
