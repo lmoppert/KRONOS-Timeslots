@@ -146,15 +146,19 @@ input.date_picker_field {
 }
 
 /* settings for the job form */
+.form-horizontal tr.single_detail label.control-label,
 .form-horizontal tr.charge_detail .control-label {
     display: none;
 }
+form.form-horizontal tr.single_detail div.control-group,
 form.form-horizontal tr.charge_detail div.control-group {
     margin-bottom: 0;
 }
+.form-horizontal tr.single_detail .controls,
 .form-horizontal tr.charge_detail .controls {
     margin-left: 0;
 }
+.form-horizontal tr.single_detail span.help-inline,
 .form-horizontal tr.charge_detail span.help-inline {
     display: block;
 }

@@ -81,7 +81,7 @@
                 <head><tr><th>{% trans "Jobnumber" %}</th><th>{% trans "Description" %}</th>{% if station.multiple_charges %}<th></th>{% endif %}</tr></thead>
                 <tbody>
                 {% for f in form %}
-                    <tr {% if station.multiple_charges %}class="charge_detail"{% else %}class="charges_detail"{% endif %}>
+                    <tr {% if station.multiple_charges %}class="charge_detail"{% else %}class="single_detail"{% endif %}>
                         <td>{{ f.id }}{{ f.number|as_crispy_field }}</td>
                         <td>{{ f.description|as_crispy_field }}</td>
                         {% if station.multiple_charges  %}<td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>{% endif %}
