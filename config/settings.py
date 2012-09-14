@@ -205,3 +205,4 @@ LOGIN_URL = "/timeslots/login"
 LOGOUT_URL = "/timeslots/logout"
 LOGIN_REDIRECT_URL = "/"
 AUTH_PROFILE_MODULE = 'timeslots.UserProfile'
+SESSION_COOKIE_AGE = 86400
