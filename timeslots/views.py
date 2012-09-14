@@ -198,6 +198,7 @@ def station(request, station_id, date, view_mode):
             slotlist[dock.name] = []
             docks.append((dock.name, dock.id))
 
+        # get all slots for one date
         if request.user.userprofile.is_master:
             slots = list(Slot.objects.filter(date=date)) 
         else:
@@ -206,7 +207,7 @@ def station(request, station_id, date, view_mode):
         if view_mode == 'jobtable':
             jobs = []
             for slot in slots:
-                if slot.block.dock.name in slotlist and not slot.is_blocked:
+                if slot.block.dock.name in slotlist and slot.block.dock.station.id == station.id and not slot.is_blocked:
                     for job in slot.job_set.all():
                         jobs.append(job)
             table = StationJobTable(jobs)
@@ -215,7 +216,7 @@ def station(request, station_id, date, view_mode):
                     { 'station': station, 'date': date, 'table': table, 'docks': docks, 'target': "jobtable"}) 
         else:
             for slot in slots:
-                if slot.block.dock.name in slotlist and (not slot.is_blocked or slot.job_set.count() >0):
+                if slot.block.dock.name in slotlist and slot.block.dock.station.id == station.id and (not slot.is_blocked or slot.job_set.count() >0):
                     slotlist[slot.block.dock.name].append(slot)
 
         return render(request, 'timeslots/job_list.html', 
