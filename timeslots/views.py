@@ -344,6 +344,8 @@ def slot(request, date, block_id, timeslot, line):
             log_task(request, "User %s has successfully released the blocking of slot %s." % (request.user, slot))
             messages.success(request, _('This slot is no longer blocked!'))
             return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        elif request.POST.has_key('keepSlotBlocked'):
+            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     else:
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))

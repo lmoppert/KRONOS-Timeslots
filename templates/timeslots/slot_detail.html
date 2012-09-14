@@ -99,6 +99,9 @@
                 <button type="submit" class="btn" name="releaseSlot" onclick="preventUnload(false)">
                     {% trans "Release slot and keep data" %}
                 </button>
+                <button type="submit" class="btn" name="keepSlotBlocked" onclick="preventUnload(false)">
+                    {% trans "Keep slot blocked" %}
+                </button>
                 {% else %}
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
                     {% if created %}{% trans "Make reservation" %}{% else %}{% trans "Update reservation" %}{% endif %}

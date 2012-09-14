@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-15 12:35+0200\n"
+"POT-Creation-Date: 2012-09-14 12:39+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -29,36 +29,36 @@ msgstr "Deutsch"
 msgid "Object not found"
 msgstr "Das angeforderte Objekt wurde nicht gefunden"
 
-#: templates/base.html:5 templates/base.html.py:45
+#: templates/base.html:11 templates/base.html.py:46
 msgid "Timeslots"
 msgstr "Timeslots"
 
-#: templates/base.html:78
+#: templates/base.html:72
 msgid "Choose dock"
 msgstr "Anzuzeigende Rampen"
 
-#: templates/base.html:85
+#: templates/base.html:79
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: templates/base.html:98 templates/timeslots/slot_detail.html:40
+#: templates/base.html:92 templates/timeslots/slot_detail.html:40
 #: templates/timeslots/slot_detail.html:74
 msgid "Error: "
 msgstr "Fehler:"
 
-#: templates/base.html:99 templates/timeslots/slot_detail.html:36
+#: templates/base.html:93 templates/timeslots/slot_detail.html:36
 msgid "Warning: "
 msgstr "Warnung:"
 
-#: templates/base.html:100
+#: templates/base.html:94
 msgid "Info: "
 msgstr "Information:"
 
-#: templates/base.html:101
+#: templates/base.html:95
 msgid "Success: "
 msgstr "Erfolgreich verarbeitet:"
 
-#: templates/base.html:107
+#: templates/base.html:101
 msgid "Empty page"
 msgstr "Leere Seite"
 
@@ -231,29 +231,33 @@ msgstr "Auftragsbeschreibung"
 
 #: templates/timeslots/slot_detail.html:97
 msgid "Release blocked slot"
-msgstr "Ladefenster wieder freigeben und Daten löschen"
+msgstr "Ladefenster freigeben, Daten löschen"
 
 #: templates/timeslots/slot_detail.html:100
 msgid "Release slot and keep data"
-msgstr "Ladefenster freigeben und Daten behalten"
+msgstr "Ladefenster freigeben, Daten behalten"
 
-#: templates/timeslots/slot_detail.html:104
+#: templates/timeslots/slot_detail.html:103
+msgid "Keep slot blocked"
+msgstr "Ladefenster geblockt lassen"
+
+#: templates/timeslots/slot_detail.html:107
 msgid "Make reservation"
 msgstr "Reservieren"
 
-#: templates/timeslots/slot_detail.html:104
+#: templates/timeslots/slot_detail.html:107
 msgid "Update reservation"
 msgstr "Reservierung aktualisieren"
 
-#: templates/timeslots/slot_detail.html:107
+#: templates/timeslots/slot_detail.html:110
 msgid "Cancel reservation"
 msgstr "Reservierung abbrechen"
 
-#: templates/timeslots/slot_detail.html:107
+#: templates/timeslots/slot_detail.html:110
 msgid "Delete reservation"
 msgstr "Reservierung löschen"
 
-#: templates/timeslots/slot_detail.html:109
+#: templates/timeslots/slot_detail.html:112
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
 
