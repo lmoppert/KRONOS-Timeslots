@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-14 12:39+0200\n"
+"POT-Creation-Date: 2012-09-17 15:22+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -74,16 +74,16 @@ msgstr "Aktuelle Aufträge"
 msgid "See our homepage for further information"
 msgstr "Auf der Webseite finden Sie weitere Informationen über KRONOS"
 
-#: templates/table.html:52
+#: templates/table.html:53
 msgid "Previous"
 msgstr "Vorige"
 
-#: templates/table.html:56
+#: templates/table.html:57
 #, python-format
 msgid "Page %(current)s of %(total)s"
 msgstr "Seite %(current)s von %(total)s"
 
-#: templates/table.html:60
+#: templates/table.html:61
 msgid "Next"
 msgstr "Nächste"
 
@@ -213,13 +213,17 @@ msgstr "Ladestelle"
 msgid "Dock"
 msgstr "Rampe"
 
+#: templates/timeslots/slot_detail.html:64
+msgid "Created"
+msgstr ""
+
 #: templates/timeslots/slot_detail.html:71
 msgid "Corresponding jobs"
 msgstr "Zugehörige Aufträge"
 
 #: templates/timeslots/slot_detail.html:71
-msgid "at least one job is required"
-msgstr "Es muss mindestens einer angegeben werden"
+msgid "at least one job is required, charges may not exceed FTL"
+msgstr "Es muss mindestens ein Auftrag angegeben werden. Die Ladung darf die FTL nicht übersteigen"
 
 #: templates/timeslots/slot_detail.html:81
 msgid "Jobnumber"
@@ -278,7 +282,7 @@ msgid "Available stations"
 msgstr "Verfügbare Ladestellen"
 
 #: templates/timeslots/user_login.html:4
-#: templates/timeslots/user_login.html:13
+#: templates/timeslots/user_login.html:16
 msgid "Login"
 msgstr "Anmelden"
 
@@ -441,53 +445,53 @@ msgstr "Protokolle"
 msgid "Date"
 msgstr "Datum"
 
-#: timeslots/views.py:66
+#: timeslots/views.py:70
 msgid "Your password has been changed!"
 msgstr "Ihr Passwort wurde erfolgreich geändert!"
 
-#: timeslots/views.py:83
+#: timeslots/views.py:87
 msgid "You are not allowed to change the status of a slot!"
 msgstr "Sie haben keine Berechtigung den Status eines Ladefensters zu ändern!"
 
-#: timeslots/views.py:113
+#: timeslots/views.py:117
 msgid "You are not authorized to access this page!"
 msgstr "Sie sind nicht berechtigt, diese Seite aufzurufen!"
 
-#: timeslots/views.py:143
+#: timeslots/views.py:147
 msgid "successfully blocked the selected slots!"
 msgstr "Die gewählten Ladezeiten wurden erfolgreich geblockt!"
 
-#: timeslots/views.py:145
+#: timeslots/views.py:149
 msgid ""
 "The slots listed below had already been reserved before you blocked them. "
 msgstr ""
 "Die unten aufgelisteten Ladezeiten waren bereits reserviert, bevor Sie diese "
 "geblockt haben. "
 
-#: timeslots/views.py:146
+#: timeslots/views.py:150
 msgid "You can click on the link if you want to relase a slot. "
 msgstr ""
 "Sie können auf den Link klicken, um die Ladezeit wieder frei zu geben. "
 
-#: timeslots/views.py:147
+#: timeslots/views.py:151
 msgid "(use <CTRL><click> to open the slot-form in a new window or tab)"
 msgstr ""
 "(Verwenden Sie <CTRL><click> um das Formular in einem neuen Fenster zu "
 "öffnen)"
 
-#: timeslots/views.py:152
+#: timeslots/views.py:156
 msgid "successfully released the selected slots!"
 msgstr "Die gewählten Ladezeiten wurden erfolgreich freigegeben!"
 
-#: timeslots/views.py:172 timeslots/views.py:292
+#: timeslots/views.py:176 timeslots/views.py:297
 msgid "This station is closed on weekends!"
 msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
 
-#: timeslots/views.py:176
+#: timeslots/views.py:180
 msgid "You are not authorized to access this station!"
 msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
 
-#: timeslots/views.py:179
+#: timeslots/views.py:183
 msgid ""
 "The reservation deadline has been reached, no more reservations will be "
 "accepted!"
@@ -495,7 +499,7 @@ msgstr ""
 "Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:229 timeslots/views.py:306
+#: timeslots/views.py:234 timeslots/views.py:311
 msgid ""
 "The maximal number of Slots have been reserved, no more reservations will be "
 "accepted!"
@@ -503,35 +507,35 @@ msgstr ""
 "Die maximale Anzahl an Buchungen wurde bereits erreicht, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:238
+#: timeslots/views.py:243
 msgid "free"
 msgstr "Frei"
 
-#: timeslots/views.py:296
+#: timeslots/views.py:301
 msgid "This slot has been blocked!"
 msgstr "Dieses Ladefenster wurde geblockt und kann nicht reserviert werden!"
 
-#: timeslots/views.py:301
+#: timeslots/views.py:306
 msgid "The deadline for booking this slot has ended!"
 msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
 
-#: timeslots/views.py:310
+#: timeslots/views.py:315
 msgid "This slot can not be changed any more!"
 msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 
-#: timeslots/views.py:316
+#: timeslots/views.py:321
 msgid "This slot was already booked by a different person!"
 msgstr "Dieses Zeitfenster wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:330
+#: timeslots/views.py:335
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:339
+#: timeslots/views.py:344
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"
 
-#: timeslots/views.py:345
+#: timeslots/views.py:350
 msgid "This slot is no longer blocked!"
 msgstr "Dieses Ladefenster wurde wieder freigegeben!"
 

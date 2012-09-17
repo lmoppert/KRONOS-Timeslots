@@ -4,23 +4,24 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
-[_] 20% Meeting vom 13.09.2012
+[_] 45% Meeting vom 13.09.2012
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
-	[_] 0% Neue User anlegen
-		[_] Christian Schmidt, KECO, Spediteur
+	[X] 100% Neue User anlegen
+		[X] Christian Schmidt, KECO, Spediteur
 		: Bamako
-		[_] Elsa Rodrigues-Kloss, TiO2, Spediteur
+		[X] Elsa Rodrigues-Kloss, TiO2, Spediteur
 		: Valletta
-		[_] Rita Longerich, PWT, Spediteur
+		[X] Rita Longerich, PWT, Spediteur
 		: Rabat
-		[_] Ralf Schäfer, Chemion, Autohof (nur Werk Leverkusen)
+		[X] Ralf Schäfer, Chemion, Autohof (nur Werk Leverkusen)
 		: Majuro
-		[_] Andreas Wild, KRONOS, Lademeister
+		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 0% Weitere Anforderungen
-		[_] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
+	[_] 25% Weitere Anforderungen
+		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
+		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
 		: International oder die beiden Logos
 		[_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben wederden können.
@@ -41,6 +42,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Beispiel Titanstr.:
 		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
 		: gleichzeitg statt finden.
+		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
 	[X] 100% Bugs
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
 		[X] I18n Reservierungsformular: Vom in Englisch
