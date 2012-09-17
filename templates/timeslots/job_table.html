@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="page-header">
-    <h1>{{ date|make_date }} <small>{{ station.longname }}</small></h1>
+    <h1>{{ date|make_date }}<br /><small>{{ station.longname }}</small></h1>
 </div>
 
 {% include "timeslots/details_subnav.html" with active=3 %}
