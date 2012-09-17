@@ -32,6 +32,10 @@ class UserProfile(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.userprofile
 
+    def form_valid(self, form):
+        self.request.session['django_language'] = form.instance.language
+        return super(UserProfile, self).form_valid(form)
+
 
 class LoggingArchive():
     model = Logging
