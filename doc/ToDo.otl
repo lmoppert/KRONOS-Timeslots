@@ -4,16 +4,21 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
-[_] 6% Meeting vom 13.09.2012
+[_] 20% Meeting vom 13.09.2012
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
 	[_] 0% Neue User anlegen
 		[_] Christian Schmidt, KECO, Spediteur
+		: Bamako
 		[_] Elsa Rodrigues-Kloss, TiO2, Spediteur
+		: Valletta
 		[_] Rita Longerich, PWT, Spediteur
+		: Rabat
 		[_] Ralf Schäfer, Chemion, Autohof (nur Werk Leverkusen)
+		: Majuro
 		[_] Andreas Wild, KRONOS, Lademeister
+		: Skopje
 	[_] 0% Weitere Anforderungen
 		[_] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
@@ -36,10 +41,16 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Beispiel Titanstr.:
 		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
 		: gleichzeitg statt finden.
-	[_] 33% Bugs
-		[_] I18n Reservierungsformular: Vom in Englisch
-		[_] I18n Reservierungsformular: Datum in der Überschrift
+	[X] 100% Bugs
+		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
+		[X] I18n Reservierungsformular: Vom in Englisch
+		[X] I18n Reservierungsformular: Datum in der Überschrift
+		[X] KRONOS Logo wird mit gedruckt im IE8
+		[X] MAJOR BUG - Die Jobliste enthält Einträge von allen Stationen
 		[X] Stationen mit single_charges enthalten dennoch die JS Buttons
+		[X] Job-Liste wird falsch dargestellt für Jobs ohne Beschreibung
+		[X] User-Menü funktioniert nicht im IE8
+		[X] Button für "geblockt lassen" fehlt
 [_] 90% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
