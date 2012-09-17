@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 15:22+0200\n"
+"POT-Creation-Date: 2012-09-17 15:45+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -103,7 +103,7 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:209
+#: templates/timeslots/blocked.html:13 timeslots/models.py:212
 msgid "Slot"
 msgstr "Ladefenster"
 
@@ -223,7 +223,9 @@ msgstr "Zugehörige Aufträge"
 
 #: templates/timeslots/slot_detail.html:71
 msgid "at least one job is required, charges may not exceed FTL"
-msgstr "Es muss mindestens ein Auftrag angegeben werden. Die Ladung darf die FTL nicht übersteigen"
+msgstr ""
+"Es muss mindestens ein Auftrag angegeben werden. Die Ladung darf die FTL "
+"nicht übersteigen"
 
 #: templates/timeslots/slot_detail.html:81
 msgid "Jobnumber"
@@ -338,7 +340,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:37 timeslots/models.py:210
+#: timeslots/forms.py:37 timeslots/models.py:213
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -356,10 +358,13 @@ msgid "At least one %(model)s is required."
 msgstr "Es muss mindestens ein %(model)s angegeben werden"
 
 #: timeslots/models.py:22
-msgid "RVNP = Rien ne vas plus -- time when a slot can not be edited any more"
+msgid ""
+"RVNP = Rien ne vas plus -- time when a slot can not be edited any more, set "
+"to Midnight to have the deadline as RNVP"
 msgstr ""
 "RNVP = Rien ne va plus -- Anzahl der Stunden vor der Verladung, bis zu der "
-"noch Änderungen erlaubt sind."
+"noch Änderungen erlaubt sind. Wenn als Wert Mitternacht angegeben wird, zählt"
+"die Deadline als Frist"
 
 #: timeslots/models.py:44
 msgid "Stations"
@@ -425,19 +430,19 @@ msgstr "Geblockt"
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:223 timeslots/tables.py:16
+#: timeslots/models.py:227 timeslots/tables.py:16
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:224
+#: timeslots/models.py:228
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:238
+#: timeslots/models.py:242
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:239
+#: timeslots/models.py:243
 msgid "Loggings"
 msgstr "Protokolle"
 

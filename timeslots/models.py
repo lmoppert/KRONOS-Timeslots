@@ -19,7 +19,7 @@ class Station(models.Model):
     shortdescription = models.CharField(max_length=200, blank=True)
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
-    rnvp = models.TimeField(help_text=_("RVNP = Rien ne vas plus -- time when a slot can not be edited any more"))
+    rnvp = models.TimeField(help_text=_("RVNP = Rien ne vas plus -- time when a slot can not be edited any more, set to Midnight to have the deadline as RNVP"))
     opened_on_weekend = models.BooleanField(default=False)
     multiple_charges = models.BooleanField(default=True)
     has_status = models.BooleanField(default=False)
@@ -185,7 +185,10 @@ class Slot(models.Model):
     def past_rnvp(self, curr_time):
         start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])
         delta = timedelta(hours=self.block.dock.station.rnvp.hour, minutes=self.block.dock.station.rnvp.minute)
-        return start - curr_time < delta
+        if delta < timedelta(minutes=1):
+            return True
+        else:
+            return start - curr_time < delta
 
     @models.permalink
     def get_absolute_url(self):
@@ -217,6 +220,7 @@ class Job(models.Model):
     """
     slot = models.ForeignKey(Slot)
     number = models.CharField(max_length=20)
+    #payload = models.IntegerField()
     description = models.CharField(max_length=200, blank=True)
 
     class Meta:
