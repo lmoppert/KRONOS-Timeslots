@@ -190,7 +190,7 @@ class Slot(models.Model):
         start = datetime.combine(self.date, self.block.start_times[int(self.timeslot)-1])
         delta = timedelta(hours=self.block.dock.station.rnvp.hour, minutes=self.block.dock.station.rnvp.minute)
         if delta < timedelta(minutes=1):
-            return True
+            return self.block.dock.station.past_deadline(self.date, curr_time)
         else:
             return start - curr_time < delta
 
