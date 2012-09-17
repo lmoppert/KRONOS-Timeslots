@@ -178,7 +178,11 @@ class Slot(models.Model):
             return ugettext_noop("blocked")
         else:
             if user.userprofile.is_master or self.company.id == user.userprofile.id:
-                return self.company.company
+                try:
+                    first_job = self.job_set.all()[0].number
+                except IndexError:
+                    first_job = "..."
+                return "%s (%s)" % (self.company.company, first_job) 
             else:
                 return ugettext_noop("reserved")
 
