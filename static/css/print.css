@@ -3,6 +3,7 @@
 form#sidebar,
 .alert,
 .nav,
+div#kronoslogo,
 div.navbar {
     display: none;
 }

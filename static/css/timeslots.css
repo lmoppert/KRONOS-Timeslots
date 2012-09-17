@@ -2,8 +2,20 @@ body {
     position: relative;
 }
 div.container-fluid { padding-top: 20px; }
-div.container-fluid h1 { font-size: 28px; }
-div.container-fluid h1 small { font-size: 20px; }
+div.container-fluid h1 { 
+    font-size: 28px; 
+    line-height: 34px;
+}
+div.container-fluid h2 { 
+    font-size: 26px; 
+    line-height: 34px;
+}
+div.container-fluid h1 small { 
+    font-size: 20px; 
+}
+div.container-fluid h2 small { 
+    font-size: 16px; 
+}
 div#timeout-alert, 
 div#timeout-warning {
     display: none;
