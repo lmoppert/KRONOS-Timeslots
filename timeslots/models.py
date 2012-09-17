@@ -177,7 +177,7 @@ class Slot(models.Model):
         if self.is_blocked:
             return ugettext_noop("blocked")
         else:
-            if user.userprofile.is_master or self.company.id == user.id:
+            if user.userprofile.is_master or self.company.id == user.userprofile.id:
                 return self.company.company
             else:
                 return ugettext_noop("reserved")
