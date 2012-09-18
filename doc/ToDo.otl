@@ -4,7 +4,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
-[_] 51% Meeting vom 13.09.2012
+[_] 52% Meeting vom 13.09.2012
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
@@ -19,22 +19,26 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 55% Weitere Anforderungen
+	[_] 60% Weitere Anforderungen
 		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
 		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
 		: International oder die beiden Logos
-		[_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben wederden können.
 		[X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
 		[X] RVNP bei allen außer KECO ist die Deadline
-		[_] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
+		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
+		[_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
 		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
 		: eventuell mit einem Hinweis darauf, was der Grund ist.
+		[_] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
 		[_] KECO: Reservierung soll eine Option KLV enthalten
 		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
 		: der Übersicht entsprechend hervorgehoben werden.
-		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
+		[X] KECO: Verladestatus muss auch vermindert werden könnnen.
+		: Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit
+		: den Status über den eigentlich finalen Zustand hinaus zu ändern und
+		: so auf den Anfang zurück zu setzen 
 	[_] 0% Nice to have
 		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
 		: So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung

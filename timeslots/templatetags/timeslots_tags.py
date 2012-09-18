@@ -27,7 +27,7 @@ register = template.Library()
 #    return SlotProgress(slot)
 
 @register.inclusion_tag('timeslots/progress.html')
-def show_progress(slot):
+def show_progress(slot, user):
     """
     Displays a colorized progress bar representing the current status of the corresponding SLOT.
     The bar is linked to a javascript fuction that increases the current status by one step.

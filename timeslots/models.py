@@ -126,11 +126,15 @@ class UserProfile(models.Model):
     readonly = models.BooleanField()
 
     def _get_is_master(self):
-        if self.user.groups.filter(name='administrator').count() == 0 and self.user.groups.filter(name='loadmaster').count() == 0:
+        if self.user.groups.filter(name='administrator').count() == 0 and self.user.groups.filter(name='loadmaster').count() == 0 and self.user.groups.filter(name='charger').count() == 0:
             return False
         else:
             return True
     is_master = property(_get_is_master)
+
+    def _get_is_charger(self):
+        return not self.user.groups.filter(name='charger').count() == 0
+    is_charger = property(_get_is_charger)
 
     @models.permalink
     def get_absolute_url(self):
