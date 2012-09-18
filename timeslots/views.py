@@ -336,6 +336,8 @@ def slot(request, date, block_id, timeslot, line):
             else:
                 formset = SingleJobForm(request.POST, instance=slot)
             if formset.is_valid():
+                if request.POST.has_key('is_klv'):
+                    slot.is_klv = True
                 slot.save()
                 formset.save()
                 log_task(request, "User %s has successfully reserved slot %s." % (request.user, slot))

@@ -163,6 +163,7 @@ class Slot(models.Model):
     line = models.IntegerField()
     progress = models.PositiveIntegerField(default=0)
     is_blocked = models.BooleanField(default=False)
+    is_klv = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
     def _get_times(self):

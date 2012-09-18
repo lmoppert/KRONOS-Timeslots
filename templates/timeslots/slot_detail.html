@@ -89,9 +89,12 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="section" style="padding-left: 12px">
+                <label class="checkbox"><input type="checkbox" name="is_klv" value="">{% trans "This charge will be an intermodal freight transport (KLV)" %}</label>
+            </div>
             {{ form.management_form }}
 
-            <div class="buttons">
+            <div class="buttons section">
                 {% if slot.is_blocked %}
                 <button type="submit" class="btn btn-primary" name="deleteSlot" onclick="preventUnload(false)">
                     {% trans "Release blocked slot" %}
