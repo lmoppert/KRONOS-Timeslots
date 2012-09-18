@@ -58,7 +58,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Job-Liste wird falsch dargestellt für Jobs ohne Beschreibung
 		[X] User-Menü funktioniert nicht im IE8
 		[X] Button für "geblockt lassen" fehlt
-[_] 90% Bugs
+[X] 100% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden

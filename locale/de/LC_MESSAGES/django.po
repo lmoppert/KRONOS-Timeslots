@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 13:17+0200\n"
+"POT-Creation-Date: 2012-09-18 15:57+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -103,7 +103,7 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:221
+#: templates/timeslots/blocked.html:13 timeslots/models.py:222
 msgid "Slot"
 msgstr "Ladefenster"
 
@@ -235,35 +235,39 @@ msgstr "Auftrags-Nummer"
 msgid "Description"
 msgstr "Auftragsbeschreibung"
 
-#: templates/timeslots/slot_detail.html:97
+#: templates/timeslots/slot_detail.html:93
+msgid "This charge will be an intermodal freight transport (KLV)"
+msgstr "Dieser Auftrag wird im Kombinierten Ladungsverkehr (KLV) transportiert"
+
+#: templates/timeslots/slot_detail.html:100
 msgid "Release blocked slot"
 msgstr "Ladefenster freigeben, Daten löschen"
 
-#: templates/timeslots/slot_detail.html:100
+#: templates/timeslots/slot_detail.html:103
 msgid "Release slot and keep data"
 msgstr "Ladefenster freigeben, Daten behalten"
 
-#: templates/timeslots/slot_detail.html:103
+#: templates/timeslots/slot_detail.html:106
 msgid "Keep slot blocked"
 msgstr "Ladefenster geblockt lassen"
 
-#: templates/timeslots/slot_detail.html:107
+#: templates/timeslots/slot_detail.html:110
 msgid "Make reservation"
 msgstr "Reservieren"
 
-#: templates/timeslots/slot_detail.html:107
+#: templates/timeslots/slot_detail.html:110
 msgid "Update reservation"
 msgstr "Reservierung aktualisieren"
 
-#: templates/timeslots/slot_detail.html:110
+#: templates/timeslots/slot_detail.html:113
 msgid "Cancel reservation"
 msgstr "Reservierung abbrechen"
 
-#: templates/timeslots/slot_detail.html:110
+#: templates/timeslots/slot_detail.html:113
 msgid "Delete reservation"
 msgstr "Reservierung löschen"
 
-#: templates/timeslots/slot_detail.html:112
+#: templates/timeslots/slot_detail.html:115
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
 
@@ -340,7 +344,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:37 timeslots/models.py:222
+#: timeslots/forms.py:37 timeslots/models.py:223
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -370,8 +374,8 @@ msgstr ""
 msgid ""
 "Choose this option if you want to be able to mark charges with an KLV flag"
 msgstr ""
-"Wählen Sie diese Option, wenn es möglich sein soll, Ladungen mit einer"
-"KLV-Kennzeichnung zu versehen"
+"Wählen Sie diese Option, wenn es möglich sein soll, Ladungen mit einerKLV-"
+"Kennzeichnung zu versehen"
 
 #: timeslots/models.py:45
 msgid "Stations"
@@ -429,27 +433,27 @@ msgstr "Land"
 msgid "Phone"
 msgstr "Telefon"
 
-#: timeslots/models.py:183
+#: timeslots/models.py:184
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:192
+#: timeslots/models.py:193
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:236 timeslots/tables.py:16
+#: timeslots/models.py:237 timeslots/tables.py:16
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:237
+#: timeslots/models.py:238
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:251
+#: timeslots/models.py:252
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:252
+#: timeslots/models.py:253
 msgid "Loggings"
 msgstr "Protokolle"
 
@@ -543,15 +547,15 @@ msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 msgid "This slot was already booked by a different person!"
 msgstr "Dieses Zeitfenster wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:342
+#: timeslots/views.py:344
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:351
+#: timeslots/views.py:353
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"
 
-#: timeslots/views.py:357
+#: timeslots/views.py:359
 msgid "This slot is no longer blocked!"
 msgstr "Dieses Ladefenster wurde wieder freigegeben!"
 

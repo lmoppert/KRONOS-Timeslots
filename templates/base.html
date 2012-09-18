@@ -26,6 +26,7 @@
             });
             $('#datepicker').datepicker('setDate', '{{ date }}');
         });
+        $('table tr').children().each(function(){$(this).text().replace('{KLV}','&nbsp;<span class="badge badge-warning">KLV</span>')});
     </script>
     {% endblock %}
     <link type="text/css" href="{{ STATIC_URL }}/img/favicon.ico" rel="shortcut icon">

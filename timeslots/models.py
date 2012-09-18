@@ -172,8 +172,15 @@ class Slot(models.Model):
             end = self.block.start_times[int(self.timeslot)]
         except IndexError:
             end = self.block.end
-        return  "%s - %s" % (start, end.strftime("%H:%M"))
+        return "%s - %s" %  (start, end.strftime("%H:%M"))
     times = property(_get_times)
+
+    def _get_times_flagged(self):
+        if self.is_klv:
+            return  "%s (KLV)" % (self.times)
+        else:
+            return  self.times
+    times_flagged = property(_get_times_flagged)
 
     def _get_date_string(self):
         return self.date.strftime("%Y-%m-%d")
@@ -188,7 +195,10 @@ class Slot(models.Model):
                     first_job = self.job_set.all()[0].number
                 except IndexError:
                     first_job = "..."
-                return "%s (%s)" % (self.company.company, first_job) 
+                if self.is_klv:
+                    return "%s - %s (KLV)" % (self.company.company, first_job) 
+                else:
+                    return "%s - %s" % (self.company.company, first_job) 
             else:
                 return ugettext_noop("reserved")
 
