@@ -23,6 +23,7 @@ class Station(models.Model):
     opened_on_weekend = models.BooleanField(default=False)
     multiple_charges = models.BooleanField(default=True)
     has_status = models.BooleanField(default=False)
+    has_klv = models.BooleanField(default=False)
 
     def past_deadline(self, curr_date, curr_time):
         deadline = datetime.combine(curr_date - timedelta(days=1), self.booking_deadline)

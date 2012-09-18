@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 15:45+0200\n"
+"POT-Creation-Date: 2012-09-18 12:03+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -103,7 +103,7 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:212
+#: templates/timeslots/blocked.html:13 timeslots/models.py:220
 msgid "Slot"
 msgstr "Ladefenster"
 
@@ -215,7 +215,7 @@ msgstr "Rampe"
 
 #: templates/timeslots/slot_detail.html:64
 msgid "Created"
-msgstr ""
+msgstr "Erstellt"
 
 #: templates/timeslots/slot_detail.html:71
 msgid "Corresponding jobs"
@@ -340,7 +340,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:37 timeslots/models.py:213
+#: timeslots/forms.py:37 timeslots/models.py:221
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -363,8 +363,8 @@ msgid ""
 "to Midnight to have the deadline as RNVP"
 msgstr ""
 "RNVP = Rien ne va plus -- Anzahl der Stunden vor der Verladung, bis zu der "
-"noch Änderungen erlaubt sind. Wenn als Wert Mitternacht angegeben wird, zählt"
-"die Deadline als Frist"
+"noch Änderungen erlaubt sind. Wenn als Wert Mitternacht angegeben wird, "
+"zähltdie Deadline als Frist"
 
 #: timeslots/models.py:44
 msgid "Stations"
@@ -422,27 +422,27 @@ msgstr "Land"
 msgid "Phone"
 msgstr "Telefon"
 
-#: timeslots/models.py:178
+#: timeslots/models.py:182
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:183
+#: timeslots/models.py:191
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:227 timeslots/tables.py:16
+#: timeslots/models.py:235 timeslots/tables.py:16
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:228
+#: timeslots/models.py:236
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:242
+#: timeslots/models.py:250
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:243
+#: timeslots/models.py:251
 msgid "Loggings"
 msgstr "Protokolle"
 
@@ -454,49 +454,49 @@ msgstr "Datum"
 msgid "Your password has been changed!"
 msgstr "Ihr Passwort wurde erfolgreich geändert!"
 
-#: timeslots/views.py:87
+#: timeslots/views.py:90
 msgid "You are not allowed to change the status of a slot!"
 msgstr "Sie haben keine Berechtigung den Status eines Ladefensters zu ändern!"
 
-#: timeslots/views.py:117
+#: timeslots/views.py:120
 msgid "You are not authorized to access this page!"
 msgstr "Sie sind nicht berechtigt, diese Seite aufzurufen!"
 
-#: timeslots/views.py:147
+#: timeslots/views.py:150
 msgid "successfully blocked the selected slots!"
 msgstr "Die gewählten Ladezeiten wurden erfolgreich geblockt!"
 
-#: timeslots/views.py:149
+#: timeslots/views.py:152
 msgid ""
 "The slots listed below had already been reserved before you blocked them. "
 msgstr ""
 "Die unten aufgelisteten Ladezeiten waren bereits reserviert, bevor Sie diese "
 "geblockt haben. "
 
-#: timeslots/views.py:150
+#: timeslots/views.py:153
 msgid "You can click on the link if you want to relase a slot. "
 msgstr ""
 "Sie können auf den Link klicken, um die Ladezeit wieder frei zu geben. "
 
-#: timeslots/views.py:151
+#: timeslots/views.py:154
 msgid "(use <CTRL><click> to open the slot-form in a new window or tab)"
 msgstr ""
 "(Verwenden Sie <CTRL><click> um das Formular in einem neuen Fenster zu "
 "öffnen)"
 
-#: timeslots/views.py:156
+#: timeslots/views.py:159
 msgid "successfully released the selected slots!"
 msgstr "Die gewählten Ladezeiten wurden erfolgreich freigegeben!"
 
-#: timeslots/views.py:176 timeslots/views.py:297
+#: timeslots/views.py:179 timeslots/views.py:304
 msgid "This station is closed on weekends!"
 msgstr "Diese Ladestelle ist am Wochenende geschlossen!"
 
-#: timeslots/views.py:180
+#: timeslots/views.py:183
 msgid "You are not authorized to access this station!"
 msgstr "Für diese Ladestelle haben Sie keine Berechtigung!"
 
-#: timeslots/views.py:183
+#: timeslots/views.py:186
 msgid ""
 "The reservation deadline has been reached, no more reservations will be "
 "accepted!"
@@ -504,7 +504,7 @@ msgstr ""
 "Die Frist für Reservierungen ist bereits abgelaufen, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:234 timeslots/views.py:311
+#: timeslots/views.py:237 timeslots/views.py:318
 msgid ""
 "The maximal number of Slots have been reserved, no more reservations will be "
 "accepted!"
@@ -512,35 +512,39 @@ msgstr ""
 "Die maximale Anzahl an Buchungen wurde bereits erreicht, es werden keine "
 "weiteren Reservierungen für diesen Tag angenommen!"
 
-#: timeslots/views.py:243
+#: timeslots/views.py:246
 msgid "free"
 msgstr "Frei"
 
-#: timeslots/views.py:301
+#: timeslots/views.py:298
+msgid "You are not allowed to change this slot!"
+msgstr "Sie haben keine Berechtigung diese Reservierung zu ändern!"
+
+#: timeslots/views.py:308
 msgid "This slot has been blocked!"
 msgstr "Dieses Ladefenster wurde geblockt und kann nicht reserviert werden!"
 
-#: timeslots/views.py:306
+#: timeslots/views.py:313
 msgid "The deadline for booking this slot has ended!"
 msgstr "Die Reservierungs-Frist für diesen Termin ist abgelaufen!"
 
-#: timeslots/views.py:315
+#: timeslots/views.py:322
 msgid "This slot can not be changed any more!"
 msgstr "Diese Reservierung kann nicht mehr geändert werden!"
 
-#: timeslots/views.py:321
+#: timeslots/views.py:328
 msgid "This slot was already booked by a different person!"
 msgstr "Dieses Zeitfenster wurde bereits durch jemand anderen reserviert!"
 
-#: timeslots/views.py:335
+#: timeslots/views.py:342
 msgid "The reservation has been saved successfully!"
 msgstr "Die Reservierung wurde erfolgreich gespeichert!"
 
-#: timeslots/views.py:344
+#: timeslots/views.py:351
 msgid "The reservation has been deleted successfully!"
 msgstr "Die Reservierung wurde erfolgreich gelöscht!"
 
-#: timeslots/views.py:350
+#: timeslots/views.py:357
 msgid "This slot is no longer blocked!"
 msgstr "Dieses Ladefenster wurde wieder freigegeben!"
 
