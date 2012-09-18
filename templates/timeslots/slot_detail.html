@@ -90,7 +90,10 @@
                 </tbody>
             </table>
             <div class="section" style="padding-left: 12px">
-                <label class="checkbox"><input type="checkbox" name="is_klv" value="">{% trans "This charge will be an intermodal freight transport (KLV)" %}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="is_klv" value=""{% if slot.is_klv %} checked="checked"{% endif %}>
+                    {% trans "This charge will be an intermodal freight transport (KLV)" %}
+                </label>
             </div>
             {{ form.management_form }}
 

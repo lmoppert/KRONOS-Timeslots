@@ -16,7 +16,7 @@ class JobTable(tables.Table):
             verbose_name=_('Job')
             )
     slot_times = tables.Column(
-            accessor='slot.times', 
+            accessor='slot.times_flagged', 
             order_by=('slot.block.start', 'slot.timeslot', 'slot.line'),
             verbose_name=_('Time')
             )
