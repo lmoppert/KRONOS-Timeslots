@@ -4,7 +4,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
-[_] 52% Meeting vom 13.09.2012
+[_] 54% Meeting vom 13.09.2012
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
@@ -19,7 +19,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 60% Weitere Anforderungen
+	[_] 70% Weitere Anforderungen
 		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
 		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
@@ -31,7 +31,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
 		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
 		: eventuell mit einem Hinweis darauf, was der Grund ist.
-		[_] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
+		[X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
 		[_] KECO: Reservierung soll eine Option KLV enthalten
 		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
 		: der Übersicht entsprechend hervorgehoben werden.

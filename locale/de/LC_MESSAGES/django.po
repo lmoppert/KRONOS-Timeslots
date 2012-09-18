@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 12:03+0200\n"
+"POT-Creation-Date: 2012-09-18 13:17+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -103,12 +103,12 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:220
+#: templates/timeslots/blocked.html:13 timeslots/models.py:221
 msgid "Slot"
 msgstr "Ladefenster"
 
 #: templates/timeslots/blocked.html:13 templates/timeslots/slot_detail.html:52
-#: timeslots/models.py:120 timeslots/tables.py:35
+#: timeslots/models.py:121 timeslots/tables.py:35
 msgid "Company"
 msgstr "Firma"
 
@@ -204,11 +204,11 @@ msgstr ""
 "Ihre Reservierung für dieses Zeitfenster ist abgelaufen und kann "
 "möglicherweise nicht mehr korrekt gespeichert werden!"
 
-#: templates/timeslots/slot_detail.html:56 timeslots/models.py:43
+#: templates/timeslots/slot_detail.html:56 timeslots/models.py:44
 msgid "Station"
 msgstr "Ladestelle"
 
-#: templates/timeslots/slot_detail.html:62 timeslots/models.py:64
+#: templates/timeslots/slot_detail.html:62 timeslots/models.py:65
 #: timeslots/tables.py:26
 msgid "Dock"
 msgstr "Rampe"
@@ -340,7 +340,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:37 timeslots/models.py:221
+#: timeslots/forms.py:37 timeslots/models.py:222
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -366,83 +366,90 @@ msgstr ""
 "noch Änderungen erlaubt sind. Wenn als Wert Mitternacht angegeben wird, "
 "zähltdie Deadline als Frist"
 
-#: timeslots/models.py:44
+#: timeslots/models.py:26
+msgid ""
+"Choose this option if you want to be able to mark charges with an KLV flag"
+msgstr ""
+"Wählen Sie diese Option, wenn es möglich sein soll, Ladungen mit einer"
+"KLV-Kennzeichnung zu versehen"
+
+#: timeslots/models.py:45
 msgid "Stations"
 msgstr "Ladestellen"
 
-#: timeslots/models.py:65
+#: timeslots/models.py:66
 msgid "Docks"
 msgstr "Rampen"
 
-#: timeslots/models.py:80
+#: timeslots/models.py:81
 msgid "0 for unlimited"
 msgstr "0 für beliebig viele"
 
-#: timeslots/models.py:104
+#: timeslots/models.py:105
 msgid "Block"
 msgstr "Ladefenster-Block"
 
-#: timeslots/models.py:105
+#: timeslots/models.py:106
 msgid "Blocks"
 msgstr "Ladefenster-Blöcke"
 
-#: timeslots/models.py:114
+#: timeslots/models.py:115
 msgid "administrator"
 msgstr "Administrator"
 
-#: timeslots/models.py:114
+#: timeslots/models.py:115
 msgid "loadmaster"
 msgstr "Lademeister"
 
-#: timeslots/models.py:114
+#: timeslots/models.py:115
 msgid "user"
 msgstr "Anwender"
 
-#: timeslots/models.py:119
+#: timeslots/models.py:120
 msgid "Language"
 msgstr "Sprache"
 
-#: timeslots/models.py:121
+#: timeslots/models.py:122
 msgid "Street"
 msgstr "Straße"
 
-#: timeslots/models.py:122
+#: timeslots/models.py:123
 msgid "ZIP"
 msgstr "PLZ"
 
-#: timeslots/models.py:123
+#: timeslots/models.py:124
 msgid "Town"
 msgstr "Stadt"
 
-#: timeslots/models.py:124
+#: timeslots/models.py:125
 msgid "Country"
 msgstr "Land"
 
-#: timeslots/models.py:125
+#: timeslots/models.py:126
 msgid "Phone"
 msgstr "Telefon"
 
-#: timeslots/models.py:182
+#: timeslots/models.py:183
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:191
+#: timeslots/models.py:192
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:235 timeslots/tables.py:16
+#: timeslots/models.py:236 timeslots/tables.py:16
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:236
+#: timeslots/models.py:237
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:250
+#: timeslots/models.py:251
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:251
+#: timeslots/models.py:252
 msgid "Loggings"
 msgstr "Protokolle"
 
