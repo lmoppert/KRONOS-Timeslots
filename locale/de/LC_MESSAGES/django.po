@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 15:57+0200\n"
+"POT-Creation-Date: 2012-09-24 10:48+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -103,7 +103,7 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:222
+#: templates/timeslots/blocked.html:13 timeslots/models.py:232
 msgid "Slot"
 msgstr "Ladefenster"
 
@@ -133,7 +133,7 @@ msgstr "Aufträge als Tabelle anzeigen"
 msgid "Blocked"
 msgstr "Geblockt"
 
-#: templates/timeslots/job_list.html:34 timeslots/tables.py:40
+#: templates/timeslots/job_list.html:35 timeslots/tables.py:40
 #: timeslots/tables.py:53
 msgid "No open jobs"
 msgstr "Keine Aufträge Vorhanden"
@@ -235,39 +235,39 @@ msgstr "Auftrags-Nummer"
 msgid "Description"
 msgstr "Auftragsbeschreibung"
 
-#: templates/timeslots/slot_detail.html:93
+#: templates/timeslots/slot_detail.html:96
 msgid "This charge will be an intermodal freight transport (KLV)"
 msgstr "Dieser Auftrag wird im Kombinierten Ladungsverkehr (KLV) transportiert"
 
-#: templates/timeslots/slot_detail.html:100
+#: templates/timeslots/slot_detail.html:105
 msgid "Release blocked slot"
 msgstr "Ladefenster freigeben, Daten löschen"
 
-#: templates/timeslots/slot_detail.html:103
+#: templates/timeslots/slot_detail.html:108
 msgid "Release slot and keep data"
 msgstr "Ladefenster freigeben, Daten behalten"
 
-#: templates/timeslots/slot_detail.html:106
+#: templates/timeslots/slot_detail.html:111
 msgid "Keep slot blocked"
 msgstr "Ladefenster geblockt lassen"
 
-#: templates/timeslots/slot_detail.html:110
+#: templates/timeslots/slot_detail.html:115
 msgid "Make reservation"
 msgstr "Reservieren"
 
-#: templates/timeslots/slot_detail.html:110
+#: templates/timeslots/slot_detail.html:115
 msgid "Update reservation"
 msgstr "Reservierung aktualisieren"
 
-#: templates/timeslots/slot_detail.html:113
+#: templates/timeslots/slot_detail.html:118
 msgid "Cancel reservation"
 msgstr "Reservierung abbrechen"
 
-#: templates/timeslots/slot_detail.html:113
+#: templates/timeslots/slot_detail.html:118
 msgid "Delete reservation"
 msgstr "Reservierung löschen"
 
-#: templates/timeslots/slot_detail.html:115
+#: templates/timeslots/slot_detail.html:120
 msgid "Reset form"
 msgstr "Formular zurücksetzen"
 
@@ -293,7 +293,7 @@ msgid "Login"
 msgstr "Anmelden"
 
 #: templates/timeslots/user_menu.html:8
-msgid "administration"
+msgid "Administration"
 msgstr "Administration"
 
 #: templates/timeslots/user_menu.html:11
@@ -344,7 +344,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:37 timeslots/models.py:223
+#: timeslots/forms.py:37 timeslots/models.py:233
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -369,6 +369,22 @@ msgstr ""
 "RNVP = Rien ne va plus -- Anzahl der Stunden vor der Verladung, bis zu der "
 "noch Änderungen erlaubt sind. Wenn als Wert Mitternacht angegeben wird, "
 "zähltdie Deadline als Frist"
+
+#: timeslots/models.py:23
+msgid "Choose this option if this station will be opened on weekends"
+msgstr "Wenn diese Option gewählt wird, können Slots auch am Wochenende gebucht werden"
+
+#: timeslots/models.py:24
+msgid ""
+"If this option is marked, the reservation form offers the opportunity to add "
+"more than one job"
+msgstr "Wenn diese Option gewählt wird, können bei der Reservierung mehrere Aufträge für einen Slot angegeben werden"
+
+#: timeslots/models.py:25
+msgid ""
+"This option adds a Statusbar to the job view, which shows the current "
+"loading status"
+msgstr "Mit dieser Option wird die Anzeige eines Slots um einen Statusbalken ergänzt"
 
 #: timeslots/models.py:26
 msgid ""
@@ -433,27 +449,27 @@ msgstr "Land"
 msgid "Phone"
 msgstr "Telefon"
 
-#: timeslots/models.py:184
+#: timeslots/models.py:191
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:193
+#: timeslots/models.py:203
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:237 timeslots/tables.py:16
+#: timeslots/models.py:247 timeslots/tables.py:16
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:238
+#: timeslots/models.py:248
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:252
+#: timeslots/models.py:262
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:253
+#: timeslots/models.py:263
 msgid "Loggings"
 msgstr "Protokolle"
 

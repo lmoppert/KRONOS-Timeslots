@@ -20,9 +20,9 @@ class Station(models.Model):
     longdescription = models.TextField(blank=True)
     booking_deadline = models.TimeField()
     rnvp = models.TimeField(help_text=_("RVNP = Rien ne vas plus -- time when a slot can not be edited any more, set to Midnight to have the deadline as RNVP"))
-    opened_on_weekend = models.BooleanField(default=False)
-    multiple_charges = models.BooleanField(default=True)
-    has_status = models.BooleanField(default=False)
+    opened_on_weekend = models.BooleanField(default=False, help_text=_("Choose this option if this station will be opened on weekends"))
+    multiple_charges = models.BooleanField(default=True, help_text=_("If this option is marked, the reservation form offers the opportunity to add more than one job"))
+    has_status = models.BooleanField(default=False, help_text=_("This option adds a Statusbar to the job view, which shows the current loading status"))
     has_klv = models.BooleanField(default=False, help_text=_("Choose this option if you want to be able to mark charges with an KLV flag"))
 
     def past_deadline(self, curr_date, curr_time):

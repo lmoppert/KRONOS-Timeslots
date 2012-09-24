@@ -89,12 +89,14 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% if station.has_klv %}
             <div class="section" style="padding-left: 12px">
                 <label class="checkbox">
                     <input type="checkbox" name="is_klv" value=""{% if slot.is_klv %} checked="checked"{% endif %}>
                     {% trans "This charge will be an intermodal freight transport (KLV)" %}
                 </label>
             </div>
+            {% endif %}
             {{ form.management_form }}
 
             <div class="buttons section">

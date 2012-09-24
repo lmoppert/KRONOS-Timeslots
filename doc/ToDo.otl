@@ -19,7 +19,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 70% Weitere Anforderungen
+	[_] 80% Weitere Anforderungen
 		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
 		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
@@ -32,7 +32,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
 		: eventuell mit einem Hinweis darauf, was der Grund ist.
 		[X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
-		[_] KECO: Reservierung soll eine Option KLV enthalten
+		[X] KECO: Reservierung soll eine Option KLV enthalten
 		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
 		: der Übersicht entsprechend hervorgehoben werden.
 		[X] KECO: Verladestatus muss auch vermindert werden könnnen.
@@ -48,7 +48,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
 		: gleichzeitg statt finden.
 		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
-	[X] 100% Bugs
+		[_] Anlieferungen sollten berücksichtigt werden können
+	[_] 90% Bugs
+		[_] KLV Ansicht prüfen, glt derzeit für alle Stationen
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
 		[X] I18n Reservierungsformular: Vom in Englisch
 		[X] I18n Reservierungsformular: Datum in der Überschrift
