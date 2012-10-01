@@ -1,5 +1,6 @@
 # Django settings for project project.
 import os
+import socket
 
 DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -87,7 +88,7 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 
-STATIC_URL = 'http://' + os.uname()[1] + '/static/'
+STATIC_URL = 'http://' + socket.getfqdn() + '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
