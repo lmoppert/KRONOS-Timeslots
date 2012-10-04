@@ -238,9 +238,11 @@ class Job(models.Model):
     A job contains informations about a charge that will be loaden within a slot. There can be several jobs per slot
     but every slot muste contain atleast one valid job.
     """
+    FTL = 25
     slot = models.ForeignKey(Slot)
+
     number = models.CharField(max_length=20)
-    #payload = models.IntegerField()
+    payload = models.PositiveSmallIntegerField(default=FTL)
     description = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -250,6 +252,7 @@ class Job(models.Model):
 
 class Logging(models.Model):
     user = models.ForeignKey(User)
+
     time = models.DateTimeField(editable=False)
     host = models.CharField(max_length=40, blank=True)
     task = models.CharField(max_length=200)
