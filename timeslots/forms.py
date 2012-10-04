@@ -85,5 +85,6 @@ class RequireOneFormSet(BaseInlineFormSet):
         if completed < 1:
             raise forms.ValidationError(_("At least one %(model)s is required.") % {'model': self.model._meta.verbose_name})
 
-JobFormSet = inlineformset_factory(Slot, Job, extra=1, formset=RequireOneFormSet)
+
+JobForm = inlineformset_factory(Slot, Job, extra=1, formset=RequireOneFormSet)
 SingleJobForm = inlineformset_factory(Slot, Job, extra=1, max_num=1, formset=RequireOneFormSet)

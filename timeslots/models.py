@@ -7,7 +7,6 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext_noop
 
-
 class Station(models.Model):
     """
     The Station represents one address, where trucks can be loaded. 
@@ -239,10 +238,11 @@ class Job(models.Model):
     but every slot muste contain atleast one valid job.
     """
     FTL = 25
+    Payload_Choices =  [(x+1,"%s t" % (x+1)) for x in range(FTL)]
     slot = models.ForeignKey(Slot)
 
     number = models.CharField(max_length=20)
-    payload = models.PositiveSmallIntegerField(default=FTL)
+    payload = models.PositiveSmallIntegerField(default=FTL, choices=Payload_Choices)
     description = models.CharField(max_length=200, blank=True)
 
     class Meta:

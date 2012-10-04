@@ -16,6 +16,7 @@ class JobInline(admin.TabularInline):
     extra = 2
 
 class SlotAdmin(admin.ModelAdmin):
+    list_display = ('date', 'block', 'times', 'line', 'company')
     inlines = [JobInline]
 
 class BlockAdmin(admin.ModelAdmin):

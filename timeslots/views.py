@@ -332,7 +332,7 @@ def slot(request, date, block_id, timeslot, line):
     if request.method == 'POST':
         if request.POST.has_key('makeReservation'):
             if block.dock.station.multiple_charges:
-                formset = JobFormSet(request.POST, instance=slot)
+                formset = JobForm(request.POST, instance=slot)
             else:
                 formset = SingleJobForm(request.POST, instance=slot)
             if formset.is_valid():
@@ -364,7 +364,7 @@ def slot(request, date, block_id, timeslot, line):
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))
         if block.dock.station.multiple_charges:
-            formset = JobFormSet(instance=slot)
+            formset = JobForm(instance=slot)
         else:
             formset = SingleJobForm(instance=slot)
 

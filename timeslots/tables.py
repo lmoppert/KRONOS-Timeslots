@@ -2,8 +2,6 @@ from django.utils.translation import ugettext_lazy as _
 import django_tables2 as tables
 from django_tables2.utils import A
 
-from timeslots.models import Job
-
 
 class JobTable(tables.Table):
     number = tables.LinkColumn(
@@ -25,7 +23,11 @@ class JobTable(tables.Table):
             order_by=('slot.block.dock.name'),
             verbose_name=_('Dock')
             )
+    payload = tables.Column(verbose_name=_('Payload'))
     description = tables.Column(verbose_name=_('Description'))
+
+    class Meta:
+        sequence = ('number', 'slot_times', 'slot_block_dock', 'payload', 'description')
 
 
 class StationJobTable(JobTable):
@@ -38,7 +40,7 @@ class StationJobTable(JobTable):
     class Meta:
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
-        sequence = ('number', 'slot_company', 'slot_times', 'slot_block_dock', 'description')
+        sequence = ('number', 'slot_company', 'slot_times', 'slot_block_dock', 'payload', 'description')
 
 
 class UserJobTable(JobTable):
@@ -51,5 +53,5 @@ class UserJobTable(JobTable):
     class Meta:
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
-        sequence = ('number', 'slot_date', 'slot_times', 'slot_block_dock', 'description')
+        sequence = ('number', 'slot_date', 'slot_times', 'slot_block_dock', 'payload', 'description')
 
