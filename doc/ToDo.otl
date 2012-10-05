@@ -14,7 +14,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer
 		[_] Anforderungsoption für die Passwort-Zurücksetzung
 		[_] Link zur Startseite von den "Sonderseiten"
-[_] 54% Meeting vom 13.09.2012
+[_] 56% Meeting vom 13.09.2012
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
@@ -29,7 +29,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 80% Weitere Anforderungen
+	[_] 90% Weitere Anforderungen
 		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
 		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
 		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
@@ -37,7 +37,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
 		[X] RVNP bei allen außer KECO ist die Deadline
 		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
-		[_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
+		[X] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
 		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
 		: eventuell mit einem Hinweis darauf, was der Grund ist.

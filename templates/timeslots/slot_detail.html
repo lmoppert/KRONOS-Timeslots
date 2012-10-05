@@ -5,6 +5,9 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.min.js"></script>
     <script type="text/javascript">
         $(function() {
+            $("td.jobnumber_input .textinput").addClass("input-medium");
+            $("td.payload_input .select").addClass("input-small");
+            $("td.description_input .textinput").addClass("input-xlarge");
             $('.charge_detail').formset({
                 prefix: '{{ form.prefix }}',
                 addText: '<button class="btn btn-mini" name="addCharge"><i class="icon-plus-sign"></i> {% trans "add another charge" %}</button>',
@@ -89,9 +92,9 @@
                 <tbody>
                 {% for f in form %}
                     <tr {% if station.multiple_charges %}class="charge_detail"{% else %}class="single_detail"{% endif %}>
-                        <td>{{ f.id }}{{ f.number|as_crispy_field }}</td>
-                        <td>{{ f.payload|as_crispy_field }}</td>
-                        <td>{{ f.description|as_crispy_field }}</td>
+                        <td class="jobnumber_input">{{ f.id }}{{ f.number|as_crispy_field }}</td>
+                        <td class="payload_input">{{ f.payload|as_crispy_field }}</td>
+                        <td class="description_input">{{ f.description|as_crispy_field }}</td>
                         {% if station.multiple_charges  %}<td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>{% endif %}
                     </tr>
                 {% endfor %}

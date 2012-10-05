@@ -24,7 +24,7 @@
             <td style="med-column">{{ slot.company }}</td>
             <td class="jobs">
                 {% for job in slot.job_set.all %}
-                <div><span class="jobnumber">{{ job.number }}</span>&nbsp;{{ job.description }}</div>
+                <div><span class="jobnumber">{{ job.number }}</span>&nbsp;{{ job.payload }} t&nbsp;{{ job.description }}</div>
                 {% endfor %}
             </td>
         </tr>
