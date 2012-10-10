@@ -49,9 +49,32 @@ class UserJobTable(JobTable):
             order_by=('slot.date'),
             verbose_name=_('Date')
             )
+    station = tables.Column(
+            accessor='slot.block.dock.station', 
+            order_by=('slot.block.dock.station'),
+            verbose_name=_('Station')
+            )
 
     class Meta:
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
-        sequence = ('number', 'slot_date', 'slot_times', 'slot_block_dock', 'payload', 'description')
+        sequence = ('number', 'slot_date', 'slot_times', 'slot_block_dock', 'payload', 'description', 'station')
+
+class UserTable(tables.Table):
+    id = tables.Column(accessor='id')
+    username = tables.Column(accessor='username')
+    company = tables.Column(accessor='userprofile.company')
+    firstname = tables.Column(accessor='first_name')
+    lastname = tables.Column(accessor='last_name')
+    street = tables.Column(accessor='userprofile.street')
+    ZIP = tables.Column(accessor='userprofile.ZIP')
+    town = tables.Column(accessor='userprofile.town')
+    country = tables.Column(accessor='userprofile.country')
+    email = tables.Column(accessor='email')
+    phone = tables.Column(accessor='userprofile.phone')
+    language = tables.Column(accessor='userprofile.language')
+    is_staff = tables.Column(accessor='is_staff')
+
+    class Meta:
+        attrs = {'class': "table table-bordered table-striped"}
 

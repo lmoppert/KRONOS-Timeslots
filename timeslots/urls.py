@@ -16,6 +16,7 @@ urlpatterns = patterns('timeslots.views',
     url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
     url(r'^password_changed/$', 'password_change_done'),
+    url(r'^users/$', 'users'),
 )
 urlpatterns += patterns('django.contrib.auth.views',
     url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'}, name='user_login'),

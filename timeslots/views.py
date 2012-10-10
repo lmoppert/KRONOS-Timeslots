@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.http import HttpResponseRedirect
 
 from django.views.generic.edit import UpdateView
@@ -8,6 +8,7 @@ from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthAr
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth.models import User
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -73,6 +74,17 @@ def password_change_done(request):
 @login_required
 def profile(request):
     return render(request, 'timeslots/userprofile_detail.html')
+
+@login_required
+def users(request):
+    if not request.user.userprofile.is_master:
+        log_task(request, "User %s tried to access the user list but is not member of a master group" % request.user)
+        messages.error(request, _("You are not authorized to access this page!"))
+        return HttpResponseRedirect('/timeslots/profile/')
+    users = get_list_or_404(User, is_active=True)
+    table = UserTable(users)
+    RequestConfig(request, paginate={"per_page": 15}).configure(table)
+    return render(request, 'timeslots/user_list.html', {'table': table})
 
 @login_required
 def slotstatus(request, slot_id, station_id, date):
@@ -351,6 +363,8 @@ def slot(request, date, block_id, timeslot, line):
                 job.delete()
             log_task(request, "User %s has successfully deleted the reservation for slot %s." % (request.user, slot))
             messages.success(request, _('The reservation has been deleted successfully!'))
+            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        elif request.POST.has_key('cancelEditing'):
             return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
         elif request.POST.has_key('releaseSlot'):
             slot.is_blocked = False
