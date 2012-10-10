@@ -368,7 +368,7 @@
     "pk": 1,
     "model": "auth.group",
     "fields": {
-      "name": "Administrator",
+      "name": "administrator",
       "permissions": [
         19,
         20,
