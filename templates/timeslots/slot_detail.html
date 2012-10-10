@@ -111,7 +111,7 @@
             {{ form.management_form }}
 
             <div class="buttons section">
-                {% if slot.is_blocked %}
+            {% if slot.is_blocked %}
                 <button type="submit" class="btn btn-primary" name="deleteSlot" onclick="preventUnload(false)">
                     {% trans "Release blocked slot" %}
                 </button>
@@ -121,15 +121,15 @@
                 <button type="submit" class="btn" name="keepSlotBlocked" onclick="preventUnload(false)">
                     {% trans "Keep slot blocked" %}
                 </button>
-                {% else %}
+            {% else %}
                 <button type="submit" class="btn btn-success" name="makeReservation" onclick="preventUnload(false)">
                     {% if created %}{% trans "Make reservation" %}{% else %}{% trans "Update reservation" %}{% endif %}
                 </button>
                 <button type="submit" class="btn btn-warning" name="cancelReservation" onclick="preventUnload(false)">
                     {% if created %}{% trans "Cancel reservation" %}{% else %}{% trans "Delete reservation" %}{% endif %}
                 </button>
-                <button type="reset" class="btn">{% trans "Reset form" %}</button>
-                {% endif %}
+                {% if not created %} <button type="submit" class="btn" name="cancelEditing" onclick="preventUnload(false)">{% trans "Cancel editing" %}</button> {% endif %}
+            {% endif %}
             </div>
         </form>
     </div>

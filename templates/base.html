@@ -1,66 +1,7 @@
-<!DOCTYPE html>
+{% extends "structure.html" %}
 {% load i18n %}
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <!--[if lt IE 9]>
-        <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta charset="utf-8">
-    <meta name="description" content="KRONOS Timeslots">
-    <meta name="author" content="Lutz Moppert">
-    <title>KRONOS {% trans "Timeslots" %}</title>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-{{ user.userprofile.language }}.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-    {% block javascript %}
-    <script type="text/javascript">
-        $(function(){
-            // Datepicker
-            $('#datepicker').datepicker({ 
-                onSelect: function(dateText, inst) { 
-                    window.location = "/timeslots/station/{{ station.id }}/date/" + dateText + "/{{ target  }}/" 
-                },
-                {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
-                dateFormat: 'yy-mm-dd'
-            });
-            $('#datepicker').datepicker('setDate', '{{ date }}');
-        });
-    </script>
-    {% endblock %}
-    <link type="text/css" href="{{ STATIC_URL }}/img/favicon.ico" rel="shortcut icon">
-    <link type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
-    <link type="text/css" href="{{ STATIC_URL }}css/custom-theme/jquery-ui-1.8.20.custom.css" rel="stylesheet">
-    <link type="text/css" href="{{ STATIC_URL }}css/timeslots.css" rel="stylesheet">
-    <link type="text/css" media="print" href="{{ STATIC_URL }}css/print.css" rel="stylesheet">
-    {% block extra_head %}{% endblock %}
-</head>
 
-<body> 
-<div class="navbar navbar-static-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <span class="span3"><a class="brand" href="{% url timeslots_home %}">
-                    <img src="{{ STATIC_URL }}/img/kronoslogo.png" alt="KRONOS">
-                    <span id="AppName">{% trans "Timeslots" %}</span>
-            </a></span>
-            {% if station %}
-            <span class="pull-left">
-                <form id="station_picker" class="navbar-form" action="/timeslots/station/" method="post">{% csrf_token %}
-                    <select id="selectedStation" name="selectedStation" class="span4" onChange="this.form.submit()">
-                        {% for curr_station in user.userprofile.stations.all %}
-                        <option value="{{ curr_station.id }}" {% ifequal curr_station.id station.id %}selected{% endifequal %}> {{ curr_station.longname }} </option>
-                        {% endfor %}
-                    </select>
-                    <input type="hidden" name="currentDate" id="currentDate" value="{{ date }}">
-                </form>
-            </span>
-            {% endif %}
-            {% if user.is_authenticated %}{% include "timeslots/user_menu.html" %}{% endif %}
-        </div>
-    </div>
-</div>
+{% block container %} 
 
 <div class="container">
     <div class="container-fluid">
@@ -111,7 +52,4 @@
 
 </div> <!-- container -->
 
-{% block extra_script %}{% endblock %}
-
-</body>
-</html>
+{% endblock %}
