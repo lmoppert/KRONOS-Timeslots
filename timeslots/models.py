@@ -237,7 +237,7 @@ class Job(models.Model):
     A job contains informations about a charge that will be loaden within a slot. There can be several jobs per slot
     but every slot muste contain atleast one valid job.
     """
-    FTL = 25
+    FTL = 28
     Payload_Choices =  [(x+1,"%s t" % (x+1)) for x in range(FTL)]
     slot = models.ForeignKey(Slot)
 
