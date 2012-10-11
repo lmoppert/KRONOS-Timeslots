@@ -242,7 +242,7 @@ class Job(models.Model):
     slot = models.ForeignKey(Slot)
 
     number = models.CharField(max_length=20)
-    payload = models.PositiveSmallIntegerField(default=FTL, choices=Payload_Choices)
+    payload = models.PositiveSmallIntegerField(default=25, choices=Payload_Choices)
     description = models.CharField(max_length=200, blank=True)
 
     class Meta:
