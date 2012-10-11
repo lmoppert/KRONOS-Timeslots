@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 16:48+0200\n"
+"POT-Creation-Date: 2012-10-11 16:11+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -37,8 +37,8 @@ msgstr "Anzuzeigende Rampen"
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: templates/base.html:33 templates/timeslots/slot_detail.html:43
-#: templates/timeslots/slot_detail.html:77
+#: templates/base.html:33 templates/timeslots/slot_detail.html:44
+#: templates/timeslots/slot_detail.html:79
 msgid "Error: "
 msgstr "Fehler:"
 
@@ -103,7 +103,7 @@ msgstr "Einige Ladezeiten waren bereits reserviert"
 msgid "Slot"
 msgstr "Ladefenster"
 
-#: templates/timeslots/blocked.html:13 templates/timeslots/slot_detail.html:55
+#: templates/timeslots/blocked.html:13 templates/timeslots/slot_detail.html:57
 #: timeslots/models.py:120 timeslots/tables.py:37
 msgid "Company"
 msgstr "Firma"
@@ -139,12 +139,12 @@ msgid "Logfiles for"
 msgstr "Logeinträge für den"
 
 #: templates/timeslots/logging.html:25 templates/timeslots/logging_pdf.html:10
-#: templates/timeslots/slot_detail.html:61
+#: templates/timeslots/slot_detail.html:63
 msgid "User"
 msgstr "Anwender"
 
 #: templates/timeslots/logging.html:26 templates/timeslots/logging_pdf.html:11
-#: templates/timeslots/slot_detail.html:51 timeslots/tables.py:19
+#: templates/timeslots/slot_detail.html:53 timeslots/tables.py:19
 msgid "Time"
 msgstr "Zeit"
 
@@ -157,7 +157,7 @@ msgid "Task"
 msgstr "Eintrag"
 
 #: templates/timeslots/password_change_form.html:18
-#: templates/timeslots/user_menu.html:16
+#: templates/timeslots/user_menu.html:17
 msgid "Change Password"
 msgstr "Passwort ändern"
 
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Reservation for"
 msgstr "Reservierung für den"
 
-#: templates/timeslots/slot_detail.html:40
+#: templates/timeslots/slot_detail.html:41
 msgid ""
 "Your reservation for this slot will end soon! Please fill in the form and "
 "send it."
@@ -192,7 +192,7 @@ msgstr ""
 "Ihre Reservierung für dieses Zeitfenster endet bald! Bitte füllen Sie das "
 "Formular korrekt aus und schicken Sie es ab."
 
-#: templates/timeslots/slot_detail.html:44
+#: templates/timeslots/slot_detail.html:46
 msgid ""
 "Your reservation for this slot has enden! It is not sure, whether any "
 "changes can be saved."
@@ -200,75 +200,75 @@ msgstr ""
 "Ihre Reservierung für dieses Zeitfenster ist abgelaufen und kann "
 "möglicherweise nicht mehr korrekt gespeichert werden!"
 
-#: templates/timeslots/slot_detail.html:59 timeslots/models.py:43
+#: templates/timeslots/slot_detail.html:61 timeslots/models.py:43
 #: timeslots/tables.py:55
 msgid "Station"
 msgstr "Ladestelle"
 
-#: templates/timeslots/slot_detail.html:65 timeslots/models.py:64
+#: templates/timeslots/slot_detail.html:67 timeslots/models.py:64
 #: timeslots/tables.py:24
 msgid "Dock"
 msgstr "Rampe"
 
-#: templates/timeslots/slot_detail.html:67
+#: templates/timeslots/slot_detail.html:69
 msgid "Created"
 msgstr "Erstellt"
 
-#: templates/timeslots/slot_detail.html:74
+#: templates/timeslots/slot_detail.html:76
 msgid "Corresponding jobs"
 msgstr "Zugehörige Aufträge"
 
-#: templates/timeslots/slot_detail.html:74
+#: templates/timeslots/slot_detail.html:76
 msgid "at least one job is required, charges may not exceed FTL"
 msgstr ""
 "Es muss mindestens ein Auftrag angegeben werden. Die Ladung darf die FTL "
 "nicht übersteigen"
 
-#: templates/timeslots/slot_detail.html:86
+#: templates/timeslots/slot_detail.html:88
 msgid "Jobnumber"
 msgstr "Auftrags-Nummer"
 
-#: templates/timeslots/slot_detail.html:87 timeslots/tables.py:26
+#: templates/timeslots/slot_detail.html:89 timeslots/tables.py:26
 msgid "Payload"
 msgstr "Gewicht"
 
-#: templates/timeslots/slot_detail.html:88 timeslots/tables.py:27
+#: templates/timeslots/slot_detail.html:90 timeslots/tables.py:27
 msgid "Description"
 msgstr "Auftragsbeschreibung"
 
-#: templates/timeslots/slot_detail.html:107
+#: templates/timeslots/slot_detail.html:109
 msgid "This charge will be an intermodal freight transport (KLV)"
 msgstr "Dieser Auftrag wird im Kombinierten Ladungsverkehr (KLV) transportiert"
 
-#: templates/timeslots/slot_detail.html:116
+#: templates/timeslots/slot_detail.html:118
 msgid "Release blocked slot"
 msgstr "Ladefenster freigeben, Daten löschen"
 
-#: templates/timeslots/slot_detail.html:119
+#: templates/timeslots/slot_detail.html:121
 msgid "Release slot and keep data"
 msgstr "Ladefenster freigeben, Daten behalten"
 
-#: templates/timeslots/slot_detail.html:122
+#: templates/timeslots/slot_detail.html:124
 msgid "Keep slot blocked"
 msgstr "Ladefenster geblockt lassen"
 
-#: templates/timeslots/slot_detail.html:126
+#: templates/timeslots/slot_detail.html:128
 msgid "Make reservation"
 msgstr "Reservieren"
 
-#: templates/timeslots/slot_detail.html:126
+#: templates/timeslots/slot_detail.html:128
 msgid "Update reservation"
 msgstr "Reservierung aktualisieren"
 
-#: templates/timeslots/slot_detail.html:129
+#: templates/timeslots/slot_detail.html:131
 msgid "Cancel reservation"
 msgstr "Reservierung abbrechen"
 
-#: templates/timeslots/slot_detail.html:129
+#: templates/timeslots/slot_detail.html:131
 msgid "Delete reservation"
 msgstr "Reservierung löschen"
 
-#: templates/timeslots/slot_detail.html:131
+#: templates/timeslots/slot_detail.html:133
 msgid "Cancel editing"
 msgstr "Bearbeiten abbrechen"
 
@@ -288,7 +288,7 @@ msgstr "Änderbar bis"
 msgid "Available stations"
 msgstr "Verfügbare Ladestellen"
 
-#: templates/timeslots/user_list.html:8
+#: templates/timeslots/user_list.html:8 templates/timeslots/user_menu.html:9
 msgid "User list"
 msgstr "Anwenderliste"
 
@@ -301,19 +301,19 @@ msgstr "Anmelden"
 msgid "Administration"
 msgstr "Administration"
 
-#: templates/timeslots/user_menu.html:11
+#: templates/timeslots/user_menu.html:12
 msgid "Browse logfiles"
 msgstr "Logeinträge anschauen"
 
-#: templates/timeslots/user_menu.html:12
+#: templates/timeslots/user_menu.html:13
 msgid "Manage blocked slots"
 msgstr "Ladefenster blocken/freigeben"
 
-#: templates/timeslots/user_menu.html:15
+#: templates/timeslots/user_menu.html:16
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/timeslots/user_menu.html:18
+#: templates/timeslots/user_menu.html:19
 msgid "Logout"
 msgstr "Abmelden"
 

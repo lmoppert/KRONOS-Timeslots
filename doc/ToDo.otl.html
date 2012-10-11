@@ -12,6 +12,7 @@
 pre { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 .Comment { color: #a0b0c0; font-style: italic; }
+.PreProc { color: #1060a0; }
 .Constant { color: #a07040; }
 .Identifier { color: #5b3674; font-style: italic; }
 .Statement { color: #007020; font-weight: bold; }
@@ -21,15 +22,30 @@ body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 <body>
 <pre>
 <span class="Statement">Liste der Offenen Punkte im Projekt Ladezeitensteuerung</span>
-<span class="Identifier">    Zeitplan</span>
-<span class="Constant">        Neues System: Ab 22.10.2012 online, Einträge möglich ab dem 12.11.2012</span>
-<span class="Constant">        Altes System: Alle Einträge ab 12.11.2012 werden geblockt</span>
 <span class="Identifier">    Recht_liche Aufklärung der User über Datenschutz </span>
 <span class="Constant">        Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten</span>
-<span class="Statement">[_] 0% Meeting vom 25.09.2012</span>
-<span class="Identifier">    Nice to have</span>
+<span class="Constant">        Klären, wer die Datenschutz-Hinweise erstellt</span>
+<span class="PreProc">            Herr Rohrbeck</span>
+<span class="Identifier">    [_] % Organisatorisches</span>
+<span class="Constant">        [_] Übersicht mit den Berechtigungen erstellen</span>
+<span class="Constant">        [_] Hosting bestellen lassen</span>
+<span class="Constant">        [_] Domains bestellen lassen</span>
+<span class="Identifier">    [_] 0% Nice to have</span>
 <span class="Constant">        [_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer</span>
-<span class="Statement">[_] 54% Meeting vom 13.09.2012</span>
+<span class="Constant">        [_] Anforderungsoption für die Passwort-Zurücksetzung</span>
+<span class="Constant">        [_] Link zur Startseite von den &quot;Sonderseiten&quot;</span>
+<span class="Constant">        [_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.</span>
+<span class="Comment">        : Slot sollte dann vom Eigentümer weiter angeschaut werden können,</span>
+<span class="Comment">        : eventuell mit einem Hinweis darauf, was der Grund ist.</span>
+<span class="Constant">        [_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.</span>
+<span class="Comment">        : So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung</span>
+<span class="Comment">        : stehen. Das ist also eine Einschränkung, die Rampenübergreifend für</span>
+<span class="Comment">        : eine Ladestelle gilt.</span>
+<span class="Comment">        : Beispiel Titanstr.:</span>
+<span class="Comment">        : 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen</span>
+<span class="Comment">        : gleichzeitg statt finden.</span>
+<span class="Constant">        [_] Status-Funktion für Titanstr. mit nur zwei Zuständen</span>
+<span class="Constant">        [_] Anlieferungen sollten berücksichtigt werden können</span>
 <span class="Identifier">    [_] 0% Domänen</span>
 <span class="Constant">        [_] kronos-timeslots.com</span>
 <span class="Constant">        [_] kronos-timeslots.eu</span>
@@ -44,37 +60,8 @@ body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 <span class="Comment">        : Majuro</span>
 <span class="Constant">        [X] Andreas Wild, KRONOS, Lademeister</span>
 <span class="Comment">        : Skopje</span>
-<span class="Identifier">    [_] 80% Weitere Anforderungen</span>
-<span class="Constant">        [X] Die Sprache sollte sich ändern, sobald das Profil geändert wird</span>
-<span class="Constant">        [X] Anzeige von &quot;KRONOS TITAN GmbH&quot; auf der Startseite ist ungünstig</span>
-<span class="Comment">        : Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS</span>
-<span class="Comment">        : International oder die beiden Logos</span>
-<span class="Constant">        [X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.</span>
-<span class="Constant">        [X] RVNP bei allen außer KECO ist die Deadline</span>
-<span class="Constant">        [X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein</span>
-<span class="Constant">        [_] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.</span>
-<span class="Constant">        [_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.</span>
-<span class="Comment">        : Slot sollte dann vom Eigentümer weiter angeschaut werden können,</span>
-<span class="Comment">        : eventuell mit einem Hinweis darauf, was der Grund ist.</span>
-<span class="Constant">        [X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts</span>
-<span class="Constant">        [X] KECO: Reservierung soll eine Option KLV enthalten</span>
-<span class="Comment">        : KLV markierte Aufträge haben eine höhere Priorität, sollten also in</span>
-<span class="Comment">        : der Übersicht entsprechend hervorgehoben werden.</span>
-<span class="Constant">        [X] KECO: Verladestatus muss auch vermindert werden könnnen.</span>
-<span class="Comment">        : Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit</span>
-<span class="Comment">        : den Status über den eigentlich finalen Zustand hinaus zu ändern und</span>
-<span class="Comment">        : so auf den Anfang zurück zu setzen </span>
-<span class="Identifier">    [_] 0% Nice to have</span>
-<span class="Constant">        [_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.</span>
-<span class="Comment">        : So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung</span>
-<span class="Comment">        : stehen. Das ist also eine Einschränkung, die Rampenübergreifend für</span>
-<span class="Comment">        : eine Ladestelle gilt.</span>
-<span class="Comment">        : Beispiel Titanstr.:</span>
-<span class="Comment">        : 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen</span>
-<span class="Comment">        : gleichzeitg statt finden.</span>
-<span class="Constant">        [_] Status-Funktion für Titanstr. mit nur zwei Zuständen</span>
-<span class="Constant">        [_] Anlieferungen sollten berücksichtigt werden können</span>
-<span class="Identifier">    [_] 90% Bugs</span>
+<span class="Statement">[_] 99% Bugs</span>
+<span class="Identifier">    [_] 90% Meeting vom 13.09.2012</span>
 <span class="Constant">        [_] KLV Ansicht prüfen, glt derzeit für alle Stationen</span>
 <span class="Constant">        [X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID</span>
 <span class="Constant">        [X] I18n Reservierungsformular: Vom in Englisch</span>
@@ -85,7 +72,6 @@ body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 <span class="Constant">        [X] Job-Liste wird falsch dargestellt für Jobs ohne Beschreibung</span>
 <span class="Constant">        [X] User-Menü funktioniert nicht im IE8</span>
 <span class="Constant">        [X] Button für &quot;geblockt lassen&quot; fehlt</span>
-<span class="Statement">[X] 100% Bugs</span>
 <span class="Identifier">    [X] 100% Detailansich für Slots</span>
 <span class="Constant">        [X] Die Übersetzung für den Form-Fehler fehlt</span>
 <span class="Constant">        [X] Hart kodierte Station ID muss verschwinden</span>
@@ -106,6 +92,23 @@ body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
 <span class="Constant">        [X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch</span>
 <span class="Constant">        [X] Geblockte Slots sind verlinkt</span>
 <span class="Statement">[X] 100% Konkrete Implementierungen</span>
+<span class="Identifier">    [X] 100% Weitere Anforderungen</span>
+<span class="Constant">        [X] Die Sprache sollte sich ändern, sobald das Profil geändert wird</span>
+<span class="Constant">        [X] Anzeige von &quot;KRONOS TITAN GmbH&quot; auf der Startseite ist ungünstig</span>
+<span class="Comment">        : Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS</span>
+<span class="Comment">        : International oder die beiden Logos</span>
+<span class="Constant">        [X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.</span>
+<span class="Constant">        [X] RVNP bei allen außer KECO ist die Deadline</span>
+<span class="Constant">        [X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein</span>
+<span class="Constant">        [X] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.</span>
+<span class="Constant">        [X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts</span>
+<span class="Constant">        [X] KECO: Reservierung soll eine Option KLV enthalten</span>
+<span class="Comment">        : KLV markierte Aufträge haben eine höhere Priorität, sollten also in</span>
+<span class="Comment">        : der Übersicht entsprechend hervorgehoben werden.</span>
+<span class="Constant">        [X] KECO: Verladestatus muss auch vermindert werden könnnen.</span>
+<span class="Comment">        : Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit</span>
+<span class="Comment">        : den Status über den eigentlich finalen Zustand hinaus zu ändern und</span>
+<span class="Comment">        : so auf den Anfang zurück zu setzen </span>
 <span class="Identifier">    [X] 100% Grundfunktionen</span>
 <span class="Constant">        [X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)</span>
 <span class="Constant">        [X] Das Formular für User und das UserProfile im Admin Backend verschmelzen</span>

@@ -1,20 +1,28 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-	Zeitplan
-		Neues System: Ab 22.10.2012 online, Einträge möglich ab dem 12.11.2012
-		Altes System: Alle Einträge ab 12.11.2012 werden geblockt
 	Recht_liche Aufklärung der User über Datenschutz 
 		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
 		Klären, wer die Datenschutz-Hinweise erstellt
-	Organisatorisches
-		Übersicht mit den Berechtigungen erstellen
-		Hosting bestellen lassen
-		Domains bestellen lassen
-[_] 0% Meeting vom 25.09.2012
-	Nice to have
+			Herr Rohrbeck
+	[_] % Organisatorisches
+		[_] Übersicht mit den Berechtigungen erstellen
+		[_] Hosting bestellen lassen
+		[_] Domains bestellen lassen
+	[_] 0% Nice to have
 		[_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer
 		[_] Anforderungsoption für die Passwort-Zurücksetzung
 		[_] Link zur Startseite von den "Sonderseiten"
-[_] 56% Meeting vom 13.09.2012
+		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
+		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
+		: eventuell mit einem Hinweis darauf, was der Grund ist.
+		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
+		: So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
+		: stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
+		: eine Ladestelle gilt.
+		: Beispiel Titanstr.:
+		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
+		: gleichzeitg statt finden.
+		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
+		[_] Anlieferungen sollten berücksichtigt werden können
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
@@ -29,37 +37,8 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
 		: Skopje
-	[_] 90% Weitere Anforderungen
-		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
-		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
-		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
-		: International oder die beiden Logos
-		[X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
-		[X] RVNP bei allen außer KECO ist die Deadline
-		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
-		[X] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
-		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
-		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
-		: eventuell mit einem Hinweis darauf, was der Grund ist.
-		[X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
-		[X] KECO: Reservierung soll eine Option KLV enthalten
-		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
-		: der Übersicht entsprechend hervorgehoben werden.
-		[X] KECO: Verladestatus muss auch vermindert werden könnnen.
-		: Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit
-		: den Status über den eigentlich finalen Zustand hinaus zu ändern und
-		: so auf den Anfang zurück zu setzen 
-	[_] 0% Nice to have
-		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
-		: So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
-		: stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
-		: eine Ladestelle gilt.
-		: Beispiel Titanstr.:
-		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
-		: gleichzeitg statt finden.
-		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
-		[_] Anlieferungen sollten berücksichtigt werden können
-	[_] 90% Bugs
+[_] 99% Bugs
+	[_] 90% Meeting vom 13.09.2012
 		[_] KLV Ansicht prüfen, glt derzeit für alle Stationen
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
 		[X] I18n Reservierungsformular: Vom in Englisch
@@ -70,7 +49,6 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Job-Liste wird falsch dargestellt für Jobs ohne Beschreibung
 		[X] User-Menü funktioniert nicht im IE8
 		[X] Button für "geblockt lassen" fehlt
-[X] 100% Bugs
 	[X] 100% Detailansich für Slots
 		[X] Die Übersetzung für den Form-Fehler fehlt
 		[X] Hart kodierte Station ID muss verschwinden
@@ -91,6 +69,23 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Fehlermeldung bei Zugriff auf geblockte Slots sind falsch
 		[X] Geblockte Slots sind verlinkt
 [X] 100% Konkrete Implementierungen
+	[X] 100% Weitere Anforderungen
+		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
+		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
+		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
+		: International oder die beiden Logos
+		[X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
+		[X] RVNP bei allen außer KECO ist die Deadline
+		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
+		[X] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
+		[X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
+		[X] KECO: Reservierung soll eine Option KLV enthalten
+		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
+		: der Übersicht entsprechend hervorgehoben werden.
+		[X] KECO: Verladestatus muss auch vermindert werden könnnen.
+		: Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit
+		: den Status über den eigentlich finalen Zustand hinaus zu ändern und
+		: so auf den Anfang zurück zu setzen 
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das Formular für User und das UserProfile im Admin Backend verschmelzen

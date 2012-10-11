@@ -6,6 +6,8 @@
             <ul class="dropdown-menu">
                 {% if user|in_group:"administrator" %}
                 <li><a href="/admin/">{% trans "Administration" %}</a></li>
+                <li><a href="{% url timeslots_user_list %}">{% trans "User list" %}</a></li>
+                <li class="divider"></li>
                 {% endif %}
                 {% if user|in_group:"administrator,loadmaster" %}
                 <li><a href="{% url timeslots_logging %}">{% trans "Browse logfiles" %}</a></li>
