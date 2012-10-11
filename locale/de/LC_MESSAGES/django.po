@@ -114,7 +114,7 @@ msgstr "Ladefenster blocken"
 
 #: templates/timeslots/details_subnav.html:4
 msgid "Show station"
-msgstr "Slot-Übersicht anzeigen"
+msgstr "Ladezeiten-Übersicht anzeigen"
 
 #: templates/timeslots/details_subnav.html:5
 msgid "Show list of timeslots"
