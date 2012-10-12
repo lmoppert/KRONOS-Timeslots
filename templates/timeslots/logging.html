@@ -18,6 +18,7 @@
 
 {% block content %}
 <h1>{% trans "Logfiles for" %} {{ day }}</h1>
+<a href="../export/{{ day|date:'Y-m' }}"><i class="icon icon-download-alt"></i> Logfile-{{ day|date:'Y-m' }}.csv</a>
 <div class="section">
     <table class="table table-bordered table-striped">
         <thead>

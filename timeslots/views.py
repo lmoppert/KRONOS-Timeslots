@@ -1,6 +1,6 @@
 from django.db.models import F
 from django.shortcuts import get_object_or_404, get_list_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.views.generic.edit import UpdateView
 from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthArchiveView
@@ -23,7 +23,7 @@ from timeslots.models import *
 from timeslots.forms import *
 from timeslots.tables import *
 from timeslots.utils import *
-
+import csv
 
 # Class-Based-Views
 @cbv_decorator(login_required)
@@ -62,6 +62,26 @@ def logging_redirect(request):
     t = datetime.now()
     kwargs = {'year': t.strftime("%Y"), 'month': t.strftime("%m"), 'day': t.strftime("%d")}
     return HttpResponseRedirect(reverse('timeslots_logging_day', kwargs=kwargs))
+
+@login_required
+def logging_export(request, year, month):
+    if not request.user.userprofile.is_master:
+        log_task(request, "User %s tried to export logfiles but is not member of a master group" % request.user)
+        messages.error(request, _("You are not authorized to access this page!"))
+        return HttpResponseRedirect('/timeslots/profile/')
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="timeslots-user-list.csv'
+    writer = csv.writer(response)
+    writer.writerow(['User', 'Time', 'Host', 'Task'])
+    data = Logging.objects.filter(time__year=year).filter(time__month=month)
+    for d in data:
+        row = []
+        row.append(d.user.username.encode('utf-8'))
+        row.append(d.time)
+        row.append(d.host.encode('utf-8'))
+        row.append(d.task.encode('utf-8'))
+        writer.writerow(row)
+    return response
 
 def logout_page(request):
     logout_then_login(request)

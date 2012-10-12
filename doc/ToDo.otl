@@ -1,46 +1,47 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-	Recht_liche Aufklärung der User über Datenschutz 
-		Erfolgt beim ersten Anmelden oder beim Zusenden der Benutzerdaten
-		Klären, wer die Datenschutz-Hinweise erstellt
-			Herr Rohrbeck
-	[_] % Organisatorisches
-		[_] Übersicht mit den Berechtigungen erstellen
+	[_] 0% Herr Rohrbeck
+		[_] Erstellen eines Datenschutz-Hinweises
+		[_] Erstellen eines Impressums
+		[_] Erstellen eines Disclaimers
+	[_] 66% Organisatorisches
+		[X] Übersicht mit den Berechtigungen erstellen
 		[_] Hosting bestellen lassen
-		[_] Domains bestellen lassen
-	[_] 0% Nice to have
+		[X] 100% Domains bestellen lassen
+			[X] kronos-timeslots.com
+			[X] kronos-timeslots.eu
+	[_] 12% Nice to have
 		[_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer
 		[_] Anforderungsoption für die Passwort-Zurücksetzung
-		[_] Link zur Startseite von den "Sonderseiten"
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
-		: Slot sollte dann vom Eigentümer weiter angeschaut werden können,
-		: eventuell mit einem Hinweis darauf, was der Grund ist.
+		:   Slot sollte dann vom Eigentümer weiter angeschaut werden können,
+		:   eventuell mit einem Hinweis darauf, was der Grund ist.
 		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
-		: So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
-		: stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
-		: eine Ladestelle gilt.
-		: Beispiel Titanstr.:
-		: 3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
-		: gleichzeitg statt finden.
+		:   So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
+		:   stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
+		:   eine Ladestelle gilt.
+		:   Beispiel Titanstr.:
+		:   3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
+		:   gleichzeitg statt finden.
 		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
 		[_] Anlieferungen sollten berücksichtigt werden können
 		[_] Funktion zum löschen von Altdaten implementieren
-	[_] 0% Domänen
-		[_] kronos-timeslots.com
-		[_] kronos-timeslots.eu
+		[X] Link zur Startseite von den "Sonderseiten" (Im User-Menü)
+		[_] Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
+		:   Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
 	[X] 100% Neue User anlegen
 		[X] Christian Schmidt, KECO, Spediteur
-		: Bamako
+		:   Bamako
 		[X] Elsa Rodrigues-Kloss, TiO2, Spediteur
-		: Valletta
+		:   Valletta
 		[X] Rita Longerich, PWT, Spediteur
-		: Rabat
+		:   Rabat
 		[X] Ralf Schäfer, Chemion, Autohof (nur Werk Leverkusen)
-		: Majuro
+		:   Majuro
 		[X] Andreas Wild, KRONOS, Lademeister
-		: Skopje
-[_] 99% Bugs
-	[_] 90% Meeting vom 13.09.2012
-		[_] KLV Ansicht prüfen, glt derzeit für alle Stationen
+		:   Skopje
+[X] 100% Bugs
+	[X] 100% Meeting vom 13.09.2012
+		[X] KLV Ansicht prüfen, glt derzeit für alle Stationen
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
 		[X] I18n Reservierungsformular: Vom in Englisch
 		[X] I18n Reservierungsformular: Datum in der Überschrift
@@ -146,9 +147,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Die Adresse kann geändert werden
 		[X] Die Userdaten (Name, Vorname und E-Mail können geändert werden
 		[X] Das Passwort kann geändert werden 
-[_] 91% Logging_
-	[_] 66% Implementierungen
-		[_] Log-Dateien sollten exportierbar sein
+[X] 100% Logging_
+	[X] 100% Implementierungen
+		[X] Log-Dateien sollten exportierbar sein
 		[X] Alle Aktionen sollten in ein dediziertes Logfile oder die DB geschrieben werden
 		[X] Formatierung der Logs sollte gut lesbar sein
 	[X] 100% Station
@@ -173,5 +174,3 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] URLs mit Hilfe von reverse und url erzeugen
 		[X] Debug modus durch Umgebungsvariable steuern
 Nice To Have
-	Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
-		Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
