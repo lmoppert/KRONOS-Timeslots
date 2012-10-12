@@ -1,0 +1,1366 @@
+[
+    {
+        "pk": 1,
+        "model": "timeslots.station",
+        "fields": {
+            "booking_deadline": "15:00:00",
+            "has_klv": false,
+            "name": "Titanstra\u00dfe",
+            "rnvp": "00:00:00",
+            "longdescription": "Titanstra\u00dfe 55,\r\n51373 Leverkusen",
+            "multiple_charges": true,
+            "opened_on_weekend": false,
+            "shortdescription": "KRONOS Leverkusen",
+            "has_status": false
+        }
+    },
+    {
+        "pk": 2,
+        "model": "timeslots.station",
+        "fields": {
+            "booking_deadline": "15:00:00",
+            "has_klv": true,
+            "name": "Werk Leverkusen",
+            "rnvp": "01:00:00",
+            "longdescription": "",
+            "multiple_charges": false,
+            "opened_on_weekend": true,
+            "shortdescription": "FERROFLOC / KRONOFLOC",
+            "has_status": true
+        }
+    },
+    {
+        "pk": 3,
+        "model": "timeslots.station",
+        "fields": {
+            "booking_deadline": "15:30:00",
+            "has_klv": false,
+            "name": "KRONOS Nordenham",
+            "rnvp": "00:00:00",
+            "longdescription": "",
+            "multiple_charges": true,
+            "opened_on_weekend": false,
+            "shortdescription": "Werk Nordenham",
+            "has_status": false
+        }
+    },
+    {
+        "pk": 4,
+        "model": "timeslots.station",
+        "fields": {
+            "booking_deadline": "15:00:00",
+            "has_klv": false,
+            "name": "Ghent",
+            "rnvp": "00:00:00",
+            "longdescription": "",
+            "multiple_charges": true,
+            "opened_on_weekend": false,
+            "shortdescription": "Langerbrugge",
+            "has_status": false
+        }
+    },
+    {
+        "pk": 5,
+        "model": "timeslots.station",
+        "fields": {
+            "booking_deadline": "15:00:00",
+            "has_klv": false,
+            "name": "Albers",
+            "rnvp": "00:00:00",
+            "longdescription": "Zus\u00e4tzliche Siloverladungen nur nach Absprache m\u00f6glich.",
+            "multiple_charges": true,
+            "opened_on_weekend": false,
+            "shortdescription": "Albers - Nordenham",
+            "has_status": false
+        }
+    },
+    {
+        "pk": 1,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 1,
+            "name": "Truck",
+            "description": "Palettenbeladung"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 1,
+            "name": "Container",
+            "description": "Container Beladung"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 2,
+            "name": "F 26 West",
+            "description": "FERROFLOC / KRONOFLOC"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 3,
+            "name": "Truck",
+            "description": "Paletten Verladung"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 3,
+            "name": "Container",
+            "description": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 3,
+            "name": "Silo",
+            "description": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 4,
+            "name": "Truck",
+            "description": "non Container"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 4,
+            "name": "Truck/Cont",
+            "description": "Truck or Container"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 4,
+            "name": "Silo ACE",
+            "description": ""
+        }
+    },
+    {
+        "pk": 10,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 4,
+            "name": "Silo BD",
+            "description": ""
+        }
+    },
+    {
+        "pk": 11,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 5,
+            "name": "Truck",
+            "description": ""
+        }
+    },
+    {
+        "pk": 12,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 5,
+            "name": "Container",
+            "description": ""
+        }
+    },
+    {
+        "pk": 13,
+        "model": "timeslots.dock",
+        "fields": {
+            "station": 5,
+            "name": "Silo",
+            "description": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:00:00",
+            "slotduration": 45,
+            "dock": 1,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 7
+        }
+    },
+    {
+        "pk": 8,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "13:00:00",
+            "slotduration": 45,
+            "dock": 1,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:00:00",
+            "slotduration": 45,
+            "dock": 2,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 7
+        }
+    },
+    {
+        "pk": 10,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "13:00:00",
+            "slotduration": 45,
+            "dock": 2,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 3
+        }
+    },
+    {
+        "pk": 11,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "00:00:00",
+            "slotduration": 60,
+            "dock": 3,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 24
+        }
+    },
+    {
+        "pk": 12,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:00:00",
+            "slotduration": 45,
+            "dock": 4,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 11
+        }
+    },
+    {
+        "pk": 13,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:00:00",
+            "slotduration": 40,
+            "dock": 5,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 13
+        }
+    },
+    {
+        "pk": 14,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:00:00",
+            "slotduration": 105,
+            "dock": 6,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 5
+        }
+    },
+    {
+        "pk": 15,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:30:00",
+            "slotduration": 45,
+            "dock": 7,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 10
+        }
+    },
+    {
+        "pk": 16,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "07:30:00",
+            "slotduration": 45,
+            "dock": 8,
+            "linecount": 2,
+            "max_slots": 0,
+            "slotcount": 10
+        }
+    },
+    {
+        "pk": 17,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "08:00:00",
+            "slotduration": 60,
+            "dock": 9,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 7
+        }
+    },
+    {
+        "pk": 18,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "08:00:00",
+            "slotduration": 60,
+            "dock": 10,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 7
+        }
+    },
+    {
+        "pk": 19,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "08:00:00",
+            "slotduration": 60,
+            "dock": 11,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 8
+        }
+    },
+    {
+        "pk": 20,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "08:00:00",
+            "slotduration": 60,
+            "dock": 12,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 8
+        }
+    },
+    {
+        "pk": 21,
+        "model": "timeslots.block",
+        "fields": {
+            "start": "08:00:00",
+            "slotduration": 180,
+            "dock": 13,
+            "linecount": 1,
+            "max_slots": 0,
+            "slotcount": 3
+        }
+    },
+    {
+        "pk": 1,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "country": "Deutschland",
+            "company": "TGL",
+            "phone": "+49 214 356 2893",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 2
+        }
+    },
+    {
+        "pk": 3,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "country": "Deutschland",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 9
+        }
+    },
+    {
+        "pk": 12,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                2
+            ],
+            "country": "Deutschland",
+            "company": "TGL",
+            "phone": "02143562535",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 12
+        }
+    },
+    {
+        "pk": 13,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 13
+        }
+    },
+    {
+        "pk": 14,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                2
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 14
+        }
+    },
+    {
+        "pk": 15,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Chemion",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 15
+        }
+    },
+    {
+        "pk": 16,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1
+            ],
+            "country": "Deutschland",
+            "company": "TGL",
+            "phone": "+49 214 356 2881",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 16
+        }
+    },
+    {
+        "pk": 17,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                3,
+                5
+            ],
+            "country": "",
+            "company": "TGN",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 17
+        }
+    },
+    {
+        "pk": 18,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                3
+            ],
+            "country": "",
+            "company": "TGN",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 18
+        }
+    },
+    {
+        "pk": 19,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                3
+            ],
+            "country": "",
+            "company": "TGN",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 19
+        }
+    },
+    {
+        "pk": 20,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                4
+            ],
+            "country": "",
+            "company": "KBL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 20
+        }
+    },
+    {
+        "pk": 21,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                5
+            ],
+            "country": "",
+            "company": "Albers",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 21
+        }
+    },
+    {
+        "pk": 22,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                4
+            ],
+            "country": "",
+            "company": "KBL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 22
+        }
+    },
+    {
+        "pk": 23,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                4
+            ],
+            "country": "",
+            "company": "Bertschi",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 23
+        }
+    },
+    {
+        "pk": 24,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 24
+        }
+    },
+    {
+        "pk": 25,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Blok",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 25
+        }
+    },
+    {
+        "pk": 26,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Titanstra\u00dfe 55",
+            "user": 26
+        }
+    },
+    {
+        "pk": 28,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Chemion",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 28
+        }
+    },
+    {
+        "pk": 29,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                5
+            ],
+            "country": "",
+            "company": "DHL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 29
+        }
+    },
+    {
+        "pk": 30,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                4
+            ],
+            "country": "",
+            "company": "Dasbach",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 30
+        }
+    },
+    {
+        "pk": 31,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                3,
+                5
+            ],
+            "country": "",
+            "company": "Dasbach Duisburg",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 31
+        }
+    },
+    {
+        "pk": 32,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "B\u00fctef\u00fchr",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 32
+        }
+    },
+    {
+        "pk": 33,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "EP Euro",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 33
+        }
+    },
+    {
+        "pk": 34,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Lehnkering Euro",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 34
+        }
+    },
+    {
+        "pk": 35,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                4
+            ],
+            "country": "",
+            "company": "KBL",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 35
+        }
+    },
+    {
+        "pk": 36,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1
+            ],
+            "country": "",
+            "company": "Greiwing packed",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 36
+        }
+    },
+    {
+        "pk": 37,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                4
+            ],
+            "country": "",
+            "company": "Lalemant",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 37
+        }
+    },
+    {
+        "pk": 38,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Lehnkering Tank",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 38
+        }
+    },
+    {
+        "pk": 39,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Nolden",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 39
+        }
+    },
+    {
+        "pk": 40,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 40
+        }
+    },
+    {
+        "pk": 41,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 41
+        }
+    },
+    {
+        "pk": 42,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1
+            ],
+            "country": "",
+            "company": "Schmidt K\u00f6ln",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 42
+        }
+    },
+    {
+        "pk": 43,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "Leverkusen",
+            "language": "de",
+            "ZIP": "51373",
+            "stations": [
+                2
+            ],
+            "country": "Germany",
+            "company": "TGL",
+            "phone": "",
+            "readonly": false,
+            "street": "Peschstra\u00dfe 5",
+            "user": 43
+        }
+    },
+    {
+        "pk": 44,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Ohl",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 44
+        }
+    },
+    {
+        "pk": 45,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Reltrans W",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 45
+        }
+    },
+    {
+        "pk": 46,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Richter Tank",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 46
+        }
+    },
+    {
+        "pk": 47,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Samskip",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 47
+        }
+    },
+    {
+        "pk": 48,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Samskip",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 48
+        }
+    },
+    {
+        "pk": 49,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Schenker Austria",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 49
+        }
+    },
+    {
+        "pk": 50,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4
+            ],
+            "country": "",
+            "company": "Schmidt HN",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 50
+        }
+    },
+    {
+        "pk": 51,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Talke Tank",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 51
+        }
+    },
+    {
+        "pk": 52,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "TransTrading",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 52
+        }
+    },
+    {
+        "pk": 53,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Unifeeder",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 53
+        }
+    },
+    {
+        "pk": 54,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "Sun Global",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 54
+        }
+    },
+    {
+        "pk": 55,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "en",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4
+            ],
+            "country": "",
+            "company": "Lidercister",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 55
+        }
+    },
+    {
+        "pk": 56,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "country": "",
+            "company": "GUS",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 56
+        }
+    },
+    {
+        "pk": 57,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Konsor",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 57
+        }
+    },
+    {
+        "pk": 58,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                2
+            ],
+            "country": "",
+            "company": "Van der lee",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 58
+        }
+    },
+    {
+        "pk": 59,
+        "model": "timeslots.userprofile",
+        "fields": {
+            "town": "",
+            "language": "de",
+            "ZIP": "",
+            "stations": [
+                1,
+                3,
+                5
+            ],
+            "country": "",
+            "company": "Albers",
+            "phone": "",
+            "readonly": false,
+            "street": "",
+            "user": 59
+        }
+    },
+]
