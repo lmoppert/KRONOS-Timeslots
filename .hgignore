@@ -9,3 +9,4 @@ syntax: glob
 *~
 ~$*
 logs/*.log
+doc/hosting/*

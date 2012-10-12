@@ -83,7 +83,7 @@ def users(request):
         return HttpResponseRedirect('/timeslots/profile/')
     users = get_list_or_404(User, is_active=True)
     table = UserTable(users)
-    RequestConfig(request, paginate={"per_page": 15}).configure(table)
+    RequestConfig(request, paginate={"per_page": 10}).configure(table)
     return render(request, 'timeslots/user_list.html', {'table': table})
 
 @login_required

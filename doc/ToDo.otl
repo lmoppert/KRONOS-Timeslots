@@ -23,6 +23,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		: gleichzeitg statt finden.
 		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
 		[_] Anlieferungen sollten berücksichtigt werden können
+		[_] Funktion zum löschen von Altdaten implementieren
 	[_] 0% Domänen
 		[_] kronos-timeslots.com
 		[_] kronos-timeslots.eu
