@@ -22,7 +22,7 @@
                     {% for company, slot in timeslot %}
                     <td class="{% if company == "free" %}slot-free{% elif company == "blocked" %}slot-blocked{% elif company == "reserved" %}slot-reserved{% else %}slot-owned{% endif %}">
                         {% if station.has_status and company != "reserved" and company != "free" and company != "blocked" %}{% show_progress slot user.userprofile %}{% endif %}
-                        {% if company in hidden or request.user.userprofile.is_charger %}
+                        {% if company in hidden or request.user.userprofile.is_readonly %}
                             {% trans company %}
                         {% else %}
                             <a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans company %}</a>

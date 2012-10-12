@@ -305,8 +305,8 @@ def slot(request, date, block_id, timeslot, line):
                     defaults={'company': request.user.userprofile})
 
     # check conditions
-    if request.user.userprofile.is_charger:
-        log_task(request, "Charger %s tried to access slot %s." % (request.user, slot))
+    if request.user.userprofile.is_readonly:
+        log_task(request, "Readonly user %s tried to access slot %s." % (request.user, slot))
         messages.error(request, _('You are not allowed to change this slot!'))
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/jobtable/' % (block.dock.station.id, date))
     if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.is_master and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:

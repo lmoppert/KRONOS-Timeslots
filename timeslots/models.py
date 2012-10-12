@@ -132,9 +132,9 @@ class UserProfile(models.Model):
             return True
     is_master = property(_get_is_master)
 
-    def _get_is_charger(self):
-        return not self.user.groups.filter(name='charger').count() == 0
-    is_charger = property(_get_is_charger)
+    def _get_is_readonly(self):
+        return not (self.user.groups.filter(name='charger').count() == 0 and self.user.groups.filter(name='viewer').count() == 0)
+    is_readonly = property(_get_is_readonly)
 
     @models.permalink
     def get_absolute_url(self):
