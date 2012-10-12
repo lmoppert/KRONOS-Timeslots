@@ -123,7 +123,6 @@ class UserProfile(models.Model):
     town = models.CharField(max_length=200, blank=True, verbose_name=_("Town"))
     country = models.CharField(max_length=200, blank=True, verbose_name=_("Country"))
     phone = models.CharField(max_length=200, blank=True, verbose_name=_("Phone"))
-    readonly = models.BooleanField()
 
     def _get_is_master(self):
         if self.user.groups.filter(name='administrator').count() == 0 and self.user.groups.filter(name='loadmaster').count() == 0 and self.user.groups.filter(name='charger').count() == 0:
