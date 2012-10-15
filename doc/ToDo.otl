@@ -57,14 +57,14 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Mehr Jobs hinzufügen Knopf muss besser positioniert werden
 	[X] Doctype wird nicht angegeben
 	[X] Job-Formular enthält Stolperfalle
-		: Löscht man das letzte Job-Formular und schickt das Formular ab, 
-		: gibt es keinen "add" Knopf mehr
+		:   Löscht man das letzte Job-Formular und schickt das Formular ab, 
+		:   gibt es keinen "add" Knopf mehr
 	[X] Keine Fehlermeldung beim reservieren ohne AN
-		: das Formular wird nicht abgeschickt und es wird ein
-		: korrekter Log-Eintrag erzeugt
+		:   das Formular wird nicht abgeschickt und es wird ein
+		:   korrekter Log-Eintrag erzeugt
 	[X] Dock-Filter bei Tabellenübersicht zeigt nichts an
 	[X] Der Dock-Filter geht beim Datumswechsel verloren.
-		: Filter in die Session schreiben
+		:   Filter in die Session schreiben
 	[X] Der Date-Picker wird nicht vollständig angezeigt bei bestimmten größen
 	[X] Das I18N Feature findet die Übersetzungen nicht
 	[X] 100% Blocken von Slots
@@ -74,20 +74,20 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Weitere Anforderungen
 		[X] Die Sprache sollte sich ändern, sobald das Profil geändert wird
 		[X] Anzeige von "KRONOS TITAN GmbH" auf der Startseite ist ungünstig
-		: Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
-		: International oder die beiden Logos
+		:   Entweder nur KRONOS oder vielleicht KRONOS TITAN GmbH und KRONOS
+		:   International oder die beiden Logos
 		[X] Hinweis bei Reservierung, es kann nur ein FTL geladen werden.
 		[X] RVNP bei allen außer KECO ist die Deadline
 		[X] In der Slot-Ansicht sollte die Auftragsnummer sichtbar sein
 		[X] Bei der Reservierung sollte die Lademenge als Pull-Down angegeben werden können.
 		[X] KECO: Gruppe für Chemion, darf Status einer Reservierung ändern, sonst nichts
 		[X] KECO: Reservierung soll eine Option KLV enthalten
-		: KLV markierte Aufträge haben eine höhere Priorität, sollten also in
-		: der Übersicht entsprechend hervorgehoben werden.
+		:   KLV markierte Aufträge haben eine höhere Priorität, sollten also in
+		:   der Übersicht entsprechend hervorgehoben werden.
 		[X] KECO: Verladestatus muss auch vermindert werden könnnen.
-		: Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit
-		: den Status über den eigentlich finalen Zustand hinaus zu ändern und
-		: so auf den Anfang zurück zu setzen 
+		:   Statt einen weiteren Kopf einzufügen, besteht jetzt die Möglichkeit
+		:   den Status über den eigentlich finalen Zustand hinaus zu ändern und
+		:   so auf den Anfang zurück zu setzen 
 	[X] 100% Grundfunktionen
 		[X] AJAX Funktion um weitere Jobs an einem Slot anzuhängen (Alle außer KECO)
 		[X] Das Formular für User und das UserProfile im Admin Backend verschmelzen
@@ -96,17 +96,17 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Anzeigen der Aufträge ausschließlich für die eigene Firma
 		[X] Das Reservieren von Slots nach der Deadline verhindern
 		[X] Bei der verwendung von URLs die Decoratoren und Namen verwenden
-			: get_absolut_url um einer Instanz die eigene URL beizubringen
-			: url um statische Links zu referenzieren
+		:   get_absolut_url um einer Instanz die eigene URL beizubringen
+		:   url um statische Links zu referenzieren
 		[X] render_to_response durch render ersetzen
 	[X] 100% Zusätzliche Funktionen für KECO
 		[X] 22 Fenster pro Tag Maximum
-			: Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
-			: einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
-			: sind. Das Modell muss um die Funktion erweitert werden
+		:   Anlegen des 22 Slots führt zu einer Fehlermeldung, eventuell mit
+		:   einer Vorwarnung in der Übersicht, wenn bereits 22 Slots belegt
+		:   sind. Das Modell muss um die Funktion erweitert werden
 		[X] Status der Verladung
 		[X] Nur ein Auftrag pro Ladefenster
-			:Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
+		:   Ein Auftrag ist an einen bestimmten Tag zur Verladung gebunden
 		[X] RNVP => Kunden können bis kurz vor Termin noch Aufträge zwischen Slots verschieben
 	[X] 100% Änderungen am Modell
 		[X] Die Ladestellen (Station) um einen Schalter für das Wochenende ergänzen
@@ -122,9 +122,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Beim Reservieren eines Slots muss mindestens eine Auftragsnummer angegeben werden
 		[X] Das Löschen der ungültigen SLots von signalgesteuert auf explizit umstellen
 		[X] Zeitfrist definieren, nach der auftragslose Slots frei gegeben werden
-			: Es findet keine Überprüfung der Auftragsnummer (z.B. Länge, Zahlen...) statt
-			: Bei jedem Request werden alle ungültigen SLots gelöscht, die
-			: Frist liegt bei 5 Minuten
+		:   Es findet keine Überprüfung der Auftragsnummer (z.B. Länge, Zahlen...) statt
+		:   Bei jedem Request werden alle ungültigen SLots gelöscht, die
+		:   Frist liegt bei 5 Minuten
 		[X] Das Formular eines Slots sollte die Existenz der AN validieren
 	[X] 100% Zusätzliche Ansichten für die Auftrags-Übersicht 
 		[X] Zusätzlich eine Übersicht nur nach Zeiten (Dock ist dann eine Spalte)
@@ -136,14 +136,14 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Ein Button erstellen, um Blocks wieder frei zu geben
 		[X] Das abschicken des Formulars erstellt oder ändert die gewählten Slots
 		[X] In der Detailansicht von Slots die Option is_blocked anzeigen
-			: Um geblockte Slots wieder frei geben zu können
+		:   Um geblockte Slots wieder frei geben zu können
 	[X] 100% Stylesheet für den Druck erstellen
 		[X] Kopfzeile ausblenden
 		[X] Seitenleiste ausblenden
 		[X] Fußzeile ausblenden
 	[X] 100% User Profil als Formular anzeigen
 		[X] Die Sprache kann geändert werden
-			: Hierbei muss dann auch die Session Variable korrigiert werden
+		:   Hierbei muss dann auch die Session Variable korrigiert werden
 		[X] Die Adresse kann geändert werden
 		[X] Die Userdaten (Name, Vorname und E-Mail können geändert werden
 		[X] Das Passwort kann geändert werden 
