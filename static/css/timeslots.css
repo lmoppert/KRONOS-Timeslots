@@ -29,6 +29,9 @@ div#timeout-warning {
     margin-bottom: 0;
     color: #555;
 }
+.footer span.separator {
+    margin-left: 30px;
+}
 td.jobs {
     padding-bottom: 2px;
 }

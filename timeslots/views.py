@@ -57,6 +57,9 @@ class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
 
 
 # View functions
+def imprint(request):
+    return render(request, 'timeslots/imprint.html')
+
 @login_required
 def logging_redirect(request):
     t = datetime.now()

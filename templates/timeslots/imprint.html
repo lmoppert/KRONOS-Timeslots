@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Imprint" %}{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{% trans "Imprint" %}</h1>
+</div>
+<h2>KRONOS INTERNATIONAL, Inc.</h2>
+<ul class="unstyled">
+    <li>Peschstrasse 5</li>
+    <li>51373 Leverkusen</li>
+    <li>{% trans "Germany" %}</li>
+    <li>{% trans "Phone" %}: +49 214 356-0</li>
+    <li>{% trans "Fax" %}: +49 214 42150</li>
+    <li>E-Mail: <a href="mailto:kronos.international@kronosww.com">kronos.international@kronosww.com</a></li>
+    <li>Internet: <a href="www.kronosww.com">www.kronosww.com</a></li>
+</ul>
+<ul class="unstyled">
+    <li>{% trans "Company domicile" %}: Wilmington, Del. (USA)/Leverkusen</li>
+    <li>{% trans "Commercial register" %}: Köln HRB 48718</li>
+    <li>{% trans "Board of Directors" %}:</li>
+    <li>Dr. Ulfert Fiand, Robert D. Graham, Klemens Schlüter, Gregory M. Swalwell</li>
+</ul>
+<ul class="unstyled">
+    <li>{% trans "VAT-ID-No." %}: DE 123660321</li>
+</ul>
+<ul class="unstyled">
+    <li>{% trans "Important Legal Information" %}</li>
+    <li><a href="http://www.kronos.de/khome.nsf/Legal/ImportantLegalInformation?OpenDocument">http://www.kronos.de/khome.nsf/Legal/ImportantLegalInformation?OpenDocument</a></li>
+    <li>{% trans "Privacy Policy" %}</li>
+    <li><a href="http://www.kronostio2.com/khome.nsf/Legal/KronosPrivacyPolicy?OpenDocument">http://www.kronostio2.com/khome.nsf/Legal/KronosPrivacyPolicy?OpenDocument</a></li>
+</ul>
+{% endblock %}
