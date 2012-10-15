@@ -113,7 +113,7 @@ def users(request):
 def slotstatus(request, slot_id, station_id, date):
     slot = get_object_or_404(Slot, pk=slot_id)
     if request.user.userprofile.is_master:
-        if slot.progress < 4:
+        if slot.progress < 3:
             slot.progress = F('progress') + 1
             slot.save()
         else:

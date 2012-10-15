@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-15 14:52+0200\n"
+"POT-Creation-Date: 2012-10-15 16:55+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -58,7 +58,7 @@ msgstr "Erfolgreich verarbeitet:"
 msgid "Empty page"
 msgstr "Leere Seite"
 
-#: templates/base.html:50 templates/timeslots/imprint.html:4
+#: templates/base.html:49 templates/timeslots/imprint.html:4
 #: templates/timeslots/imprint.html:10
 msgid "Imprint"
 msgstr ""
@@ -640,12 +640,11 @@ msgid "Carrier is beeing loaded"
 msgstr "Die Fracht wird geladen"
 
 #: timeslots/templatetags/timeslots_tags.py:55
-msgid "Carrier is checking out"
-msgstr "Der Spediteur checkt aus"
+msgid "Carrier has checked out"
+msgstr "Der Spediteur hat ausgecheckt"
 
-#: timeslots/templatetags/timeslots_tags.py:59
-msgid "Slot has been processed"
-msgstr "Der Vorgang ist abgeschlossen"
+#~ msgid "Slot has been processed"
+#~ msgstr "Der Vorgang ist abgeschlossen"
 
 #~ msgid "See our homepage for further information"
 #~ msgstr "Auf der Webseite finden Sie weitere Informationen über KRONOS"

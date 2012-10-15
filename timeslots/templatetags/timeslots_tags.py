@@ -46,18 +46,14 @@ def show_progress(slot, user):
     elif progress == 1:
         div_title = _("Carrier is checking in")
         div_class = "progress progress-danger"
-        div_style = "width: 25%"
+        div_style = "width: 33%"
     elif progress == 2:
         div_title = _("Carrier is beeing loaded")
         div_class = "progress progress-warning"
-        div_style = "width: 50%"
+        div_style = "width: 66%"
     elif progress == 3:
-        div_title = _("Carrier is checking out")
+        div_title = _("Carrier has checked out")
         div_class = "progress progress-success"
-        div_style = "width: 75%"
-    else:
-        div_title = _("Slot has been processed")
-        div_class = "progress"
         div_style = "width: 100%"
     return {'div_title': div_title, 'div_class': div_class, 'div_style': div_style, 'progress': progress, 
             'slot_id': slot.id, 'station_id': slot.block.dock.station.id, 'date': slot.date}
