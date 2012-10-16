@@ -147,7 +147,8 @@ class UserProfile(models.Model):
     The most important additions are the language (prefered user-interface
     language) and the company field.
     """
-    GROUPS = (_("administrator"), _("loadmaster"), _("charger"), _("user"))
+    GROUPS = (_("administrator"), _("loadmaster"), _("charger"), _("user"),
+              _("viewer"))
     LANGUAGES = ((u'de', u'Deutsch'), (u'en', u'English'))
     user = models.OneToOneField(User)
     stations = models.ManyToManyField(Station)

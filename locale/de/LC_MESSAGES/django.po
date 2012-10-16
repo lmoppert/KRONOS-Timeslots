@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-16 15:26+0200\n"
+"POT-Creation-Date: 2012-10-16 16:01+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -104,12 +104,12 @@ msgstr "Zurück zur Timeslots Anwendung"
 msgid "Some slots had already been reserved"
 msgstr "Einige Ladezeiten waren bereits reserviert"
 
-#: templates/timeslots/blocked.html:13 timeslots/models.py:296
+#: templates/timeslots/blocked.html:13 timeslots/models.py:297
 msgid "Slot"
 msgstr "Ladefenster"
 
 #: templates/timeslots/blocked.html:13 templates/timeslots/slot_detail.html:57
-#: timeslots/models.py:176 timeslots/tables.py:38
+#: timeslots/models.py:177 timeslots/tables.py:38
 msgid "Company"
 msgstr "Firma"
 
@@ -133,7 +133,7 @@ msgstr "Aufträge als Tabelle anzeigen"
 msgid "Germany"
 msgstr "Deutschland"
 
-#: templates/timeslots/imprint.html:17 timeslots/models.py:174
+#: templates/timeslots/imprint.html:17 timeslots/models.py:175
 msgid "Phone"
 msgstr "Telefon"
 
@@ -394,7 +394,7 @@ msgstr "Blockieren von"
 msgid "Block until"
 msgstr "Blockieren bis"
 
-#: timeslots/forms.py:42 timeslots/models.py:297
+#: timeslots/forms.py:42 timeslots/models.py:298
 msgid "Slots"
 msgstr "Ladefenster"
 
@@ -484,47 +484,51 @@ msgstr "Beschicker"
 msgid "user"
 msgstr "Anwender"
 
-#: timeslots/models.py:159
+#: timeslots/models.py:151
+msgid "viewer"
+msgstr "Zuschauer"
+
+#: timeslots/models.py:160
 msgid "Language"
 msgstr "Sprache"
 
-#: timeslots/models.py:164
+#: timeslots/models.py:165
 msgid "Street"
 msgstr "Straße"
 
-#: timeslots/models.py:169
+#: timeslots/models.py:170
 msgid "Country"
 msgstr "Land"
 
-#: timeslots/models.py:177
+#: timeslots/models.py:178
 msgid "ZIP"
 msgstr "PLZ"
 
-#: timeslots/models.py:178
+#: timeslots/models.py:179
 msgid "Town"
 msgstr "Stadt"
 
-#: timeslots/models.py:248
+#: timeslots/models.py:249
 msgid "blocked"
 msgstr "Geblockt"
 
-#: timeslots/models.py:261
+#: timeslots/models.py:262
 msgid "reserved"
 msgstr "Reserviert"
 
-#: timeslots/models.py:318 timeslots/tables.py:14
+#: timeslots/models.py:319 timeslots/tables.py:14
 msgid "Job"
 msgstr "Auftrag"
 
-#: timeslots/models.py:319
+#: timeslots/models.py:320
 msgid "Jobs"
 msgstr "Aufträge"
 
-#: timeslots/models.py:334
+#: timeslots/models.py:335
 msgid "Logging"
 msgstr "Protokoll"
 
-#: timeslots/models.py:335
+#: timeslots/models.py:336
 msgid "Loggings"
 msgstr "Protokolle"
 
