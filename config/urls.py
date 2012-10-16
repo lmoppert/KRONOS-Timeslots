@@ -3,7 +3,8 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', 'timeslots.views.index', name='home'),
     url(r'^urls/$', 'timeslots.tests.urls.show_url_patterns'),
     url(r'^timeslots/', include('timeslots.urls')),

@@ -2,7 +2,8 @@ from datetime import datetime
 from django.conf.urls import patterns, url
 from timeslots.views import UserProfile, DayLoggingArchive, MonthLoggingArchive
 
-urlpatterns = patterns('timeslots.views',
+urlpatterns = patterns(
+    'timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
     url(r'^logout/$', 'logout_then_login', name='user_logout'),
     url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slotstatus/(?P<slot_id>\d+)/$', 'slotstatus', name='timeslots_slot_progress'),
@@ -20,12 +21,14 @@ urlpatterns = patterns('timeslots.views',
     url(r'^users/$', 'users', name='timeslots_user_list'),
     url(r'^imprint/$', 'imprint', name='timeslots_imprint'),
 )
-urlpatterns += patterns('django.contrib.auth.views',
+urlpatterns += patterns(
+    'django.contrib.auth.views',
     url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'}, name='user_login'),
     url(r'^password/$', 'password_change', {'post_change_redirect': '/timeslots/password_changed/',
         'template_name': 'timeslots/password_change_form.html'}, name='timeslots_change_password'),
 )
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^userprofile/$', UserProfile.as_view(), name='timeslots_userprofile_form'),
     url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', DayLoggingArchive.as_view(), name='timeslots_logging_day'),
     url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})/$', MonthLoggingArchive.as_view(), name='timeslots_logging_month'),
