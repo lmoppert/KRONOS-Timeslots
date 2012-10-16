@@ -1,15 +1,15 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-	[_] 0% Herr Rohrbeck
-		[_] Erstellen eines Datenschutz-Hinweises
-		[_] Erstellen eines Impressums
-		[_] Erstellen eines Disclaimers
+	[X] 100% Herr Rohrbeck
+		[X] Erstellen eines Datenschutz-Hinweises
+		[X] Erstellen eines Impressums
+		[X] Erstellen eines Disclaimers
 	[_] 66% Organisatorisches
 		[X] Übersicht mit den Berechtigungen erstellen
 		[_] Hosting bestellen lassen
 		[X] 100% Domains bestellen lassen
 			[X] kronos-timeslots.com
 			[X] kronos-timeslots.eu
-	[_] 12% Nice to have
+	[_] 11% Nice to have
 		[_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer
 		[_] Anforderungsoption für die Passwort-Zurücksetzung
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
@@ -28,6 +28,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Link zur Startseite von den "Sonderseiten" (Im User-Menü)
 		[_] Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
 		:   Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
+	[_] 0% Refactoring
+		[_] Prüfen, ob die Modelle vielleicht zusätzliche Manager benötigen
+		[_] Eine base.html für das Projekt und eine für die Anwendung
+		[_] Eine requirements.txt für das automatische intsllieren (pip install -r requirements.txt)
 	[X] 100% Neue User anlegen
 		[X] Christian Schmidt, KECO, Spediteur
 		:   Bamako

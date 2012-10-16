@@ -6,8 +6,9 @@ import locale
 
 register = Library()
 
+
 @register.filter
-def get_range( value ):
+def get_range(value):
     """
     Returns a list containing range made from given value.
 
@@ -29,6 +30,7 @@ def get_range( value ):
     """
     return [v + 1 for v in range(value)]
 
+
 @register.filter
 def make_date(curr_date):
     """
@@ -40,8 +42,10 @@ def make_date(curr_date):
     else:
         fmtstr = "%A, %d %B %Y"
 
-    date_obj = date(int(curr_date[:4]), int(curr_date[5:7]), int(curr_date[8:10]))
+    date_obj = date(int(curr_date[:4]), int(curr_date[5:7]),
+                    int(curr_date[8:10]))
     return date_obj.strftime(fmtstr)
+
 
 @register.filter
 def in_group(user, groups):

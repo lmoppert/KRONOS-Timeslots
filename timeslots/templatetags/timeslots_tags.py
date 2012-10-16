@@ -4,39 +4,19 @@ from django.utils.translation import ugettext_lazy as _
 register = template.Library()
 
 
-#class SlotProgress(template.Node):
-#    def __init__(self, progress, nodelist_true, nodelist_false):
-#        self.slot = template.Variable(slot)
-#
-#    def render(self, context):
-#        try:
-#            slot = self.slot.resolve(context)
-#        except template.VariableDoesNotExist:
-#            return ''
-#        if slot 
-#
-#@register.tag(name='show_progress')
-#def do_show_progress(parser, token):
-#    """The ``{% slot %}`` tag displays a button to change the progress of a slot and 
-#    additionally a colorized progress bar, that represents the current progress status
-#    """
-#    try:
-#        tag_name, progress = token.split_contents()
-#    except ValueError:
-#        raise template.TemplateSyntaxError('%s requires a Progress as argument' % token.contents.split()[0])
-#    return SlotProgress(slot)
-
 @register.inclusion_tag('timeslots/progress.html')
 def show_progress(slot, user):
     """
-    Displays a colorized progress bar representing the current status of the corresponding SLOT.
-    The bar is linked to a javascript fuction that increases the current status by one step.
+    Displays a colorized progress bar representing the current status of the
+    corresponding SLOT. The bar is linked to a javascript fuction that
+    increases the current status by one step.
 
     Usage (in template)::
 
         {% show_progress SLOT %}
 
-    The tag uses the template ``timeslots/progress.html`` to render the progress bar
+    The tag uses the template ``timeslots/progress.html`` to render the
+    progress bar
     """
     progress = slot.progress
     if progress == 0:
@@ -55,5 +35,6 @@ def show_progress(slot, user):
         div_title = _("Carrier has checked out")
         div_class = "progress progress-success"
         div_style = "width: 100%"
-    return {'div_title': div_title, 'div_class': div_class, 'div_style': div_style, 'progress': progress, 
-            'slot_id': slot.id, 'station_id': slot.block.dock.station.id, 'date': slot.date}
+    return {'div_title': div_title, 'div_class': div_class,
+            'div_style': div_style, 'progress': progress, 'slot_id': slot.id,
+            'station_id': slot.block.dock.station.id, 'date': slot.date}

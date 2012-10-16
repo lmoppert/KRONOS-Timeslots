@@ -24,12 +24,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'django',                      # Or path to database file if using sqlite3.
-        'USER': 'django',                      # Not used with sqlite3.
-        'PASSWORD': 'bX2p?vyXnZwK',            # Not used with sqlite3.
-        'HOST': '',                            # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                            # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'bX2p?vyXnZwK',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -102,7 +102,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -112,7 +112,7 @@ SECRET_KEY = 'q5!b8!u$^n2asxv=co07ru7f=oks9xmpahf)3b7e71sygb09&amp;p'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -143,9 +143,6 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
     os.path.join(DIR, '..', 'templates')
 )
 
@@ -170,7 +167,7 @@ if DEBUG:
     # Settings for the debug toolbar
     INTERNAL_IPS = ['127.0.0.1']
     ALWAYS_SHOW_DEBUG_TOOLBAR = True
-    DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False }
+    DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
