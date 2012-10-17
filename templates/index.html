@@ -9,7 +9,6 @@
 {% block content %}
 <div class="page-header">
     <h1>{{ user.userprofile.company }}</h1>
-    {% if user.is_staff %}<a href="{{ STATIC_URL }}html/todo.html">{% trans "ToDo List" %}</a>{% endif %}
 </div>
 
 <div class="section">

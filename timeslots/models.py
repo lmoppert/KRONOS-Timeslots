@@ -325,7 +325,7 @@ class Logging(models.Model):
 
     time = models.DateTimeField(editable=False)
     host = models.CharField(max_length=40, blank=True)
-    task = models.CharField(max_length=200)
+    task = models.CharField(max_length=500)
 
     def save(self, *args, **kwargs):
         self.time = datetime.today()
