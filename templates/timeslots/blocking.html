@@ -28,7 +28,6 @@
     });
     $(function(){
         $('#id_start').datepicker({ 
-            {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
             changeMonth: true,
             changeYear: true,
             dateFormat: 'yy-mm-dd',
@@ -39,7 +38,6 @@
             }
         });
         $('#id_end').datepicker({ 
-            {% if not station.opened_on_weekend %}beforeShowDay: $.datepicker.noWeekends,{% endif %}
             changeMonth: true,
             changeYear: true,
             dateFormat: 'yy-mm-dd',
