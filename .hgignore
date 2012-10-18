@@ -11,3 +11,4 @@ syntax: glob
 logs/*.log
 doc/hosting/*
 config/local_settings.py
+static/admin
