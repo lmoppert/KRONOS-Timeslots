@@ -3,9 +3,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Erstellen eines Datenschutz-Hinweises
 		[X] Erstellen eines Impressums
 		[X] Erstellen eines Disclaimers
-	[_] 66% Organisatorisches
+	[X] 100% Organisatorisches
 		[X] Übersicht mit den Berechtigungen erstellen
-		[_] Hosting bestellen lassen
+		[X] Hosting bestellen lassen
 		[X] 100% Domains bestellen lassen
 			[X] kronos-timeslots.com
 			[X] kronos-timeslots.eu
@@ -177,4 +177,3 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[X] 100% Sonstiges
 		[X] URLs mit Hilfe von reverse und url erzeugen
 		[X] Debug modus durch Umgebungsvariable steuern
-Nice To Have

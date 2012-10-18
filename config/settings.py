@@ -1,4 +1,4 @@
-# Django settings for project project.
+# Django settings for project kronos-timeslots.com.
 import os
 import socket
 

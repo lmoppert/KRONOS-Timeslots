@@ -6,10 +6,8 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', 'timeslots.views.index', name='home'),
-    url(r'^urls/$', 'timeslots.tests.urls.show_url_patterns'),
+    url(r'^urls/$', 'timeslots.tests.urls.show_url_patterns', name='urls'),
     url(r'^timeslots/', include('timeslots.urls')),
-
-    # Build in admin site
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
