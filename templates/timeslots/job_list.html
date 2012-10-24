@@ -19,7 +19,7 @@
             <th style="small-column">
                 {{ slot.times }}
                 {% if slot.is_blocked %}&nbsp;<span class="badge badge-important">{% trans "Blocked" %}</span>{% endif %}
-                {% if slot.is_klv %}&nbsp;<span class="badge badge-warning">KLV</span>{% endif %}
+                {% if slot.is_klv %}&nbsp;<span class="badge badge-warning">KLV/NV</span>{% endif %}
             </th>
             <td style="med-column">{{ slot.company }}</td>
             <td class="jobs">

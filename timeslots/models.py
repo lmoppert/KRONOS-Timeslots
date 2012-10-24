@@ -49,7 +49,7 @@ class Station(models.Model):
         default=False,
         help_text=_(
             "Choose this option if you want to be able to mark charges with "
-            "an KLV flag"
+            "an KLV/NV flag"
         )
     )
 
@@ -235,7 +235,7 @@ class Slot(models.Model):
 
     def _get_times_flagged(self):
         if self.is_klv:
-            return  "%s (KLV)" % (self.times)
+            return  "%s (KLV/NV)" % (self.times)
         else:
             return  self.times
     times_flagged = property(_get_times_flagged)
@@ -255,7 +255,7 @@ class Slot(models.Model):
                 except IndexError:
                     first_job = "..."
                 if self.is_klv:
-                    return "%s - %s (KLV)" % (self.company.company, first_job)
+                    return "%s - %s (KLV/NV)" % (self.company.company, first_job)
                 else:
                     return "%s - %s" % (self.company.company, first_job)
             else:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-16 16:01+0200\n"
+"POT-Creation-Date: 2012-10-24 13:31+0200\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: config/settings.py:52
+#: config/settings.py:33
 msgid "English"
 msgstr "Englisch"
 
-#: config/settings.py:53
+#: config/settings.py:34
 msgid "German"
 msgstr "Deutsch"
 
@@ -63,11 +63,7 @@ msgstr "Leere Seite"
 msgid "Imprint"
 msgstr "Impressum"
 
-#: templates/index.html:12
-msgid "ToDo List"
-msgstr "Liste mit ausstehenden Aufgaben"
-
-#: templates/index.html:16
+#: templates/index.html:15
 msgid "Open jobs"
 msgstr "Aktuelle Aufträge"
 
@@ -278,8 +274,12 @@ msgid "Description"
 msgstr "Auftragsbeschreibung"
 
 #: templates/timeslots/slot_detail.html:109
-msgid "This charge will be an intermodal freight transport (KLV)"
-msgstr "Dieser Auftrag wird im Kombinierten Ladungsverkehr (KLV) transportiert"
+msgid ""
+"This charge will be an intermodal freight transport (KLV) or local public "
+"transport (NV)"
+msgstr ""
+"Dieser Auftrag wird im Kombinierten Ladungsverkehr (KLV) oder Nahverkehr "
+"(NV) transportiert"
 
 #: templates/timeslots/slot_detail.html:118
 msgid "Release blocked slot"
@@ -443,9 +443,9 @@ msgstr ""
 
 #: timeslots/models.py:51
 msgid ""
-"Choose this option if you want to be able to mark charges with an KLV flag"
+"Choose this option if you want to be able to mark charges with an KLV/NV flag"
 msgstr ""
-"Wählen Sie diese Option, wenn es möglich sein soll, Ladungen mit einerKLV-"
+"Wählen Sie diese Option, wenn es möglich sein soll, Ladungen mit einer KLV/NV-"
 "Kennzeichnung zu versehen"
 
 #: timeslots/models.py:74
@@ -643,3 +643,6 @@ msgstr "Die Fracht wird geladen"
 #: timeslots/templatetags/timeslots_tags.py:35
 msgid "Carrier has checked out"
 msgstr "Der Spediteur hat ausgecheckt"
+
+#~ msgid "ToDo List"
+#~ msgstr "Liste mit ausstehenden Aufgaben"

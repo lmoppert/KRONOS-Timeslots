@@ -1,14 +1,10 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-	[X] 100% Herr Rohrbeck
-		[X] Erstellen eines Datenschutz-Hinweises
-		[X] Erstellen eines Impressums
-		[X] Erstellen eines Disclaimers
-	[X] 100% Organisatorisches
-		[X] Übersicht mit den Berechtigungen erstellen
-		[X] Hosting bestellen lassen
-		[X] 100% Domains bestellen lassen
-			[X] kronos-timeslots.com
-			[X] kronos-timeslots.eu
+	[_] 33% Meeting vom 24.10.2012
+		[X] Kennzeichnung KLV umbenennen in KLV/NV
+		[_] Aufträge als Tabelle anzeigen: sortieren nach Auftragsnummer
+		[_] Nice to have
+			[_] Anzahl der einzelnen Status anzeigen
+			[_] Status in der Tabelle anzeigen
 	[_] 11% Nice to have
 		[_] Fehler beim Blocken generieren eine E-Mail an den Slot-Besitzer
 		[_] Anforderungsoption für die Passwort-Zurücksetzung
@@ -32,6 +28,16 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Prüfen, ob die Modelle vielleicht zusätzliche Manager benötigen
 		[_] Eine base.html für das Projekt und eine für die Anwendung
 		[_] Eine requirements.txt für das automatische intsllieren (pip install -r requirements.txt)
+	[X] 100% Herr Rohrbeck
+		[X] Erstellen eines Datenschutz-Hinweises
+		[X] Erstellen eines Impressums
+		[X] Erstellen eines Disclaimers
+	[X] 100% Organisatorisches
+		[X] Übersicht mit den Berechtigungen erstellen
+		[X] Hosting bestellen lassen
+		[X] 100% Domains bestellen lassen
+			[X] kronos-timeslots.com
+			[X] kronos-timeslots.eu
 	[X] 100% Neue User anlegen
 		[X] Christian Schmidt, KECO, Spediteur
 		:   Bamako
@@ -44,6 +50,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Andreas Wild, KRONOS, Lademeister
 		:   Skopje
 [X] 100% Bugs
+	[_] % Live-System
+		[_] Long-Running-Task erzeugt doppelte DB-Einträge
+		[_] Domain noch nicht eingerichtet
 	[X] 100% Meeting vom 13.09.2012
 		[X] KLV Ansicht prüfen, glt derzeit für alle Stationen
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
