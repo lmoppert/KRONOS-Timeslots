@@ -1,8 +1,8 @@
 Liste der Offenen Punkte im Projekt Ladezeitensteuerung
-	[_] 33% Meeting vom 24.10.2012
+	[_] 66% Meeting vom 24.10.2012
 		[X] Kennzeichnung KLV umbenennen in KLV/NV
-		[_] Aufträge als Tabelle anzeigen: sortieren nach Auftragsnummer
-		[_] Nice to have
+		[X] Aufträge als Tabelle anzeigen: sortieren nach Auftragsnummer
+		[_] % Nice to have
 			[_] Anzahl der einzelnen Status anzeigen
 			[_] Status in der Tabelle anzeigen
 	[_] 11% Nice to have
@@ -25,6 +25,7 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
 		:   Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
 	[_] 0% Refactoring
+		[_] Statt der Gruppen, lieber ein Feld Rolle im Userprofile einfügen
 		[_] Prüfen, ob die Modelle vielleicht zusätzliche Manager benötigen
 		[_] Eine base.html für das Projekt und eine für die Anwendung
 		[_] Eine requirements.txt für das automatische intsllieren (pip install -r requirements.txt)

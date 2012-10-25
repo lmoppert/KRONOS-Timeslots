@@ -293,6 +293,7 @@ class Slot(models.Model):
         }
 
     class Meta:
+        unique_together = ('date', 'block', 'timeslot', 'line',)
         ordering = ['date', 'timeslot', 'line']
         verbose_name = _("Slot")
         verbose_name_plural = _("Slots")

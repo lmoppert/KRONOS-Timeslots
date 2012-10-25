@@ -41,6 +41,7 @@ class StationJobTable(JobTable):
     class Meta:
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
+        order_by = ('number',)
         sequence = ('number', 'slot_company', 'slot_times', 'slot_block_dock',
                     'payload', 'description')
 
