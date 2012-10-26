@@ -25,9 +25,9 @@ def daterange(start, end):
 
 def delete_slot_garbage(request):
     # annotate creates a filterable value (properties not available in filters)
-    slots = Slot.objects.annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
+    slots = Slot.objects.filter(is_blocked=False).annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)
     for slot in slots:
-        if not slot.is_blocked and now() - slot.created > timedelta(minutes=5):
+        if now() - slot.created > timedelta(minutes=5):
             log_task(request,
                      "The garbage collector has deleted slot %s" % slot)
             slot.delete()

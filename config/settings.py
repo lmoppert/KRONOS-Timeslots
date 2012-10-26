@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'timeslots',
     'crispy_forms',
     'django_tables2',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -147,7 +148,7 @@ SESSION_COOKIE_AGE = 86400
 # Optional apps used only for development
 if DJANGO_SERVER == 'Development':
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INSTALLED_APPS += ('debug_toolbar','south')
+    INSTALLED_APPS += ('debug_toolbar')
     INTERNAL_IPS = ['127.0.0.1']
     ALWAYS_SHOW_DEBUG_TOOLBAR = True
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
