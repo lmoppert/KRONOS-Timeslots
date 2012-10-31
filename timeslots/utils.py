@@ -29,7 +29,7 @@ def delete_slot_garbage(request):
     for slot in slots:
         if now() - slot.created > timedelta(minutes=5):
             log_task(request,
-                     "The garbage collector has deleted slot %s" % slot)
+                     "The garbage collector has deleted slot %s (%s)" % (slot, slot.times))
             slot.delete()
 
 
