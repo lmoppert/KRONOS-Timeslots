@@ -27,6 +27,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 	[_] 0% Refactoring
 		[_] Statt der Gruppen, lieber ein Feld Rolle im Userprofile einfügen
 		[_] Prüfen, ob die Modelle vielleicht zusätzliche Manager benötigen
+			[_] Slots.expired_objects => Alles was älter ist als 5 Minuten
+			[_] Slots.not_blocked_objects => Alle nicht geblockten Reservierungen
+			[_] Slots.pending_objects => Alle Slots.expired_objects mit Job-Count = 0
 		[_] Eine base.html für das Projekt und eine für die Anwendung
 		[_] Eine requirements.txt für das automatische intsllieren (pip install -r requirements.txt)
 	[X] 100% Herr Rohrbeck
@@ -51,9 +54,9 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[X] Andreas Wild, KRONOS, Lademeister
 		:   Skopje
 [X] 100% Bugs
-	[_] % Live-System
-		[_] Long-Running-Task erzeugt doppelte DB-Einträge
-		[_] Domain noch nicht eingerichtet
+	[X] 100% Live-System
+		[X] Long-Running-Task erzeugt doppelte DB-Einträge
+		[X] Domain noch nicht eingerichtet
 	[X] 100% Meeting vom 13.09.2012
 		[X] KLV Ansicht prüfen, glt derzeit für alle Stationen
 		[X] Filter für das Verlinken von Slots nimmt UserID statt UserProfileID
