@@ -1,4 +1,23 @@
-Liste der Offenen Punkte im Projekt Ladezeitensteuerung
+Liste der Punkte für Version 2
+	Anforderungen Silo Leverkusen
+		[_] Ladezeiten sind Produktabhängig
+		[_] Es gibt zwei Waagen, mit zwei bzw. drei Füllstutzen
+		[_] Der Lademeister bestimmt, welches Produkt wo verfügbar ist
+	Anforderungen Belgien
+		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
+		:   So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
+		:   stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
+		:   eine Ladestelle gilt.
+		:   Beispiel Titanstr.:
+		:   3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
+		:   gleichzeitg statt finden.
+	Anforderungen Titanstraße
+		[_] Status-Funktion mit nur zwei Zuständen
+		[_] Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
+		:   Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
+	Allgemeine Anforderungen
+		[_] Anlieferungen sollten berücksichtigt werden können
+Liste der Offenen Punkte für Version 1.0
 	[_] 66% Meeting vom 24.10.2012
 		[X] Kennzeichnung KLV umbenennen in KLV/NV
 		[X] Aufträge als Tabelle anzeigen: sortieren nach Auftragsnummer
@@ -11,20 +30,10 @@ Liste der Offenen Punkte im Projekt Ladezeitensteuerung
 		[_] Die Block-Option sollte um eine Funktion zur Störungskennzeichnung erweitert werden.
 		:   Slot sollte dann vom Eigentümer weiter angeschaut werden können,
 		:   eventuell mit einem Hinweis darauf, was der Grund ist.
-		[_] Teilweise können nur eine bestimmte Anzahl an Slots parallel abgearbeitet werden.
-		:   So beispielsweises in Ghent, wo nur drei Staplerfahrer zur Verfügung
-		:   stehen. Das ist also eine Einschränkung, die Rampenübergreifend für
-		:   eine Ladestelle gilt.
-		:   Beispiel Titanstr.:
-		:   3 Slots Trucks, 2 Slots Container, es können maximal 4 Beladungen
-		:   gleichzeitg statt finden.
-		[_] Status-Funktion für Titanstr. mit nur zwei Zuständen
-		[_] Anlieferungen sollten berücksichtigt werden können
 		[_] Funktion zum löschen von Altdaten implementieren
 		[X] Link zur Startseite von den "Sonderseiten" (Im User-Menü)
-		[_] Ablösung der bestehenden Excel Lösung (Vorschlag H. Wild)
-		:   Alle Aufträge werden in Excel erfasst, diese Daten könnte man als Basis nehmen
 	[_] 0% Refactoring
+		[_] Es finden zu viele DB Abfragen in den Templates statt, ab in den View!
 		[_] Statt der Gruppen, lieber ein Feld Rolle im Userprofile einfügen
 		[_] Prüfen, ob die Modelle vielleicht zusätzliche Manager benötigen
 			[_] Slots.expired_objects => Alles was älter ist als 5 Minuten
