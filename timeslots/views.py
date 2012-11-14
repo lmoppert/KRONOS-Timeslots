@@ -293,7 +293,7 @@ def station(request, station_id, date, view_mode):
             docks.append((dock.name, dock.id))
 
         # get all slots for one date
-        if request.user.userprofile.is_master:
+        if request.user.userprofile.is_master or request.user.userprofile.is_viewer:
             slots = list(Slot.objects.filter(date=date))
         else:
             slots = list(Slot.objects.filter(date=date).filter(

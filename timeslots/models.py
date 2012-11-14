@@ -187,6 +187,10 @@ class UserProfile(models.Model):
             return True
     is_master = property(_get_is_master)
 
+    def _get_is_viewer(self):
+        return not self.user.groups.filter(name='viewer').count() == 0
+    is_viewer = property(_get_is_viewer)
+
     def _get_is_readonly(self):
         return not (self.user.groups.filter(name='charger').count() == 0 and
                     self.user.groups.filter(name='viewer').count() == 0)
@@ -248,7 +252,7 @@ class Slot(models.Model):
         if self.is_blocked:
             return ugettext_noop("blocked")
         else:
-            if (user.userprofile.is_master or
+            if (user.userprofile.is_master or user.userprofile.is_viewer or
                     self.company.id == user.userprofile.id):
                 try:
                     first_job = self.job_set.all()[0].number
