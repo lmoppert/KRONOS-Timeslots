@@ -256,7 +256,10 @@ def station(request, station_id, date, view_mode):
         msg += "station %s, which is not opened on weekends." % station
         log_task(request, msg)
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/')
+        diff = 7 - datetime.strptime(date, "%Y-%m-%d").date().weekday()
+        monday = datetime.strptime(date, "%Y-%m-%d").date() + timedelta(days=diff)
+        date = monday.strftime("%Y-%m-%d")
+        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station.id, date))
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
         msg = "User %s tried to access " % request.user
         msg += "station %s without authorization" % station
