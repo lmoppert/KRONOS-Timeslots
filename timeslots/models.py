@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime, date
+from datetime import timedelta, datetime, date, time
 
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
@@ -18,7 +18,13 @@ class Station(models.Model):
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
     longdescription = models.TextField(blank=True)
-    booking_deadline = models.TimeField()
+    booking_deadline = models.TimeField(
+        help_text=_(
+            "Booking deadline = time on the day before from which on a slot "
+            "can not be reserved any more. Set this to midnight to turn off "
+            "this feature completely for this station"
+        )
+    )
     rnvp = models.TimeField(
         help_text=_(
             "RVNP = Rien ne vas plus -- time when a slot can not be edited "
@@ -54,8 +60,10 @@ class Station(models.Model):
     )
 
     def past_deadline(self, curr_date, curr_time):
-        deadline = datetime.combine(
-            curr_date - timedelta(days=1), self.booking_deadline)
+        my_dl = self.booking_deadline
+        if my_dl == time(0, 0):
+            return False
+        deadline = datetime.combine(curr_date - timedelta(days=1), my_dl)
         return curr_time > deadline
 
     @models.permalink
