@@ -62,8 +62,9 @@ class Station(models.Model):
     def past_deadline(self, curr_date, curr_time):
         my_dl = self.booking_deadline
         if my_dl == time(0, 0):
-            return False
-        deadline = datetime.combine(curr_date - timedelta(days=1), my_dl)
+            deadline = datetime.combine(curr_date + timedelta(days=1), my_dl)
+        else:
+            deadline = datetime.combine(curr_date - timedelta(days=1), my_dl)
         return curr_time > deadline
 
     @models.permalink

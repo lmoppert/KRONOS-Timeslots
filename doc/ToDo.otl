@@ -63,6 +63,8 @@ Liste der Offenen Punkte für Version 1.0
 		[X] Andreas Wild, KRONOS, Lademeister
 		:   Skopje
 [X] 100% Bugs
+	[X] 100% Änderung der Deadline Logik
+		[X] Für Ferrofloc greift die  Deadline gar nicht mehr
 	[X] 100% Live-System
 		[X] Long-Running-Task erzeugt doppelte DB-Einträge
 		[X] Domain noch nicht eingerichtet
