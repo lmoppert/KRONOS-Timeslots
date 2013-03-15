@@ -40,7 +40,7 @@ Liste der Offenen Punkte für Version 1.0
 			[_] Slots.not_blocked_objects => Alle nicht geblockten Reservierungen
 			[_] Slots.pending_objects => Alle Slots.expired_objects mit Job-Count = 0
 		[_] Eine base.html für das Projekt und eine für die Anwendung
-		[_] Eine requirements.txt für das automatische intsllieren (pip install -r requirements.txt)
+		[_] Eine requirements.txt für das automatische intallieren (pip install -r requirements.txt)
 	[X] 100% Herr Rohrbeck
 		[X] Erstellen eines Datenschutz-Hinweises
 		[X] Erstellen eines Impressums
