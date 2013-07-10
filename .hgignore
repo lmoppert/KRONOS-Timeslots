@@ -12,3 +12,7 @@ logs/*.log
 doc/hosting/*
 config/local_settings.py
 static/admin
+local/*
+bin/*
+lib/*
+include/*
