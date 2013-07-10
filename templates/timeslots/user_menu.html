@@ -6,19 +6,19 @@
             <ul class="dropdown-menu">
                 {% if user|in_group:"administrator" %}
                 <li><a href="/admin/">{% trans "Administration" %}</a></li>
-                <li><a href="{% url 'timeslots_user_list' %}">{% trans "User list" %}</a></li>
+                <li><a href="{% url timeslots_user_list %}">{% trans "User list" %}</a></li>
                 <li class="divider"></li>
                 {% endif %}
                 {% if user|in_group:"administrator,loadmaster" %}
-                <li><a href="{% url 'timeslots_logging' %}">{% trans "Browse logfiles" %}</a></li>
-                <li><a href="{% url 'timeslots_blocking' %}">{% trans "Manage blocked slots" %}</a></li>
+                <li><a href="{% url timeslots_logging %}">{% trans "Browse logfiles" %}</a></li>
+                <li><a href="{% url timeslots_blocking %}">{% trans "Manage blocked slots" %}</a></li>
                 <li class="divider"></li>
                 {% endif %}
-                <li><a href="{% url 'timeslots_home' %}">{% trans "Homepage" %}</a></li>
-                <li><a href="{% url 'timeslots_userprofile_detail' %}">{% trans "Profile" %}</a></li>
-                <li><a href="{% url 'timeslots_change_password' %}">{% trans "Change Password" %}</a></li>
+                <li><a href="{% url timeslots_home %}">{% trans "Homepage" %}</a></li>
+                <li><a href="{% url timeslots_userprofile_detail %}">{% trans "Profile" %}</a></li>
+                <li><a href="{% url timeslots_change_password %}">{% trans "Change Password" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url 'user_logout' %}">{% trans "Logout" %}</a></li>
+                <li><a href="{% url user_logout %}">{% trans "Logout" %}</a></li>
             </ul>
         </li>
     </ul>
