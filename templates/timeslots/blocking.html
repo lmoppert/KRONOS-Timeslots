@@ -8,7 +8,7 @@
     <h1>{% trans "Blocking Of Timeslots" %}</h1>
 </div>
 
-<form action="{% url timeslots_blocking %}" method="post" accept-charset="utf-8">{% csrf_token %}
+<form action="{% url 'timeslots_blocking' %}" method="post" accept-charset="utf-8">{% csrf_token %}
     {% crispy form %}
 </form>
 {% endblock %}
