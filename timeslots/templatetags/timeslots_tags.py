@@ -35,6 +35,6 @@ def show_progress(slot, user):
         div_title = _("Carrier has checked out")
         div_class = "progress progress-success"
         div_style = "width: 100%"
-    return {'div_title': div_title, 'div_class': div_class,
+    return {'user': user, 'div_title': div_title, 'div_class': div_class,
             'div_style': div_style, 'progress': progress, 'slot_id': slot.id,
             'station_id': slot.block.dock.station.id, 'date': slot.date}

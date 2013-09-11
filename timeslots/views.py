@@ -143,7 +143,7 @@ def slotstatus(request, slot_id, station_id, date):
         msg = "User %s tried to change the status " % request.user
         msg += "of slot %s but is not allowed to." % slot
         log_task(request, msg)
-        msg += _('You are not allowed to change the status of a slot!')
+        msg = _('You are not allowed to change the status of a slot!')
         messages.error(request, msg)
         return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
             station_id, date))
@@ -349,7 +349,7 @@ def station(request, station_id, date, view_mode):
                             company = slot.status(request.user)
                         except ObjectDoesNotExist:
                             company = ugettext_noop("free")
-                        if company in ("free", "reserved", "blocked"):
+                        if company in ("free", "blocked"):
                             lines.append((company, None))
                         else:
                             lines.append((company, slot))
