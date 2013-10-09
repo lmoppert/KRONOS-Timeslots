@@ -17,6 +17,6 @@ Django_.
 
 
 
-.. _Django https://www.djangoproject.com/
+.. _Django: https://www.djangoproject.com/
 
 
