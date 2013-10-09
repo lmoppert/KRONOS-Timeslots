@@ -312,7 +312,7 @@ def station(request, station_id, date, view_mode):
                         jobs.append(job)
             table = StationJobTable(jobs)
             #RequestConfig(request, paginate={"per_page": 25}).configure(table)
-            RequestConfig(request).configure(table)
+            RequestConfig(request, paginate=False).configure(table)
             return render(request, 'timeslots/job_table.html', {
                 'station': station, 'date': date, 'table': table,
                 'docks': docks, 'target': "jobtable"})
