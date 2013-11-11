@@ -1,0 +1,9 @@
+# Mandatory packages
+django==1.4.2
+south
+django-crispy-forms
+django-tables2
+mysql-python
+
+# Optional pachages for development server
+django-debug-toolbar

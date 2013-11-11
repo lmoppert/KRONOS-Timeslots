@@ -44,7 +44,7 @@ USE_TZ = True
 
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = ''
+STATIC_ROOT = '/var/www/static'
 STATIC_URL = 'http://' + socket.getfqdn() + '/static/'
 STATICFILES_DIRS = (
     os.path.join(DIR, '..', 'static'),
