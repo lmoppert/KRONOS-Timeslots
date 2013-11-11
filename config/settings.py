@@ -47,6 +47,7 @@ MEDIA_URL = ''
 STATIC_ROOT = ''
 STATIC_URL = 'http://' + socket.getfqdn() + '/static/'
 STATICFILES_DIRS = (
+    os.path.join(DIR, '..', 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
