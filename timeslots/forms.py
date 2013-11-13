@@ -1,16 +1,20 @@
-from datetime import date
+"""Definition of forms for the Timeslots application."""
 
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.bootstrap import *
-from crispy_forms.layout import *
-from timeslots.models import *
+from crispy_forms.bootstrap import Div, Field, AppendedText
+from crispy_forms.layout import Submit, Layout
+from timeslots.models import UserProfile, Block, Slot, Job
 
 
 class UserProfileForm(forms.ModelForm):
+
+    """Form for the user profile."""
+
     def __init__(self, *args, **kwargs):
+        """Initialise the form."""
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.form_action = 'timeslots_userprofile_form'
@@ -22,12 +26,18 @@ class UserProfileForm(forms.ModelForm):
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
     class Meta:
+
+        """Meta information for the user profile form."""
+
         model = UserProfile
         fields = ('language', 'company', 'street', 'ZIP', 'town', 'country',
                   'phone')
 
 
 class BlockSlotForm(forms.Form):
+
+    """Form for blocking of slots."""
+
     block = forms.ModelChoiceField(
         label=_("Choose block"),
         queryset=Block.objects.none(),
@@ -44,6 +54,7 @@ class BlockSlotForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        """Initialise the form."""
         stations = kwargs.pop('stations', None)
         timeslots = kwargs.pop('timeslots', None)
         self.helper = FormHelper()
@@ -92,10 +103,11 @@ class BlockSlotForm(forms.Form):
 
 
 class RequireOneFormSet(BaseInlineFormSet):
-    """
-    Require at least one form in the formset to be completed.
-    """
+
+    """Require at least one form in the formset to be completed."""
+
     def clean(self):
+        """Return an overloaded cleaning routine."""
         super(RequireOneFormSet, self).clean()
         for error in self.errors:
             if error:

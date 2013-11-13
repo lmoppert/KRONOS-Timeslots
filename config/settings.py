@@ -1,4 +1,5 @@
-# Django settings for project kronos-timeslots.com.
+"""Django settings for project kronos-timeslots.com."""
+
 import os
 import socket
 
@@ -146,6 +147,9 @@ LOGIN_REDIRECT_URL = "/timeslots/"
 AUTH_PROFILE_MODULE = 'timeslots.UserProfile'
 SESSION_COOKIE_AGE = 86400
 
+# Other settings
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
 # Optional apps used only for development
 if DJANGO_SERVER == 'Development':
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
@@ -156,6 +160,6 @@ if DJANGO_SERVER == 'Development':
 
 # Look for a local settings file
 try:
-        from local_settings import *
+    from config.local_settings import *
 except:
-        pass
+    pass

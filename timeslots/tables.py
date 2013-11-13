@@ -1,9 +1,14 @@
+"""Table definitions for the Timeslots application."""
+
 from django.utils.translation import ugettext_lazy as _
 import django_tables2 as tables
 from django_tables2.utils import A
 
 
 class JobTable(tables.Table):
+
+    """Display all jobs for a day in a table."""
+
     number = tables.LinkColumn(
         'timeslots_slot_detail',
         kwargs={'block_id': A('slot.block.id'),
@@ -27,11 +32,17 @@ class JobTable(tables.Table):
     description = tables.Column(verbose_name=_('Description'))
 
     class Meta:
+
+        """Meta information for the job table."""
+
         sequence = ('number', 'slot_times', 'slot_block_dock', 'payload',
                     'description')
 
 
 class StationJobTable(JobTable):
+
+    """Display all jobs of a station in a table."""
+
     slot_company = tables.Column(
         accessor='slot.company',
         order_by=('slot.company.company'),
@@ -39,6 +50,9 @@ class StationJobTable(JobTable):
     )
 
     class Meta:
+
+        """Meta information for the station job table."""
+
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
         order_by = ('number',)
@@ -47,6 +61,9 @@ class StationJobTable(JobTable):
 
 
 class UserJobTable(JobTable):
+
+    """Display all jobs of a user in a table."""
+
     slot_date = tables.Column(
         accessor='slot.date',
         order_by=('slot.date'),
@@ -59,6 +76,9 @@ class UserJobTable(JobTable):
     )
 
     class Meta:
+
+        """Meta information for the user job table."""
+
         attrs = {'class': "table table-bordered table-striped"}
         empty_text = _('No open jobs')
         sequence = ('number', 'slot_date', 'slot_times', 'slot_block_dock',
@@ -66,6 +86,9 @@ class UserJobTable(JobTable):
 
 
 class UserTable(tables.Table):
+
+    """Display all users in a table."""
+
     id = tables.Column(accessor='id')
     username = tables.Column(accessor='username')
     company = tables.Column(accessor='userprofile.company')
@@ -84,4 +107,7 @@ class UserTable(tables.Table):
     is_staff = tables.Column(accessor='is_staff')
 
     class Meta:
+
+        """Meta information for the user table."""
+
         attrs = {'class': "table table-bordered table-striped"}

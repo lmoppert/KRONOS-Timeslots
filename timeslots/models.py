@@ -1,3 +1,5 @@
+"""Model definition for the timeslots application."""
+
 from datetime import timedelta, datetime, date, time
 
 from django.contrib.auth.models import User
@@ -9,12 +11,14 @@ from django.utils.translation import ugettext_noop
 
 
 class Station(models.Model):
+
     """
     The Station represents one address, where trucks can be loaded.
 
     Every station consist of one or several `timeslots.Dock`
 
     """
+
     name = models.CharField(max_length=200)
     shortdescription = models.CharField(max_length=200, blank=True)
     longdescription = models.TextField(blank=True)
@@ -60,6 +64,7 @@ class Station(models.Model):
     )
 
     def past_deadline(self, curr_date, curr_time):
+        """Return, whether the slot is past the deadline."""
         my_dl = self.booking_deadline
         if my_dl == time(0, 0):
             deadline = datetime.combine(curr_date + timedelta(days=1), my_dl)
@@ -69,9 +74,11 @@ class Station(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
+        """Return the absolute URL for the station."""
         return ('timeslots_station_detail', (), {'station_id': self.id})
 
     def _get_longname(self):
+        """Return the long name for the station."""
         return self.name + " - " + self.shortdescription
     longname = property(_get_longname)
 
@@ -84,20 +91,21 @@ class Station(models.Model):
 
 
 class Dock(models.Model):
-    """
-    The Dock belongs to one `timeslots.Station` and represents a dock, that is
-    meant for a specific sort of loading like container or truck.
 
+    """Model for the dock of a `timeslots.Station`.
+
+    A dock is meant for a specific sort of loading like container or truck. The
     Timeslots of a dock are organized through a `timeslots.Block`
 
     """
+
     station = models.ForeignKey(Station)
 
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
-        return  '%s - %s' % (self.station.name, self.name)
+        return '%s - %s' % (self.station.name, self.name)
 
     class Meta:
         verbose_name = _("Dock")
@@ -105,12 +113,15 @@ class Dock(models.Model):
 
 
 class Block(models.Model):
-    """
-    The Block is a collection og timeslots that belongs to a specific
-    `timeslots.Dock`.
 
-    The number of Lines (possible patallel loadings) is also defined hereour
+    """Model for the block of a `timeslots.Dock`.
+
+    The Block is a collection of timeslots that belongs to a specific dock. The
+    number of Lines (possible patallel loadings) is also defined within this
+    model
+
     """
+
     dock = models.ForeignKey(Dock)
 
     start = models.TimeField()
@@ -119,10 +130,12 @@ class Block(models.Model):
     slotduration = models.IntegerField()
     max_slots = models.IntegerField(default=0, help_text=_("0 for unlimited"))
 
-    def get_slots(self, date):
-        return self.slot_set.filter(date=date).count()
+    def get_slots(self, filter_date):
+        """Return a filtered list of slots for a specific date."""
+        return self.slot_set.filter(date=filter_date).count()
 
     def _get_end(self):
+        """Return the end time of a block."""
         delta = self.slotcount * self.slotduration
         endtime = (datetime.combine(date.today(), self.start) +
                    timedelta(minutes=delta))
@@ -150,12 +163,14 @@ class Block(models.Model):
 
 
 class UserProfile(models.Model):
-    """
-    This model adds additional fields to the buil in `auth.User` model.
+
+    """ Model that adds additional fields to the buil in `auth.User` model.
 
     The most important additions are the language (prefered user-interface
     language) and the company field.
+
     """
+
     GROUPS = (_("administrator"), _("loadmaster"), _("charger"), _("user"),
               _("viewer"))
     LANGUAGES = ((u'de', u'Deutsch'), (u'en', u'English'))
@@ -205,8 +220,10 @@ class UserProfile(models.Model):
                     self.user.groups.filter(name='viewer').count() == 0)
     is_readonly = property(_get_is_readonly)
 
+    @classmethod
     @models.permalink
-    def get_absolute_url(self):
+    def get_absolute_url(cls):
+        """Return the absolute URL for a user."""
         return ('timeslots_userprofile_detail', (), {})
 
     def __unicode__(self):
@@ -215,16 +232,21 @@ class UserProfile(models.Model):
 
 @receiver(user_logged_in)
 def setlang(sender, **kwargs):
+    """Write the users language into the session."""
     lang = kwargs['user'].userprofile.language
     kwargs['request'].session['django_language'] = lang
 
 
 class Slot(models.Model):
+
+    """ A Slot is the representation of a dedicated reservation.
+
+    The Slot is part of a block and identified by the timeslot number and the
+    line number, which results in a triple as the index (block_id, timeslot,
+    line)
+
     """
-    This is the representation of a dedicated reservation. The Slot is part of
-    a block and identified by the timeslot number and the line number, which
-    results in a triple as the index (block_id, timeslot, line)
-    """
+
     block = models.ForeignKey(Block)
     company = models.ForeignKey(UserProfile)
 
@@ -248,9 +270,9 @@ class Slot(models.Model):
 
     def _get_times_flagged(self):
         if self.is_klv:
-            return  "%s (KLV/NV)" % (self.times)
+            return "%s (KLV/NV)" % (self.times)
         else:
-            return  self.times
+            return self.times
     times_flagged = property(_get_times_flagged)
 
     def _get_date_string(self):
@@ -258,6 +280,7 @@ class Slot(models.Model):
     date_string = property(_get_date_string)
 
     def status(self, user):
+        """Return a textual representation of the slot status."""
         if self.is_blocked:
             return ugettext_noop("blocked")
         else:
@@ -268,13 +291,15 @@ class Slot(models.Model):
                 except IndexError:
                     first_job = "..."
                 if self.is_klv:
-                    return "%s - %s (KLV/NV)" % (self.company.company, first_job)
+                    return "%s - %s (KLV/NV)" % (self.company.company,
+                                                 first_job)
                 else:
                     return "%s - %s" % (self.company.company, first_job)
             else:
                 return ugettext_noop("reserved")
 
     def past_rnvp(self, curr_time):
+        """Return, whether the slot is past RNVP."""
         start = datetime.combine(
             self.date,
             self.block.start_times[int(self.timeslot) - 1]
@@ -290,6 +315,7 @@ class Slot(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
+        """Return the absolute URL for a slot."""
         return ('timeslots_slot_detail', (), {
                 'block_id': self.block.id,
                 'timeslot': str(self.timeslot),
@@ -313,11 +339,15 @@ class Slot(models.Model):
 
 
 class Job(models.Model):
-    """
-    A job contains informations about a charge that will be loaden within a
+
+    """ Model for the job information of a slot.
+
+    A job contains information about a charge that will be loaden within a
     slot. There can be several jobs per slot but every slot muste contain
     at least one valid job.
+
     """
+
     FTL = 40
     Payload_Choices = [(x + 1, "%s t" % (x + 1)) for x in range(FTL)]
     slot = models.ForeignKey(Slot)
@@ -335,6 +365,9 @@ class Job(models.Model):
 
 
 class Logging(models.Model):
+
+    """ Class for log messages. """
+
     user = models.ForeignKey(User)
 
     time = models.DateTimeField(editable=False)
@@ -342,6 +375,7 @@ class Logging(models.Model):
     task = models.CharField(max_length=500)
 
     def save(self, *args, **kwargs):
+        """Method, that saves a log message into the database."""
         self.time = datetime.today()
         super(Logging, self).save(*args, **kwargs)
 
