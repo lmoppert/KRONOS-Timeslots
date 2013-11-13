@@ -3,6 +3,7 @@
 # pylint:disable=C0301
 from datetime import datetime
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 from timeslots.views import UserProfile, DayLoggingArchive, MonthLoggingArchive
 
 urlpatterns = patterns(
@@ -22,7 +23,10 @@ urlpatterns = patterns(
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
     url(r'^password_changed/$', 'password_change_done'),
     url(r'^users/$', 'users', name='timeslots_user_list'),
-    url(r'^imprint/$', 'imprint', name='timeslots_imprint'),
+    url(r'^imprint/$',
+        TemplateView.as_view(template_name='timeslots/imprint.html'),
+        name='timeslots_imprint'),
+
 )
 urlpatterns += patterns(
     'django.contrib.auth.views',
