@@ -19,11 +19,7 @@ def show_progress(slot, user):
     progress bar
     """
     progress = slot.progress
-    if progress == 0:
-        div_title = _("Slot has been booked")
-        div_class = "progress"
-        div_style = "width: 0%"
-    elif progress == 1:
+    if progress == 1:
         div_title = _("Carrier is checking in")
         div_class = "progress progress-danger"
         div_style = "width: 33%"
@@ -35,6 +31,10 @@ def show_progress(slot, user):
         div_title = _("Carrier has checked out")
         div_class = "progress progress-success"
         div_style = "width: 100%"
+    else:
+        div_title = _("Slot has been booked")
+        div_class = "progress"
+        div_style = "width: 0%"
     return {'user': user, 'div_title': div_title, 'div_class': div_class,
             'div_style': div_style, 'progress': progress, 'slot_id': slot.id,
             'station_id': slot.block.dock.station.id, 'date': slot.date}
