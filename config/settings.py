@@ -3,6 +3,7 @@
 import os
 import socket
 
+ugettext = lambda s: s
 DIR = os.path.abspath(os.path.dirname(__file__))
 
 try:
@@ -19,6 +20,7 @@ ADMINS = (
     ('Lutz Moppert', 'lutz.moppert@kronosww.com'),
 )
 MANAGERS = ADMINS
+GRAPPELLI_ADMIN_TITLE = 'Admin Interface for <a href="/">KRONOS Timeslots</a>'
 
 DATABASES = {
     'default': {
@@ -29,7 +31,6 @@ DATABASES = {
 
 TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'en'
-ugettext = lambda s: s
 LANGUAGES = (
     ('en', ugettext('English')),
     ('de', ugettext('German')),
@@ -45,7 +46,7 @@ USE_TZ = True
 
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = '/var/www/static'
+STATIC_ROOT = '/var/www/static/'
 STATIC_URL = 'http://' + socket.getfqdn() + '/static/'
 STATICFILES_DIRS = (
     os.path.join(DIR, '..', 'static'),
@@ -54,8 +55,8 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -103,6 +104,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'timeslots',
