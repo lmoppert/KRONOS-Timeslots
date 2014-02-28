@@ -10,21 +10,18 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
 
 class LoggingAdmin(admin.ModelAdmin):
-
     """Admin view for the log entries."""
 
     list_display = ('time', 'user', 'host', 'task')
 
 
 class JobAdmin(admin.ModelAdmin):
-
     """Admin view for the jobs."""
 
     list_display = ('number', 'description')
 
 
 class JobInline(admin.TabularInline):
-
     """Inline view for the jobs."""
 
     model = Job
@@ -32,7 +29,6 @@ class JobInline(admin.TabularInline):
 
 
 class SlotAdmin(admin.ModelAdmin):
-
     """Admin view for the slots."""
 
     list_display = ('date', 'block', 'times', 'line', 'company')
@@ -40,14 +36,12 @@ class SlotAdmin(admin.ModelAdmin):
 
 
 class BlockAdmin(admin.ModelAdmin):
-
     """Admin view for the blocks."""
 
     list_display = ('dock', 'start', 'end')
 
 
 class BlockInline(admin.TabularInline):
-
     """Inline view for the blocks."""
 
     model = Block
@@ -55,7 +49,6 @@ class BlockInline(admin.TabularInline):
 
 
 class DockAdmin(admin.ModelAdmin):
-
     """Admin view for the docks."""
 
     list_display = ('station', 'name', 'description')
@@ -63,7 +56,6 @@ class DockAdmin(admin.ModelAdmin):
 
 
 class DockInline(admin.TabularInline):
-
     """Inline view for the docks."""
 
     model = Dock
@@ -71,7 +63,6 @@ class DockInline(admin.TabularInline):
 
 
 class StationAdmin(admin.ModelAdmin):
-
     """Admin view for the stations."""
 
     list_display = ('name', 'shortdescription')
@@ -87,8 +78,28 @@ class StationAdmin(admin.ModelAdmin):
     inlines = [DockInline]
 
 
-class UserProfileInline(admin.StackedInline):
+class ScaleAdmin(admin.ModelAdmin):
+    """Admin view for the scales."""
 
+    list_display = ('name', 'description')
+
+
+class ProductAdmin(admin.ModelAdmin):
+    """Admin view for the products."""
+
+    list_display = ('name', 'description', 'load_time')
+
+
+class AvailabilityAdmin(admin.ModelAdmin):
+    """Admin view for the availability of products."""
+
+
+class SiloJobAdmin(admin.ModelAdmin):
+    """Admin view for the silo jobs."""
+    pass
+
+
+class UserProfileInline(admin.StackedInline):
     """Inline view for the user profile."""
 
     model = UserProfile
@@ -97,7 +108,6 @@ class UserProfileInline(admin.StackedInline):
 
 
 class UserAdmin(AuthUserAdmin):
-
     """Admin view for the user profile."""
 
     def add_view(self, *args, **kwargs):

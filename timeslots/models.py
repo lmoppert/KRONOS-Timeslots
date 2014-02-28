@@ -1,5 +1,6 @@
 """Model definition for the timeslots application."""
 
+# pylint:disable=C0301
 from datetime import timedelta, datetime, date, time
 
 from django.contrib.auth.models import User
@@ -11,7 +12,6 @@ from django.utils.translation import ugettext_noop
 
 
 class Station(models.Model):
-
     """
     The Station represents one address, where trucks can be loaded.
 
@@ -83,7 +83,7 @@ class Station(models.Model):
     longname = property(_get_longname)
 
     def __unicode__(self):
-        return self.name
+        return self.longname
 
     class Meta:
         verbose_name = _("Station")
@@ -91,7 +91,6 @@ class Station(models.Model):
 
 
 class Dock(models.Model):
-
     """Model for the dock of a `timeslots.Station`.
 
     A dock is meant for a specific sort of loading like container or truck. The
@@ -113,7 +112,6 @@ class Dock(models.Model):
 
 
 class Block(models.Model):
-
     """Model for the block of a `timeslots.Dock`.
 
     The Block is a collection of timeslots that belongs to a specific dock. The
@@ -163,7 +161,6 @@ class Block(models.Model):
 
 
 class UserProfile(models.Model):
-
     """ Model that adds additional fields to the buil in `auth.User` model.
 
     The most important additions are the language (prefered user-interface
@@ -238,7 +235,6 @@ def setlang(sender, **kwargs):
 
 
 class Slot(models.Model):
-
     """ A Slot is the representation of a dedicated reservation.
 
     The Slot is part of a block and identified by the timeslot number and the
@@ -339,10 +335,9 @@ class Slot(models.Model):
 
 
 class Job(models.Model):
-
     """ Model for the job information of a slot.
 
-    A job contains information about a charge that will be loaden within a
+    A job contains information about a charge that will be loaded within a
     slot. There can be several jobs per slot but every slot muste contain
     at least one valid job.
 
@@ -365,7 +360,6 @@ class Job(models.Model):
 
 
 class Logging(models.Model):
-
     """ Class for log messages. """
 
     user = models.ForeignKey(User)
@@ -382,3 +376,52 @@ class Logging(models.Model):
     class Meta:
         verbose_name = _("Logging")
         verbose_name_plural = _("Loggings")
+
+
+class Scale(models.Model):
+    """Model for the scale of a `timeslots.Station`.
+
+    A scale is a loading point for silo loading and has one or more silos, that
+    belong to the specific scale.
+
+    """
+
+    station = models.ForeignKey(Station)
+
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
+    start = models.TimeField()
+    concurrent_products = models.IntegerField()
+    slicecount = models.IntegerField()
+    sliceduration = models.IntegerField(default=30, help_test=_(
+        "Length of a time slice in minutes, default is 30 min."))
+
+
+class Product(models.Model):
+    """Model for the available products in a silo."""
+
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
+    load_time = models.IntegerField()
+
+
+class Availability(models.Model):
+    """Model storing the availability of a product in a silo."""
+
+    scale = models.ForeignKey(Scale)
+    product = models.ForeignKey(Product)
+
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+
+class SiloJob(models.Model):
+    """Model for the jobs of silo loadings."""
+
+    scale = models.ForeignKey(Scale)
+    product = models.ForeignKey(Product)
+    company = models.ForeignKey(UserProfile)
+
+    date = models.DateField()
+    number = models.CharField(max_length=20)
+    description = models.CharField(max_length=200, blank=True)
