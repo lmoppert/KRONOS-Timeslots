@@ -1,7 +1,8 @@
 """Module with class based views and view functions for the Timeslots app."""
 
 from django.db.models import F
-from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.shortcuts import (
+    get_object_or_404, get_list_or_404, render, redirect)
 from django.http import HttpResponseRedirect, HttpResponse
 
 from django.views.generic.edit import UpdateView
@@ -80,11 +81,8 @@ class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
 def logging_redirect(request):
     """Return a redirect to the one day log view."""
     t = datetime.now()
-    return HttpResponseRedirect(reverse('timeslots_logging_day', kwargs={
-        'year': t.strftime("%Y"),
-        'month': t.strftime("%m"),
-        'day': t.strftime("%d")
-    }))
+    return redirect('timeslots_logging_day', year=t.strftime("%Y"),
+                    month=t.strftime("%m"), day=t.strftime("%d"))
 
 
 @login_required
@@ -122,7 +120,7 @@ def logout_page(request):
 def password_change_done(request):
     """Return the redirect after a password has been changed."""
     messages.success(request, _('Your password has been changed!'))
-    return HttpResponseRedirect('/timeslots/profile/')
+    return redirect('timeslots_userprofile_detail')
 
 
 @login_required
@@ -295,6 +293,8 @@ def station(request, station_id, date, view_mode):
         msg = _("You are not authorized to access this station!")
         messages.error(request, msg)
         return HttpResponseRedirect('/timeslots/profile/')
+    if (curr_station.docks.count() == 0 and curr_station.scales.count() > 1):
+        return HttpResponseRedirect('/station/%s/scales/' % curr_station.id)
     if (view_mode == 'slots' and not request.user.userprofile.is_master and
         curr_station.past_deadline(datetime.strptime(date, "%Y-%m-%d"),
                                    datetime.now())):
