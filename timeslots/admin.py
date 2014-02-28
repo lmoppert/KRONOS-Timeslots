@@ -2,7 +2,7 @@
 
 #pep257: disable C0110
 from timeslots.models import (Station, Dock, Block, UserProfile, Slot, Job,
-                              Logging)
+                              Logging, Availability, SiloJob, Scale, Product)
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -13,6 +13,12 @@ class LoggingAdmin(admin.ModelAdmin):
     """Admin view for the log entries."""
 
     list_display = ('time', 'user', 'host', 'task')
+
+
+class ProductAdmin(admin.ModelAdmin):
+    """Admin view for the products."""
+
+    list_display = ('name', 'description', 'load_time')
 
 
 class JobAdmin(admin.ModelAdmin):
@@ -26,6 +32,32 @@ class JobInline(admin.TabularInline):
 
     model = Job
     extra = 2
+
+
+class AvailabilityAdmin(admin.ModelAdmin):
+    """Admin view for the availability of products."""
+
+    list_display = ('date', 'scale', 'product')
+
+
+class AvailabilityInline(admin.TabularInline):
+    """Inline view for the availability of products."""
+
+    model = Availability
+    extra = 1
+
+
+class SiloJobAdmin(admin.ModelAdmin):
+    """Admin view for the silo jobs."""
+
+    list_display = ('number', 'date', 'description')
+
+
+class SiloJobInline(admin.TabularInline):
+    """Admin view for the silo jobs."""
+
+    model = SiloJob
+    extra = 1
 
 
 class SlotAdmin(admin.ModelAdmin):
@@ -62,6 +94,20 @@ class DockInline(admin.TabularInline):
     extra = 1
 
 
+class ScaleAdmin(admin.ModelAdmin):
+    """Admin view for the scales."""
+
+    list_display = ('name', 'description')
+    inlines = [SiloJobInline, AvailabilityInline]
+
+
+class ScaleInline(admin.TabularInline):
+    """Inline view for the scales."""
+
+    model = Scale
+    extra = 1
+
+
 class StationAdmin(admin.ModelAdmin):
     """Admin view for the stations."""
 
@@ -75,28 +121,7 @@ class StationAdmin(admin.ModelAdmin):
                        'has_klv', 'booking_deadline', 'rnvp']
         })
     ]
-    inlines = [DockInline]
-
-
-class ScaleAdmin(admin.ModelAdmin):
-    """Admin view for the scales."""
-
-    list_display = ('name', 'description')
-
-
-class ProductAdmin(admin.ModelAdmin):
-    """Admin view for the products."""
-
-    list_display = ('name', 'description', 'load_time')
-
-
-class AvailabilityAdmin(admin.ModelAdmin):
-    """Admin view for the availability of products."""
-
-
-class SiloJobAdmin(admin.ModelAdmin):
-    """Admin view for the silo jobs."""
-    pass
+    inlines = [DockInline, ScaleInline]
 
 
 class UserProfileInline(admin.StackedInline):
@@ -127,6 +152,10 @@ admin.site.register(Dock, DockAdmin)
 admin.site.register(Block, BlockAdmin)
 admin.site.register(Slot, SlotAdmin)
 admin.site.register(Job, JobAdmin)
+admin.site.register(Scale, ScaleAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Availability, AvailabilityAdmin)
+admin.site.register(SiloJob, SiloJobAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Site)

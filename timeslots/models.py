@@ -393,7 +393,7 @@ class Scale(models.Model):
     start = models.TimeField()
     concurrent_products = models.IntegerField()
     slicecount = models.IntegerField()
-    sliceduration = models.IntegerField(default=30, help_test=_(
+    sliceduration = models.IntegerField(default=30, help_text=_(
         "Length of a time slice in minutes, default is 30 min."))
 
 
@@ -411,8 +411,7 @@ class Availability(models.Model):
     scale = models.ForeignKey(Scale)
     product = models.ForeignKey(Product)
 
-    start_date = models.DateField()
-    end_date = models.DateField()
+    date = models.DateField()
 
 
 class SiloJob(models.Model):
