@@ -9,12 +9,12 @@ from timeslots.models import Slot, Logging
 
 
 # Helper functions
-def log_task(request, message):
+def log_msg(request, message, object="<NONE>"):
     """Create an log entry for the submitted task."""
     logentry = Logging.objects.create(
         user=request.user,
         host=request.META.get('REMOTE_ADDR'),
-        task=message
+        task=message.format(user=request.user, object=object)
     )
     logentry.save()
 
@@ -30,11 +30,12 @@ def daterange(start, end):
 def delete_slot_garbage(request):
     """Garbage Collector for uncompleted slot reservations."""
     # annotate creates a filterable value (properties not available in filters)
-    slots = Slot.objects.filter(is_blocked=False).annotate(num_jobs=Count('job')).filter(num_jobs__exact=0)  # NOQA
+    slots = Slot.objects.filter(is_blocked=False).annotate(
+        num_jobs=Count('job')).filter(num_jobs__exact=0)
     for slot in slots:
         if now() - slot.created > timedelta(minutes=5):
-            log_task(request, "The garbage collector has deleted slot %s (%s)"
-                     % (slot, slot.times))
+            msg = "The garbage collector has deleted slot {object} (%s)"
+            log_msg(request, msg % slot.times, slot)
             slot.delete()
 
 

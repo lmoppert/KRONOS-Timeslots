@@ -1,23 +1,28 @@
 """URLs for the Timeslots application."""
 
 # pylint:disable=C0301
-from datetime import datetime
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
-from timeslots.views import UserProfile, DayLoggingArchive, MonthLoggingArchive
+from timeslots.views import (JobListView, JobTableView, SlotView, UserProfile,
+                             DayLoggingArchive, MonthLoggingArchive)
 
 urlpatterns = patterns(
     'timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
     url(r'^logout/$', 'logout_then_login', name='user_logout'),
     url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slotstatus/(?P<slot_id>\d+)/$', 'slotstatus', name='timeslots_slot_progress'),  # NOQA
-    url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slots/$', 'station', {'view_mode': 'slots'}),  # NOQA
-    url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/joblist/$', 'station', {'view_mode': 'joblist'}),  # NOQA
-    url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/jobtable/$', 'station', {'view_mode': 'jobtable'}),  # NOQA
-    url(r'^station/(?P<station_id>\d+)/$', 'station', {'date': datetime.now().strftime("%Y-%m-%d"), 'view_mode': 'slots'}, name='timeslots_station_detail'),  # NOQA
+    url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slots/$',
+        SlotView.as_view()),
+    url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/joblist/$',
+        JobListView.as_view()),
+    url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/jobtable/$',
+        JobTableView.as_view()),
+    url(r'^station/(?P<pk>\d+)/$', SlotView.as_view(),
+        name='timeslots_station_detail'),
     url(r'^station/$', 'station_redirect', name='timeslots_station'),
     url(r'^logging/$', 'logging_redirect', name='timeslots_logging'),
-    url(r'^logging/export/(?P<year>\d{4})-(?P<month>\d{2})/$', 'logging_export', name='timeslots_logging_export'),  # NOQA
+    url(r'^logging/export/(?P<year>\d{4})-(?P<month>\d{2})/$',
+        'logging_export', name='timeslots_logging_export'),
     url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),  # NOQA
     url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
@@ -30,13 +35,19 @@ urlpatterns = patterns(
 )
 urlpatterns += patterns(
     'django.contrib.auth.views',
-    url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'}, name='user_login'),  # NOQA
-    url(r'^password/$', 'password_change', {'post_change_redirect': '/timeslots/password_changed/',  # NOQA
-        'template_name': 'timeslots/password_change_form.html'}, name='timeslots_change_password'),  # NOQA
+    url(r'^login/$', 'login', {'template_name': 'timeslots/user_login.html'},
+        name='user_login'),
+    url(r'^password/$', 'password_change', {
+        'post_change_redirect': '/timeslots/password_changed/',
+        'template_name': 'timeslots/password_change_form.html'},
+        name='timeslots_change_password'),
 )
 urlpatterns += patterns(
     '',
-    url(r'^userprofile/$', UserProfile.as_view(), name='timeslots_userprofile_form'),  # NOQA
-    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', DayLoggingArchive.as_view(), name='timeslots_logging_day'),  # NOQA
-    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})/$', MonthLoggingArchive.as_view(), name='timeslots_logging_month'),  # NOQA
+    url(r'^userprofile/$', UserProfile.as_view(),
+        name='timeslots_userprofile_form'),
+    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$',
+        DayLoggingArchive.as_view(), name='timeslots_logging_day'),
+    url(r'^logging/(?P<year>\d{4})-(?P<month>\d{2})/$',
+        MonthLoggingArchive.as_view(), name='timeslots_logging_month'),
 )

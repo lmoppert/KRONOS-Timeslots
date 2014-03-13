@@ -75,7 +75,7 @@ class Station(models.Model):
     @models.permalink
     def get_absolute_url(self):
         """Return the absolute URL for the station."""
-        return ('timeslots_station_detail', (), {'station_id': self.id})
+        return ('timeslots_station_detail', (), {'pk': self.id})
 
     def _get_longname(self):
         """Return the long name for the station."""

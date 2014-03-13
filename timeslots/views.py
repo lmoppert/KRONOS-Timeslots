@@ -3,9 +3,9 @@
 from django.db.models import F
 from django.shortcuts import (
     get_object_or_404, get_list_or_404, render, redirect)
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse
 
-from django.views.generic.edit import UpdateView
+from django.views.generic import UpdateView, DetailView
 from django.views.generic.dates import DayArchiveView, MonthArchiveView
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,7 +26,7 @@ from timeslots.models import Block, Logging, Slot, Station
 from timeslots.forms import (UserProfileForm, BlockSlotForm, JobForm,
                              SingleJobForm)
 from timeslots.tables import StationJobTable, UserJobTable, UserTable
-from timeslots.utils import (daterange, delete_slot_garbage, log_task,
+from timeslots.utils import (daterange, delete_slot_garbage, log_msg,
                              cbv_decorator)
 import csv
 
@@ -76,6 +76,214 @@ class MonthLoggingArchive(LoggingArchive, MonthArchiveView):
     pass
 
 
+@cbv_decorator(login_required)
+class StationView(DetailView):
+    """Base Class for all station related Views."""
+
+    model = Station
+    date = datetime.now().strftime('%Y-%m-%d')
+    target = 'slots'
+    docks = []  # List of tuples: (dock_name, dock_id)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if 'selectedDocks' in request.POST:
+            docks = request.POST.getlist('selectedDocks')
+            request.session['selectedDocks'] = docks
+        return self.get(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.handle_session_data(request)
+        url = self.handle_conditions(request, self.date)
+        if url:
+            return redirect(url)
+        else:
+            delete_slot_garbage(request)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+    def get_job_data(self, request):
+        slotlist = {}
+        for dock_name, dock_id in self.docks:
+            slotlist[dock_name] = []
+        profile = request.user.userprofile
+        if profile.is_master or profile.is_viewer:
+            slots = list(Slot.objects.filter(date=self.date))
+        else:
+            slots = list(Slot.objects.filter(date=self.date).filter(
+                company=request.user.userprofile.id))
+        return (slotlist, slots)
+
+    def get_context_data(self, **kwargs):
+        context = super(StationView, self).get_context_data(**kwargs)
+        if 'date' in self.kwargs:
+            self.date = self.kwargs['date']
+        context['date'] = self.date
+        context['target'] = self.target
+        return context
+
+    def handle_session_data(self, request):
+        self.docks = []
+        if 'selectedDocks' in request.session:
+            for dock_id in request.session['selectedDocks']:
+                try:
+                    dock = self.object.dock_set.get(pk=dock_id)
+                except:
+                    continue
+                self.docks.append((dock.name, dock.id))
+        else:
+            for dock in self.object.dock_set.all():
+                self.docks.append((dock.name, dock.id))
+
+    def handle_conditions(self, request, date):
+        station = self.object
+        user = request.user
+        date = datetime.strptime(date, "%Y-%m-%d").date()
+        if (not station.opened_on_weekend and not user.userprofile.is_master
+                and date.weekday() > 4):
+            msg = "User {user} tried to access the weekend view of station" \
+                  "{object}, which is not opened on weekends."
+            log_msg(request, msg, station)
+            messages.error(request, _('This station is closed on weekends!'))
+            monday = (date + timedelta(days=7 - date.weekday()))
+            return '/timeslots/station/{station}/date/{date}/slots/'.format(
+                station=station.id, date=monday.strftime("%Y-%m-%d"))
+        if user.userprofile.stations.filter(id=station.id).count() == 0:
+            msg = "User {user} tried to access station {station} without" \
+                "authorization"
+            log_msg(request, msg, station)
+            msg = _("You are not authorized to access this station!")
+            messages.error(request, msg)
+            return '/timeslots/profile/'
+        if self.object.dock_set.count() == 0:
+            if self.object.scale_set.count() == 0:
+                msg = "Station {station} has no docks or scales assigned to it"
+                messages.error(request, msg % station.name)
+                return 'timeslots_home'
+            return '/station/{station}/scales/'.format(station=self.object.id)
+
+
+class SlotView(StationView):
+    """
+    Displays the blocks ( see :model:`timeslots.Block`) of a
+    :model:`timeslots.Station` for a specific date.
+    """
+
+    template_name = 'timeslots/station_detail.html'
+
+    def handle_conditions(self, request, date):
+        station = self.object
+        user = request.user
+        if (not user.userprofile.is_master and station.past_deadline(
+                datetime.strptime(date, "%Y-%m-%d").date(), datetime.now())):
+            msg = _("The reservation deadline has been reached, no more"
+                    "reservations will be accepted!")
+            messages.warning(request, msg)
+        return super(SlotView, self).handle_conditions(request, date)
+
+    def get_timeslots(self, block):
+        timeslots = []
+        for timeslot in range(block.slotcount):
+            lines = []
+            for line in range(block.linecount):
+                try:
+                    curr_slot = block.slot_set.filter(
+                        date=self.date).get(
+                        date=self.date,
+                        timeslot=timeslot + 1,
+                        line=line + 1,
+                        block=block.id
+                    )
+                    company = curr_slot.status(self.request.user)
+                except ObjectDoesNotExist:
+                    company = ugettext_noop("free")
+                if company in ("free", "blocked"):
+                    lines.append((company, None))
+                else:
+                    lines.append((company, curr_slot))
+            time = block.start_times[int(timeslot)].strftime("%H:%M")
+            timeslots.append((time, lines))
+        return timeslots
+
+    def get_context_data(self, **kwargs):
+        context = super(SlotView, self).get_context_data(**kwargs)
+        docks = []
+        for dock_name, dock_id in self.docks:
+            blocks = []
+            dock = self.object.dock_set.get(pk=dock_id)
+            for block in dock.block_set.all():
+                if (block.max_slots > 0 and
+                        block.get_slots(self.date) >= block.max_slots):
+                    msg = _('The maximal number of Slots have been reserved, '
+                            'no more reservations will be accepted!')
+                    messages.warning(self.request, msg)
+                timeslots = self.get_timeslots(block)
+                blocks.append((str(block.id), timeslots))
+            docks.append((dock_name, blocks))
+        spans = ["span12", "span12", "span6", "span4"]
+        if len(self.docks) < 4:
+            span = spans[len(docks)]
+        else:
+            span = "span3"
+        if self.request.user.userprofile.is_master:
+            hidden = ()
+        else:
+            hidden = ("blocked", "reserved")
+        context['span'] = span
+        context['hidden'] = hidden
+        context['docks'] = docks
+        return context
+
+
+class JobListView(StationView):
+    """
+    Displays the jobs of a :model:`timeslots.Station` for a specific date as a
+    List, grouped by dock.
+    """
+
+    template_name = 'timeslots/job_list.html'
+    target = 'joblist'
+
+    def get_context_data(self, **kwargs):
+        context = super(JobListView, self).get_context_data(**kwargs)
+        slotlist, slots = self.get_job_data(self.request)
+        for slot in slots:
+            if (slot.block.dock.name in slotlist and
+                    slot.block.dock.station.id == self.object.id
+                    and (not slot.is_blocked or slot.job_set.count() > 0)):
+                slotlist[slot.block.dock.name].append(slot)
+        context['slotlist'] = slotlist
+        context['docks'] = self.docks
+        return context
+
+
+class JobTableView(StationView):
+    """
+    Displays the jobs of a :model:`timeslots.Station` for a specific date as a
+    Table.
+    """
+
+    template_name = 'timeslots/job_table.html'
+    target = 'jobtable'
+
+    def get_context_data(self, **kwargs):
+        context = super(JobTableView, self).get_context_data(**kwargs)
+        jobs = []
+        slotlist, slots = self.get_job_data(self.request)
+        for slot in slots:
+            if ((slot.block.dock.name in slotlist and
+                    slot.block.dock.station.id == self.object.id
+                    and not slot.is_blocked)):
+                for job in slot.job_set.all():
+                    jobs.append(job)
+        table = StationJobTable(jobs)
+        RequestConfig(self.request, paginate=False).configure(table)
+        context['table'] = table
+        context['docks'] = self.docks
+        return context
+
+
 # View functions
 @login_required
 def logging_redirect(request):
@@ -89,12 +297,12 @@ def logging_redirect(request):
 def logging_export(request, year, month):
     """Return a response for the logfile export."""
     if not request.user.userprofile.is_master:
-        msg = "User %s tried to export logfiles" % request.user
+        msg = "User {user} tried to export logfiles"
         msg += "but is not a member of a master group"
-        log_task(request, msg)
+        log_msg(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return redirect('/timeslots/profile/')
     filename = 'timeslots-user-list.csv'
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
@@ -133,12 +341,12 @@ def profile(request):
 def users(request):
     """Return the user list view."""
     if not request.user.userprofile.is_master:
-        msg = "User %s tried to access the user list " % request.user
+        msg = "User {user} tried to access the user list "
         msg += "but is not member of a master group"
-        log_task(request, msg)
+        log_msg(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return redirect('/timeslots/profile/')
     userlist = get_list_or_404(User, is_active=True)
     table = UserTable(userlist)
     RequestConfig(request, paginate={"per_page": 10}).configure(table)
@@ -156,15 +364,15 @@ def slotstatus(request, slot_id, station_id, date):
         else:
             curr_slot.progress = 0
             curr_slot.save()
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
             station_id, date))
     else:
-        msg = "User %s tried to change the status " % request.user
-        msg += "of slot %s but is not allowed to." % curr_slot
-        log_task(request, msg)
+        msg = "User {user} tried to change the status of slot {object} but is"
+        msg += " not allowed to."
+        log_msg(request, msg, curr_slot)
         msg = _('You are not allowed to change the status of a slot!')
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
             station_id, date))
 
 
@@ -192,7 +400,7 @@ def station_redirect(request):
             del request.session['selectedDocks']
         except KeyError:
             pass
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
             curr_station, date))
 
 
@@ -200,12 +408,12 @@ def station_redirect(request):
 def blocking(request):
     """Return the slot blocking form."""
     if not request.user.userprofile.is_master:
-        log = "User %s tried to access the blocking view but is not member " \
-            "of a master group" % request.user
-        log_task(request, log)
+        msg = "User {user} tried to access the blocking view but is not "
+        msg += "member of a master group"
+        log_msg(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return redirect('/timeslots/profile/')
     if (request.method == 'POST' and 'block' in request.POST and
             request.POST.get('block') != ""):
         block = get_object_or_404(Block, pk=request.POST.get('block'))
@@ -234,7 +442,7 @@ def blocking(request):
                         curr_slot.is_blocked = 'blockSlots' in request.POST
                         curr_slot.save()
             if 'blockSlots' in request.POST:
-                log = "User %s blocked slots %s from %s to %s for block %s"
+                log = "User {user} blocked slots %s from %s to %s for block %s"
                 msg = _("successfully blocked the selected slots!")
                 if len(reserved_slots) > 0:
                     msg = _("The slots listed below had already been "
@@ -246,164 +454,20 @@ def blocking(request):
                     return render(request, 'timeslots/blocked.html', {
                         'slots': reserved_slots})
             else:
-                log = "User %s released slots %s from %s to %s for block %s"
+                log = "User {user} released slots %s from %s to %s for block "
+                log += "{object}"
                 msg = _("successfully released the selected slots!")
-            log_task(request,
-                     log % (request.user, form['slots'].value(),
-                            form['start'].value(), form['end'].value(), block))
+            log_msg(request, log % (form['slots'].value(),
+                                    form['start'].value(),
+                                    form['end'].value()), block)
             messages.success(request, msg)
-            return HttpResponseRedirect(reverse('timeslots_blocking'))
+            return redirect(reverse('timeslots_blocking'))
         else:
             form.helper.form_show_errors = False
     else:
         form = BlockSlotForm(
             stations=request.user.userprofile.stations.values('id'))
     return render(request, 'timeslots/blocking.html', {'form': form})
-
-
-@login_required
-def station(request, station_id, date, view_mode):
-    """ Return the main view for a station.
-
-    Displays the blocks ( see :model:`timeslots.Block`) of a
-    :model:`timeslots.Station` or the jobs (table- or listview) for a specific
-    date.
-
-    """
-
-    # check conditions
-    curr_station = get_object_or_404(Station, pk=station_id)
-    if (not curr_station.opened_on_weekend and
-            not request.user.userprofile.is_master and
-            datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4):
-        msg = "User %s tried to access the weekend view of " % request.user
-        msg += "station %s, which is not opened on weekends." % curr_station
-        log_task(request, msg)
-        messages.error(request, _('This station is closed on weekends!'))
-        diff = 7 - datetime.strptime(date, "%Y-%m-%d").date().weekday()
-        monday = datetime.strptime(date, "%Y-%m-%d").date() + timedelta(
-            days=diff)
-        date = monday.strftime("%Y-%m-%d")
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (curr_station.id, date))
-    if request.user.userprofile.stations.filter(id=station_id).count() == 0:
-        msg = "User %s tried to access " % request.user
-        msg += "station %s without authorization" % curr_station
-        log_task(request, msg)
-        msg = _("You are not authorized to access this station!")
-        messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
-    if (curr_station.docks.count() == 0 and curr_station.scales.count() > 1):
-        return HttpResponseRedirect('/station/%s/scales/' % curr_station.id)
-    if (view_mode == 'slots' and not request.user.userprofile.is_master and
-        curr_station.past_deadline(datetime.strptime(date, "%Y-%m-%d"),
-                                   datetime.now())):
-        messages.warning(request,
-                         _('The reservation deadline has been reached, no '
-                           'more reservations will be accepted!'))
-
-    # prepare context items
-    if request.method == 'POST':
-        selected_docks = request.POST.getlist('selectedDocks')
-        request.session['selectedDocks'] = selected_docks
-    if 'selectedDocks' in request.session:
-        docklist = []
-        for dock_id in request.session['selectedDocks']:
-            docklist.append(curr_station.dock_set.get(pk=dock_id))
-        dock_count = len(docklist)
-    else:
-        docklist = curr_station.dock_set.all()
-        dock_count = docklist.count()
-
-    delete_slot_garbage(request)
-    if not view_mode == 'slots':
-        slotlist = {}
-        docks = []
-        for dock in docklist:
-            slotlist[dock.name] = []
-            docks.append((dock.name, dock.id))
-
-        # get all slots for one date
-        if request.user.userprofile.is_master or \
-           request.user.userprofile.is_viewer:
-            slots = list(Slot.objects.filter(date=date))
-        else:
-            slots = list(Slot.objects.filter(date=date).filter(
-                company=request.user.userprofile.id))
-
-        if view_mode == 'jobtable':
-            jobs = []
-            for curr_slot in slots:
-                if ((curr_slot.block.dock.name in slotlist and
-                     curr_slot.block.dock.station.id == curr_station.id
-                     and not curr_slot.is_blocked)):
-                    for job in curr_slot.job_set.all():
-                        jobs.append(job)
-            table = StationJobTable(jobs)
-            #RequestConfig(request, paginate={"per_page": 25}).configure(table)
-            RequestConfig(request, paginate=False).configure(table)
-            return render(request, 'timeslots/job_table.html', {
-                'station': curr_station, 'date': date, 'table': table,
-                'docks': docks, 'target': "jobtable"})
-        else:
-            for curr_slot in slots:
-                if (curr_slot.block.dock.name in slotlist and
-                    curr_slot.block.dock.station.id == curr_station.id
-                    and (not curr_slot.is_blocked
-                         or curr_slot.job_set.count() > 0)):
-                    slotlist[curr_slot.block.dock.name].append(curr_slot)
-
-        return render(request, 'timeslots/job_list.html', {
-            'station': curr_station, 'date': date, 'slotlist': slotlist,
-            'docks': docks, 'target': "joblist"})
-    else:
-        docks = []
-        for dock in docklist:
-            blocks = []
-            for block in dock.block_set.all():
-                if (block.max_slots > 0 and
-                        block.get_slots(date) >= block.max_slots):
-                    msg = _('The maximal number of Slots have been reserved, '
-                            'no more reservations will be accepted!')
-                    messages.warning(request, msg)
-                timeslots = []
-                for timeslot in range(block.slotcount):
-                    lines = []
-                    for line in range(block.linecount):
-                        try:
-                            curr_slot = block.slot_set.filter(date=date).get(
-                                date=date,
-                                timeslot=timeslot + 1,
-                                line=line + 1,
-                                block=block.id
-                            )
-                            company = curr_slot.status(request.user)
-                        except ObjectDoesNotExist:
-                            company = ugettext_noop("free")
-                        if company in ("free", "blocked"):
-                            lines.append((company, None))
-                        else:
-                            lines.append((company, curr_slot))
-                    time = block.start_times[int(timeslot)].strftime("%H:%M")
-                    timeslots.append((time, lines))
-                blocks.append((str(block.id), timeslots))
-            docks.append((dock.name, blocks))
-        if dock_count == 1:
-            span = "span12"
-        elif dock_count == 2:
-            span = "span6"
-        elif dock_count == 3:
-            span = "span4"
-        else:
-            span = "span3"
-
-    if request.user.userprofile.is_master:
-        hidden = ()
-    else:
-        hidden = ("blocked", "reserved")
-    return render(request, 'timeslots/station_detail.html', {
-        'station': curr_station, 'date': date, 'docks': docks, 'span': span,
-        'target': "slots", 'hidden': hidden})
 
 
 @login_required
@@ -435,65 +499,69 @@ def slot(request, date, block_id, timeslot, line):
 
     # check conditions
     if request.user.userprofile.is_readonly:
-        log_task(request, "Readonly user %s tried to access slot %s."
-                 % (request.user, curr_slot))
+        msg = "Readonly user {user} tried to access slot {object}."
+        log_msg(request, msg, curr_slot)
         messages.error(request, _('You are not allowed to change this slot!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/jobtable/'
-                                    % (block.dock.station.id, date))
+        return redirect('/timeslots/station/%s/date/%s/jobtable/' % (
+            block.dock.station.id, date))
     if ((not curr_slot.block.dock.station.opened_on_weekend
          and not request.user.userprofile.is_master
          and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4)):
         if created:
             curr_slot.delete()
-        log_task(request, "User %s tried to access slot %s, which is not "
-                 "opened on weekends." % (request.user, curr_slot))
+        msg = "User {user} tried to access slot {object}, which is not opened "
+        msg += "on weekends."
+        log_msg(request, msg, curr_slot)
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/')
+        return redirect('/timeslots/profile/')
     if not request.user.userprofile.is_master and curr_slot.is_blocked:
-        log_task(request, "User %s tried to access slot %s which is blocked."
-                 % (request.user, curr_slot))
+        msg = "User {user} tried to access slot {object} which is blocked."
+        log_msg(request, msg, curr_slot)
         messages.error(request, _('This slot has been blocked!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (block.dock.station.id, date))
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            block.dock.station.id, date))
     if (created and not request.user.userprofile.is_master and
         curr_slot.block.dock.station.past_deadline(
             datetime.strptime(date, "%Y-%m-%d"), datetime.now())):
         curr_slot.delete()
-        log_task(request, "User %s tried to reserve slot %s after the "
-                 "booking deadline has been reached."
-                 % (request.user, curr_slot))
-        messages.error(request,
-                       _("The deadline for booking this slot has ended!"))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (block.dock.station.id, date))
+        msg = "User {user} tried to reserve slot {object} after the "
+        msg += "booking deadline has been reached."
+        log_msg(request, msg, curr_slot)
+        msg = _("The deadline for booking this slot has ended!")
+        messages.error(request, msg)
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            block.dock.station.id, date))
     if ((created and block.max_slots > 0
          and block.get_slots(date) > block.max_slots)):
         curr_slot.delete()
-        log_task(request, "User %s tried to reserve slot %s after the "
-                 "maximum number of blocks per day has been reached."
-                 % (request.user, curr_slot))
-        messages.error(request, _("The maximal number of Slots have been "
-                                  "reserved, no more reservations will be "
-                                  "accepted!"))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (block.dock.station.id, date))
+        msg = "User {user} tried to reserve slot {object} after the "
+        msg += "maximum number of blocks per day has been reached."
+        log_msg(request, msg, curr_slot)
+        msg = _("The maximal number of Slots have been reserved, no more "
+                "reservations will be accepted!")
+        messages.error(request, msg)
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            block.dock.station.id, date))
     if ((not created and not request.user.userprofile.is_master
          and curr_slot.past_rnvp(datetime.now()))):
-        log_task(request, "User %s tried to change slot %s after the rnvp "
-                 "deadline has been reached." % (request.user, curr_slot))
-        messages.error(request, _("This slot can not be changed any more!"))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (block.dock.station.id, date))
+        msg = "User {user} tried to change slot {object} after the rnvp "
+        msg += "deadline has been reached."
+        log_msg(request, msg, curr_slot)
+        msg = _("This slot can not be changed any more!")
+        messages.error(request, msg)
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            block.dock.station.id, date))
     if ((not request.user.userprofile.is_master
          and curr_slot.company.user.id != request.user.id)):
         if created:
             curr_slot.delete()
-        log_task(request, "User %s tried to access slot %s which is "
-                 "reserved for a different user." % (request.user, curr_slot))
-        messages.error(request, _("This slot was already booked by a "
-                                  "different person!"))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                    % (block.dock.station.id, date))
+        msg = "User {user} tried to access slot {object} which is "
+        msg += "reserved for a different user."
+        log_msg(request, msg, curr_slot)
+        msg = _("This slot was already booked by a different person!")
+        messages.error(request, msg)
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            block.dock.station.id, date))
 
     # process request
     if request.method == 'POST':
@@ -507,48 +575,48 @@ def slot(request, date, block_id, timeslot, line):
                     curr_slot.is_klv = True
                 curr_slot.save()
                 formset.save()
-                log_task(request, "User %s has successfully reserved slot %s."
-                         % (request.user, curr_slot))
-                messages.success(request, _("The reservation has been saved "
-                                            "successfully!"))
-                return HttpResponseRedirect(
-                    '/timeslots/station/%s/date/%s/slots/'
-                    % (block.dock.station.id, date))
+                msg = "User {user} has successfully reserved slot {object}."
+                log_msg(request, msg, curr_slot)
+                msg = _("The reservation has been saved successfully!")
+                messages.success(request, msg)
+                return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                    block.dock.station.id, date))
             else:
-                log_task(request, "User %s has submitted a reservation "
-                         "form for slot %s which contained errors."
-                         % (request.user, curr_slot))
+                msg = "User {user} has submitted a reservation form for slot "
+                msg += "{object} which contained errors."
+                log_msg(request, msg, curr_slot)
         elif ('cancelReservation' in request.POST or
                 'deleteSlot' in request.POST):
             curr_slot.delete()
             for job in curr_slot.job_set.all():
                 job.delete()
-            log_task(request, "User %s has successfully deleted the "
-                     "reservation for slot %s." % (request.user, curr_slot))
-            messages.success(request, _("The reservation has been deleted "
-                                        "successfully!"))
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                        % (block.dock.station.id, date))
+            msg = "User {user} has successfully deleted the reservation for "
+            msg += "slot {object}."
+            log_msg(request, msg, curr_slot)
+            msg = _("The reservation has been deleted successfully!")
+            messages.success(request, msg)
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                block.dock.station.id, date))
         elif 'cancelEditing' in request.POST:
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                        % (block.dock.station.id, date))
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                block.dock.station.id, date))
         elif 'releaseSlot' in request.POST:
             curr_slot.is_blocked = False
             curr_slot.save()
-            log_task(request, "User %s has successfully released the "
-                     "blocking of slot %s." % (request.user, curr_slot))
+            msg = "User {user} has successfully released the blocking of "
+            msg += "slot {object}."
+            log_msg(request, msg, curr_slot)
             messages.success(request, _('This slot is no longer blocked!'))
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                        % (block.dock.station.id, date))
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                block.dock.station.id, date))
         elif 'keepSlotBlocked' in request.POST:
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/'
-                                        % (block.dock.station.id, date))
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                block.dock.station.id, date))
     else:
         # This one has to go into the else path, otherwise errors
         # formset.non_form_errors are overwritten
-        log_task(request,
-                 "User %s has opened the reservation form for slot %s."
-                 % (request.user, curr_slot))
+        msg = "User {user} has opened the reservation form for slot {object}."
+        log_msg(request, msg, curr_slot)
         if block.dock.station.multiple_charges:
             formset = JobForm(instance=curr_slot)
         else:
