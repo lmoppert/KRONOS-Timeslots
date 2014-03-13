@@ -156,7 +156,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap'
 if DJANGO_SERVER == 'Development':
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar',)
-    INTERNAL_IPS = ['127.0.0.1']
+    INTERNAL_IPS = ['127.0.0.1', '10.49.20.40', '10.49.20.25']
     ALWAYS_SHOW_DEBUG_TOOLBAR = True
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
