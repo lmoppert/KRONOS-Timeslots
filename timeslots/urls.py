@@ -4,7 +4,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 from timeslots.views import (JobListView, JobTableView, SlotView, UserProfile,
-                             DayLoggingArchive, MonthLoggingArchive)
+                             BlockingForm, DayLoggingArchive,
+                             MonthLoggingArchive)
 
 urlpatterns = patterns(
     'timeslots.views',
@@ -24,7 +25,8 @@ urlpatterns = patterns(
     url(r'^logging/export/(?P<year>\d{4})-(?P<month>\d{2})/$',
         'logging_export', name='timeslots_logging_export'),
     url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),  # NOQA
-    url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
+    #url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
+    url(r'^blocking/$', BlockingForm.as_view(), name='timeslots_blocking'),
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
     url(r'^password_changed/$', 'password_change_done'),
     url(r'^users/$', 'users', name='timeslots_user_list'),

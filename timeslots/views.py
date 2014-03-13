@@ -1,11 +1,11 @@
 """Module with class based views and view functions for the Timeslots app."""
 
 from django.db.models import F
-from django.shortcuts import (
-    get_object_or_404, get_list_or_404, render, redirect)
+from django.shortcuts import (get_object_or_404, get_list_or_404, render,
+                              redirect)
 from django.http import HttpResponse
 
-from django.views.generic import UpdateView, DetailView
+from django.views.generic import UpdateView, DetailView, FormView
 from django.views.generic.dates import DayArchiveView, MonthArchiveView
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -284,6 +284,94 @@ class JobTableView(StationView):
         return context
 
 
+@cbv_decorator(login_required)
+class BlockingForm(FormView):
+    """Return the slot blocking form."""
+
+    template_name = 'timeslots/blocking.html'
+    form_class = BlockSlotForm
+
+    def dispatch(self, request, *args, **kwargs):
+        url = self.handle_conditions(request)
+        if url:
+            return redirect(url)
+        return super(BlockingForm, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if ('block' in request.POST and request.POST.get('block') != ""):
+            block = get_object_or_404(Block, pk=request.POST.get('block'))
+            timeslots = []
+            for t in block.start_times:
+                timeslots.append(t.strftime("%H:%M"))
+            form = BlockSlotForm(
+                request.POST,
+                stations=request.user.userprofile.stations.values('id'),
+                timeslots=list(enumerate(timeslots, start=1))
+            )
+            if form.is_valid():
+                return self.form_valid(form, block, timeslots)
+            else:
+                return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        form.helper.form_show_errors = False
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def form_valid(self, form, block, timeslots):
+        reserved_slots = []
+        for day in daterange(form['start'].value(),
+                             form['end'].value()):
+            for timeslot in form['slots'].value():
+                for line in range(block.linecount):
+                    curr_slot, created = Slot.objects.get_or_create(
+                        block=block,
+                        date=day.strftime("%Y-%m-%d"),
+                        timeslot=str(int(timeslot)),
+                        line=str(line + 1),
+                        defaults={'company': self.request.user.userprofile}
+                    )
+                    if not created and not curr_slot.is_blocked:
+                        reserved_slots.append(curr_slot)
+                    curr_slot.is_blocked = 'blockSlots' in self.request.POST
+                    curr_slot.save()
+        log = "User {user} %s slots %s from %s to %s for block %s"
+        if 'blockSlots' in self.request.POST:
+            task = "blocked"
+            msg = _("successfully blocked the selected slots!")
+            if len(reserved_slots) > 0:
+                msg = _("The slots listed below had already been "
+                        "reserved before you blocked them. You can "
+                        "click on the link if you want to relase a "
+                        "slot. use <CTRL><click> to open the "
+                        "slot-form (in a new window or tab)")
+                messages.warning(self.request, msg)
+                return render(self.request, 'timeslots/blocked.html', {
+                    'slots': reserved_slots})
+        else:
+            task = "released"
+            log += "{object}"
+        log_msg(self.request, log % (task, form['slots'].value(),
+                                     form['start'].value(),
+                                     form['end'].value(), block))
+        msg = _("successfully %s the selected slots!")
+        messages.success(self.request, msg % task)
+        return redirect(reverse('timeslots_blocking'))
+
+    def get(self, request, *args, **kwargs):
+        form = BlockSlotForm(
+            stations=request.user.userprofile.stations.values('id'))
+        return render(request, self.template_name, {'form': form})
+
+    def handle_conditions(self, request):
+        if not request.user.userprofile.is_master:
+            msg = "User {user} tried to access the blocking view but is not "
+            msg += "member of a master group"
+            log_msg(request, msg)
+            msg = _("You are not authorized to access this page!")
+            messages.error(request, msg)
+            return '/timeslots/profile/'
+
+
 # View functions
 @login_required
 def logging_redirect(request):
@@ -402,72 +490,6 @@ def station_redirect(request):
             pass
         return redirect('/timeslots/station/%s/date/%s/slots/' % (
             curr_station, date))
-
-
-@login_required
-def blocking(request):
-    """Return the slot blocking form."""
-    if not request.user.userprofile.is_master:
-        msg = "User {user} tried to access the blocking view but is not "
-        msg += "member of a master group"
-        log_msg(request, msg)
-        msg = _("You are not authorized to access this page!")
-        messages.error(request, msg)
-        return redirect('/timeslots/profile/')
-    if (request.method == 'POST' and 'block' in request.POST and
-            request.POST.get('block') != ""):
-        block = get_object_or_404(Block, pk=request.POST.get('block'))
-        timeslots = []
-        for t in block.start_times:
-            timeslots.append(t.strftime("%H:%M"))
-        form = BlockSlotForm(
-            request.POST,
-            stations=request.user.userprofile.stations.values('id'),
-            timeslots=list(enumerate(timeslots, start=1))
-        )
-        if form.is_valid():
-            reserved_slots = []
-            for day in daterange(form['start'].value(), form['end'].value()):
-                for timeslot in form['slots'].value():
-                    for line in range(block.linecount):
-                        curr_slot, created = Slot.objects.get_or_create(
-                            block=block,
-                            date=day.strftime("%Y-%m-%d"),
-                            timeslot=str(int(timeslot)),
-                            line=str(line + 1),
-                            defaults={'company': request.user.userprofile}
-                        )
-                        if not created and not curr_slot.is_blocked:
-                            reserved_slots.append(curr_slot)
-                        curr_slot.is_blocked = 'blockSlots' in request.POST
-                        curr_slot.save()
-            if 'blockSlots' in request.POST:
-                log = "User {user} blocked slots %s from %s to %s for block %s"
-                msg = _("successfully blocked the selected slots!")
-                if len(reserved_slots) > 0:
-                    msg = _("The slots listed below had already been "
-                            "reserved before you blocked them. You can "
-                            "click on the link if you want to relase a "
-                            "slot. use <CTRL><click> to open the slot-form "
-                            "(in a new window or tab)")
-                    messages.warning(request, msg)
-                    return render(request, 'timeslots/blocked.html', {
-                        'slots': reserved_slots})
-            else:
-                log = "User {user} released slots %s from %s to %s for block "
-                log += "{object}"
-                msg = _("successfully released the selected slots!")
-            log_msg(request, log % (form['slots'].value(),
-                                    form['start'].value(),
-                                    form['end'].value()), block)
-            messages.success(request, msg)
-            return redirect(reverse('timeslots_blocking'))
-        else:
-            form.helper.form_show_errors = False
-    else:
-        form = BlockSlotForm(
-            stations=request.user.userprofile.stations.values('id'))
-    return render(request, 'timeslots/blocking.html', {'form': form})
 
 
 @login_required
