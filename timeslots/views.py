@@ -484,10 +484,8 @@ def station_redirect(request):
     if request.method == 'POST':
         curr_station = request.POST['selectedStation']
         date = request.POST['currentDate']
-        try:
+        if 'selectedDocks' in request.session:
             del request.session['selectedDocks']
-        except KeyError:
-            pass
         return redirect('/timeslots/station/%s/date/%s/slots/' % (
             curr_station, date))
 
