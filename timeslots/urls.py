@@ -3,29 +3,32 @@
 # pylint:disable=C0301
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
-from timeslots.views import (JobListView, JobTableView, SlotView, UserProfile,
-                             BlockingForm, DayLoggingArchive,
+from timeslots.views import (JobListView, JobTableView, SlotList, SlotView,
+                             UserProfile, BlockingForm, DayLoggingArchive,
                              MonthLoggingArchive)
 
 urlpatterns = patterns(
     'timeslots.views',
     url(r'^$', 'index', name='timeslots_home'),
     url(r'^logout/$', 'logout_then_login', name='user_logout'),
-    url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slotstatus/(?P<slot_id>\d+)/$', 'slotstatus', name='timeslots_slot_progress'),  # NOQA
+    url(r'^station/(?P<station_id>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slotstatus/(?P<slot_id>\d+)/$',  # NOQA
+        'slotstatus', name='timeslots_slot_progress'),
     url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/slots/$',
-        SlotView.as_view()),
+        SlotList.as_view()),
     url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/joblist/$',
         JobListView.as_view()),
     url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/jobtable/$',
         JobTableView.as_view()),
-    url(r'^station/(?P<pk>\d+)/$', SlotView.as_view(),
+    url(r'^station/(?P<pk>\d+)/$', SlotList.as_view(),
         name='timeslots_station_detail'),
     url(r'^station/$', 'station_redirect', name='timeslots_station'),
     url(r'^logging/$', 'logging_redirect', name='timeslots_logging'),
     url(r'^logging/export/(?P<year>\d{4})-(?P<month>\d{2})/$',
         'logging_export', name='timeslots_logging_export'),
-    url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$', 'slot', name='timeslots_slot_detail'),  # NOQA
-    #url(r'^blocking/$', 'blocking', name='timeslots_blocking'),
+    #url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$',  # NOQA
+    #    'slot', name='atimeslots_slot_detail'),
+    url(r'^date/(?P<date>\d{4}-\d{2}-\d{2})/slot/(?P<block_id>\d+)\.(?P<timeslot>\d+)\.(?P<line>\d+)/$',  # NOQA
+        SlotView.as_view(), name='timeslots_slot_detail'),
     url(r'^blocking/$', BlockingForm.as_view(), name='timeslots_blocking'),
     url(r'^profile/$', 'profile', name='timeslots_userprofile_detail'),
     url(r'^password_changed/$', 'password_change_done'),

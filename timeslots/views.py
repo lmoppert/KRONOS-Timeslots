@@ -5,7 +5,7 @@ from django.shortcuts import (get_object_or_404, get_list_or_404, render,
                               redirect)
 from django.http import HttpResponse
 
-from django.views.generic import UpdateView, DetailView, FormView
+from django.views.generic import UpdateView, DetailView, FormView  # , View
 from django.views.generic.dates import DayArchiveView, MonthArchiveView
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -88,8 +88,8 @@ class StationView(DetailView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         if 'selectedDocks' in request.POST:
-            docks = request.POST.getlist('selectedDocks')
-            request.session['selectedDocks'] = docks
+            self.docks = request.POST.getlist('selectedDocks')
+            request.session['selectedDocks'] = self.docks
         return self.get(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -119,7 +119,7 @@ class StationView(DetailView):
         context = super(StationView, self).get_context_data(**kwargs)
         if 'date' in self.kwargs:
             self.date = self.kwargs['date']
-        context['date'] = self.date
+        context['date'] = str(self.date)
         context['target'] = self.target
         return context
 
@@ -164,7 +164,7 @@ class StationView(DetailView):
             return '/station/{station}/scales/'.format(station=self.object.id)
 
 
-class SlotView(StationView):
+class SlotList(StationView):
     """
     Displays the blocks ( see :model:`timeslots.Block`) of a
     :model:`timeslots.Station` for a specific date.
@@ -180,7 +180,7 @@ class SlotView(StationView):
             msg = _("The reservation deadline has been reached, no more"
                     "reservations will be accepted!")
             messages.warning(request, msg)
-        return super(SlotView, self).handle_conditions(request, date)
+        return super(SlotList, self).handle_conditions(request, date)
 
     def get_timeslots(self, block):
         timeslots = []
@@ -207,7 +207,7 @@ class SlotView(StationView):
         return timeslots
 
     def get_context_data(self, **kwargs):
-        context = super(SlotView, self).get_context_data(**kwargs)
+        context = super(SlotList, self).get_context_data(**kwargs)
         docks = []
         for dock_name, dock_id in self.docks:
             blocks = []
@@ -370,6 +370,197 @@ class BlockingForm(FormView):
             msg = _("You are not authorized to access this page!")
             messages.error(request, msg)
             return '/timeslots/profile/'
+
+
+@cbv_decorator(login_required)
+class SlotView(DetailView):
+    """ Return details for a :model:`timeslots.Slot`.
+
+    **Context**
+
+    ``RequestContext``
+
+    ``block``
+    An instance of :model:`timeslots.Block`
+
+    """
+
+    model = Slot
+    created = False
+    date = datetime.now().strftime('%Y-%m-%d')
+    template_name = 'timeslots/slot_detail.html'
+
+    def slot_reservation(self, request, *args, **kwargs):
+        if self.block.dock.station.multiple_charges:
+            formset = JobForm(self.request.POST, instance=self.object)
+        else:
+            formset = SingleJobForm(self.request.POST, instance=self.object)
+        if formset.is_valid():
+            if 'is_klv' in request.POST:
+                self.object.is_klv = True
+            self.object.save()
+            formset.save()
+            log = "User {user} has successfully reserved slot {object}."
+            msg = _("The reservation has been saved successfully!")
+            log_msg(request, log, self.object)
+            messages.success(request, msg)
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                self.block.dock.station.id, self.date))
+        else:
+            log = "User {user} has submitted a reservation form for slot "
+            log += "{object} which contained errors."
+            log_msg(request, log, self.object)
+            return self.get(request, *args, **kwargs)
+
+    def slot_delete(self, request):
+        self.object.delete()
+        for job in self.object.job_set.all():
+            job.delete()
+        msg = "User {user} has successfully deleted the reservation for "
+        msg += "slot {object}."
+        log_msg(request, msg, self.object)
+        msg = _("The reservation has been deleted successfully!")
+        messages.success(request, msg)
+        return redirect('/timeslots/station/%s/date/%s/slots/' % (
+            self.block.dock.station.id, self.date))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(**kwargs)
+        self.get_context_data(object=self.object)
+        if 'makeReservation' in request.POST:
+            return self.slot_reservation(request, *args, **kwargs)
+        elif ('cancelReservation' in request.POST
+                or 'deleteSlot' in request.POST):
+            return self.slot_delete(request)
+        elif 'cancelEditing' in request.POST:
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                self.block.dock.station.id, self.date))
+        elif 'releaseSlot' in request.POST:
+            self.object.is_blocked = False
+            self.object.save()
+            msg = "User {user} has successfully released the blocking of "
+            msg += "slot {object}."
+            log_msg(request, msg, self.object)
+            messages.success(request, _('This slot is no longer blocked!'))
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                self.block.dock.station.id, self.date))
+        elif 'keepSlotBlocked' in request.POST:
+            return redirect('/timeslots/station/%s/date/%s/slots/' % (
+                self.block.dock.station.id, self.date))
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(**kwargs)
+        context = self.get_context_data(object=self.object)
+        if not self.request.user.userprofile.is_master:
+            url = self.handle_conditions(request, self.date)
+            if url:
+                return redirect(url)
+        delete_slot_garbage(request)
+        msg = "User {user} has opened the reservation form for slot {object}."
+        log_msg(request, msg, self.object)
+        return self.render_to_response(context)
+
+    def get_object(self, **kwargs):
+        self.date = self.kwargs['date']
+        self.block = get_object_or_404(Block, pk=kwargs['block_id'])
+        self.timeslot = kwargs['timeslot']
+        self.line = kwargs['line']
+        slot, self.created = Slot.objects.get_or_create(
+            date=self.date,
+            timeslot=self.timeslot,
+            line=self.line,
+            block=self.block,
+            defaults={'company': self.request.user.userprofile}
+        )
+        return slot
+
+    def get_context_data(self, **kwargs):
+        context = super(SlotView, self).get_context_data(**kwargs)
+        try:
+            end = self.block.start_times[int(self.timeslot)]
+        except IndexError:
+            end = self.block.end
+        times = self.block.start_times[int(self.timeslot) - 1].strftime(
+            "%H:%M") + " - " + end.strftime("%H:%M")
+        context['times'] = times
+        if self.block.dock.station.multiple_charges:
+            formset = JobForm(instance=self.object)
+        else:
+            formset = SingleJobForm(instance=self.object)
+        context['form'] = formset
+        context['slot'] = self.object
+        context['object'] = self.object
+        context['date'] = self.date
+        context['curr_block'] = self.block
+        context['station'] = self.block.dock.station
+        context['created'] = self.created
+        return context
+
+    def handle_conditions_with_deletion(self, request):
+        redirect = False
+        if ((self.created and self.block.max_slots > 0
+                and self.block.get_slots(self.date) > self.block.max_slots)):
+            log = "User {user} tried to reserve slot {object} after the "
+            log += "maximum number of blocks per day has been reached."
+            msg = _("The maximal number of Slots have been reserved, no more "
+                    "reservations will be accepted!")
+            redirect = True
+        if ((not self.object.block.dock.station.opened_on_weekend
+                and datetime.strptime(self.date,
+                                      "%Y-%m-%d").date().weekday() > 4)):
+            log = "User {user} tried to access slot {object}, which is not "
+            log += "opened on weekends."
+            msg = _('This station is closed on weekends!')
+            redirect = True
+        if (self.created and self.object.block.dock.station.past_deadline(
+                datetime.strptime(self.date, "%Y-%m-%d"), datetime.now())):
+            log = "User {user} tried to reserve slot {object} after the "
+            log += "booking deadline has been reached."
+            msg = _("The deadline for booking this slot has ended!")
+            redirect = True
+        if (self.object.company.user.id != request.user.id):
+            log = "User {user} tried to access slot {object} which is "
+            log += "reserved for a different user."
+            msg = _("This slot was already booked by a different person!")
+            redirect = True
+        if redirect:
+            log_msg(request, log, self.object)
+            messages.error(request, msg)
+            if self.created:
+                self.object.delete()
+            url = '/timeslots/station/%s/date/%s/slots/'
+            return url % (self.block.dock.station.id, self.date)
+
+    def handle_conditions(self, request):
+        redirect = False
+        if request.user.userprofile.is_readonly:
+            log = "Readonly user {user} tried to access slot {object}."
+            msg = _('You are not allowed to change this slot!')
+            redirect = True
+        if (self.object.is_blocked):
+            log = "User {user} tried to access slot {object} which is blocked."
+            msg = _('This slot has been blocked!')
+            redirect = True
+        if (not self.created and self.object.past_rnvp(datetime.now())):
+            log = "User {user} tried to change slot {object} after the rnvp "
+            log += "deadline has been reached."
+            msg = _("This slot can not be changed any more!")
+            redirect = True
+        if redirect:
+            log_msg(request, log, self.object)
+            messages.error(request, msg)
+            url = '/timeslots/station/%s/date/%s/slots/'
+            return url % (self.block.dock.station.id, self.date)
+        else:
+            return self.handle_conditions_with_deletion(request)
+
+
+@cbv_decorator(login_required)
+class SiloView(DetailView):
+    """Base Class for all station related Views."""
+
+    model = Station
+    date = datetime.now().strftime('%Y-%m-%d')
 
 
 # View functions
