@@ -155,13 +155,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap'
 # Optional apps used only for development
 if DJANGO_SERVER == 'Development':
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INSTALLED_APPS += ('debug_toolbar',)
+    INSTALLED_APPS += ('debug_toolbar', 'django_extensions')
     INTERNAL_IPS = ['127.0.0.1', '10.49.20.40', '10.49.20.25']
     ALWAYS_SHOW_DEBUG_TOOLBAR = True
     DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
-# Look for a local settings file
+# Try to load the local settings file
 try:
-    from config.local_settings import *
+    from config.local_settings import *  # nopyflakes
 except:
     pass
