@@ -7,3 +7,4 @@ mysql-python
 
 # Optional pachages for development server
 django-debug-toolbar
+django-extensions
