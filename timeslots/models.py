@@ -396,6 +396,13 @@ class Scale(models.Model):
     sliceduration = models.IntegerField(default=30, help_text=_(
         "Length of a time slice in minutes, default is 30 min."))
 
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _("Scale")
+        verbose_name_plural = _("Scales")
+
 
 class Product(models.Model):
     """Model for the available products in a silo."""
@@ -403,6 +410,13 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True)
     load_time = models.IntegerField()
+
+    def __unicode__(self):
+        return "KRONOS" + self.name
+
+    class Meta:
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")
 
 
 class Availability(models.Model):
@@ -412,6 +426,10 @@ class Availability(models.Model):
     product = models.ForeignKey(Product)
 
     date = models.DateField()
+
+    class Meta:
+        verbose_name = _("Availability")
+        verbose_name_plural = _("Availabilities")
 
 
 class SiloJob(models.Model):
@@ -424,3 +442,7 @@ class SiloJob(models.Model):
     date = models.DateField()
     number = models.CharField(max_length=20)
     description = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        verbose_name = _("Silo-Job")
+        verbose_name_plural = _("Silo-Jobs")
