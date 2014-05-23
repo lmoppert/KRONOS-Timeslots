@@ -4,7 +4,11 @@ south
 django-crispy-forms
 django-tables2
 mysql-python
+docutils
+pygments
 
 # Optional pachages for development server
 django-debug-toolbar
 django-extensions
+django-grappelli<2.5
+werkzeug
