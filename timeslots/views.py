@@ -177,7 +177,7 @@ class SlotList(StationView):
         user = request.user
         if (not user.userprofile.is_master and station.past_deadline(
                 datetime.strptime(date, "%Y-%m-%d").date(), datetime.now())):
-            msg = _("The reservation deadline has been reached, no more"
+            msg = _("The reservation deadline has been reached, no more "
                     "reservations will be accepted!")
             messages.warning(request, msg)
         return super(SlotList, self).handle_conditions(request, date)
