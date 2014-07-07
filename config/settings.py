@@ -154,6 +154,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # Optional apps used only for development
 if DJANGO_SERVER == 'Development':
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar', 'django_extensions')
     INTERNAL_IPS = ['127.0.0.1', '10.49.20.40', '10.49.20.25']
