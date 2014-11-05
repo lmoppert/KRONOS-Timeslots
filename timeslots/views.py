@@ -166,6 +166,78 @@ class StationView(DetailView):
 
 class SlotList(StationView):
     """
+    Displays the scales ( see :model:`timeslots.Scale`) of a
+    :model:`timeslots.Station` for a specific date.
+    """
+
+    template_name = 'timeslots/station_detail.html'
+
+    def handle_conditions(self, request, date):
+        station = self.object
+        user = request.user
+        if (not user.userprofile.is_master and station.past_deadline(
+                datetime.strptime(date, "%Y-%m-%d").date(), datetime.now())):
+            msg = _("The reservation deadline has been reached, no more "
+                    "reservations will be accepted!")
+            messages.warning(request, msg)
+        return super(SlotList, self).handle_conditions(request, date)
+
+    def get_timeslots(self, block):
+        timeslots = []
+        for timeslot in range(block.slotcount):
+            lines = []
+            for line in range(block.linecount):
+                try:
+                    curr_slot = block.slot_set.filter(
+                        date=self.date).get(
+                        date=self.date,
+                        timeslot=timeslot + 1,
+                        line=line + 1,
+                        block=block.id
+                    )
+                    company = curr_slot.status(self.request.user)
+                except ObjectDoesNotExist:
+                    company = ugettext_noop("free")
+                if company in ("free", "blocked"):
+                    lines.append((company, None))
+                else:
+                    lines.append((company, curr_slot))
+            time = block.start_times[int(timeslot)].strftime("%H:%M")
+            timeslots.append((time, lines))
+        return timeslots
+
+    def get_context_data(self, **kwargs):
+        context = super(SlotList, self).get_context_data(**kwargs)
+        docks = []
+        for dock_name, dock_id in self.docks:
+            blocks = []
+            dock = self.object.dock_set.get(pk=dock_id)
+            for block in dock.block_set.all():
+                if (block.max_slots > 0 and
+                        block.get_slots(self.date) >= block.max_slots):
+                    msg = _('The maximal number of Slots have been reserved, '
+                            'no more reservations will be accepted!')
+                    messages.warning(self.request, msg)
+                timeslots = self.get_timeslots(block)
+                blocks.append((str(block.id), timeslots))
+            docks.append((dock_name, blocks))
+        spans = ["span12", "span12", "span6", "span4"]
+        if len(self.docks) < 4:
+            span = spans[len(docks)]
+        else:
+            span = "span3"
+        if self.request.user.userprofile.is_master:
+            hidden = ()
+        else:
+            hidden = ("blocked", "reserved")
+        context['span'] = span
+        context['hidden'] = hidden
+        context['docks'] = docks
+        return context
+
+
+class SlotList(StationView):
+    """
     Displays the blocks ( see :model:`timeslots.Block`) of a
     :model:`timeslots.Station` for a specific date.
     """

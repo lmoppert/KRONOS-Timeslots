@@ -19,6 +19,8 @@ urlpatterns = patterns(
         JobListView.as_view()),
     url(r'^station/(?P<pk>\d+)/date/(?P<date>\d{4}-\d{2}-\d{2})/jobtable/$',
         JobTableView.as_view()),
+    url(r'^station/(?P<pk>\d+)/scale/(?P<date>\d{4}-\d{2}-\d{2})/slots/$',
+        ScaleList.as_view()),
     url(r'^station/(?P<pk>\d+)/$', SlotList.as_view(),
         name='timeslots_station_detail'),
     url(r'^station/$', 'station_redirect', name='timeslots_station'),
