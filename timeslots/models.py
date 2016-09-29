@@ -76,7 +76,7 @@ class Station(models.Model):
     longname = property(_get_longname)
 
     def __unicode__(self):
-        return self.name
+        return "%s - %s" % (self.name, self.shortdescription)
 
     class Meta:
         verbose_name = _("Station")

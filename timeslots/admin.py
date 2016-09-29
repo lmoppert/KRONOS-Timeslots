@@ -60,6 +60,7 @@ class UserProfileInline(admin.StackedInline):
     model = UserProfile
     max_num = 1
     can_delete = False
+    filter_horizontal = ('stations', )
 
 
 class UserAdmin(AuthUserAdmin):
