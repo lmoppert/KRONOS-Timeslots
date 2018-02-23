@@ -395,7 +395,7 @@ def slot(request, date, block_id, timeslot, line):
     except IndexError:
         end = block.end
     times = block.start_times[int(timeslot) - 1].strftime("%H:%M")
-    times += " - " + end.strftime("%H:%M")
+    #times += " - " + end.strftime("%H:%M")
     delete_slot_garbage(request)
     slot, created = Slot.objects.get_or_create(
         date=date, timeslot=timeslot, line=line, block=block,

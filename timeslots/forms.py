@@ -1,4 +1,4 @@
-from datetime import date
+# from datetime import date
 
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext_lazy as _
@@ -23,8 +23,8 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('language', 'company', 'street', 'ZIP', 'town', 'country',
-                  'phone')
+        fields = ('language', 'company')
+        # , 'street', 'ZIP', 'town', 'country', 'phone')
 
 
 class BlockSlotForm(forms.Form):

@@ -12,6 +12,7 @@ if DJANGO_SERVER == 'Development':
     DEBUG = True
 else:
     DEBUG = False
+# DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

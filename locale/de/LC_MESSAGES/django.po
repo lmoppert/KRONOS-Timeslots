@@ -219,7 +219,7 @@ msgstr ""
 
 #: templates/timeslots/slot_detail.html:34
 msgid "Reservation for"
-msgstr "Reservierung für den"
+msgstr "Reservierung für"
 
 #: templates/timeslots/slot_detail.html:41
 msgid ""

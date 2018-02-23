@@ -7,7 +7,6 @@ div#kronoslogo,
 div.navbar {
     display: none;
 }
-h1 {font-size: 14px}
-body {font-size: 12px}
+h1 {font-size: 16pt;}
+body {font-size: 14pt;}
 .page-header {margin: 0;}
-
