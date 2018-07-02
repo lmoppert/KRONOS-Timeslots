@@ -20,6 +20,7 @@ urlpatterns = patterns(
     url(r'^password_changed/$', 'password_change_done'),
     url(r'^users/$', 'users', name='timeslots_user_list'),
     url(r'^imprint/$', 'imprint', name='timeslots_imprint'),
+    url(r'^privacy/$', 'privacy', name='timeslots_privacy'),
 )
 urlpatterns += patterns(
     'django.contrib.auth.views',

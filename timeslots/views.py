@@ -62,6 +62,10 @@ def imprint(request):
     return render(request, 'timeslots/imprint.html')
 
 
+def privacy(request):
+    return render(request, 'timeslots/privacy.html')
+
+
 @login_required
 def logging_redirect(request):
     t = datetime.now()
