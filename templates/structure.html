@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="description" content="KRONOS Timeslots">
     <meta name="author" content="Lutz Moppert">
-    <title>TEST {% trans "Timeslots" %}</title>
+    <title>{% trans "Timeslots" %}</title>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.datepicker-{{ user.userprofile.language }}.js"></script>
@@ -43,7 +43,7 @@
         <div class="container">
             <span class="span3"><a class="brand" href="{% url timeslots_home %}">
                     <img src="{{ STATIC_URL }}/img/kronoslogo.png" alt="KRONOS">
-                    <span id="AppName">{% trans "Testslots" %}</span>
+                    <span id="AppName">{% trans "Timeslots" %}</span>
             </a></span>
             {% if station %}
             <span class="pull-left">
