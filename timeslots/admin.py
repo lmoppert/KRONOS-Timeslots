@@ -9,6 +9,10 @@ class LoggingAdmin(admin.ModelAdmin):
     list_display = ('time', 'user', 'host', 'task')
 
 
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('dock', 'date', 'details')
+
+
 class JobAdmin(admin.ModelAdmin):
     list_display = ('number', 'description')
 
@@ -50,7 +54,7 @@ class StationAdmin(admin.ModelAdmin):
         }),
         ('Booking information', {
             'fields': ['multiple_charges', 'opened_on_weekend', 'has_status',
-                       'has_klv', 'booking_deadline', 'rnvp']
+                       'has_klv', 'has_product', 'booking_deadline', 'rnvp']
         })
     ]
     inlines = [DockInline]
@@ -79,6 +83,7 @@ admin.site.register(Dock, DockAdmin)
 admin.site.register(Block, BlockAdmin)
 admin.site.register(Slot, SlotAdmin)
 admin.site.register(Job, JobAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Site)

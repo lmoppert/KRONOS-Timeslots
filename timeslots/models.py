@@ -1,5 +1,6 @@
 from datetime import timedelta, datetime, date, time
 
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.db import models
@@ -58,6 +59,13 @@ class Station(models.Model):
             "an KLV/NV flag"
         )
     )
+    has_product = models.BooleanField(
+        default=False,
+        help_text=_(
+            "Choose this option if you want to be able to add information "
+            "about available products to the docks of this station"
+        )
+    )
 
     def past_deadline(self, curr_date, curr_time):
         my_dl = self.booking_deadline
@@ -97,16 +105,40 @@ class Dock(models.Model):
     description = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
-        return  '%s - %s' % (self.station.name, self.name)
+        return '%s - %s' % (self.station.name, self.name)
 
     class Meta:
         verbose_name = _("Dock")
         verbose_name_plural = _("Docks")
 
 
+class Product(models.Model):
+    """
+    The Product contains infromation on products offered on a specific
+    `timeslots.Dock` on a certain day.
+    """
+    dock = models.ForeignKey(Dock)
+    date = models.DateField()
+    details = models.CharField(max_length=50, blank=True, null=True)
+
+    def __unicode__(self):
+        return "%s (%s): %s)" % (unicode(self.dock),
+                                 unicode(self.date),
+                                 self.details)
+
+    def get_absolute_url(self):
+        return reverse('timeslots_slot_view', kwargs={
+            'station_id': self.dock.station.id,
+            'date': self.date.strftime("%Y-%m-%d"),
+        })
+
+    class Meta:
+        ordering = ['date']
+
+
 class Block(models.Model):
     """
-    The Block is a collection og timeslots that belongs to a specific
+    The Block is a collection of timeslots that belongs to a specific
     `timeslots.Dock`.
 
     The number of Lines (possible patallel loadings) is also defined hereour
@@ -248,9 +280,9 @@ class Slot(models.Model):
 
     def _get_times_flagged(self):
         if self.is_klv:
-            return  "%s (KLV/NV)" % (self.times)
+            return "%s (KLV/NV)" % (self.times)
         else:
-            return  self.times
+            return self.times
     times_flagged = property(_get_times_flagged)
 
     def _get_date_string(self):
@@ -268,7 +300,8 @@ class Slot(models.Model):
                 except IndexError:
                     first_job = "..."
                 if self.is_klv:
-                    return "%s - %s (KLV/NV)" % (self.company.company, first_job)
+                    return "%s - %s (KLV/NV)" % (
+                        self.company.company, first_job)
                 else:
                     return "%s - %s" % (self.company.company, first_job)
             else:

@@ -27,6 +27,22 @@ class UserProfileForm(forms.ModelForm):
         # , 'street', 'ZIP', 'town', 'country', 'phone')
 
 
+class DockProductsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit(
+            'updateProducts',
+            _('Update available Products'),
+            css_class="btn btn-primary")
+        )
+        super(DockProductsForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Product
+        fields = ('details',)
+
+
 class BlockSlotForm(forms.Form):
     block = forms.ModelChoiceField(
         label=_("Choose block"),
@@ -112,6 +128,7 @@ class RequireOneFormSet(BaseInlineFormSet):
                 {'model': self.model._meta.verbose_name})
 
 
-JobForm = inlineformset_factory(Slot, Job, extra=1, formset=RequireOneFormSet)
-SingleJobForm = inlineformset_factory(Slot, Job, extra=1, max_num=1,
-                                      formset=RequireOneFormSet)
+JobForm = inlineformset_factory(Slot, Job, fields='__all__', extra=1,
+                                formset=RequireOneFormSet)
+SingleJobForm = inlineformset_factory(Slot, Job, fields='__all__', extra=1,
+                                      max_num=1, formset=RequireOneFormSet)

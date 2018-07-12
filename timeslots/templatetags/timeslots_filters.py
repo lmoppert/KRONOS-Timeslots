@@ -37,20 +37,14 @@ def make_date(curr_date):
     """
     The date is converted from YYYY-MM-DD to a real date representation
     """
-    # if get_language() == "de":
-    #     locale.setlocale(locale.LC_TIME, "en_US.utf8")
-    #     fmtstr = "%A, %d. %B %Y"
-    # else:
-    #     fmtstr = "%A, %d %B %Y"
     date_obj = date(int(curr_date[:4]), int(curr_date[5:7]),
                     int(curr_date[8:10]))
-    # return date_obj.strftime(fmtstr)
     if get_language() == "de":
         date_str = format_date(date_obj, format='full', locale='de_DE')
     else:
         date_str = format_date(date_obj, format='full', locale='en')
+
     return date_str
-    
 
 
 @register.filter

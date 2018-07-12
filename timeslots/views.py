@@ -39,6 +39,30 @@ class UserProfile(UpdateView):
         return super(UserProfile, self).form_valid(form)
 
 
+@cbv_decorator(user_passes_test(lambda u: u.userprofile.is_master))
+class DockProducts(UpdateView):
+    form_class = DockProductsForm
+
+    def get_object(self, queryset=None):
+        dock = Dock.objects.get(pk=self.kwargs['dock_id'])
+        date = self.kwargs['date']
+        product, created = Product.objects.get_or_create(dock=dock, date=date)
+        return product
+
+    def get_context_data(self, **kwargs):
+        kwargs['dock'] = Dock.objects.get(pk=self.kwargs['dock_id'])
+        kwargs['date'] = self.kwargs['date']
+        if 'form' not in kwargs:
+            product_form = self.get_form()
+            product_form.helper.form_action = reverse(
+                'timeslots_products_form', kwargs={
+                    'dock_id': self.kwargs['dock_id'],
+                    'date': self.kwargs['date'],
+                })
+            kwargs['form'] = self.get_form()
+        return super(DockProducts, self).get_context_data(**kwargs)
+
+
 class LoggingArchive():
     model = Logging
     month_format = "%m"
@@ -84,7 +108,7 @@ def logging_export(request, year, month):
         log_task(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return HttpResponseRedirect('/app/profile/')
     filename = 'timeslots-user-list.csv'
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
@@ -108,7 +132,7 @@ def logout_page(request):
 @login_required
 def password_change_done(request):
     messages.success(request, _('Your password has been changed!'))
-    return HttpResponseRedirect('/timeslots/profile/')
+    return HttpResponseRedirect('/app/profile/')
 
 
 @login_required
@@ -124,7 +148,7 @@ def users(request):
         log_task(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return HttpResponseRedirect('/app/profile/')
     users = get_list_or_404(User, is_active=True)
     table = UserTable(users)
     RequestConfig(request, paginate={"per_page": 10}).configure(table)
@@ -141,7 +165,7 @@ def slotstatus(request, slot_id, station_id, date):
         else:
             slot.progress = 0
             slot.save()
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (
             station_id, date))
     else:
         msg = "User %s tried to change the status " % request.user
@@ -149,7 +173,7 @@ def slotstatus(request, slot_id, station_id, date):
         log_task(request, msg)
         msg = _('You are not allowed to change the status of a slot!')
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (
             station_id, date))
 
 
@@ -175,7 +199,7 @@ def station_redirect(request):
             del request.session['selectedDocks']
         except KeyError:
             pass
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (
             station, date))
 
 
@@ -187,7 +211,7 @@ def blocking(request):
         log_task(request, msg)
         msg = _("You are not authorized to access this page!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return HttpResponseRedirect('/app/profile/')
     if (request.method == 'POST' and
             'block' in request.POST and
             request.POST.get('block') != ""):
@@ -244,6 +268,18 @@ def blocking(request):
     return render(request, 'timeslots/blocking.html', {'form': form})
 
 
+def get_products(dock, date):
+    details = ""
+    products = Product.objects.filter(dock=dock, date=date)
+    if not products:
+        products = Product.objects.filter(dock=dock, date__lt=date)
+    if products:
+        details += "{}".format(products.last().details)
+    else:
+        details = _('No product details abailable')
+    return details
+
+
 @login_required
 def station(request, station_id, date, view_mode):
     """
@@ -263,14 +299,14 @@ def station(request, station_id, date, view_mode):
         diff = 7 - datetime.strptime(date, "%Y-%m-%d").date().weekday()
         monday = datetime.strptime(date, "%Y-%m-%d").date() + timedelta(days=diff)
         date = monday.strftime("%Y-%m-%d")
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (station.id, date))
     if request.user.userprofile.stations.filter(id=station_id).count() == 0:
         msg = "User %s tried to access " % request.user
         msg += "station %s without authorization" % station
         log_task(request, msg)
         msg = _("You are not authorized to access this station!")
         messages.error(request, msg)
-        return HttpResponseRedirect('/timeslots/profile/')
+        return HttpResponseRedirect('/app/profile/')
     if (view_mode == 'slots' and not request.user.userprofile.is_master and
         station.past_deadline(datetime.strptime(date, "%Y-%m-%d"),
                               datetime.now())):
@@ -361,7 +397,11 @@ def station(request, station_id, date, view_mode):
                     time = block.start_times[int(timeslot)].strftime("%H:%M")
                     timeslots.append((time, lines))
                 blocks.append((str(block.id), timeslots))
-            docks.append((dock.name, blocks))
+            if dock.station.has_product:
+                products = get_products(dock, date)
+                docks.append(([dock.name, products, dock.id], blocks))
+            else:
+                docks.append((dock.name, blocks))
         if dock_count == 1:
             span = "span12"
         elif dock_count == 2:
@@ -399,7 +439,7 @@ def slot(request, date, block_id, timeslot, line):
     except IndexError:
         end = block.end
     times = block.start_times[int(timeslot) - 1].strftime("%H:%M")
-    #times += " - " + end.strftime("%H:%M")
+    times += " - " + end.strftime("%H:%M")
     delete_slot_garbage(request)
     slot, created = Slot.objects.get_or_create(
         date=date, timeslot=timeslot, line=line, block=block,
@@ -410,37 +450,37 @@ def slot(request, date, block_id, timeslot, line):
     if request.user.userprofile.is_readonly:
         log_task(request, "Readonly user %s tried to access slot %s." % (request.user, slot))
         messages.error(request, _('You are not allowed to change this slot!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/jobtable/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/jobtable/' % (block.dock.station.id, date))
     if not slot.block.dock.station.opened_on_weekend and not request.user.userprofile.is_master and datetime.strptime(date, "%Y-%m-%d").date().weekday() > 4:
         if created:
             slot.delete()
         log_task(request, "User %s tried to access slot %s, which is not opened on weekends." % (request.user, slot))
         messages.error(request, _('This station is closed on weekends!'))
-        return HttpResponseRedirect('/timeslots/profile/')
+        return HttpResponseRedirect('/app/profile/')
     if not request.user.userprofile.is_master and slot.is_blocked:
         log_task(request, "User %s tried to access slot %s which is blocked." % (request.user, slot))
         messages.error(request, _('This slot has been blocked!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if created and not request.user.userprofile.is_master and slot.block.dock.station.past_deadline(datetime.strptime(date, "%Y-%m-%d"), datetime.now()):
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the booking deadline has been reached." % (request.user, slot))
         messages.error(request, _('The deadline for booking this slot has ended!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if created and block.max_slots > 0 and block.get_slots(date) > block.max_slots:
         slot.delete()
         log_task(request, "User %s tried to reserve slot %s after the maximum number of blocks per day has been reached." % (request.user, slot))
         messages.error(request, _('The maximal number of Slots have been reserved, no more reservations will be accepted!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if not created and not request.user.userprofile.is_master and slot.past_rnvp(datetime.now()):
         log_task(request, "User %s tried to change slot %s after the rnvp deadline has been reached." % (request.user, slot))
         messages.error(request, _('This slot can not be changed any more!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     if not request.user.userprofile.is_master and slot.company.user.id != request.user.id:
         if created:
             slot.delete()
         log_task(request, "User %s tried to access slot %s which is reserved for a different user." % (request.user, slot))
         messages.error(request, _('This slot was already booked by a different person!'))
-        return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+        return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
 
     # process request
     if request.method == 'POST':
@@ -456,7 +496,7 @@ def slot(request, date, block_id, timeslot, line):
                 formset.save()
                 log_task(request, "User %s has successfully reserved slot %s." % (request.user, slot))
                 messages.success(request, _('The reservation has been saved successfully!'))
-                return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+                return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
             else:
                 log_task(request, "User %s has submitted a reservation form for slot %s which contained errors." % (request.user, slot))
         elif ('cancelReservation' in request.POST or
@@ -466,17 +506,17 @@ def slot(request, date, block_id, timeslot, line):
                 job.delete()
             log_task(request, "User %s has successfully deleted the reservation for slot %s." % (request.user, slot))
             messages.success(request, _('The reservation has been deleted successfully!'))
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+            return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
         elif 'cancelEditing' in request.POST:
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+            return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
         elif 'releaseSlot' in request.POST:
             slot.is_blocked = False
             slot.save()
             log_task(request, "User %s has successfully released the blocking of slot %s." % (request.user, slot))
             messages.success(request, _('This slot is no longer blocked!'))
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+            return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
         elif 'keepSlotBlocked' in request.POST:
-            return HttpResponseRedirect('/timeslots/station/%s/date/%s/slots/' % (block.dock.station.id, date))
+            return HttpResponseRedirect('/app/station/%s/date/%s/slots/' % (block.dock.station.id, date))
     else:
         # This one has to go into the else path, otherwise errors formset.non_form_errors are overwritten
         log_task(request, "User %s has opened the reservation form for slot %s." % (request.user, slot))
