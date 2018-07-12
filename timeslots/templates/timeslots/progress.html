@@ -1,5 +1,5 @@
 {% if user.userprofile.is_master %}
-    <a href="{% url timeslots_slot_progress station_id=station_id date=date slot_id=slot_id %}">
+    <a href="{% url "timeslots_slot_progress" station_id=station_id date=date slot_id=slot_id %}">
 {% endif %}
     <div class="{{ div_class }}" title="{{ div_title }}" style="float:left; width: 100px; margin-right: 20px; margin-bottom: 0">
         <div class="bar" style="{{ div_style }}"></div>

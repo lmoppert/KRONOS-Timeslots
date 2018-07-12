@@ -12,7 +12,16 @@
 <div class="section clearfix">
     {% for dock, blocks in docks %} 
     <div class="{{ span }}">
-        <h3 style="text-align: center">{{ dock }}</h3>
+        {% if station.has_product %}
+            <h3 style="text-align: center">
+                {{ dock.0 }} <small>{{ dock.1 }}</small>
+                {% if user.userprofile.is_master %}
+                    <a href="/app/dock/{{ dock.2 }}/date/{{ date }}/products" class="btn btn-small"><i class="icon-edit"></i></a>
+                {% endif %}
+            </h3>
+        {% else %}
+            <h3 style="text-align: center">{{ dock }}</h3>
+        {% endif %}
         {% for blockid, timeslots in blocks %}
         <table class="table table-bordered table-condesed blocktable">
             <tbody>
@@ -25,7 +34,7 @@
                         {% if company in hidden or request.user.userprofile.is_readonly %}
                             {% trans company %}
                         {% else %}
-                            <a href="/timeslots/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans company %}</a>
+                            <a href="/app/date/{{ date }}/slot/{{ blockid }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}/">{% trans company %}</a>
                         {% endif %}
                     </td>
                     {% endfor %}

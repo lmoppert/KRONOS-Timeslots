@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/kronos-timeslots.com/doc/Functions.otl.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v10">
+<meta name="syntax" content="outliner">
+<meta name="settings" content="use_css,expand_tabs">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #404850; background-color: #f0f0f0; }
+body { font-family: monospace; color: #404850; background-color: #f0f0f0; }
+.PreProc { color: #1060a0; }
+.Constant { color: #a07040; }
+.Identifier { color: #5b3674; font-style: italic; }
+.Statement { color: #007020; font-weight: bold; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="Statement">Konfiguration</span>
+<span class="Identifier">    User:</span>
+<span class="Constant">        Ein User gehört genau einer Gruppe an (administrator, loadmaster oder user)</span>
+<span class="Constant">        Einem User werden Ladestellen zugeordnet</span>
+<span class="Constant">        Dem User ist eine Sprache zugeordnet</span>
+<span class="Constant">        Der User kann seine Stammdaten, die Sprache und sein Passwort selbständig ändern</span>
+<span class="Identifier">    Ladestellen:</span>
+<span class="Constant">        Die Konfiguration ist ausschließlich durch einen Administrator möglich (das sind derzeit Frau Mattheis, Herr Ellmann und ich)</span>
+<span class="Constant">        Eine Ladestelle hat eine oder mehrere Rampen</span>
+<span class="Constant">        Eine Ladestelle hat eine Buchungs-Deadline, also eine Uhrzeit am Vortag der eigentlichen Ladezeit, bis zu der ein Kunde einen Slot reservieren kann.</span>
+<span class="Constant">        Eine Ladestelle hat eine Änderungs-Deadline, eine Uhrzeit am Tag der Verladung, bis zu der ein Kunde noch die zugehörigen Auftragsdaten ändern kann.</span>
+<span class="Constant">        Eine Ladestelle kann für die Buchung am Wochenende freigegeben werden (derzeit bei Werk Leverkusen der Fall)</span>
+<span class="Constant">        Eine Ladestelle kann so konfiguriert werden, dass nur eine Auftragsnummer pro Slot angegeben werden kann (derzeit bei Werk Leverkusen der Fall)</span>
+<span class="Constant">        Eine Ladestelle kann konfiguriert werden, dass ein Slot einen Status erhält. Dieser kann von einem Lademeister dann jeweils weitergeführt werden.</span>
+<span class="Identifier">    Rampen und Blöcke:</span>
+<span class="Constant">        Eine Rampe kann einen oder mehrere Blöcke enthalten</span>
+<span class="Constant">        Ein Block ist eine Sammlung von Timeslots.</span>
+<span class="Constant">        Für einen Block kann die maximal zu buchende Anzahl an Slots festgelegt werden  (derzeit bei Werk Leverkusen der Fall)</span>
+<span class="Statement">User (Spediteur)</span>
+<span class="Identifier">    Erlaubte Aktivitäten</span>
+<span class="Constant">        Anzeigen und Bearbeiten der eigenen Stammdaten</span>
+<span class="Constant">        Anzeigen der Verfügbaren Ladezeiten einer Ladestelle</span>
+<span class="Constant">        Reservieren eines Ladefensters innerhalb der Fristen</span>
+<span class="Constant">        Ändern einer Reservierung innerhalb der Fristen</span>
+<span class="Constant">        Löschen einer Reservierung</span>
+<span class="Identifier">    Unterbundene Aktivitäten</span>
+<span class="Constant">        Anzeigen oder Bearbeiten fremder Stammdaten</span>
+<span class="Constant">        Anzeigen der Verfügbaren Ladezeiten einer Ladestelle, die dem Kunden nicht zugewiesen ist</span>
+<span class="Constant">        Anzeigen oder Bearbeiten der Reservierung eines anderen Kunden</span>
+<span class="Constant">        Reservieren eines Ladefensters nach ablauf der Deadline</span>
+<span class="Constant">        Reservieren eines Ladefensters nach erreichen der maximalen Anzahl erlaubter Reservierungen (nur KECO)</span>
+<span class="Constant">        Ändern eines Ladefensters nach ablauf der RNVP-Deadline (nur KECO)</span>
+<span class="Identifier">    Weiteres</span>
+<span class="Constant">        In der Reservierungs-Maske werden Warnungen angezeigt, das die Reservierungsfrist abläuft</span>
+<span class="Constant">        Reservierungen, die keine Auftragsnummer enthalten, werden nach ca. 5 Minuten gelöscht</span>
+<span class="Statement">Loadmaster</span>
+<span class="Identifier">    Erlaubte Aktivitäten (zusätzlich zu den oben genannten)</span>
+<span class="Constant">        Anzeigen und Bearbeiten aller Reservierungen unabhängig von den Fristen </span>
+<span class="Constant">        Ladefenster blockieren und freigeben</span>
+<span class="Identifier">    Unterbundene Aktivitäten</span>
+<span class="Constant">        Zugriff auf Stationen, für die er nicht zuständig ist</span>
+<span class="Statement">Administrator</span>
+<span class="Identifier">    Administration</span>
+<span class="Constant">        Bearbeiten aller Aspekte der Anwendung:</span>
+<span class="PreProc">            User</span>
+<span class="PreProc">            Gruppen</span>
+<span class="PreProc">            Ladestellen</span>
+<span class="PreProc">            Rampen</span>
+<span class="PreProc">            Ladefenster-Blöcke</span>
+<span class="PreProc">            Ladefenster</span>
+<span class="PreProc">            Aufträge</span>
+<span class="PreProc">            Protokolle</span>
+</pre>
+</body>
+</html>

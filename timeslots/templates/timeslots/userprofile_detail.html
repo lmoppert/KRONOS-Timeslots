@@ -15,7 +15,6 @@
 
 <table id="profile_details">
     <tr>
-<!--
         <td><strong>{% trans "Address:" %}</strong></td>
         <td>
             {{ user.userprofile.street }}<br />
@@ -26,7 +25,6 @@
         <td><strong>{% trans "Phone:" %}</strong></td>
         <td>{{ user.userprofile.phone }}</td>
     </tr><tr>
--->
         <td><strong>{% trans "Language:" %}</strong></td>
         <td>{{ user.userprofile.get_language_display }}</td>
     </tr>
@@ -34,7 +32,7 @@
 
 <div class="section">
     <p>
-        <a class="btn btn-primary" href="{% url timeslots_userprofile_form %}">{% trans "Change your profile" %}</a>
+        <a class="btn btn-primary" href="{% url "timeslots_userprofile_form" %}">{% trans "Change your profile" %}</a>
     </p>
 </div>
 
