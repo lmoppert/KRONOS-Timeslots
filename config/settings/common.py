@@ -4,7 +4,7 @@
 from django.utils.translation import ugettext_lazy as _
 from os.path import abspath, dirname, join, normpath, basename
 from sys import path
-from secrets import SECRET_KEY
+from .secrets import SECRET_KEY
 import socket
 
 DIR = abspath(dirname(__file__))
