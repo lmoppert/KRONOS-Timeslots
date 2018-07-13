@@ -1,5 +1,5 @@
-from common import *
-from secrets import PSQL_PASS
+from .common import *
+from .secrets import PSQL_PASS
 
 DEBUG = True
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
