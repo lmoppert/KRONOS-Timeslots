@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+appdirs = "==1.4.3"
+django-crispy-forms = "==1.6.1"
+django-debug-toolbar = "==1.8"
+django-extensions = "==1.7.9"
+"django-tables2" = "==1.6.1"
+"psycopg2" = "==2.7.1"
+pyparsing = "==2.2.0"
+pytz = "==2017.2"
+six = "==1.10.0"
+sqlparse = "==0.2.3"
+Babel = "==2.4.0"
+Django = "==1.11.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
