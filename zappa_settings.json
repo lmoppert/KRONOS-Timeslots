@@ -1,0 +1,44 @@
+{
+    "dev": {
+        "timeout_seconds": 60,
+        "memory_size": 512,
+        "aws_region": "eu-central-1", 
+        "django_settings": "config.settings.aws-dev", 
+        "profile_name": "default", 
+        "project_name": "timeslots", 
+        "runtime": "python2.7", 
+        "s3_bucket": "zappa-sj0ewtf3a",
+        "vpc_config": {
+            "SubnetIds": [
+                "subnet-ed909286", "subnet-43a2a028", "subnet-cb6d15b6"
+            ],
+            "SecurityGroupIds": ["sg-bb8437d7"]
+        },
+        "tags": {
+            "Bestellnummer": "4200000183"
+        },
+        "certificate_arn": "arn:aws:acm:us-east-1:574564864754:certificate/5854c2c5-5b21-4b48-9d7b-976a36280225",
+        "domain": "www.kronos-timeslots.de"
+    },
+    "prod": {
+        "timeout_seconds": 30,
+        "memory_size": 256,
+        "aws_region": "eu-central-1", 
+        "django_settings": "config.settings.zappa", 
+        "profile_name": "default", 
+        "project_name": "timeslots", 
+        "runtime": "python2.7", 
+        "s3_bucket": "zappa-sj0ewtf3a",
+        "vpc_config": {
+            "SubnetIds": [
+                "subnet-ed909286", "subnet-43a2a028", "subnet-cb6d15b6"
+            ],
+            "SecurityGroupIds": ["sg-bb8437d7"]
+        },
+        "tags": {
+            "Bestellnummer": "4200000183"
+        },
+        "certificate_arn": "arn:aws:acm:us-east-1:574564864754:certificate/5854c2c5-5b21-4b48-9d7b-976a36280225",
+        "domain": "www.kronos-timeslots.de"
+    }
+}
