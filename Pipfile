@@ -14,10 +14,12 @@ sqlparse = "==0.2.3"
 Babel = "==2.4.0"
 Django = "==1.11.1"
 "psycopg2" = "*"
+zappa = "*"
+django-storages = "*"
+boto = "*"
 
 [dev-packages]
 django-debug-toolbar = "==1.8"
-zappa = "*"
 pyparsing = "==2.2.0"
 pygraphviz = "*"
 pydot = "*"
