@@ -15,7 +15,12 @@ path.append(BASE_DIR)
 
 SECRET_KEY = SECRET_KEY
 DEBUG = False
-ALLOWED_HOSTS = ['kronos-timeslots.com', 'timeslots.kronosww.com', 'localhost']
+ALLOWED_HOSTS = [
+    'kronos-timeslots.com',
+    'timeslots.kronosww.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 ADMINS = [
     ('Lutz Moppert', 'lutz.moppert@kronosww.com'),
