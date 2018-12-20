@@ -3,6 +3,7 @@ syntax: glob
 Pipfile.lock
 secrets.py
 .DS_Store
+.env
 .settings
 .project
 .buildpath
