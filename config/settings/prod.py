@@ -21,6 +21,7 @@ ALLOWED_HOSTS.append('kronos-timeslots.de')
 
 # Host static files with S3
 INSTALLED_APPS.append('storages')
+AWS_DEFAULT_ACL = 'public-read'
 AWS_STORAGE_BUCKET_NAME = 'timeslots-staticfiles'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
