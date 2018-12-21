@@ -16,6 +16,8 @@ DATABASES = {
         'PASSWORD': AWS_PSQL_PASS
     }
 }
+ALLOWED_HOSTS.append('.kronos-timeslots.com')
+ALLOWED_HOSTS.append('kronos-timeslots.com')
 ALLOWED_HOSTS.append('.kronos-timeslots.de')
 ALLOWED_HOSTS.append('kronos-timeslots.de')
 
