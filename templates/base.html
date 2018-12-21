@@ -45,12 +45,21 @@
     </div>
 
     <footer class="footer">
-        <p class="pull-right">
-            <a href="{% url "timeslots_imprint" %}">{% trans "Imprint" %}</a>
-            <span class="separator">
-                &copy; <a href="http://kronostio2.com">KRONOS INTERNATIONAL, Inc.</a> {% now "Y" %} &nbsp;
-            </span>
-        </p>
+        <div class="separator">
+            <ul id="menu" class="menu">
+                <li class="item-115">
+                    <a href="https://kronostio2.com/en/important-legal-information">Important Legal Information</a>
+                </li>
+                <li class="item-669">
+                    <a href="https://kronostio2.com/en/terms-and-conditions">Terms and Conditions of Sale</a>
+                </li>
+                <li class="item-116">
+                    <a href="/app/privacy">Privacy Policy</a>
+                </li>
+            </ul> <br>
+            &copy; 2012 - {% now "Y" %} KRONOS Worldwide, Inc. | 5430 LBJ Freeway, Suite 1700 | Dallas, TX, 75240 | United States<br>
+            Phone: (972) 233-1700 | Fax: (972) 448-1445 | <a href="mailto:kronos.marketing@kronosww.com">kronos.marketing@kronosww.com</a>
+        </div>
     </footer>
 
 </div> <!-- container -->
