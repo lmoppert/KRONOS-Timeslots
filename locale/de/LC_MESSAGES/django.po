@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeslots\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-20 16:57+0200\n"
+"POT-Creation-Date: 2019-02-15 11:00+0100\n"
 "PO-Revision-Date: 2012-07-23\n"
 "Last-Translator: Lutz Moppert <lutz.moppert@kronosww.com>\n"
 "Language-Team: German\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: config/settings/common.py:35
+#: config/settings/common.py:40
 msgid "English"
 msgstr "Englisch"
 
-#: config/settings/common.py:36
+#: config/settings/common.py:41
 msgid "German"
 msgstr "Deutsch"
 
@@ -70,11 +70,6 @@ msgstr "Erfolgreich verarbeitet:"
 msgid "Empty page"
 msgstr "Leere Seite"
 
-#: templates/base.html:49 timeslots/templates/timeslots/imprint.html:4
-#: timeslots/templates/timeslots/imprint.html:10
-msgid "Imprint"
-msgstr "Impressum"
-
 #: templates/index.html:15
 msgid "Open jobs"
 msgstr "Aktuelle Aufträge"
@@ -85,7 +80,7 @@ msgstr "Aktuelle Aufträge"
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/structure.html:11
+#: templates/structure.html:11 templates/structure.html:47
 msgid "Timeslots"
 msgstr "Timeslots"
 
@@ -187,10 +182,6 @@ msgstr ""
 "NV-Kennzeichnung zu versehen"
 
 #: timeslots/models.py:65
-#, fuzzy
-#| msgid ""
-#| "Choose this option if you want to be able to mark charges with an KLV/NV "
-#| "flag"
 msgid ""
 "Choose this option if you want to be able to add information about available "
 "products to the docks of this station"
@@ -348,6 +339,11 @@ msgstr "Liste der Ladezeiten anzeigen"
 #: timeslots/templates/timeslots/details_subnav.html:6
 msgid "Show table of jobs"
 msgstr "Aufträge als Tabelle anzeigen"
+
+#: timeslots/templates/timeslots/imprint.html:4
+#: timeslots/templates/timeslots/imprint.html:10
+msgid "Imprint"
+msgstr "Impressum"
 
 #: timeslots/templates/timeslots/imprint.html:16
 msgid "Germany"
@@ -555,19 +551,11 @@ msgstr "Profil"
 msgid "Logout"
 msgstr "Abmelden"
 
-#: timeslots/templates/timeslots/userprofile_detail.html:18
-msgid "Address:"
-msgstr "Adresse:"
-
-#: timeslots/templates/timeslots/userprofile_detail.html:25
-msgid "Phone:"
-msgstr "Telefon:"
-
-#: timeslots/templates/timeslots/userprofile_detail.html:28
+#: timeslots/templates/timeslots/userprofile_detail.html:15
 msgid "Language:"
 msgstr "Sprache:"
 
-#: timeslots/templates/timeslots/userprofile_detail.html:35
+#: timeslots/templates/timeslots/userprofile_detail.html:22
 msgid "Change your profile"
 msgstr "Ändern Sie Ihre Daten"
 
@@ -620,8 +608,8 @@ msgid "successfully released the selected slots!"
 msgstr "Die gewählten Ladezeiten wurden erfolgreich freigegeben!"
 
 #: timeslots/views.py:279
-msgid "No product details abailable"
-msgstr ""
+msgid "No product details available"
+msgstr "Keine Produktinformationen verfügbar"
 
 #: timeslots/views.py:298 timeslots/views.py:458
 msgid "This station is closed on weekends!"
@@ -682,6 +670,3 @@ msgstr "Die Reservierung wurde erfolgreich gelöscht!"
 #: timeslots/views.py:516
 msgid "This slot is no longer blocked!"
 msgstr "Dieses Ladefenster wurde wieder freigegeben!"
-
-#~ msgid "ToDo List"
-#~ msgstr "Liste mit ausstehenden Aufgaben"

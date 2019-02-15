@@ -276,7 +276,7 @@ def get_products(dock, date):
     if products:
         details += "{}".format(products.last().details)
     else:
-        details = _('No product details abailable')
+        details = _('No product details available')
     return details
 
 
