@@ -242,7 +242,8 @@ class UserProfile(models.Model):
         return ('timeslots_userprofile_detail', (), {})
 
     def __unicode__(self):
-        return "%s" % self.company
+        return "%s %s (%s)" % (self.user.first_name, self.user.last_name,
+                               self.company)
 
 
 @receiver(user_logged_in)

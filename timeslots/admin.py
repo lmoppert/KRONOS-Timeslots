@@ -1,4 +1,4 @@
-from timeslots.models import *
+from timeslots import models
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -18,7 +18,7 @@ class JobAdmin(admin.ModelAdmin):
 
 
 class JobInline(admin.TabularInline):
-    model = Job
+    model = models.Job
     extra = 2
 
 
@@ -32,7 +32,7 @@ class BlockAdmin(admin.ModelAdmin):
 
 
 class BlockInline(admin.TabularInline):
-    model = Block
+    model = models.Block
     extra = 1
 
 
@@ -42,12 +42,12 @@ class DockAdmin(admin.ModelAdmin):
 
 
 class DockInline(admin.TabularInline):
-    model = Dock
+    model = models.Dock
     extra = 1
 
 
 class UserProfileRelated(admin.TabularInline):
-    model = UserProfile.stations.through
+    model = models.UserProfile.stations.through
     extra = 0
 
 
@@ -66,13 +66,18 @@ class StationAdmin(admin.ModelAdmin):
 
 
 class UserProfileInline(admin.StackedInline):
-    model = UserProfile
+    model = models.UserProfile
     max_num = 1
     can_delete = False
     filter_horizontal = ('stations', )
 
 
 class UserAdmin(AuthUserAdmin):
+    list_display = ('username', 'userprofile', 'first_name', 'last_name',
+                    'is_staff')
+    search_fields = ('username', 'first_name', 'last_name', 'email',
+                     'userprofile__company')
+
     def add_view(self, *args, **kwargs):
         self.inlines = []
         return super(UserAdmin, self).add_view(*args, **kwargs)
@@ -82,13 +87,13 @@ class UserAdmin(AuthUserAdmin):
         return super(UserAdmin, self).change_view(*args, **kwargs)
 
 
-admin.site.register(Logging, LoggingAdmin)
-admin.site.register(Station, StationAdmin)
-admin.site.register(Dock, DockAdmin)
-admin.site.register(Block, BlockAdmin)
-admin.site.register(Slot, SlotAdmin)
-admin.site.register(Job, JobAdmin)
-admin.site.register(Product, ProductAdmin)
+admin.site.register(models.Logging, LoggingAdmin)
+admin.site.register(models.Station, StationAdmin)
+admin.site.register(models.Dock, DockAdmin)
+admin.site.register(models.Block, BlockAdmin)
+admin.site.register(models.Slot, SlotAdmin)
+admin.site.register(models.Job, JobAdmin)
+admin.site.register(models.Product, ProductAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Site)
