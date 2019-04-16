@@ -46,11 +46,6 @@ class DockInline(admin.TabularInline):
     extra = 1
 
 
-class UserProfileRelated(admin.TabularInline):
-    model = models.UserProfile.stations.through
-    extra = 0
-
-
 class StationAdmin(admin.ModelAdmin):
     list_display = ('name', 'shortdescription')
     fieldsets = [
@@ -62,7 +57,7 @@ class StationAdmin(admin.ModelAdmin):
                        'has_klv', 'has_product', 'booking_deadline', 'rnvp']
         })
     ]
-    inlines = [DockInline, UserProfileRelated]
+    inlines = [DockInline]
 
 
 class UserProfileInline(admin.StackedInline):
